@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script type="text/javascript"  src="loadJsonData.js"></script>
+  <script type="text/javascript"  src="process.js"></script>
+  <script type="text/javascript"  src="nlg.js"></script>
+</head>
+<body>
+  
+  <div class="header">
+    <img id="logo" src="logo.svg" >
+  </div>
+
+  <div class="topnav">
+    <div id="search-container">
+      <input type="text" id="search">
+      <input type="text" disabled="disabled" id="suggestion" />
+      <button onclick="search()" >Search</button> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="leftcolumn">
+      <h3>VIS Bio</h3>
+      <p id="bio"></p>
+      <p id="collab"></p>
+      <p id="supervisor"></p>
+      <div id="anim">
+        <span id="tp" class="tooltip" data-tooltip="username must consist of 29 symbols."></span>
+      </div>
+      <svg width="750" height="450" id="CollabChart"></svg>
+      
+    </div>
+    <div class="rightcolumn">
+      <h3 id=dod>Details on Demand</h3>
+    </div>
+  </div>
+  <script>
+
+    function search(){
+      var name = document.getElementById("search").value;
+      generateProfile(name);
+      process(name); 
+    };
+
+  </script>
+  
+  <div class="footer">
+    <p>Copyright &copy; 2017 Shahid Latif | University of Duisburg-Essen | shahid.latif@uni-due.de</p>
+  </div>
+</body>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript"  src="authors-autocomplete.js"></script>
+  <script type="text/javascript"  src="visualization.js"></script>
+
+</html> 
