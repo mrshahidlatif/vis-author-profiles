@@ -1,14 +1,14 @@
-function generateVis(gdata, adata, canvas){
+function generateVis(gdata, adata, canvas,pdata,aName){
   
+  console.log(gdata);
   console.log(adata);
   //Data for individual Publications
   var indPub = [];
   for(var i=0;i<adata.length;i++){
-    indPub.push(adata[i].ConfsPerYear); 
+    indPub.push(adata[i].AllPublicationsPerYear); 
   }
 
-  
-  var svg = d3.select("svg"),
+  var svg = d3.select("#" + canvas),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
@@ -44,12 +44,28 @@ function generateVis(gdata, adata, canvas){
 
     data = indPub[j];
     var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-        y = d3.scaleLinear().rangeRound([(j+1)*height/N, j*height/N]);
+        y = d3.scaleLinear().rangeRound([(j+1)*height/N, j*height/N+3]);
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    
+    // Prep the tooltip bits, initial display is hidden
+    var tooltip = svg.append("g")
+      .attr("class", "tooltip")
+      .style("display", "none");
+        
+    tooltip.append("rect")
+      .attr("width", 60)
+      .attr("height", 30)
+      .attr("fill", "green")
+      .style("opacity", 0.2);
+
+    tooltip.append("text")
+      .attr("x", 25)
+      .attr("dy", "1.2em")
+      .style("text-anchor", "middle")
+      .attr("font-size", "12px")
 
       //x.domain(data.map(function(d) { return d.Year; }));
       x.domain(xDomain);
@@ -57,14 +73,7 @@ function generateVis(gdata, adata, canvas){
       y.domain([0,maxCount]);
       
       if (j==0){
-        //Adding names of coauthors 
-        g.selectAll(".names")
-          .data(adata)
-          .enter().append("text")
-          .attr("class", "names")
-          .attr("x", 0)
-          .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return d.Name });
+      
 
         g.append("g")
             .attr("class", "axis axis--x")
@@ -91,6 +100,15 @@ function generateVis(gdata, adata, canvas){
             .attr("y", function(d,i) { return (i)*height/N;})
             .attr("width", width+50)
             .attr("height",height/N);
+
+          //Adding names of coauthors 
+        g.selectAll(".names")
+          .data(adata)
+          .enter().append("text")
+          .attr("class", "names")
+          .attr("x", 0)
+          .attr("y", function(d,i){return (i+1)*height/N-5})
+          .text(function(d){return d.Name });
     
       }
       g.selectAll(".bar")
@@ -101,7 +119,15 @@ function generateVis(gdata, adata, canvas){
           .attr("y", function(d) { return y(d.Value); })
           .attr("width", x.bandwidth())
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-          .on("mouseover",function(d){document.getElementById("tp").setAttribute("data-tooltip", d.Value);})
+            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+              var xPosition = d3.mouse(this)[0]-30;
+              var yPosition = d3.mouse(this)[1]-30;
+              tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+              tooltip.select("text").text("Count: " + d.Value)
+            });
+    
       
       //Adding bars for mutual publications
       g.selectAll(".mbar")
@@ -112,14 +138,15 @@ function generateVis(gdata, adata, canvas){
           .attr("y", function(d) { return y(d.Value); })
           .attr("width", x.bandwidth())
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-          .on("mousemove", function(d){
-            tooltip
-              .style("left", d3.event.pageX - 50 + "px")
-              .style("top", d3.event.pageY - 70 + "px")
-              .style("display", "inline-block")
-              .html((d.Year) + "<br>" + "£" + (d.Value));
-        })
-        .on("mouseout", function(d){ tooltip.style("display", "none");});
+            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+              var xPosition = d3.mouse(this)[0]-30;
+              var yPosition = d3.mouse(this)[1]-30;
+              tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+              tooltip.select("text").text("Count: " + d.Value);
+            })
+            .on("click", function(d){showMutualPublications(pdata, d.Year, aName, d.Name)});
     
       //Adding horizontal lines 
       g.append("g")
@@ -130,11 +157,105 @@ function generateVis(gdata, adata, canvas){
        .attr("stroke-width", "0.5px");
 
   }
-  g.append("g")
-       .attr("transform", "translate("+x(2008)+", 0)")
-       .append("line")
-       .attr("y2", 450)
-       .attr("stroke", "#6b6b6b")
-       .attr("stroke-width", "0.5px");
+  //Draw Vertical line for showing the starting year of main author 
+  // g.append("g")
+  //      .attr("transform", "translate("+x(2008)+", 0)")
+  //      .append("line")
+  //      .attr("y2", 450)
+  //      .attr("stroke", "#6b6b6b")
+  //      .attr("stroke-width", "0.5px");
 
+}
+function showMutualPublications(pdata, year, aName, cName){
+  //Prints the mutual publications on mouse click in side panel 
+  //console.log("Hi from Call me ");
+  //console.log(year + aName+cName);
+  document.getElementById("dod").innerHTML="";
+  var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
+  for (var i=0; i<pubs.length;i++){
+    StringifyPublication(pubs[i]);
+  }
+  // document.getElementById("dod").innerHTML="Wow, you clicked me!"+ "<br>" 
+  // + "I will show mutual publications..." + "<br>" + "Just not yet!";
+}
+
+function StringifyPublication(p){
+  var authors=""; 
+  for (var i =0;i<p.Authors.length; i++){
+    authors = authors + p.Authors[i].Name + ", ";
+  }
+  var pString = authors + "<br>" + p.Title + ", " + p.Venue + ", " + p.Year;
+  document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
+  //document.getElementById("dod").innerHTML = pString + "<br>";
+}
+
+function getMutualPublicationObjects(pubData, year, aName, cName){
+  //Return array of mutual publications of Author and CoAuthor for Year "year"
+  var mutualPublications = []; 
+  for(var i=0;i<pubData.length;i++){
+    if(pubData[i].Year == year){
+      var tempAuthors = []; 
+      for (var j=0;j<pubData[i].Authors.length;j++){
+        tempAuthors.push(pubData[i].Authors[j].Name);
+        }
+        if(tempAuthors.indexOf(aName) != -1 && tempAuthors.indexOf(cName) != -1)
+        {
+          mutualPublications.push(pubData[i]);
+        }
+    }
+  }
+    return mutualPublications; 
+}
+
+function generateSparkline(data,canvas){
+
+ data.sort(function(a, b) {
+    return +a.Year - +b.Year;
+  });
+  // set the dimensions and margins of the graph
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+    width =  90 - margin.left - margin.right,
+    height = 20 - margin.top - margin.bottom;
+
+// set the ranges
+var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.4);
+var y = d3.scaleLinear()
+          .range([height, 0]);
+          
+// append the svg object to the body of the page
+// append a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("#" + canvas)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .style("background-color", 'lightgray')
+  .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")")
+  
+  svg.selectAll("*").remove();
+  // Scale the range of the data in the domains
+  x.domain(data.map(function(d) { return d.Year; }));
+  y.domain([0, d3.max(data, function(d) { return d.Value; })]);
+
+  // append the rectangles for the bar chart
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.Year); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.Value); })
+      .attr("height", function(d) { return height - y(d.Value); });
+
+  // // add the x Axis
+  // svg.append("g")
+  //     .attr("transform", "translate(0," + height + ")")
+  //     .call(d3.axisBottom(x));
+
+  // // add the y Axis
+  // svg.append("g")
+  //     .call(d3.axisLeft(y));
 }

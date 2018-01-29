@@ -24,25 +24,24 @@
 
   <div class="row">
     <div class="leftcolumn">
-      <h3>VIS Bio</h3>
-      <p id="bio"></p>
-      <p id="collab"></p>
-      <p id="supervisor"></p>
-      <div id="anim">
-        <span id="tp" class="tooltip" data-tooltip="username must consist of 29 symbols."></span>
-      </div>
-      <svg width="750" height="450" id="CollabChart"></svg>
+      <h3>Summary</h3>
+      <p id="bio"> </p>
+      <svg width="70" height="20" id="sparklineJournals"></svg> 
+      <svg width="70" height="20" id="sparklineConfs"></svg>
+      <p style="display:inline"></p>
+      <br>
+      <svg width="850" height="550" id="CollabChart"></svg>
       
     </div>
     <div class="rightcolumn">
-      <h3 id=dod>Details on Demand</h3>
+      <p id=dod></p>
     </div>
   </div>
   <script>
 
     function search(){
       var name = document.getElementById("search").value;
-      generateProfile(name);
+      document.getElementById("search").value = "";
       process(name); 
     };
 

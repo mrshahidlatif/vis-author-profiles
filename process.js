@@ -18,7 +18,7 @@ function process(name) {
       }
     }
     var distCoAuthors = compressArray(allCoAuthors, name);
-    var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 10);
+    var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 8);
     var topNCoAuthorObjects = [];
 
     loadJSON("authordata.json", function(response) {
@@ -35,12 +35,12 @@ function process(name) {
       for (var i = 0; i < topNCoAuthorObjects.length; i++) {
         var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
         var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
-        console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
+        //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
         var a = new Object();
         a.Name = topNCoAuthorObjects[i].Name;
         a.StartYear = sYear;
         a.MutualPublications = topNCoAuthor[i].count;
-        console.log(a.MutualPublications/(2017-a.StartYear)); 
+        //console.log(a.MutualPublications/(2017-a.StartYear)); 
         dataForGantt.push(a);
       }
       //console.log(dataForGantt);
@@ -50,10 +50,30 @@ function process(name) {
         
       }
       //console.log(dataForGantt);
-      generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart");
-    });
+      generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name);
+      //Calling NLG function and generating text 
+      var jpy;
+      var cpy;
+      var statData = []; //For computing statistics 
+      var pubCount = 0; //No of publications for searched author
+      var aObject;
+        //console.log(adata);
+        for (var i = 0; i < adata.length; i++) {
+          statData.push(adata[i].Journals + adata[i].Conferences);
+          if (adata[i].Name == name) {
+            aObject = adata[i];
+            pubCount = adata[i].Journals + adata[i].Conferences;
+            jpy = adata[i].JournalsPerYear;
+            cpy = adata[i].ConfsPerYear;
+          }
+        }
+        //Generating graphs for author stats 
+       var pct = percentRank(statData, pubCount);
+       generateProfileText(pdata, adata, aObject, pct);
   });
+});
 }
+
 
 function getMutualPublications(pubData,aName, cName){
   var MutualPubPerYear = []; 
@@ -68,6 +88,9 @@ function getMutualPublications(pubData,aName, cName){
       }
     }
     var mppy = countFrequency(MutualPubPerYear);
+    for (var i =0;i<mppy.length;i++){
+      mppy[i]["Name"]=cName;
+    }
     return mppy; 
 }
 function countFrequency(original) {
@@ -130,6 +153,11 @@ function getMax(data) {
 
 function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, threshold) {
   var topAuthors = [];
+  // console.log("Here are his coauthors!!!")
+  // distCoAuthors.sort(function(a, b) {
+  //   return b.count - a.count;
+  // });
+  //console.log(distCoAuthors);
   for (var i = 0; i < distCoAuthors.length; i++) {
     var percentPublications = Math.round(distCoAuthors[i].count / NoOfAuthorPublications * 100);
     if (percentPublications > threshold) {
@@ -143,32 +171,32 @@ function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, threshold) {
   return topAuthors;
 }
 
-function generateProfile(name) {
-  //Generate graphics
-  var adata;
-  var jpy;
-  var cpy;
-  var statData = []; //For computing statistics 
-  var pubCount = 0; //No of publications for searched author
-  var aObject;
-  loadJSON("authordata.json", function(response) {
-    adata = JSON.parse(response);
-    //console.log(adata);
-    for (var i = 0; i < adata.length; i++) {
-      statData.push(adata[i].Journals + adata[i].Conferences);
-      if (adata[i].Name == name) {
-        aObject = adata[i];
-        pubCount = adata[i].Journals + adata[i].Conferences;
-        jpy = adata[i].JournalsPerYear;
-        cpy = adata[i].ConfsPerYear;
-      }
-    }
-    //Generating graphs for author stats 
-    var pct = percentRank(statData, pubCount);
-    generateProfileText(aObject, pct);
+// function generateProfile(name) {
+//   //Generate graphics
+//   var adata;
+//   var jpy;
+//   var cpy;
+//   var statData = []; //For computing statistics 
+//   var pubCount = 0; //No of publications for searched author
+//   var aObject;
+//   loadJSON("authordata.json", function(response) {
+//     adata = JSON.parse(response);
+//     //console.log(adata);
+//     for (var i = 0; i < adata.length; i++) {
+//       statData.push(adata[i].Journals + adata[i].Conferences);
+//       if (adata[i].Name == name) {
+//         aObject = adata[i];
+//         pubCount = adata[i].Journals + adata[i].Conferences;
+//         jpy = adata[i].JournalsPerYear;
+//         cpy = adata[i].ConfsPerYear;
+//       }
+//     }
+//     //Generating graphs for author stats 
+//    var pct = percentRank(statData, pubCount);
+//    generateProfileText(adata, aObject, pct);
 
-  });
-}
+//   });
+// }
 
 function percentRank(array, n) {
   var L = 0;

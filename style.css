@@ -1,4 +1,5 @@
 /*Page Layout */
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');
 #logo { 
     width:20%; 
 }
@@ -21,7 +22,8 @@
 }
 body
 {
-    font-family: Helvetica, Sans-Serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: Helvetica, Sans-Serif;*/
     color: #444444;
     font-size: 9pt;
 }
@@ -80,11 +82,11 @@ body
 
 /*Visualization styles */
 .bar {
-  fill: steelblue;
+  fill: gray;
 }
 
 .hbar{
-    fill:green;
+    fill:black;
     opacity: 0.1 
 }
 .mbar{
@@ -95,7 +97,9 @@ body
 .bar:hover {
   fill: green;
 }
-
+.mbar:hover {
+  fill: green;
+}
 .axis {
     font: 10px sans-serif;
 }
@@ -112,16 +116,4 @@ body
     font-weight: bold;
     fill:black;
     font-size:14px;
-}
-
-/* Tool Tip */
-.toolTip {
-  position: absolute;
-  display: none;
-  min-width: 80px;
-  height: auto;
-  background: none repeat scroll 0 0 #ffffff;
-  border: 1px solid #6F257F;
-  padding: 14px;
-  text-align: center;
 }
