@@ -13,7 +13,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
   }
 
   var svg = d3.select("#" + canvas),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    margin = {top: 10, right: 0, bottom: 20, left: 20},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
   
@@ -47,13 +47,12 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
   for (var j=0;j<N;j++){
 
     data = indPub[j];
-    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    var x = d3.scaleBand().rangeRound([80, width]).padding(0.3),
         y = d3.scaleLinear().rangeRound([(j+1)*height/N, j*height/N+3]);
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    
     // Prep the tooltip bits, initial display is hidden
     var tooltip = svg.append("g")
       .attr("class", "tooltip")
@@ -63,7 +62,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
       .attr("width", 60)
       .attr("height", 30)
       .attr("fill", "green")
-      .style("opacity", 0.2);
+      .style("opacity", 0.5);
 
     tooltip.append("text")
       .attr("x", 25)
@@ -79,20 +78,19 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
       if (j==0){
       
 
-        g.append("g")
-            .attr("class", "axis axis--x")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+        // g.append("g")
+        //     .attr("class", "axis axis--x")
+        //     .attr("transform", "translate(0," + height + ")")
+        //     .call(d3.axisBottom(x));
 
-        g.append("g")
-            .attr("class", "axis axis--y")
-            .call(d3.axisLeft(y).ticks(2))
-          .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "0.71em")
-            .attr("text-anchor", "end")
-            .text("Frequency");
+        // g.append("g")
+        //     .attr("class", "axis axis--y")
+        //     .call(d3.axisRight(y).ticks(2))
+        //   .append("text")
+        //     .attr("transform", "rotate(-90)")
+        //     .attr("y", 6)
+        //     .attr("dy", "0.71em")
+        //     .attr("text-anchor", "end")
       
 
         //Drawing horizontal bar charts to mark start year of each coauthor 
@@ -115,6 +113,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
           .text(function(d){return d.Name });
     
       }
+      //adding bars for individual publications 
       g.selectAll(".bar")
         .data(indPub[j])
         .enter().append("rect")
@@ -129,7 +128,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
               var xPosition = d3.mouse(this)[0]-30;
               var yPosition = d3.mouse(this)[1]-30;
               tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-              tooltip.select("text").text("Count: " + d.Value);
+              tooltip.select("text").html("Count: " + '<br>' + d.Value);
             });
     
       
@@ -158,7 +157,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
        .append("line")
        .attr("x2", width)
        .attr("stroke", "#6b6b6b")
-       .attr("stroke-width", "0.5px");
+       .attr("stroke-width", "0.3px");
 
   }
   //Draw Vertical line for showing the starting year of main author 
@@ -167,7 +166,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
        .append("line")
        .attr("y2", height)
        .attr("stroke", "#ff2b2b")
-       .attr("stroke-width", "1px");
+       .attr("stroke-width", "0.5px");
 
 }
 function showMutualPublications(pdata, year, aName, cName){
@@ -188,7 +187,7 @@ function StringifyPublication(p){
   var authors=""; 
   for (var i =0;i<p.Authors.length; i++){
     // authors = authors + p.Authors[i].Name + ", ";
-    authors += '<span onclick="loadMe(this.innerHTML)">' +  p.Authors[i].Name + "</span>";
+    authors += '<span id="linkedAuthorName" onclick="loadMe(this.innerHTML)">' +  p.Authors[i].Name + "</span>";
     if(i != p.Authors.length-1){
       authors += ", ";
     }
@@ -235,14 +234,14 @@ function generateSparkline(data,canvas){
     return +a.Year - +b.Year;
   });
   // set the dimensions and margins of the graph
-var margin = {top: 0, right: 0, bottom: 0, left: 0},
+var margin = {top: 2, right: 0, bottom: 0, left: 0},
     width =  90 - margin.left - margin.right,
     height = 20 - margin.top - margin.bottom;
 
 // set the ranges
 var x = d3.scaleBand()
           .range([0, width])
-          .padding(0.4);
+          .padding(0.3);
 var y = d3.scaleLinear()
           .range([height, 0]);
           
