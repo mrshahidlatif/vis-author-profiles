@@ -1,0 +1,22 @@
+----
+BUGS
+----
+-Problem with author names having special characters like ü, ä, ö etc. 
+
+
+
+-----
+TODOs
+-----
+Appearance 
+-Making search bar case insensitive 
+-Remove numbers when displaying names of authors 
+-Extend tooltip to show year, count and type of publication
+-Revise the highlight coloring scheme 
+
+Functionality 
+-Making author sparklines interactive 
+-Exception handling when record of author is not found
+-add button to load second tier coauthors 
+-link names in central graphic to load record function
+-Integrate the VIS publications
