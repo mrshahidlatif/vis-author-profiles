@@ -174,7 +174,8 @@ function showMutualPublications(pdata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 
   //console.log("Hi from Call me ");
   //console.log(year + aName+cName);
-  document.getElementById("dod").innerHTML="";
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications: "+ aName + " and " + cName 
+  + "<br>" + year + "</span>" + "<br>" + "<br>";
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pubs[i]);
@@ -186,11 +187,18 @@ function showMutualPublications(pdata, year, aName, cName){
 function StringifyPublication(p){
   var authors=""; 
   for (var i =0;i<p.Authors.length; i++){
-    authors = authors + p.Authors[i].Name + ", ";
+    // authors = authors + p.Authors[i].Name + ", ";
+    authors += '<span onclick="loadMe(this.innerHTML)">' +  p.Authors[i].Name + "</span>";
+    if(i != p.Authors.length-1){
+      authors += ", ";
+    }
   }
   var pString = authors + "<br>" + p.Title + ", " + p.Venue + ", " + p.Year;
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
   //document.getElementById("dod").innerHTML = pString + "<br>";
+}
+function loadMe(name){
+  process(name);
 }
 
 function getMutualPublicationObjects(pubData, year, aName, cName){

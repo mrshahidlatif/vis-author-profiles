@@ -4,12 +4,15 @@ function process(name) {
   var adata;
   var allCoAuthors = [];
   var authorPubCoun = 0;
+  var isFound = false;
+
   loadJSON("pubdata.json", function(response) {
     pdata = JSON.parse(response);
     var c = 0;
     for (var i = 0; i < pdata.length; i++) {
       for (var j = 0; j < pdata[i].Authors.length; j++) {
         if (pdata[i].Authors[j].Name == name) {
+          isFound = true;
           authorPubCoun++;
           for (var k = 0; k < pdata[i].Authors.length; k++) {
             allCoAuthors.push(pdata[i].Authors[k].Name);
@@ -17,63 +20,67 @@ function process(name) {
         }
       }
     }
-    var distCoAuthors = compressArray(allCoAuthors, name);
-    var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 5, 100, 3);
-    var topNCoAuthorObjects = [];
+    if (isFound) { //Author found so go ahead with process
+      var distCoAuthors = compressArray(allCoAuthors, name);
+      var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 5, 100, 3);
+      var topNCoAuthorObjects = [];
 
-    loadJSON("authordata.json", function(response) {
-      adata = JSON.parse(response);
-      for (var i = 0; i < topNCoAuthor.length; i++) {
-        for (var j = 0; j < adata.length; j++) {
-          if (adata[j].Name == topNCoAuthor[i].Name) {
-            topNCoAuthorObjects.push(adata[j]);
+      loadJSON("authordata.json", function(response) {
+        adata = JSON.parse(response);
+        for (var i = 0; i < topNCoAuthor.length; i++) {
+          for (var j = 0; j < adata.length; j++) {
+            if (adata[j].Name == topNCoAuthor[i].Name) {
+              topNCoAuthorObjects.push(adata[j]);
+            }
           }
         }
-      }
-      
-      var dataForGantt = [];
-      for (var i = 0; i < topNCoAuthorObjects.length; i++) {
-        var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
-        var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
-        //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
-        var a = new Object();
-        a.Name = topNCoAuthorObjects[i].Name;
-        a.StartYear = sYear;
-        a.MutualPublications = topNCoAuthor[i].Value;
-        //console.log(a.MutualPublications/(2017-a.StartYear)); 
-        dataForGantt.push(a);
-      }
-      //console.log(dataForGantt);
-      for (var i=0;i<dataForGantt.length;i++){
-        var mppy = getMutualPublications(pdata,name, dataForGantt[i].Name);
-        dataForGantt[i]["MutualPubPerYear"] = mppy;
         
-      }
-      //console.log(dataForGantt);
-      generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name, adata);
-      //Calling NLG function and generating text 
-      var jpy;
-      var cpy;
-      var statData = []; //For computing statistics 
-      var pubCount = 0; //No of publications for searched author
-      var aObject;
-        //console.log(adata);
-        for (var i = 0; i < adata.length; i++) {
-          statData.push(adata[i].Journals + adata[i].Conferences);
-          if (adata[i].Name == name) {
-            aObject = adata[i];
-            pubCount = adata[i].Journals + adata[i].Conferences;
-            jpy = adata[i].JournalsPerYear;
-            cpy = adata[i].ConfsPerYear;
-          }
+        var dataForGantt = [];
+        for (var i = 0; i < topNCoAuthorObjects.length; i++) {
+          var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
+          var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
+          //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
+          var a = new Object();
+          a.Name = topNCoAuthorObjects[i].Name;
+          a.StartYear = sYear;
+          a.MutualPublications = topNCoAuthor[i].Value;
+          //console.log(a.MutualPublications/(2017-a.StartYear)); 
+          dataForGantt.push(a);
         }
-        //Generating graphs for author stats 
-       var pct = percentRank(statData, pubCount);
-       generateProfileText(pdata, adata, aObject, pct, dataForGantt);
+        //console.log(dataForGantt);
+        for (var i=0;i<dataForGantt.length;i++){
+          var mppy = getMutualPublications(pdata,name, dataForGantt[i].Name);
+          dataForGantt[i]["MutualPubPerYear"] = mppy;
+          
+        }
+        //console.log(dataForGantt);
+        generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name, adata);
+        //Calling NLG function and generating text 
+        var jpy;
+        var cpy;
+        var statData = []; //For computing statistics 
+        var pubCount = 0; //No of publications for searched author
+        var aObject;
+          //console.log(adata);
+          for (var i = 0; i < adata.length; i++) {
+            statData.push(adata[i].Journals + adata[i].Conferences);
+            if (adata[i].Name == name) {
+              aObject = adata[i];
+              pubCount = adata[i].Journals + adata[i].Conferences;
+              jpy = adata[i].JournalsPerYear;
+              cpy = adata[i].ConfsPerYear;
+            }
+          }
+          //Generating graphs for author stats 
+         var pct = percentRank(statData, pubCount);
+         generateProfileText(pdata, adata, aObject, pct, dataForGantt);
+      });
+    }
+    else {
+      document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
+    }
   });
-});
 }
-
 
 function getMutualPublications(pubData,aName, cName){
   var MutualPubPerYear = []; 
@@ -192,16 +199,16 @@ function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold,
   });
 
   if (topAuthors.length > N){
-    console.log(topAuthors);
+    //console.log(topAuthors);
     var gaps = [];
     for(var i=N;i<topAuthors.length;i++){
       var gap = topAuthors[i-1].Value - topAuthors[i].Value;
       gaps.push(gap);
     }
-    console.log(gaps);
+    //console.log(gaps);
     var maxGap = d3.max(gaps);
     var cutPoint = gaps.indexOf(maxGap) + N ; // adding 1 due to 0-indexing system 
-    console.log(cutPoint);
+    //console.log(cutPoint);
 
     
     for (var i=0;i<cutPoint;i++){
@@ -211,7 +218,7 @@ function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold,
   else {
     finalTopAuthors = topAuthors;
   }
-  console.log(finalTopAuthors);
+  //console.log(finalTopAuthors);
 
   return finalTopAuthors;
 }

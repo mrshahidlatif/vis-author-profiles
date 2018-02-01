@@ -79,6 +79,18 @@ body
     color: white;
 }
 
+/*Clickable Names*/
+#linkedAuthorName {
+    cursor:pointer;
+    /*color:blue;*/
+    /*text-decoration:underline;*/
+    font-weight: bold;
+}
+#sideBarHead {
+    color:black;
+    font-size: 13px;
+}
+
 
 /*Visualization styles */
 .bar {
