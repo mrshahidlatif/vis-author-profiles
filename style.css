@@ -95,10 +95,10 @@ body
 }
 
 .bar:hover {
-  fill: green;
+  fill: #f3f7a3;
 }
 .mbar:hover {
-  fill: green;
+  fill: #f3f7a3;
 }
 .axis {
     font: 10px sans-serif;

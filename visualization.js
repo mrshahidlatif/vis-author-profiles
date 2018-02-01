@@ -1,7 +1,11 @@
-function generateVis(gdata, adata, canvas,pdata,aName){
+function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
   
-  console.log(gdata);
-  console.log(adata);
+  //console.log(gdata);
+  //console.log(adata);
+  
+  var main_author = getAuthorObjectByName(allAuthorsData, aName);
+  var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
+  //console.log(main_author);
   //Data for individual Publications
   var indPub = [];
   for(var i=0;i<adata.length;i++){
@@ -125,7 +129,7 @@ function generateVis(gdata, adata, canvas,pdata,aName){
               var xPosition = d3.mouse(this)[0]-30;
               var yPosition = d3.mouse(this)[1]-30;
               tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-              tooltip.select("text").text("Count: " + d.Value)
+              tooltip.select("text").text("Count: " + d.Value);
             });
     
       
@@ -158,12 +162,12 @@ function generateVis(gdata, adata, canvas,pdata,aName){
 
   }
   //Draw Vertical line for showing the starting year of main author 
-  // g.append("g")
-  //      .attr("transform", "translate("+x(2008)+", 0)")
-  //      .append("line")
-  //      .attr("y2", 450)
-  //      .attr("stroke", "#6b6b6b")
-  //      .attr("stroke-width", "0.5px");
+  g.append("g")
+       .attr("transform", "translate("+x(main_author_start_year)+", 0)")
+       .append("line")
+       .attr("y2", height)
+       .attr("stroke", "#ff2b2b")
+       .attr("stroke-width", "1px");
 
 }
 function showMutualPublications(pdata, year, aName, cName){
@@ -206,6 +210,16 @@ function getMutualPublicationObjects(pubData, year, aName, cName){
   }
     return mutualPublications; 
 }
+function getAuthorObjectByName(adata, name){
+  //console.log(adata)
+  //console.log(name);
+  for (var i=0;i<adata.length;i++){
+    if (adata[i].Name==name){
+      var obj =adata[i];
+    }
+  }
+  return obj;
+}
 
 function generateSparkline(data,canvas){
 
@@ -230,7 +244,7 @@ var y = d3.scaleLinear()
 var svg = d3.select("#" + canvas)
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-    .style("background-color", 'lightgray')
+    .style("background-color", '#f2f2f2')
   .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")")

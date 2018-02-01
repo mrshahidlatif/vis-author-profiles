@@ -18,14 +18,14 @@ function process(name) {
       }
     }
     var distCoAuthors = compressArray(allCoAuthors, name);
-    var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 8);
+    var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 5, 100, 3);
     var topNCoAuthorObjects = [];
 
     loadJSON("authordata.json", function(response) {
       adata = JSON.parse(response);
       for (var i = 0; i < topNCoAuthor.length; i++) {
         for (var j = 0; j < adata.length; j++) {
-          if (adata[j].Name == topNCoAuthor[i].value) {
+          if (adata[j].Name == topNCoAuthor[i].Name) {
             topNCoAuthorObjects.push(adata[j]);
           }
         }
@@ -39,7 +39,7 @@ function process(name) {
         var a = new Object();
         a.Name = topNCoAuthorObjects[i].Name;
         a.StartYear = sYear;
-        a.MutualPublications = topNCoAuthor[i].count;
+        a.MutualPublications = topNCoAuthor[i].Value;
         //console.log(a.MutualPublications/(2017-a.StartYear)); 
         dataForGantt.push(a);
       }
@@ -50,7 +50,7 @@ function process(name) {
         
       }
       //console.log(dataForGantt);
-      generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name);
+      generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name, adata);
       //Calling NLG function and generating text 
       var jpy;
       var cpy;
@@ -69,7 +69,7 @@ function process(name) {
         }
         //Generating graphs for author stats 
        var pct = percentRank(statData, pubCount);
-       generateProfileText(pdata, adata, aObject, pct);
+       generateProfileText(pdata, adata, aObject, pct, dataForGantt);
   });
 });
 }
@@ -151,52 +151,71 @@ function getMax(data) {
   else return 1800;
 }
 
-function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, threshold) {
+// function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, threshold) {
+//   var topAuthors = [];
+//   // console.log("Here are his coauthors!!!")
+//   // distCoAuthors.sort(function(a, b) {
+//   //   return b.count - a.count;
+//   // });
+//   console.log(distCoAuthors);
+//   for (var i = 0; i < distCoAuthors.length; i++) {
+//     var percentPublications = Math.round(distCoAuthors[i].Value / NoOfAuthorPublications * 100);
+//     if (percentPublications > threshold) {
+//       topAuthors.push(distCoAuthors[i]);
+
+//     }
+//   }
+//   topAuthors.sort(function(a, b) {
+//     return b.Value - a.Value;
+//   });
+//   return topAuthors;
+// }
+
+function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold, UpperThreshold, MinimumNoOfOutputItems) {
+ 
+  var N = MinimumNoOfOutputItems; 
+  if (N==0){ N =1 ;}
+  var l = lowerThreshold;
+  var u = UpperThreshold;
   var topAuthors = [];
-  // console.log("Here are his coauthors!!!")
-  // distCoAuthors.sort(function(a, b) {
-  //   return b.count - a.count;
-  // });
-  //console.log(distCoAuthors);
+  var finalTopAuthors=[];
+
   for (var i = 0; i < distCoAuthors.length; i++) {
-    var percentPublications = Math.round(distCoAuthors[i].count / NoOfAuthorPublications * 100);
-    if (percentPublications > threshold) {
+    var percentPublications = Math.round(distCoAuthors[i].Value / NoOfAuthorPublications * 100);
+    if (percentPublications >= l && percentPublications <= u) {
       topAuthors.push(distCoAuthors[i]);
 
     }
   }
   topAuthors.sort(function(a, b) {
-    return b.count - a.count;
+    return b.Value - a.Value;
   });
-  return topAuthors;
+
+  if (topAuthors.length > N){
+    console.log(topAuthors);
+    var gaps = [];
+    for(var i=N;i<topAuthors.length;i++){
+      var gap = topAuthors[i-1].Value - topAuthors[i].Value;
+      gaps.push(gap);
+    }
+    console.log(gaps);
+    var maxGap = d3.max(gaps);
+    var cutPoint = gaps.indexOf(maxGap) + N ; // adding 1 due to 0-indexing system 
+    console.log(cutPoint);
+
+    
+    for (var i=0;i<cutPoint;i++){
+      finalTopAuthors.push(topAuthors[i]);
+    }
+  }
+  else {
+    finalTopAuthors = topAuthors;
+  }
+  console.log(finalTopAuthors);
+
+  return finalTopAuthors;
 }
 
-// function generateProfile(name) {
-//   //Generate graphics
-//   var adata;
-//   var jpy;
-//   var cpy;
-//   var statData = []; //For computing statistics 
-//   var pubCount = 0; //No of publications for searched author
-//   var aObject;
-//   loadJSON("authordata.json", function(response) {
-//     adata = JSON.parse(response);
-//     //console.log(adata);
-//     for (var i = 0; i < adata.length; i++) {
-//       statData.push(adata[i].Journals + adata[i].Conferences);
-//       if (adata[i].Name == name) {
-//         aObject = adata[i];
-//         pubCount = adata[i].Journals + adata[i].Conferences;
-//         jpy = adata[i].JournalsPerYear;
-//         cpy = adata[i].ConfsPerYear;
-//       }
-//     }
-//     //Generating graphs for author stats 
-//    var pct = percentRank(statData, pubCount);
-//    generateProfileText(adata, aObject, pct);
-
-//   });
-// }
 
 function percentRank(array, n) {
   var L = 0;
@@ -242,15 +261,15 @@ function compressArray(original, name) {
 
     if (myCount > 0) {
       var a = new Object();
-      a.value = original[i];
-      a.count = myCount;
+      a.Name = original[i];
+      a.Value = myCount;
       compressed.push(a);
     }
   }
   //Remove the self author 
   compressed = $.grep(compressed,
     function(o, i) {
-      return o.value === name;
+      return o.Name === name;
     },
     true);
   return compressed;
