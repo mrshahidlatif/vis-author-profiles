@@ -16,8 +16,12 @@ if(isFound) {
   //Data for individual Publications
   var indPub = [];
   for(var i=0;i<adata.length;i++){
+    for (var j=0; j<adata[i].AllPublicationsPerYear.length;j++){
+      adata[i].AllPublicationsPerYear[j]["Name"] = adata[i].Name; //adding name of each author to list
+    }
     indPub.push(adata[i].AllPublicationsPerYear); 
   }
+  //console.log(indPub);
 
   var svg = d3.select("#" + canvas),
     margin = {top: 10, right: 0, bottom: 20, left: 20},
@@ -136,9 +140,9 @@ if(isFound) {
               var yPosition = d3.mouse(this)[1]-30;
               tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
               tooltip.select("text").html("Count: " + '<br>' + d.Value);
-            });
-    
-      
+            })
+            .on("click", function(d){showIndividualPublications(pdata, d.Year, d.Name)});
+  
       //Adding bars for mutual publications
       g.selectAll(".mbar")
         .data(gdata[j].MutualPubPerYear)
@@ -186,8 +190,36 @@ function showMutualPublications(pdata, year, aName, cName){
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pubs[i]);
   }
-  // document.getElementById("dod").innerHTML="Wow, you clicked me!"+ "<br>" 
-  // + "I will show mutual publications..." + "<br>" + "Just not yet!";
+}
+
+function showIndividualPublications(pdata, year, name){
+  //Prints the mutual publications on mouse click in side panel 
+  //console.log("Hi from Call me ");
+  //console.log(year + aName+cName);
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications: "+ name + " and " + name 
+  + "<br>" + year + "</span>" + "<br>" + "<br>";
+  var pubs = getIndividualPublicationsObjects(pdata, year, name);
+  for (var i=0; i<pubs.length;i++){
+    StringifyPublication(pubs[i]);
+  }
+}
+
+
+function getIndividualPublicationsObjects(pubData, year, name){
+  var indPublications = []; 
+  for(var i=0;i<pubData.length;i++){
+    if(pubData[i].Year == year){
+      var tempAuthors = []; 
+      for (var j=0;j<pubData[i].Authors.length;j++){
+        tempAuthors.push(pubData[i].Authors[j].Name);
+        }
+        if(tempAuthors.indexOf(name) != -1)
+        {
+          indPublications.push(pubData[i]);
+        }
+    }
+  }
+  return indPublications;
 }
 
 function StringifyPublication(p){
