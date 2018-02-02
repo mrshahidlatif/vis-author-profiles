@@ -182,9 +182,10 @@ function showMutualPublications(pdata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 
   //console.log("Hi from Call me ");
   //console.log(year + aName+cName);
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications: "+ aName + " and " + cName 
-  + "<br>" + year + "</span>" + "<br>" + "<br>";
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + pubs.length + ") : " +
+   aName + " and " + cName + ", " + year + "</span>" + "<br>" + "<hr>";
+  
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pubs[i]);
   }
@@ -194,15 +195,14 @@ function showIndividualPublications(pdata, year, name){
   //Prints the mutual publications on mouse click in side panel 
   //console.log("Hi from Call me ");
   //console.log(year + aName+cName);
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications: "+ name  
-  + "<br>" + year + "</span>" + "<br>" + "<br>";
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + name  
+  + ", " + year + "</span>" + "<br>" + "<hr>";
+  
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pubs[i]);
   }
 }
-
-
 function getIndividualPublicationsObjects(pubData, year, name){
   var indPublications = []; 
   for(var i=0;i<pubData.length;i++){
@@ -271,27 +271,27 @@ function generateSparkline(data,canvas){
     return +a.Year - +b.Year;
   });
   // set the dimensions and margins of the graph
-var margin = {top: 2, right: 0, bottom: 0, left: 0},
-    width =  90 - margin.left - margin.right,
-    height = 20 - margin.top - margin.bottom;
+  var margin = {top: 2, right: 0, bottom: 0, left: 0},
+      width =  90 - margin.left - margin.right,
+      height = 20 - margin.top - margin.bottom;
 
-// set the ranges
-var x = d3.scaleBand()
-          .range([0, width])
-          .padding(0.3);
-var y = d3.scaleLinear()
-          .range([height, 0]);
-          
-// append the svg object to the body of the page
-// append a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("#" + canvas)
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .style("background-color", '#f2f2f2')
-  .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")")
+  // set the ranges
+  var x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.3);
+  var y = d3.scaleLinear()
+            .range([height, 0]);
+            
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select("#" + canvas)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("background-color", '#f2f2f2')
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")")
   
   svg.selectAll("*").remove();
   // Scale the range of the data in the domains

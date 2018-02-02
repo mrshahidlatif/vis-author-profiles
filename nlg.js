@@ -16,6 +16,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 
 	generateSparkline(aObject.ConfsPerYear,"sparklineConfs");
 	generateSparkline(aObject.JournalsPerYear,"sparklineJournals");
+	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll");
 }
 
 function generateSummary(pdata, adata, a, p)
@@ -24,8 +25,9 @@ function generateSummary(pdata, adata, a, p)
 	var pub = getPublications(pdata, a.Name);
 	//console.log(pub);
 	var sYear = d3.min(a.AllPublicationsPerYear, function(d){return d.Year;});
-	bio = a.Name + " is a senior researcher publishing since " + sYear + "." + " Until now, he has "
-	+ "published "+ a.Journals + " journal " + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+	bio = a.Name + " is publishing since " + sYear + "." + " Until now, he has "+ "published " + (a.Journals+a.Conferences)
+	+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+	+ a.Journals + " journal " + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 	+ "and " + a.Conferences + " conference articles" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 	+ ".";
 
@@ -67,11 +69,13 @@ function generateCollaborationText(pdata, adata, a, topCoAuthors){
 	return collab;
 }
 function showAdditionalInfo(){
-	document.getElementById("dod").innerHTML = "Top collaborator is decided on the basis of maximum number of mutual publications."; 
+	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "About Top Collaborator" + "</span>" + "<br>" + "<hr>" + 
+	"Top collaborator is decided on the basis of maximum number of mutual publications."; 
 }
 
 function showAdditionalInfo2(){
-	document.getElementById("dod").innerHTML = "Active collaboration is measured in terms of maximum number of published articles" +
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Active Collaboration" + "</span>" + "<br>" + "<hr>" + 
+	"Active collaboration is measured in terms of maximum number of published articles";
 	" per year."; 
 }
 
