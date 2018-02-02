@@ -265,15 +265,27 @@ function getAuthorObjectByName(adata, name){
   return obj;
 }
 
-function generateSparkline(data,canvas){
+function generateSparkline(data,canvas, h, w){
+
+ var largeScale = false;
+ if (h>100 || w>200){
+  largeScale = true ;
+ } 
 
  data.sort(function(a, b) {
     return +a.Year - +b.Year;
   });
   // set the dimensions and margins of the graph
-  var margin = {top: 2, right: 0, bottom: 0, left: 0},
-      width =  90 - margin.left - margin.right,
-      height = 20 - margin.top - margin.bottom;
+  if (largeScale){
+    var margin = {top: 10, right: 20, bottom: 20, left: 30},
+      width =  w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
+  }
+  else {
+    var margin = {top: 3, right: 0, bottom: 0, left: 0},
+      width =  w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
+  }
 
   // set the ranges
   var x = d3.scaleBand()
@@ -289,9 +301,12 @@ function generateSparkline(data,canvas){
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
+      .on("click", function(d){enlargeMe(data, this.id)})
+
     .append("g")
       .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")")
+    
   
   svg.selectAll("*").remove();
   // Scale the range of the data in the domains
@@ -307,13 +322,33 @@ function generateSparkline(data,canvas){
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); });
+  
+  if (largeScale){
+    // add the x Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
-  // // add the x Axis
-  // svg.append("g")
-  //     .attr("transform", "translate(0," + height + ")")
-  //     .call(d3.axisBottom(x));
-
-  // // add the y Axis
-  // svg.append("g")
-  //     .call(d3.axisLeft(y));
+    // add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
+    }
+}
+function enlargeMe(data, id){
+  //console.log(data); 
+  if (id == "sparklineAll"){
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);   
+  }
+  else if (id == "sparklineJournals") {
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);  
+  }
+  else if (id == "sparklineConfs") {
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);  
+  }
 }

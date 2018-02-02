@@ -14,9 +14,9 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	document.getElementById("bio").innerHTML = bio;
 	document.getElementById("collab").innerHTML = collab;
 
-	generateSparkline(aObject.ConfsPerYear,"sparklineConfs");
-	generateSparkline(aObject.JournalsPerYear,"sparklineJournals");
-	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll");
+	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90);
+	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90);
+	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90);
 }
 
 function generateSummary(pdata, adata, a, p)
@@ -33,7 +33,6 @@ function generateSummary(pdata, adata, a, p)
 
 	return bio;
 }
-
 function generateCollaborationText(pdata, adata, a, topCoAuthors){
 	console.log(topCoAuthors);
 	var collab = "";
