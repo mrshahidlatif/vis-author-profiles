@@ -22,7 +22,7 @@ function process(name) {
     }
     if (isFound) { //Author found so go ahead with process
       var distCoAuthors = compressArray(allCoAuthors, name);
-      var topNCoAuthor = getTopNCoAuthors(distCoAuthors, authorPubCoun, 5, 100, 3);
+      var topNCoAuthor = getTopNCoAuthors(distCoAuthors, 3, 6);
       var topNCoAuthorObjects = [];
 
       loadJSON("authordata.json", function(response) {
@@ -159,6 +159,7 @@ function getMax(data) {
 }
 
 // function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, threshold) {
+//   //Basic! Returns the authors which are above a certain percent thresold
 //   var topAuthors = [];
 //   // console.log("Here are his coauthors!!!")
 //   // distCoAuthors.sort(function(a, b) {
@@ -178,38 +179,86 @@ function getMax(data) {
 //   return topAuthors;
 // }
 
-function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold, UpperThreshold, MinimumNoOfOutputItems) {
+// function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold, UpperThreshold, MinimumNoOfOutputItems) {
  
-  var N = MinimumNoOfOutputItems; 
-  if (N==0){ N =1 ;}
+//   //Given [l, u] percentage range and N (minimum desired authors) returns the authors that lie in the percent interval [l, u]
+//   var N = MinimumNoOfOutputItems; 
+//   if (N==0){ N =1 ;}
+//   var l = lowerThreshold;
+//   var u = UpperThreshold;
+//   var topAuthors = [];
+//   var finalTopAuthors=[];
+
+//   for (var i = 0; i < distCoAuthors.length; i++) {
+//     var percentPublications = Math.round(distCoAuthors[i].Value / NoOfAuthorPublications * 100);
+//     if (percentPublications >= l && percentPublications <= u) {
+//       topAuthors.push(distCoAuthors[i]);
+
+//     }
+//   }
+//   topAuthors.sort(function(a, b) {
+//     return b.Value - a.Value;
+//   });
+
+//   if (topAuthors.length > N){
+//     //console.log(topAuthors);
+//     var gaps = [];
+//     for(var i=N;i<topAuthors.length;i++){
+//       var gap = topAuthors[i-1].Value - topAuthors[i].Value;
+//       gaps.push(gap);
+//     }
+//     //console.log(gaps);
+//     var maxGap = d3.max(gaps);
+//     var cutPoint = gaps.indexOf(maxGap) + N ; // adding 1 due to 0-indexing system 
+//     //console.log(cutPoint);
+
+    
+//     for (var i=0;i<cutPoint;i++){
+//       finalTopAuthors.push(topAuthors[i]);
+//     }
+//   }
+//   else {
+//     finalTopAuthors = topAuthors;
+//   }
+//   //console.log(finalTopAuthors);
+
+//   return finalTopAuthors;
+// }
+
+function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
+ 
+  //Given [l, u] range: returns the authors in that range by systematically cutting off the list
+  //For instance, check for Fabian Beck, Thomas Ertl, Daniel A. Keim to see its effect
   var l = lowerThreshold;
   var u = UpperThreshold;
   var topAuthors = [];
   var finalTopAuthors=[];
 
-  for (var i = 0; i < distCoAuthors.length; i++) {
-    var percentPublications = Math.round(distCoAuthors[i].Value / NoOfAuthorPublications * 100);
-    if (percentPublications >= l && percentPublications <= u) {
-      topAuthors.push(distCoAuthors[i]);
-
-    }
-  }
-  topAuthors.sort(function(a, b) {
+  distCoAuthors.sort(function(a, b) {
     return b.Value - a.Value;
   });
+  console.log(distCoAuthors);
+  if (u < distCoAuthors.length){
+    for (var i = 0; i < u; i++) {
+        topAuthors.push(distCoAuthors[i]);
 
-  if (topAuthors.length > N){
-    //console.log(topAuthors);
+    }   
+  }
+  else {
+    topAuthors = distCoAuthors;
+  }
+
+  if (topAuthors.length > l){
+    console.log(topAuthors);
     var gaps = [];
-    for(var i=N;i<topAuthors.length;i++){
+    for(var i=l;i<topAuthors.length;i++){
       var gap = topAuthors[i-1].Value - topAuthors[i].Value;
       gaps.push(gap);
     }
-    //console.log(gaps);
+    console.log(gaps);
     var maxGap = d3.max(gaps);
-    var cutPoint = gaps.indexOf(maxGap) + N ; // adding 1 due to 0-indexing system 
+    var cutPoint = gaps.indexOf(maxGap) + l ; // adding 1 due to 0-indexing system 
     //console.log(cutPoint);
-
     
     for (var i=0;i<cutPoint;i++){
       finalTopAuthors.push(topAuthors[i]);
@@ -218,10 +267,11 @@ function getTopNCoAuthors(distCoAuthors, NoOfAuthorPublications, lowerThreshold,
   else {
     finalTopAuthors = topAuthors;
   }
-  //console.log(finalTopAuthors);
+  console.log(finalTopAuthors);
 
   return finalTopAuthors;
 }
+
 
 
 function percentRank(array, n) {
