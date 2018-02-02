@@ -124,10 +124,10 @@ body
 }
 
 .bar:hover {
-  fill: #f3f7a3;
+  fill: #fffd96;
 }
 .mbar:hover {
-  fill: #f3f7a3;
+  fill: #fffd96;
 }
 .axis {
     font: 10px sans-serif;
@@ -145,4 +145,17 @@ body
     /*font-weight: bold;*/
     fill:black;
     font-size:11px;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 80px;
+  height: 38px;
+  padding: 2px;
+  font: 10px sans-serif;
+  background: #fce394;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }

@@ -64,23 +64,11 @@ if(isFound) {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // Prep the tooltip bits, initial display is hidden
-    var tooltip = svg.append("g")
-      .attr("class", "tooltip")
-      .style("display", "none");
-        
-    tooltip.append("rect")
-      .attr("width", 60)
-      .attr("height", 30)
-      .attr("fill", "green")
-      .style("opacity", 0.5);
-
-    tooltip.append("text")
-      .attr("x", 25)
-      .attr("dy", "1.2em")
-      .style("text-anchor", "middle")
-      .attr("font-size", "12px")
-
+    //tooltip 
+    var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+      
       //x.domain(data.map(function(d) { return d.Year; }));
       x.domain(xDomain);
       //y.domain([0, d3.max(data, function(d) { return d.Value; })]);
@@ -133,14 +121,19 @@ if(isFound) {
           .attr("y", function(d) { return y(d.Value); })
           .attr("width", x.bandwidth())
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-            .on("mouseover", function() { tooltip.style("display", null); })
-            .on("mouseout", function() { tooltip.style("display", "none"); })
-            .on("mousemove", function(d) {
-              var xPosition = d3.mouse(this)[0]-30;
-              var yPosition = d3.mouse(this)[1]-30;
-              tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-              tooltip.select("text").html("Count: " + '<br>' + d.Value);
-            })
+          .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5 + "px")
+             .style("top", (d3.event.pageY - 38) + "px");
+           })
+         .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
             .on("click", function(d){showIndividualPublications(pdata, d.Year, d.Name)});
   
       //Adding bars for mutual publications
@@ -152,14 +145,19 @@ if(isFound) {
           .attr("y", function(d) { return y(d.Value); })
           .attr("width", x.bandwidth())
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-            .on("mouseover", function() { tooltip.style("display", null); })
-            .on("mouseout", function() { tooltip.style("display", "none"); })
-            .on("mousemove", function(d) {
-              var xPosition = d3.mouse(this)[0]-30;
-              var yPosition = d3.mouse(this)[1]-30;
-              tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-              tooltip.select("text").text("Count: " + d.Value);
-            })
+         .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5 + "px")
+             .style("top", (d3.event.pageY - 38) + "px");
+           })
+         .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
             .on("click", function(d){showMutualPublications(pdata, d.Year, aName, d.Name)});
     
       //Adding horizontal lines 
@@ -196,7 +194,7 @@ function showIndividualPublications(pdata, year, name){
   //Prints the mutual publications on mouse click in side panel 
   //console.log("Hi from Call me ");
   //console.log(year + aName+cName);
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications: "+ name + " and " + name 
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications: "+ name  
   + "<br>" + year + "</span>" + "<br>" + "<br>";
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
   for (var i=0; i<pubs.length;i++){
