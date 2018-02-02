@@ -237,7 +237,7 @@ function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
   distCoAuthors.sort(function(a, b) {
     return b.Value - a.Value;
   });
-  console.log(distCoAuthors);
+  // console.log(distCoAuthors);
   if (u < distCoAuthors.length){
     for (var i = 0; i < u; i++) {
         topAuthors.push(distCoAuthors[i]);
@@ -249,13 +249,13 @@ function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
   }
 
   if (topAuthors.length > l){
-    console.log(topAuthors);
+    // console.log(topAuthors);
     var gaps = [];
     for(var i=l;i<topAuthors.length;i++){
       var gap = topAuthors[i-1].Value - topAuthors[i].Value;
       gaps.push(gap);
     }
-    console.log(gaps);
+    // console.log(gaps);
     var maxGap = d3.max(gaps);
     var cutPoint = gaps.indexOf(maxGap) + l ; // adding 1 due to 0-indexing system 
     //console.log(cutPoint);
@@ -267,7 +267,7 @@ function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
   else {
     finalTopAuthors = topAuthors;
   }
-  console.log(finalTopAuthors);
+  // console.log(finalTopAuthors);
 
   return finalTopAuthors;
 }

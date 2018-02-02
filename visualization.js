@@ -2,8 +2,15 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
   
   //console.log(gdata);
   //console.log(adata);
-  
+  var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
+  if (typeof main_author === "undefined") {
+    isFound = false ; // Author not found [Auhtor deosn't belong to VIS authors]
+    document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
+    //Clear the previous conetens here
+
+}
+if(isFound) {
   var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
   //console.log(main_author);
   //Data for individual Publications
@@ -167,7 +174,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
        .attr("y2", height)
        .attr("stroke", "#ff2b2b")
        .attr("stroke-width", "0.5px");
-
+}
 }
 function showMutualPublications(pdata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 

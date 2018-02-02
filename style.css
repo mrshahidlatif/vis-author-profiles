@@ -102,6 +102,13 @@ body
     font-size: 11px;
 }
 
+#info:hover {
+    cursor:pointer;
+    /*color:blue;*/
+    text-decoration:underline;
+    /*font-weight: bold;*/
+}
+
 /*Visualization styles */
 .bar {
   fill: gray;
