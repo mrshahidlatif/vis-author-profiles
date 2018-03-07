@@ -1,4 +1,4 @@
-function process(name) {
+function process(name,container, l,u, t) {
   //Processing the data 
   var pdata;
   var adata;
@@ -22,7 +22,7 @@ function process(name) {
     }
     if (isFound) { //Author found so go ahead with process
       var distCoAuthors = compressArray(allCoAuthors, name);
-      var topNCoAuthor = getTopNCoAuthors(distCoAuthors, 3, 6);
+      var topNCoAuthor = getTopNCoAuthors(distCoAuthors, l, u,t);
       var topNCoAuthorObjects = [];
 
       loadJSON("authordata.json", function(response) {
@@ -54,7 +54,7 @@ function process(name) {
           
         }
         //console.log(dataForGantt);
-        generateVis(dataForGantt, topNCoAuthorObjects, "CollabChart",pdata, name, adata);
+        generateVis(dataForGantt, topNCoAuthorObjects, container,pdata, name, adata);
         //Calling NLG function and generating text 
         var jpy;
         var cpy;
@@ -73,7 +73,9 @@ function process(name) {
           }
           //Generating graphs for author stats 
          var pct = percentRank(statData, pubCount);
-         generateProfileText(pdata, adata, aObject, pct, dataForGantt);
+         if(t==1){ // call once as process() is called twice with t=1 and t=2
+            generateProfileText(pdata, adata, aObject, pct, dataForGantt);
+          }
       });
     }
     else {
@@ -225,7 +227,7 @@ function getMax(data) {
 //   return finalTopAuthors;
 // }
 
-function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
+function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold, t) {
  
   //Given [l, u] range: returns the authors in that range by systematically cutting off the list
   //For instance, check for Fabian Beck, Thomas Ertl, Daniel A. Keim to see its effect
@@ -237,7 +239,7 @@ function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
   distCoAuthors.sort(function(a, b) {
     return b.Value - a.Value;
   });
-  // console.log(distCoAuthors);
+  //console.log(distCoAuthors);
   if (u < distCoAuthors.length){
     for (var i = 0; i < u; i++) {
         topAuthors.push(distCoAuthors[i]);
@@ -268,11 +270,23 @@ function getTopNCoAuthors(distCoAuthors, lowerThreshold, UpperThreshold) {
     finalTopAuthors = topAuthors;
   }
   // console.log(finalTopAuthors);
-
+  if (t==2){
+    var tier2authors = subtractArrayOfObjects(topAuthors,finalTopAuthors);
+    finalTopAuthors = tier2authors; 
+    //console.log(finalTopAuthors);
+  }
   return finalTopAuthors;
 }
-
-
+function subtractArrayOfObjects(a1,a2){
+  for (var i=0; i<a1.length;i++){
+    for (var j=0;j<a2.length;j++){
+      if (a1[i].Name == a2[j].Name){
+        a1.splice(i,1);
+      }
+    }
+  }
+  return a1;
+}
 
 function percentRank(array, n) {
   var L = 0;
@@ -330,4 +344,4 @@ function compressArray(original, name) {
     },
     true);
   return compressed;
-};
+}

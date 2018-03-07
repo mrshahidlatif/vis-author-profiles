@@ -11,7 +11,7 @@
 <body>
   
   <div class="header">
-    <img id="logo" src="logo.svg" >
+    <img id="logo" src="logo.svg">
   </div>
 
   <div class="topnav">
@@ -22,18 +22,23 @@
     </div>
   </div>
 
+  <div class="title">
+    <h2 id="name"></h2>
+  </div>
+
   <div class="row">
     <div class="leftcolumn">
-      <h4 id="name"></h4>
       <p id="bio">
         <!-- <svg width="70" height="20" id="sparklineJournals"></svg>  -->
       </p>
       
      <!--  <svg width="70" height="20" id="sparklineConfs"></svg> -->
       <p id="collab"></p>
+      <p id="sup"></p>
+      <p id="supvisee"></p>
       <br>
-      <svg width="400" height="200" id="CollabChart"></svg>
-      
+      <svg width="330" height="200" id="CollabChart1"></svg>
+      <svg width="330" height="200" id="CollabChart2"></svg>
     </div>
     <div class="rightcolumn">
       <p class="sidebar" id=dod></p>
@@ -41,16 +46,20 @@
   </div>
   <script>
 
+    var name = "";
+    var l=2;
+    var u=8;
     function search(){
-      var name = document.getElementById("search").value;
+      name = document.getElementById("search").value;
       document.getElementById("search").value = "";
-      process(name); 
-    };
+      process(name,"CollabChart1",l,u,1); 
+      process(name,"CollabChart2",l,u,2); 
+    }
 
   </script>
   
   <div class="footer">
-    <p>Copyright &copy; 2017 Shahid Latif | University of Duisburg-Essen | shahid.latif@uni-due.de</p>
+    <p>Contact: Shahid Latif | University of Duisburg-Essen | shahid.latif@uni-due.de</p>
   </div>
 </body>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

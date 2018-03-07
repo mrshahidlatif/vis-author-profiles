@@ -75,8 +75,6 @@ if(isFound) {
       y.domain([0,maxCount]);
       
       if (j==0){
-      
-
         // g.append("g")
         //     .attr("class", "axis axis--x")
         //     .attr("transform", "translate(0," + height + ")")
@@ -229,12 +227,13 @@ function StringifyPublication(p){
       authors += ", ";
     }
   }
-  var pString = authors + "<br>" + p.Title + ", " + p.Venue + ", " + p.Year;
+  var pString = p.Title + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
 function loadMe(name){
-  process(name);
+  process(name,"CollabChart1",l,u,1); 
+  process(name,"CollabChart2",l,u,2); 
 }
 
 function getMutualPublicationObjects(pubData, year, aName, cName){

@@ -1,9 +1,9 @@
 ----
 BUGS
 ----
--Problem with author names having special characters like ü, ä, ö etc. 
-
-
+-Problem with author names having special characters like ü, ä, ö etc. [FIXED]
+-Line for active year of author is displayed in the beginning when author is the most senior 
+-Author does not properly load when clicked on author's name in right side bar [FIXED]
 
 -----
 TODOs
@@ -11,12 +11,22 @@ TODOs
 Appearance 
 -Making search bar case insensitive 
 -Remove numbers when displaying names of authors 
--Extend tooltip to show year, count and type of publication
--Revise the highlight coloring scheme 
+-Extend tooltip to show year, count and type of publication [DONE]
+-Revise the highlight coloring scheme [DONE]
+-restrict width of the text to a fixed length according to layout instructions [DONE]
+-side bar should have its own scroll bar 
+-use the gray background for active period [DONE]
+-remove any other gray backgrounds [DONE]
+-reduce the overall width of the page [DONE]
+
 
 Functionality 
 -Making author sparklines interactive 
 -Exception handling when record of author is not found
--add button to load second tier coauthors 
+-add button to load second tier coauthors [DONE]
 -link names in central graphic to load record function
--Integrate the VIS publications
+-Integrate the VIS publications 
+-show number of publication after the name of author in the central graphic, i.e. John A. (32)
+-fix the height of bar for each author in the central graphic
+-Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. 
+-First Author publication count (Pay attention to alphabatical order in some conferences)
