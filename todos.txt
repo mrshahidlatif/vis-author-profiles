@@ -21,6 +21,7 @@ Appearance
 
 
 Functionality 
+-Handle if the author has more than 2 supervisors 
 -Making author sparklines interactive 
 -Exception handling when record of author is not found
 -add button to load second tier coauthors [DONE]

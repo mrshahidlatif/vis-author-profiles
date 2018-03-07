@@ -35,6 +35,10 @@ function generateSummary(pdata, adata, a, p)
 	+ a.Journals + " journal " + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 	+ "and " + a.Conferences + " conference articles" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 	+ ".";
+	if (a.PhDThesisTitle != ""){
+		bio += " The author completed his/her PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
+		"\" was published in " + a.PhDYear+".";
+	}
 
 	return bio;
 }
@@ -92,7 +96,7 @@ function generateSupervisorRelationText(pdata, adata, a, topCoAuthors){
 	}
 	if(supervisors.length == 1){
 		sup += "Based on the publication data, the author has worked under the supervision" 
-		+'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + "of " + supervisors[0] + ".";
+		+'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " of " + supervisors[0] + ".";
 	}
 	else if (supervisors.length == 2) {
 			sup += "Based on the publication data, it is inferred that the author has worked under the supervision" 
@@ -107,13 +111,13 @@ function generateSupervisorRelationText(pdata, adata, a, topCoAuthors){
 function generateSuperviseeRelationText(pdata, adata, a){
 	var text = "";
 	var supervisees = findSupervisee(pdata, adata, a);
-	console.log(supervisees);
+	//console.log(supervisees);
 	sortByValue(supervisees);
-	console.log(supervisees);
+	//console.log(supervisees);
 	
 	if(supervisees.length>0){
 		text += "According to publication data analysis, the author assumes the role of a supervisor" + 
-		"His noteable supervised researchers"+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " are ";
+		". His noteable supervised researchers"+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " are ";
 		for (var i=0;i<3;i++){
 			if(i==2){
 				text += " and " + supervisees[i].Name+ ".";
