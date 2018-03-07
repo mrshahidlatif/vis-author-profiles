@@ -350,4 +350,19 @@ function enlargeMe(data, id){
   + '<svg width="400" height="200" id="figure"></svg>';
     generateSparkline(data,"figure", 125, 350);  
   }
+  else if (id == "sparklineAsFirstAuthor") {
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles as First Author" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);  
+  }
+  else if (id == "sparklineJournalsAsFirstAuthor") {
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles as First Author" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);  
+  }
+  else if (id == "sparklineConfsAsFirstAuthor") {
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles as First Author" + "</span>" + "<br>" + "<hr>" 
+  + '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 125, 350);  
+  }
 }

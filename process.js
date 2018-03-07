@@ -103,7 +103,6 @@ function getMutualPublications(pubData,aName, cName){
     return mppy; 
 }
 function countFrequency(original) {
-
   var compressed = [];
   // make a copy of the input array
   var copy = original.slice(0);

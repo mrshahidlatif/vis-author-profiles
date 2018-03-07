@@ -12,6 +12,9 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
 	var sup = generateSupervisorRelationText(pdata, adata, aObject, topCoAuthors);
 	var supvisee = generateSuperviseeRelationText(pdata, adata, aObject);
+	var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
+	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,aObject.Name,"J");
+	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"C");
 
 	document.getElementById("bio").innerHTML = bio;
 	document.getElementById("collab").innerHTML = collab;
@@ -22,6 +25,10 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90);
 	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90);
 	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90);
+	generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90);
+	generateSparkline(firstAuthorJournals,"sparklineJournalsAsFirstAuthor", 20, 90);
+	generateSparkline(firstAuthorConfs,"sparklineConfsAsFirstAuthor", 20, 90);
+
 }
 
 function generateSummary(pdata, adata, a, p)
@@ -35,10 +42,22 @@ function generateSummary(pdata, adata, a, p)
 	+ a.Journals + " journal " + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 	+ "and " + a.Conferences + " conference articles" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 	+ ".";
+
+	var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,a.Name,"A");
+	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,a.Name,"J");
+	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,a.Name,"C");
+
+	bio += " Out of " + (a.Journals+a.Conferences) + " articles, the author published " + sumAllValues(firstAuthorPubs) +
+	" articles as first author " + '<svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + 
+	" (" + sumAllValues(firstAuthorJournals) + " journal articles " + '<svg width="70" height="20" id="sparklineJournalsAsFirstAuthor"></svg>'
+	+ ", " + sumAllValues(firstAuthorConfs) + " conference articles " + '<svg width="70" height="20" id="sparklineConfsAsFirstAuthor"></svg>' + ").";
+
 	if (a.PhDThesisTitle != ""){
 		bio += " The author completed his/her PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
 		"\" was published in " + a.PhDYear+".";
 	}
+	
+
 
 	return bio;
 }
@@ -228,6 +247,52 @@ function getPublicationsAsLastAuthor(pdata, name){
       }
     }
     return publications; 
+}
+
+function getPublicationsAsFirstAuthor(pdata, name, type){
+	//type = [A, J, C]
+	//A for all articles 
+	//J for journal articles 
+	//C for conference articles 
+  var publications = []; 
+  for(var i=0;i<pdata.length;i++){
+    var tempAuthors = []; 
+    for (var j=0;j<pdata[i].Authors.length;j++){
+      tempAuthors.push(pdata[i].Authors[j].Name);
+      }
+      if(tempAuthors.indexOf(name) != -1 && tempAuthors.indexOf(name)==0)
+      {
+      	if(type == "A")
+        publications.push(pdata[i].Year);
+    	else if (type == "J"){
+    		if(pdata[i].Type == "J"){
+    			publications.push(pdata[i].Year);
+    		}
+    	}
+    	else if (type == "C"){
+    		if (pdata[i].Type == "C"){
+    			publications.push(pdata[i].Year);
+    		}
+    	}
+
+      }
+    }
+    var pubsPerYear = groupPublicationsByYear(publications);
+    return pubsPerYear; 
+}
+function groupPublicationsByYear(pubs){
+	var pubsPerYear = countFrequency(pubs);
+	sortByYear(pubsPerYear);
+	//console.log(pubsPerYear);
+	return pubsPerYear;
+}
+
+function sumAllValues(data){
+	var sum =0;
+	for(var i=0;i<data.length;i++){
+		sum += data[i].Value; 
+	}
+	return sum;
 }
 
 function getStartYear(a){
