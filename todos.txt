@@ -26,12 +26,13 @@ Functionality
 -Exception handling when record of author is not found
 -add button to load second tier coauthors [DONE]
 -link names in central graphic to load record function
--Integrate the VIS publications 
+[Priority:High]-Integrate the VIS publications 
 -show number of publication after the name of author in the central graphic, i.e. John A. (32)
--fix the height of bar for each author in the central graphic
--Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. 
+[Priority:High]-fix the height of bar for each author in the central graphic
+-Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. [IN PROCESS]
 -First Author publication count (Pay attention to alphabatical order in some conferences) [DONE]
 -add venues of conferences 
+[Priority:High]-Handle cases when top collaborator, supervisor, active collaborator or supvisee overlap in NLG.js
 
 
 MISC 
