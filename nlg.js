@@ -112,8 +112,16 @@ function generateSuperviseeRelationText(pdata, adata, a){
 	console.log(supervisees);
 	
 	if(supervisees.length>0){
-		text += "According to publication data analysis, the author assumes the role of a supervisor"
-		+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "His noteable supervised researchers are "
+		text += "According to publication data analysis, the author assumes the role of a supervisor" + 
+		"His noteable supervised researchers"+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " are ";
+		for (var i=0;i<3;i++){
+			if(i==2){
+				text += " and " + supervisees[i].Name+ ".";
+			}
+			else {
+				text += supervisees[i].Name + ", ";
+			}
+		}
 		
 	}
 	return text; 
@@ -163,6 +171,10 @@ function showAdditionalInfo3(){
 	"Supervisor relationship is calculated based on the seniority and the order of authors in publications. If a coauthor started working "+
 	"at least 5 year prior to the main author and appeared as the last author in half of the mutual publications, then that coauthor is " +
 	"categorized as the supervisor of the main author.";
+}
+function showAdditionalInfo4(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisee Relationship" + "</span>" + "<br>" + "<hr>" +
+	"To be added....!";
 }
 
 function getFirstNamePronoun(fullName){
