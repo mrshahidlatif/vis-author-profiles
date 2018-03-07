@@ -3,6 +3,10 @@
 #logo { 
     width:10%; 
 }
+#badge {
+    width:3%; 
+}
+
 .header {
     background-color: #F1F1F1;
     /*text-align: center;*/

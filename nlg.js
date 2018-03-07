@@ -4,10 +4,14 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//console.log(adata);
 	// console.log(aObject);
 	// console.log(percentile);
+	var isSupervisorBadge=false;
 	var bio = "";
 	var collab="";
 	var sup=""; 
-	document.getElementById("name").innerHTML = aObject.Name; 
+	var title="";
+	
+	document.getElementById("name").innerHTML = title;
+
 	var bio = generateSummary(pdata, adata, aObject, percentile);
 	var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
 	var sup = generateSupervisorRelationText(pdata, adata, aObject, topCoAuthors);
@@ -16,11 +20,26 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,aObject.Name,"J");
 	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"C");
 
+	//Displaying the badges 
+	var totalpubCount = (aObject.Journals+aObject.Conferences);
+	if (totalpubCount>=100){
+		title += aObject.Name + '<img id="badge" align="top" src="golden_badge.svg">'; 
+	}
+	else if(totalpubCount>=50 && totalpubCount<100){
+		title += aObject.Name + '<img id="badge" align="top" src="silver_badge.svg">'; 
+	}
+	else if(totalpubCount>=10 && totalpubCount <50){
+		title += aObject.Name + '<img id="badge" align="top" src="bronze_badge.svg">'; 
+	}
+	if(supvisee != ""){
+		title += '<img id="badge" align="top" src="supervisor_badge.svg">'; 
+	}
+
 	document.getElementById("bio").innerHTML = bio;
 	document.getElementById("collab").innerHTML = collab;
 	document.getElementById("sup").innerHTML = sup;
 	document.getElementById("supvisee").innerHTML = supvisee;
-
+	document.getElementById("name").innerHTML = title;
 
 	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90);
 	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90);
@@ -29,6 +48,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	generateSparkline(firstAuthorJournals,"sparklineJournalsAsFirstAuthor", 20, 90);
 	generateSparkline(firstAuthorConfs,"sparklineConfsAsFirstAuthor", 20, 90);
 
+	
 }
 
 function generateSummary(pdata, adata, a, p)
@@ -57,8 +77,6 @@ function generateSummary(pdata, adata, a, p)
 		"\" was published in " + a.PhDYear+".";
 	}
 	
-
-
 	return bio;
 }
 function generateCollaborationText(pdata, adata, a, topCoAuthors){
@@ -135,6 +153,7 @@ function generateSuperviseeRelationText(pdata, adata, a){
 	//console.log(supervisees);
 	
 	if(supervisees.length>0){
+		isSupervisorBadge=true;
 		text += "According to publication data analysis, the author assumes the role of a supervisor" + 
 		". His noteable supervised researchers"+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " are ";
 		for (var i=0;i<3;i++){

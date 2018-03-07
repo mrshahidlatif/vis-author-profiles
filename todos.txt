@@ -30,11 +30,11 @@ Functionality
 -show number of publication after the name of author in the central graphic, i.e. John A. (32)
 -fix the height of bar for each author in the central graphic
 -Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. 
--First Author publication count (Pay attention to alphabatical order in some conferences) 
+-First Author publication count (Pay attention to alphabatical order in some conferences) [DONE]
 -add venues of conferences 
 
 
 MISC 
 -take care of duplicated functions with different names 
 	+ e.g. getAuthorObjectByName() in visualization.js & findAuthorObjectByName() in nlg.js
-	
+
