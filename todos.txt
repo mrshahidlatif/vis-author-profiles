@@ -18,6 +18,7 @@ Appearance
 -use the gray background for active period [DONE]
 -remove any other gray backgrounds [DONE]
 -reduce the overall width of the page [DONE]
+-Replace first name by the Second name of author in textual summary
 
 
 Functionality 
