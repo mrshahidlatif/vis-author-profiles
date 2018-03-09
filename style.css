@@ -25,6 +25,7 @@ body
     color: #444444;
     font-size: 12pt;
     text-align: justify;
+    line-height: 1.5;
 }
 .title {
     /*background-color: #F1F1F1;*/
@@ -104,15 +105,19 @@ body
     text-decoration:underline;
     /*font-weight: bold;*/
 }
+#publicationTitle {
+    font-weight: bold;
+}
 
 #sideBarHead {
-    font-size: 12px;
-    color: #003c9e;
+    font-size: 14px;
+    color: black;
     position: absolute;
     text-align: center;
 }
-.sidebar {
+#dod {
     font-size: 12px;
+    line-height: 1.2;
 }
 
 #info {

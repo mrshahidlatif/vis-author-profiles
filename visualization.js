@@ -227,7 +227,8 @@ function StringifyPublication(p){
       authors += ", ";
     }
   }
-  var pString = p.Title + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
+  var pString = '<span id="publicationTitle">' + p.Title + "</span>"
+  + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
@@ -266,7 +267,7 @@ function getAuthorObjectByName(adata, name){
 
 function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
 
- console.log(ymax); 
+ //console.log(ymax); 
  var largeScale = false;
  if (h>100 || w>200){
   largeScale = true ;
