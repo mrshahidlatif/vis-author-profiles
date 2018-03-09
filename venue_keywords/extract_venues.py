@@ -1,17 +1,17 @@
 import json
 import re
 import operator
-from pprint import pprint
 
 data = json.load(open("../pubdata.json", encoding="utf8"))
 
 venues = {}
+venueRawMapping = {}
 
 print("Reading data ...")
 for publication in data:
-    venue_long = publication["Venue"]
+    venueRaw = publication["Venue"]
     # removing additional information (after comma, in brackets, etc.)
-    venue = re.sub("(?<=.{10})(,|\(|\s-\s).*","", venue_long)
+    venue = re.sub("(?<=.{10})(,|\(|\s-\s).*","", venueRaw)
     # removing year and index information
     venue = re.sub("\s?'\d\d|\d\d\d\d(:.*)?\s?|\d\d?(th|st|nd|rd)\s|\d\d\.?|(first|second|third|fourth|fith|sixth|seventh|eigth|nineth|tenth|eleventh|twelveth)", "", venue, flags=re.IGNORECASE)
     # removing roman numbers - https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression
@@ -22,18 +22,25 @@ for publication in data:
     if not venue in venues:
         venues[venue] = 0
     venues[venue] += 1
+    venueRawMapping[venueRaw] = venue;
 print("... %d distinct venues identified\n" % len(venues))
 
 print("Sorting by frequency ...")
-sorted_venues = sorted(venues.items(), key=operator.itemgetter(1), reverse=True)
+sortedVenues = sorted(venues.items(), key=operator.itemgetter(1), reverse=True)
 print("... the top venues are:")
 for i in range(0,min(len(venues), 10)):
-    print("\t"+str(sorted_venues[i]).strip("()"))
+    print("\t" + str(sortedVenues[i]).strip("()"))
 print("")
 
 print("Writing data ...")
+print("... venues.csv ...")
 with open("venues.csv", "w", encoding="utf8") as out:
-    for venue in sorted_venues:
+    for venue in sortedVenues:
         out.write(str(venue).strip("()")+"\n")
 out.close()
+print("... done")
+
+print("... venue_raw_mapping.json")
+with open('venue_raw_mapping.json', 'w') as outfile:
+    json.dump(venueRawMapping, outfile)
 print("... done")
