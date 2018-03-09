@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="supervisor_badge.svg">
+   sodipodi:docname="active_gold.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -275,7 +275,7 @@
        id="path26-33"
        style="fill:#ffd700;fill-opacity:1;stroke-width:0.26458332"
        sodipodi:type="star"
-       transform="matrix(0.43171634,0,0,0.41277905,10.693369,158.46586)" />
+       transform="matrix(0.43171634,0,0,0.41277905,144.5954,100.46837)" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -290,26 +290,66 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15.85525799px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.39638144"
-       x="8.3624716"
-       y="278.57138"
+       x="145.21407"
+       y="221.82391"
        id="text67-9"
        transform="scale(0.97844706,1.0220277)"><tspan
          sodipodi:role="line"
          id="tspan65-6"
-         x="8.3624716"
-         y="278.57138"
+         x="145.21407"
+         y="221.82391"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:15.8552494px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.39638144">visor</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:14.14233875px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.35355848"
-       x="6.6362138"
-       y="264.95532"
+       x="143.48781"
+       y="208.20786"
        id="text67-9-8"
        transform="scale(0.97844706,1.0220277)"><tspan
          sodipodi:role="line"
          id="tspan65-6-3"
-         x="6.6362138"
-         y="264.95532"
+         x="143.48781"
+         y="208.20786"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:14.14233112px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.35355848">Super-</tspan></text>
+    <path
+       d="m -17.694751,301.25044 0.249456,-56.02414 48.64305,-27.79603 48.393595,28.22811 -0.249456,56.02413 -48.643051,27.79603 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="3.1460453"
+       sodipodi:arg1="2.6224465"
+       sodipodi:r2="48.518803"
+       sodipodi:r1="56.024689"
+       sodipodi:cy="273.45441"
+       sodipodi:cx="30.948299"
+       sodipodi:sides="6"
+       id="path26-33-1"
+       style="fill:#ffd700;fill-opacity:1;stroke-width:0.26458332"
+       sodipodi:type="star"
+       transform="matrix(0.43171634,0,0,0.41277905,11.495176,158.73314)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:14.14233875px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.35355848"
+       x="8.0020084"
+       y="264.43231"
+       id="text67-9-8-6"
+       transform="scale(0.97844706,1.0220277)"><tspan
+         sodipodi:role="line"
+         id="tspan65-6-3-4"
+         x="8.0020084"
+         y="264.43231"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:14.14233112px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.35355848">Active</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:19.37623215px;line-height:1.25;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.48440129"
+       x="11.488251"
+       y="293.8522"
+       id="text71-6-0"
+       transform="scale(1.0244408,0.9761423)"><tspan
+         sodipodi:role="line"
+         id="tspan69-6-7"
+         x="11.488251"
+         y="293.8522"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:19.37623215px;font-family:Impact;-inkscape-font-specification:'Impact, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.48440129">20+</tspan></text>
   </g>
 </svg>
