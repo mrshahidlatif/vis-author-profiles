@@ -264,8 +264,9 @@ function getAuthorObjectByName(adata, name){
   return obj;
 }
 
-function generateSparkline(data,canvas, h, w){
+function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
 
+ console.log(ymax); 
  var largeScale = false;
  if (h>100 || w>200){
   largeScale = true ;
@@ -274,6 +275,27 @@ function generateSparkline(data,canvas, h, w){
  data.sort(function(a, b) {
     return +a.Year - +b.Year;
   });
+ //console.log(data); 
+ // add in missing years 
+ var data2 = [];
+ //var range = +data[data.length-1].Year - +data[0].Year;
+ var range = endYear - startYear; 
+ //console.log(range);
+ for (var i=0;i<=range;i++){
+    //var year = +data[0].Year + i;
+    var year = +startYear + i;
+    var count = 0;
+    for (j=0;j<data.length;j++){
+      if(year == data[j].Year){
+        count = data[j].Value;
+      }
+    }
+    var obj = new Object()
+    obj.Year = year;
+    obj.Value = count;
+    data2.push(obj);
+ }
+ //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){
     var margin = {top: 10, right: 20, bottom: 20, left: 30},
@@ -300,7 +322,7 @@ function generateSparkline(data,canvas, h, w){
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
-      .on("click", function(d){enlargeMe(data, this.id)})
+      .on("click", function(d){enlargeMe(data2, this.id,startYear, endYear, ymax)})
 
     .append("g")
       .attr("transform", 
@@ -309,12 +331,13 @@ function generateSparkline(data,canvas, h, w){
   
   svg.selectAll("*").remove();
   // Scale the range of the data in the domains
-  x.domain(data.map(function(d) { return d.Year; }));
-  y.domain([0, d3.max(data, function(d) { return d.Value; })]);
+  x.domain(data2.map(function(d) { return d.Year; }));
+  //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
+  y.domain([0, ymax]);
 
   // append the rectangles for the bar chart
   svg.selectAll(".bar")
-      .data(data)
+      .data(data2)
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.Year); })
@@ -333,36 +356,36 @@ function generateSparkline(data,canvas, h, w){
         .call(d3.axisLeft(y));
     }
 }
-function enlargeMe(data, id){
+function enlargeMe(data, id, startYear, endYear, ymax){
   //console.log(data); 
   if (id == "sparklineAll"){
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);   
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);   
   }
   else if (id == "sparklineJournals") {
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);  
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
   }
   else if (id == "sparklineConfs") {
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);  
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
   }
   else if (id == "sparklineAsFirstAuthor") {
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles as First Author" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);  
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
   }
   else if (id == "sparklineJournalsAsFirstAuthor") {
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles as First Author" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);  
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
   }
   else if (id == "sparklineConfsAsFirstAuthor") {
     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles as First Author" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350);  
+    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
   }
 }

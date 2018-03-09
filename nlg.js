@@ -8,9 +8,9 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	var bio = "";
 	var collab="";
 	var sup=""; 
-	var title="";
+	var title= aObject.Name;
 	
-	document.getElementById("name").innerHTML = title;
+	//document.getElementById("name").innerHTML = title;
 
 	var bio = generateSummary(pdata, adata, aObject, percentile);
 	var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
@@ -23,16 +23,16 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//Displaying the badges 
 	var totalpubCount = (aObject.Journals+aObject.Conferences);
 	if (totalpubCount>=100){
-		title += aObject.Name + '<img id="badge" align="top" src="golden_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/golden_badge.svg">'; 
 	}
 	else if(totalpubCount>=50 && totalpubCount<100){
-		title += aObject.Name + '<img id="badge" align="top" src="silver_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/silver_badge.svg">'; 
 	}
 	else if(totalpubCount>=10 && totalpubCount <50){
-		title += aObject.Name + '<img id="badge" align="top" src="bronze_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/bronze_badge.svg">'; 
 	}
 	if(supvisee != ""){
-		title += '<img id="badge" align="top" src="supervisor_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
 	}
 
 	document.getElementById("bio").innerHTML = bio;
@@ -41,15 +41,27 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	document.getElementById("supvisee").innerHTML = supvisee;
 	document.getElementById("name").innerHTML = title;
 
-	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90);
-	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90);
-	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90);
-	generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90);
-	generateSparkline(firstAuthorJournals,"sparklineJournalsAsFirstAuthor", 20, 90);
-	generateSparkline(firstAuthorConfs,"sparklineConfsAsFirstAuthor", 20, 90);
+	var sYear = findStartYear(aObject);
+	var eYear = findEndYear(aObject);
+	var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 
+	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax);
+	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax);
+	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax);
+	generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax);
+	generateSparkline(firstAuthorJournals,"sparklineJournalsAsFirstAuthor", 20, 90, sYear,eYear, ymax);
+	generateSparkline(firstAuthorConfs,"sparklineConfsAsFirstAuthor", 20, 90, sYear,eYear, ymax);
 	
 }
+function findStartYear(aObject){
+	var sYear = d3.min(aObject.AllPublicationsPerYear, function(d){return d.Year});
+	return sYear; 
+}
+function findEndYear(aObject){
+	var eYear = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Year});
+	return eYear; 
+}
+
 
 function generateSummary(pdata, adata, a, p)
 {

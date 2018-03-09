@@ -4,6 +4,9 @@ BUGS
 -Problem with author names having special characters like ü, ä, ö etc. [FIXED]
 -Line for active year of author is displayed in the beginning when author is the most senior 
 -Author does not properly load when clicked on author's name in right side bar [FIXED]
+-Strange behavior for Catherine Plaisant
+-Some title missing for some publications in the right side panel for Daniel a. kiem
+-Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters
 
 -----
 TODOs
@@ -19,6 +22,8 @@ Appearance
 -remove any other gray backgrounds [DONE]
 -reduce the overall width of the page [DONE]
 -Replace first name by the Second name of author in textual summary
+-Make the text a bit larger especially in the right side bar 
+-Sparklines shouldn't change the line height (use higher line width)
 
 
 Functionality 
@@ -34,6 +39,7 @@ Functionality
 -First Author publication count (Pay attention to alphabatical order in some conferences) [DONE]
 -add venues of conferences 
 [Priority:High]-Handle cases when top collaborator, supervisor, active collaborator or supvisee overlap in NLG.js
+-Add DOI to publications 
 
 
 MISC 
