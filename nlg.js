@@ -1,10 +1,11 @@
+var hasSupversied = false; 
 function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	
 	//console.log(pdata);
 	//console.log(adata);
 	// console.log(aObject);
+	hasSupversied = false; 
 	// console.log(percentile);
-	var isSupervisorBadge=false;
 	var bio = "";
 	var collab="";
 	var sup=""; 
@@ -19,28 +20,40 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,aObject.Name,"J");
 	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"C");
 
+	var sYear = findStartYear(aObject);
+	var eYear = findEndYear(aObject);
+
 	//Displaying the badges 
 	var totalpubCount = (aObject.Journals+aObject.Conferences);
+	var yearsActive = eYear - sYear; 
+
 	if (totalpubCount>=100){
-		title += '<img id="badge" align="top" src="badges/golden_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/article_gold.svg">'; 
 	}
 	else if(totalpubCount>=50 && totalpubCount<100){
-		title += '<img id="badge" align="top" src="badges/silver_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/article_silver.svg">'; 
 	}
 	else if(totalpubCount>=10 && totalpubCount <50){
-		title += '<img id="badge" align="top" src="badges/bronze_badge.svg">'; 
+		title += '<img id="badge" align="top" src="badges/article_bronze.svg">'; 
 	}
-	// if(supvisee != ""){
-	// 	title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
-	// }
+	if(hasSupversied){
+		title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
+	}
+	if (yearsActive >= 20){
+		title += '<img id="badge" align="top" src="badges/active_gold.svg">'; 
+	}
+	else if (yearsActive < 20 && yearsActive >= 10){
+		title += '<img id="badge" align="top" src="badges/active_silver.svg">'; 
+	}
+	else if (yearsActive < 10 && yearsActive >= 5){
+		title += '<img id="badge" align="top" src="badges/active_bronze.svg">'; 
+	}
+	console.log(hasSupversied);
 
 	document.getElementById("bio").innerHTML = bio;
 	document.getElementById("name").innerHTML = title;
 	document.getElementById("collRelation").innerHTML = text;
 	
-
-	var sYear = findStartYear(aObject);
-	var eYear = findEndYear(aObject);
 	var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 
 	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax);
@@ -94,13 +107,13 @@ function firstSentenceV1(a,c, supervisors,supervisees){
 	var s ;
 	if (DoesExistInList(supervisees, c.Name)){
 		s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
-		" and supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "is " + getLastName(c.Name); 
+		" and supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " is " + getLastName(c.Name); 
 		
 
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
 			s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' +
-			 " and supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + "is " + getLastName(c.Name) + ". ";
+			 " and supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " is " + getLastName(c.Name) + ". ";
 	}
 	else {
 		s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
@@ -117,7 +130,7 @@ function firstSentenceV2(a,c1,c2){
 }
 function firstSentenceV3(a,list_c){
 	var s = "";
-	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + "are " ;
+	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
 		for (var i=0;i<list_c.length;i++){
 			if(i==list_c.length-1){
 					s += "and " + list_c[i].Name+ ".";
@@ -426,6 +439,7 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 			text += thirdSentenceV1(a,topCoAuthors[1],supervisors,supervisees);
 			text += fourthSentenceV1(a,topCoAuthors[2],supervisors,supervisees);
 			if (supervisees.length > 0){
+				hasSupversied = true;
 				text += fifthSenetenceV3(a,topCoAuthors,supervisees);
 			}
 		}
