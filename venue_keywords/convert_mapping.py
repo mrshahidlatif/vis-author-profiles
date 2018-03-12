@@ -19,7 +19,6 @@ for venueRaw in venueRawMapping:
         keywords = venueKeywords[venueRawMapping[venueRaw]]
         if len(keywords) > 0:
             venueRawKeywords[venueRaw] = keywords
-            print(venueRaw, venueKeywords[venueRawMapping[venueRaw]])
 
 with open('../venue_keywords.json', 'w') as outfile:
     json.dump(venueRawKeywords, outfile)
