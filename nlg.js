@@ -13,12 +13,8 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//document.getElementById("name").innerHTML = title;
 
 	var bio = generateSummary(pdata, adata, aObject, percentile);
-
 	var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
-
 	var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
-	var sup = generateSupervisorRelationText(pdata, adata, aObject, topCoAuthors);
-	var supvisee = generateSuperviseeRelationText(pdata, adata, aObject);
 	var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
 	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,aObject.Name,"J");
 	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"C");
@@ -34,14 +30,11 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	else if(totalpubCount>=10 && totalpubCount <50){
 		title += '<img id="badge" align="top" src="badges/bronze_badge.svg">'; 
 	}
-	if(supvisee != ""){
-		title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
-	}
+	// if(supvisee != ""){
+	// 	title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
+	// }
 
 	document.getElementById("bio").innerHTML = bio;
-	document.getElementById("collab").innerHTML = collab;
-	document.getElementById("sup").innerHTML = sup;
-	document.getElementById("supvisee").innerHTML = supvisee;
 	document.getElementById("name").innerHTML = title;
 	document.getElementById("collRelation").innerHTML = text;
 	
@@ -97,6 +90,290 @@ function generateSummary(pdata, adata, a, p)
 	return bio;
 }
 
+function firstSentenceV1(a,c, supervisors,supervisees){
+	var s ;
+	if (DoesExistInList(supervisees, c.Name)){
+		s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+		" and supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "is " + getLastName(c.Name); 
+		
+
+	}
+	else if (DoesExistInSupervisors(supervisors, c.Name)){
+			s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' +
+			 " and supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + "is " + getLastName(c.Name) + ". ";
+	}
+	else {
+		s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+		" is " + getLastName(c.Name) + ". ";	
+	}
+	return s;
+
+}
+function firstSentenceV2(a,c1,c2){
+	var s = "";
+	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+	" are " + c1.Name + " and " + c2.Name + ". "
+	return s;
+}
+function firstSentenceV3(a,list_c){
+	var s = "";
+	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + "are " ;
+		for (var i=0;i<list_c.length;i++){
+			if(i==list_c.length-1){
+					s += "and " + list_c[i].Name+ ".";
+			}
+			else {
+					s += list_c[i].Name + ", ";
+			}
+		}
+		return s;
+}
+function secondSentenceV1(a,c){
+
+	var s = "";
+	var startYear = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
+	var lastYear = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
+	//console.log(lastYear); 
+	if (lastYear>2015){
+		s += " It is ";
+		if (lastYear - startYear > 20){
+			s += "a prolonged and still";
+		} 
+		s += " ongoing collaboration since " + startYear + " with " + c.MutualPublications
+			 + " publications. "; 
+
+	}
+	else if (lastYear<=2015){
+		s += " This ";
+		if (lastYear-startYear >20){
+			text += "was a long lasting "; 
+		}
+		s += "collaboration ";
+			if (lastYear-startYear >20){
+				text += "that "
+			}
+		s += "ended in " + lastYear + " with " + c.MutualPublications
+			 + " publications. "; 
+
+	}
+	return s;
+}
+function thirdSentenceV1(a,c,supervisors,supervisees){
+		var s = "";
+		var startYear1 = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
+		var lastYear1 = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
+		s += getLastName(c.Name) + " is the second most frequent co-author";
+		if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
+			s += ", a long-lasting and still ongoing collaboration with "+ c.MutualPublications +
+					" publications since " + startYear1;
+			if (DoesExistInList(supervisees, c.Name)){
+						s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+			}
+			if (DoesExistInSupervisors(supervisors, c.Name)){
+						s += " and " + getLastName(c.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+			}
+		}
+		else if (lastYear1 -  startYear1 > 1 && lastYear1>2015){
+			s += ", an ongoing collaboration with "+ c.MutualPublications +
+					" publications since " + startYear1;
+			if (DoesExistInList(supervisees, c.Name)){
+					s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+			}
+			if (DoesExistInSupervisors(supervisors, c.Name)){
+					s += " and " + getLastName(c.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+			}
+		}
+		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
+			s += ", a collaboration that produced "+ c.MutualPublications +
+					" publications in a span of " + (lastYear1 - startYear1) + " years and ended in " + lastYear1;
+			if (DoesExistInList(supervisees, c.Name)){
+					s += getLastName(a.Name) + " acted as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + 
+					"in this collaboration"
+			}
+			if (DoesExistInSupervisors(supervisors, c.Name)){
+					s += getLastName(c.Name) + " acted as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + 
+					 "in this collaboration"
+			}
+		}
+		s += ". ";
+		return s;
+}
+function fourthSentenceV1(a, c, supervisors, supervisees){
+	var s = "";
+	var startYear1 = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
+	var lastYear1 = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
+		s += "Together with " + getLastName(c.Name) + ", the author published ";
+		if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
+			s += ", a long-lasting and still ongoing collaboration with "+ c.MutualPublications +
+					"publications since " + startYear1;
+			if (DoesExistInList(supervisees, c.Name)){
+						s += " and " + getLastName(a.Name) + " is acting as a supervisor. "
+			}
+			if (DoesExistInSupervisors(supervisors, c.Name)){
+						s += " and " + getLastName(c.Name) + " is acting as a supervisor. "
+			}
+		}
+		else {
+			s += c.MutualPublications + " research papers since " + startYear1 + ". "; 
+		}
+		return s;
+
+}
+function fifthSenetenceV1(a,c,supervisees){
+	var s = "";
+	if(DoesExistInList(supervisees, c.Name)){
+		supervisees = RemoveItemFromList(supervisees,c.Name);
+		s += "In addition to " + getLastName(c.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+		 "of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+		for (var i=0;i<supervisees.length;i++){
+			if(i==supervisees.length-1){
+					s += "and " + getLastName(supervisees[i].Name)+ ".";
+			}
+			else {
+					s += getLastName(supervisees[i].Name) + ", ";
+			}
+		}
+	}
+	else {
+		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+		"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+		for (var i=0;i<supervisees.length;i++){
+			if(i==supervisees.length-1){
+					s += "and " + getLastName(supervisees[i].Name)+ ".";
+			}
+			else {
+					s += getLastName(supervisees[i].Name) + ", ";
+			}
+		}	
+	}
+	return s;
+}
+function fifthSenetenceV2(a,c1,c2,supervisees){
+	var s = "";
+	if (DoesExistInList(supervisees, c1.Name) && DoesExistInList(supervisees, c2.Name)){
+		supervisees = RemoveItemFromList(supervisees,c1.Name);
+		supervisees = RemoveItemFromList(supervisees,c2.Name);
+		s += "In addition to " + getLastName(c1.Name) + "and " + getLastName(c2.Name) + ", further supervisees" +
+		 '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+		for (var i=0;i<supervisees.length;i++){
+			if(i==supervisees.length-1){
+					s += "and " + getLastName(supervisees[i].Name)+ ".";
+			}
+			else {
+					s += getLastName(supervisees[i].Name) + ", ";
+			}
+		}
+	}
+	else if (DoesExistInList(supervisees, c1.Name) || DoesExistInList(supervisees, c2.Name)){
+		
+		if (DoesExistInList(supervisees, c1.Name)){
+			supervisees = RemoveItemFromList(supervisees,c1.Name);
+			s += "In addition to " + getLastName(c1.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+			 "of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+			for (var i=0;i<supervisees.length;i++){
+				if(i==supervisees.length-1){
+						s += "and " + getLastName(supervisees[i].Name)+ ".";
+				}
+				else {
+						s += getLastName(supervisees[i].Name) + ", ";
+				}
+			}
+		}
+		else if (DoesExistInList(supervisees, c2.Name)){
+			supervisees = RemoveItemFromList(supervisees,c2.Name);
+			s += "In addition to " + getLastName(c2.Name) + ", further supervisees" + + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+			 "of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+			for (var i=0;i<supervisees.length;i++){
+				if(i==supervisees.length-1){
+						s += "and " + getLastName(supervisees[i].Name)+ ".";
+				}
+				else {
+						s += getLastName(supervisees[i].Name) + ", ";
+				}
+			}
+		}
+	}
+	else {
+		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
+		" with considerable amount of publications are " ;
+		for (var i=0;i<supervisees.length;i++){
+			if(i==supervisees.length-1){
+					s += "and " + getLastName(supervisees[i].Name)+ ".";
+			}
+			else {
+					s += getLastName(supervisees[i].Name) + ", ";
+			}
+		}	
+	}
+	return s;
+}
+function fifthSenetenceV3(a,list_c,supervisees){
+	var s = "";
+	var alreadySupervisees = [];
+	for (var i=0; i< list_c.length ; i++){
+		if (DoesExistInList(supervisees, list_c[i].Name)){
+
+			alreadySupervisees.push(list_c[i]);
+			supervisees = RemoveItemFromList(supervisees, list_c[i].Name);
+		}
+	}
+	console.log(alreadySupervisees); 
+	if (alreadySupervisees.length > 0 && supervisees.length > 0){
+		if (alreadySupervisees.length == 1){
+			s += "In addition to " + alreadySupervisees[0].Name ;
+		}
+		else if (alreadySupervisees.length == 2){
+			s += "In addition to " + alreadySupervisees[0].Name + " and " + alreadySupervisees[0].Name ; 
+		}
+		else if (alreadySupervisees > 2){
+			s += "In addition to ";
+			for (var i=0;i<alreadySupervisees.length;i++){
+				if(i==alreadySupervisees.length-1){
+					s += "and " + getLastName(alreadySupervisees[i].Name)+ ".";
+				}
+				else {
+					s += getLastName(alreadySupervisees[i].Name) + ", ";
+				}
+			}
+
+		}
+		if (supervisees.length > 2){
+			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+			for (var i=0;i<supervisees.length;i++){
+				if(i==supervisees.length-1){
+					s += "and " + getLastName(supervisees[i].Name)+ ".";
+				}
+				else {
+					s += getLastName(supervisees[i].Name) + ", ";
+				}
+			}
+		}
+		else if (supervisees.length == 2){
+			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			"of " + getLastName(a.Name) + " with considerable amount of publications are " +
+			getLastName(supervisees[0].Name) + " and " + getLastName(supervisees[1].Name) + ".";
+		}
+		else if (supervisees.length == 1){
+			s +=  ", another supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			"of " + getLastName(a.Name) + " with considerable amount of publications is " +
+			getLastName(supervisees[0].Name) + ".";
+		}
+	}
+	// else {
+	// 	console.log("Why I am here......");
+	// 	s += "Supervisees of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+	// 	for (var i=0;i<supervisees.length;i++){
+	// 		if(i==supervisees.length-1){
+	// 				s += "and " + getLastName(supervisees[i].Name)+ ".";
+	// 		}
+	// 		else {
+	// 				s += getLastName(supervisees[i].Name) + ", ";
+	// 		}
+	// 	}	
+	// }
+	return s;
+}
 function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 	var text = "";
 	console.log(topCoAuthors);
@@ -121,144 +398,68 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 	console.log(supervisors);
 
 	if (topCoAuthors.length > 0){
-		text += getLastNamePronoun(a.Name) + " top ";
+		
 		if (topCoAuthors.length == 1){
-			text += "collaborator is " + topCoAuthors[0].Name + ".";
-			var startYear = d3.min(topCoAuthors[0].MutualPubPerYear, function(d){return +d.Year;});
-			var lastYear = d3.max(topCoAuthors[0].MutualPubPerYear, function(d){return +d.Year;});
-			console.log(lastYear); 
-			if (lastYear>2015){
-				text += " It is ";
-				if (lastYear - startYear > 20){
-					text += "a prolonged and still";
-				} 
-				text += " ongoing collaboration since " + startYear + " with " + topCoAuthors[0].MutualPublications
-				+ " publications"; 
-
-				if (DoesExistInList(supervisees, topCoAuthors[0].Name)){
-					text += " and " + getLastName(a.Name) + " is acting as a supervisor."
-				}
-				if (DoesExistInSupervisors(supervisors, topCoAuthors[0].Name)){
-					text += " and " + getLastName(topCoAuthors[0].Name) + " is acting as a supervisor."
-				}
+			text += firstSentenceV1(a,topCoAuthors[0],supervisors, supervisees);
+			text += secondSentenceV1(a,topCoAuthors[0]);
+			if (supervisees.length > 0){
+				text += fifthSenetenceV1(a,topCoAuthors[0], supervisees); 
 			}
-			else if (lastYear<=2015){
-				text += " This ";
-				if (lastYear-startYear >20){
-					text += "was a long lasting "; 
-				}
-				text += "collaboration ";
-				if (lastYear-startYear >20){
-					text += "that "
-				}
-				text += "ended in " + lastYear + " with " + topCoAuthors[0].MutualPublications
-				+ " publications "; 
-
-				if (DoesExistInList(supervisees, topCoAuthors[0].Name)){
-					text += " and " + getLastName(a.Name) + " acted as a supervisor."
-				}
-				if (DoesExistInSupervisors(supervisors, topCoAuthors[0].Name)){
-					text += " and " + getLastName(topCoAuthors[0].Name) + " acted as a supervisor."
-				}
-			}
-
 		}
 		else if (topCoAuthors.length == 2){
-			if (topCoAuthors[0].MutualPublications == topCoAuthors[1].MutualPublications){
-				text += " collaborators are " + topCoAuthors[0].Name + " and " + topCoAuthors[1].Name + "."	
+			if (topCoAuthors[0].MutualPublications == topCoAuthors[1].MutualPublications){	
+				text += firstSentenceV2(a,topCoAuthors[0],topCoAuthors[1]);
 			}
 			else {
-				text += " collaborator is " + topCoAuthors[0].Name + "."; 
-				var startYear = d3.min(topCoAuthors[0].MutualPubPerYear, function(d){return +d.Year;});
-				var lastYear = d3.max(topCoAuthors[0].MutualPubPerYear, function(d){return +d.Year;});
-
-				var startYear1 = d3.min(topCoAuthors[1].MutualPubPerYear, function(d){return +d.Year;});
-				var lastYear1 = d3.max(topCoAuthors[1].MutualPubPerYear, function(d){return +d.Year;});
-
-				if (lastYear>2015){
-					text += " It is ";
-					if (lastYear - startYear > 20){
-						text += "a prolonged and still";
-					} 
-					text += " ongoing collaboration since " + startYear + " with " + topCoAuthors[0].MutualPublications
-					+ " publications"; 
-
-					if (DoesExistInList(supervisees, topCoAuthors[0].Name)){
-						text += " and " + getLastName(a.Name) + " is acting as a supervisor"
-					}
-					if (DoesExistInSupervisors(supervisors, topCoAuthors[0].Name)){
-						text += " and " + getLastName(topCoAuthors[0].Name) + " is acting as a supervisor"
-					}
+				text += firstSentenceV1(a,topCoAuthors[0],supervisors, supervisees); 
+				text += secondSentenceV1(a,topCoAuthors[0]);
+				text += thirdSentenceV1(a,topCoAuthors[1],supervisors,supervisees);
+				if (supervisees.length > 0){
+					text += fifthSenetenceV2(a,topCoAuthors[0],topCoAuthors[1],supervisees);
 				}
-				else if (lastYear<=2015){
-					text += " This ";
-					if (lastYear-startYear >20){
-						text += "was a long lasting "; 
-					}
-					text += "collaboration ";
-					if (lastYear-startYear >20){
-						text += "that "
-					}
-					text += "ended in " + lastYear + " with " + topCoAuthors[0].MutualPublications
-					+ " publications "; 
-
-					if (DoesExistInList(supervisees, topCoAuthors[0].Name)){
-						text += " and " + getLastName(a.Name) + " acted as a supervisor."
-					}
-					if (DoesExistInSupervisors(supervisors, topCoAuthors[0].Name)){
-						text += " and " + getLastName(topCoAuthors[0].Name) + " acted as a supervisor."
-					}
-				}
-				text += ". " + getLastName(topCoAuthors[1].Name) + " is the second most frequent co-author ";
-				if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
-					text += ", a long-lasting and still ongoing collaboration with "+ topCoAuthors[1].MutualPublications +
-					"publications since " + startYear1;
-					if (DoesExistInList(supervisees, topCoAuthors[1].Name)){
-						text += " and " + getLastName(a.Name) + " is acting as a supervisor"
-					}
-					if (DoesExistInSupervisors(supervisors, topCoAuthors[1].Name)){
-						text += " and " + getLastName(topCoAuthors[1].Name) + " is acting as a supervisor"
-					}
-				}
-				else {
-					text += "with " + topCoAuthors[1].MutualPublications + " mutual publications since " + startYear1 ; 
-				}
-				
 			}		
-
 
 		}
 		else if (topCoAuthors.length > 2){
-			text += "collaborators are " ;
-			for (var i=0;i<topCoAuthors.length;i++){
-				if(i==topCoAuthors.length-1){
-					text += "and " + topCoAuthors[i].Name+ ".";
-				}
-				else {
-					text += topCoAuthors[i].Name + ", ";
-				}
+			text += firstSentenceV1(a,topCoAuthors[0],supervisors, supervisees); 
+			text += secondSentenceV1(a,topCoAuthors[0]);
+			text += thirdSentenceV1(a,topCoAuthors[1],supervisors,supervisees);
+			text += fourthSentenceV1(a,topCoAuthors[2],supervisors,supervisees);
+			if (supervisees.length > 0){
+				text += fifthSenetenceV3(a,topCoAuthors,supervisees);
 			}
 		}
 	}
 	return text; 
 }
+function RemoveItemFromList(list, name){
+	var r = [];
+	r = list.filter(function(el) {
+    	return el.Name !== name;
+	});
+	return r;
+}
 
 function DoesExistInList(list, name){
+	var r = false;
 	for (var i=0;i<list.length;i++){
 		if (list[i].Name == name){
-			return true;
+			r = true;
 		}
-		return false; 
 	}
+	return r;
 }
 
 function DoesExistInSupervisors(list, name){
+	//console.log(list);
+	// console.log(name);
+	var r = false;
 	for (var i=0;i<list.length;i++){
 		if (list[i] == name){
-			return true;
+			r = true;
 		}
-		return false; 
 	}
+	return r;
 }
 
 function generateCollaborationText(pdata, adata, a, topCoAuthors){
@@ -295,82 +496,6 @@ function generateCollaborationText(pdata, adata, a, topCoAuthors){
 	}
 	return collab;
 }
-
-function generateSupervisorRelationText(pdata, adata, a, topCoAuthors){
-	//console.log(topCoAuthors);
-	//console.log(a);
-	var sup = "";
-	var supervisors = []; 
-	var main_author_startYear = getStartYear(a);
-	//console.log(main_author_startYear);
-	for (var i=0;i<topCoAuthors.length;i++){
-		if(topCoAuthors[i].StartYear < main_author_startYear + 5) {
-			var pubs = getAllMutualPublications(pdata, a.Name, topCoAuthors[i].Name)
-			//console.log(pubs); 
-			if (isSupervisor(pubs,a.Name,topCoAuthors[i].Name)){
-				supervisors.push(topCoAuthors[i].Name);
-				//console.log (topCoAuthors[i].Name + " : " + "YES");
-			}
-		}
-	}
-	if(supervisors.length == 1){
-		sup += "Based on the publication data, the author has worked under the supervision" 
-		+'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " of " + supervisors[0] + ".";
-	}
-	else if (supervisors.length == 2) {
-			sup += "Based on the publication data, it is inferred that the author has worked under the supervision" 
-		+'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " of " + supervisors[0] + " and " + supervisors[1] + ".";
-	}
-	else {
-		sup = "";
-	}
-
-	return sup;
-}
-function generateSuperviseeRelationText(pdata, adata, a){
-	var text = "";
-	var supervisees = findSupervisee(pdata, adata, a);
-	//console.log(supervisees);
-	sortByValue(supervisees);
-	//console.log(supervisees);
-	
-	if(supervisees.length>0){
-		isSupervisorBadge=true;
-		text += "According to publication data analysis, the author assumes the role of a supervisor" + 
-		". His noteable supervised researchers"+ '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " are ";
-		if (supervisees.length>2){
-			for (var i=0;i<3;i++){
-				if(i==2){
-					text += " and " + supervisees[i].Name+ ".";
-				}
-				else {
-					text += supervisees[i].Name + ", ";
-				}
-			}
-		}
-		
-	}
-	return text; 
-
-}
-// function isASupervisorOfB(pdata, b, a){
-// 	console.log(a.Name);
-// 	console.log(b.Name); 
-// 	var flag = false; 
-// 	var A_startYear = getStartYear(b);
-// 	console.log(A_startYear); 
-// 	if(b.StartYear < A_startYear + 5) {
-// 			console.log("Ben is senior ");
-// 			var pubs = getAllMutualPublications(pdata, a.Name, b.Name)
-// 			console.log(pubs); 
-// 			if (isSupervisor(pubs,a.Name,b.Name)){
-// 				flag = true;
-// 				console.log("I am dakjfdklajf kdl");
-// 				//console.log (topCoAuthors[i].Name + " : " + "YES");
-// 			}
-// 	}
-// 	return flag; 
-// }
 
 function isSupervisor(pdata,aName,cName){
 	var count1 = 0; // frequency of main author before potential supervisor
@@ -602,7 +727,7 @@ function findSupervisee(pubData, adata, author){
 					 var obj = new Object();
 					 obj.Name = firstAuthor;
 					 obj.Count = mutualPubs.length;
-					supervisees.push(obj);
+					 supervisees.push(obj);
 				}
 			}
 		}
