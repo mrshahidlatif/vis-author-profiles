@@ -1,5 +1,12 @@
 /*Page Layout */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');
+/*@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');*/
+
+@font-face {
+font-family: 'Verlag Book';
+font-style: normal;
+font-weight: normal;
+src: local('Verlag Book'), url('Verlag-Book.woff') format('woff');
+}
 #logo { 
     width:10%; 
 }
@@ -20,7 +27,8 @@
 }
 body
 {
-    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family:'Verlag Book';
     /*font-family: Helvetica, Sans-Serif;*/
     color: #444444;
     font-size: 12pt;
@@ -164,7 +172,8 @@ body
 }
 
 .names{
-    font-family: 'Source Sans Pro', sans-serif;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family:'Verlag Book';
     /*font-weight: bold;*/
     fill:black;
     font-size:11px;
