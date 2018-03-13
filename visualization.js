@@ -22,11 +22,17 @@ if(isFound) {
     indPub.push(adata[i].AllPublicationsPerYear); 
   }
   //console.log(indPub);
-
-  var svg = d3.select("#" + canvas),
-    margin = {top: 10, right: 0, bottom: 20, left: 20},
-    width = +svg.attr("width") - margin.left - margin.right,
+  //var svg = d3.select("#" + canvas),
+  var svg = d3.select("#" + canvas)
+  .attr("height", indPub.length*50)
+  .attr("width",320 );
+    margin = {top: 10, right: 0, bottom: 20, left: 20};
+    width = +svg.attr("width") - margin.left - margin.right;
     height = +svg.attr("height") - margin.top - margin.bottom;
+    //height = indPub.length*60 - margin.top - margin.bottom;
+
+    console.log(height);
+    
   
   //Clearing the contents of SVG before second search
   svg.selectAll("*").remove();
@@ -56,9 +62,8 @@ if(isFound) {
   }
 
   for (var j=0;j<N;j++){
-
     data = indPub[j];
-    var x = d3.scaleBand().rangeRound([80, width]).padding(0.3),
+    var x = d3.scaleBand().rangeRound([50, width]).padding(0.3),
         y = d3.scaleLinear().rangeRound([(j+1)*height/N, j*height/N+3]);
 
     var g = svg.append("g")
@@ -107,7 +112,7 @@ if(isFound) {
           .attr("class", "names")
           .attr("x", 0)
           .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return d.Name });
+          .text(function(d){return getLastName(d.Name) });
     
       }
       //adding bars for individual publications 
@@ -357,36 +362,52 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
         .call(d3.axisLeft(y));
     }
 }
+
+function generateLinePlot(data, canvas, h, w){
+ 
+  var svg = d3.select("#" + canvas),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var x = d3.scaleLinear()
+      .rangeRound([0, width]);
+
+  var y = d3.scaleLinear()
+      .rangeRound([height, 0]);
+
+  var line = d3.line()
+      .x(function(d) { return x(d.Name); })
+      .y(function(d) { return y(d.Value); });
+
+    x.domain(d3.extent(data, function(d) { return d.Name; }));
+    y.domain(d3.extent(data, function(d) { return d.Value; }));
+
+    g.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+      .select(".domain")
+        .remove();
+
+    g.append("g")
+        .call(d3.axisLeft(y))
+
+    g.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line); 
+
+}
+
 function enlargeMe(data, id, startYear, endYear, ymax){
   //console.log(data); 
-  if (id == "sparklineAll"){
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);   
-  }
-  else if (id == "sparklineJournals") {
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles" + "</span>" + "<br>" + "<hr>" 
+    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Publications" + "</span>" + "<br>" + "<hr>" 
   + '<svg width="400" height="200" id="figure"></svg>';
     generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
-  }
-  else if (id == "sparklineConfs") {
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
-  }
-  else if (id == "sparklineAsFirstAuthor") {
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of All Articles as First Author" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
-  }
-  else if (id == "sparklineJournalsAsFirstAuthor") {
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Journal Articles as First Author" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
-  }
-  else if (id == "sparklineConfsAsFirstAuthor") {
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Conference Articles as First Author" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
-  }
+
 }

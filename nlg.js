@@ -895,6 +895,7 @@ function generateResearchTopicsText(pdata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
 	//Name of the following function needs to be renamed. It selected the top items from a list 
+	console.log(keywords);
 	var topKeywords = getTopNCoAuthors(keywords, 1, 3, 1);
 	var restKeywords = getTopNCoAuthors(keywords, 1, 5, 2);
 
@@ -928,7 +929,7 @@ function getKeywords(pdata, a){
   	});
 
   	var keydata = getKeywordsPerYear(pubs, allUniqueKeywords[0].Name); 
-  	generateLinePlot(keydata, "line"); 
+  	// generateLinePlot(keydata, "line"); 
 	//console.log(allUniqueKeywords); 
 	return allUniqueKeywords; 
 }

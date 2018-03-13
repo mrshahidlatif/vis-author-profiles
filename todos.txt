@@ -4,7 +4,7 @@ BUGS
 -Problem with author names having special characters like ü, ä, ö etc. [FIXED]
 -Line for active year of author is displayed in the beginning when author is the most senior 
 -Author does not properly load when clicked on author's name in right side bar [FIXED]
--Strange behavior for Catherine Plaisant
+-Strange behavior for Catherine Plaisant and Tobias Shreck, Vidya Setlur
 -Some title missing for some publications in the right side panel for Daniel a. kiem
 -Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters
 
@@ -27,6 +27,8 @@ Appearance
 
 
 Functionality 
+-NLG : Handle the case where 2nd and 3rd top coauthors have same no. of publications 
+-Stephan Diel is a good example having 3 top coauthors and three of them are his supervisees
 -Handle if the author has more than 2 supervisors 
 -Making author sparklines interactive 
 -Exception handling when record of author is not found
@@ -38,7 +40,7 @@ Functionality
 -Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. [IN PROCESS]
 -First Author publication count (Pay attention to alphabatical order in some conferences) [DONE]
 -add venues of conferences 
-[Priority:High]-Handle cases when top collaborator, supervisor, active collaborator or supvisee overlap in NLG.js
+[Priority:High]-Handle cases when top collaborator, supervisor, active collaborator or supvisee overlap in NLG.js [DONE]
 -Add DOI to publications 
 
 

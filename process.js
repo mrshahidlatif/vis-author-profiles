@@ -310,7 +310,8 @@ function percentRank(array, n) {
 //Counting frequency of each element in array and return a (key,value) pair
 //Also removes the self author
 function compressArray(original, name) {
-
+  //console.log(original);
+  //console.log(name);
   var compressed = [];
   // make a copy of the input array
   var copy = original.slice(0);
@@ -342,5 +343,38 @@ function compressArray(original, name) {
       return o.Name === name;
     },
     true);
+  return compressed;
+}
+
+//Return (Year, Value ) 
+//Later to be merged with compressArray() as it is duplication
+function compressArray2(original) {
+  //console.log(original);
+  //console.log(name);
+  var compressed = [];
+  // make a copy of the input array
+  var copy = original.slice(0);
+
+  // first loop goes over every element
+  for (var i = 0; i < original.length; i++) {
+
+    var myCount = 0;
+    // loop over every element in the copy and see if it's the same
+    for (var w = 0; w < copy.length; w++) {
+      if (original[i] == copy[w]) {
+        // increase amount of times duplicate is found
+        myCount++;
+        // sets item to undefined
+        delete copy[w];
+      }
+    }
+
+    if (myCount > 0) {
+      var a = new Object();
+      a.Year = original[i];
+      a.Value = myCount;
+      compressed.push(a);
+    }
+  }
   return compressed;
 }
