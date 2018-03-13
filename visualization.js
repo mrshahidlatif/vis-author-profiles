@@ -1,7 +1,7 @@
 function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
   
-  //console.log(gdata);
-  //console.log(adata);
+  // console.log(gdata);
+  // console.log(adata);
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
   if (typeof main_author === "undefined") {
@@ -363,46 +363,139 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
     }
 }
 
-function generateLinePlot(data, canvas, h, w){
- 
-  var svg = d3.select("#" + canvas),
-    margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+function generateSparklineForMutualPublications(data,canvas, h, w, startYear, endYear, ymax){
 
-  var x = d3.scaleLinear()
-      .rangeRound([0, width]);
+ //console.log(ymax); 
+ var largeScale = false;
+ if (h>100 || w>200){
+  largeScale = true ;
+ } 
 
+ data.sort(function(a, b) {
+    return +a.Year - +b.Year;
+  });
+ //console.log(data); 
+ // add in missing years 
+ var data2 = [];
+ //var range = +data[data.length-1].Year - +data[0].Year;
+ var range = endYear - startYear; 
+ //console.log(range);
+ for (var i=0;i<=range;i++){
+    //var year = +data[0].Year + i;
+    var year = +startYear + i;
+    var count = 0;
+    for (j=0;j<data.length;j++){
+      if(year == data[j].Year){
+        count = data[j].Value;
+      }
+    }
+    var obj = new Object()
+    obj.Year = year;
+    obj.Value = count;
+    data2.push(obj);
+ }
+ //console.log(data2); 
+  // set the dimensions and margins of the graph
+  if (largeScale){
+    var margin = {top: 10, right: 20, bottom: 20, left: 30},
+      width =  w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
+  }
+  else {
+    var margin = {top: 3, right: 0, bottom: 0, left: 0},
+      width =  w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
+  }
+
+  // set the ranges
+  var x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.3);
   var y = d3.scaleLinear()
-      .rangeRound([height, 0]);
+            .range([height, 0]);
+            
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select("#" + canvas)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("background-color", '#f2f2f2')
+      .on("click", function(d){enlargeMe(data2, this.id,startYear, endYear, ymax)})
 
-  var line = d3.line()
-      .x(function(d) { return x(d.Name); })
-      .y(function(d) { return y(d.Value); });
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")")
+    
+  
+  svg.selectAll("*").remove();
+  // Scale the range of the data in the domains
+  x.domain(data2.map(function(d) { return d.Year; }));
+  //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
+  y.domain([0, ymax]);
 
-    x.domain(d3.extent(data, function(d) { return d.Name; }));
-    y.domain(d3.extent(data, function(d) { return d.Value; }));
-
-    g.append("g")
+  // append the rectangles for the bar chart
+  svg.selectAll(".msbar")
+      .data(data2)
+    .enter().append("rect")
+      .attr("class", "msbar")
+      .attr("x", function(d) { return x(d.Year); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.Value); })
+      .attr("height", function(d) { return height - y(d.Value); });
+  
+  if (largeScale){
+    // add the x Axis
+    svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-      .select(".domain")
-        .remove();
+        .call(d3.axisBottom(x));
 
-    g.append("g")
-        .call(d3.axisLeft(y))
-
-    g.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line); 
-
+    // add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
+    }
 }
+
+// function generateLinePlot(data, canvas, h, w){
+ 
+//   var svg = d3.select("#" + canvas),
+//     margin = {top: 20, right: 20, bottom: 30, left: 50},
+//     width = +svg.attr("width") - margin.left - margin.right,
+//     height = +svg.attr("height") - margin.top - margin.bottom,
+//     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//   var x = d3.scaleLinear()
+//       .rangeRound([0, width]);
+
+//   var y = d3.scaleLinear()
+//       .rangeRound([height, 0]);
+
+//   var line = d3.line()
+//       .x(function(d) { return x(d.Name); })
+//       .y(function(d) { return y(d.Value); });
+
+//     x.domain(d3.extent(data, function(d) { return d.Name; }));
+//     y.domain(d3.extent(data, function(d) { return d.Value; }));
+
+//     g.append("g")
+//         .attr("transform", "translate(0," + height + ")")
+//         .call(d3.axisBottom(x))
+//       .select(".domain")
+//         .remove();
+
+//     g.append("g")
+//         .call(d3.axisLeft(y))
+
+//     g.append("path")
+//         .datum(data)
+//         .attr("fill", "none")
+//         .attr("stroke", "steelblue")
+//         .attr("stroke-linejoin", "round")
+//         .attr("stroke-linecap", "round")
+//         .attr("stroke-width", 1.5)
+//         .attr("d", line); 
+
+// }
 
 function enlargeMe(data, id, startYear, endYear, ymax){
   //console.log(data); 

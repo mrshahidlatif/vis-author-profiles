@@ -160,6 +160,9 @@ body
 .mbar:hover {
   fill: #fffd96;
 }
+.msbar {
+  fill: #b73c35;
+}
 .axis {
     font: 10px sans-serif;
 }

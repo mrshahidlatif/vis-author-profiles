@@ -10,9 +10,9 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	// console.log(percentile);
 	var bio = "";
 	var collab="";
-	var sup=""; 
 	var title= getFullNameWithoutNo(aObject.Name);
 	var researchTopicsText = "";
+	var text = ""; 
 
 
 	var sYear = findStartYear(aObject);
@@ -25,57 +25,72 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	getKeywords(pdata, aObject); 
 
 	//For Outliers
-	if (totalpubCount < 5){
+	if (totalpubCount < 5 ){
 		//Special Summary for these authors
+		var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
+
+		document.getElementById("bio").innerHTML = bio;
+		document.getElementById("name").innerHTML = title;
+		document.getElementById("collRelation").innerHTML = text;
+		document.getElementById("rtopics").innerHTML = researchTopicsText;
+	}
+	else if (totalpubCount >= 5){
+
+		if (eYear <= 2013){
+			var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
+		}
+		else {
+			var bio = generateSummary(pdata, adata, aObject, percentile);
+		}
+		
+		if (topCoAuthors.length > 0){
+			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
+			// var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
+		}
+		researchTopicsText = generateResearchTopicsText(pdata, aObject); 
+		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
+
+
+		//Displaying the badges 
+		if (totalpubCount>=100){
+			title += '<img id="badge" align="top" src="badges/article_gold.svg">'; 
+		}
+		else if(totalpubCount>=50 && totalpubCount<100){
+			title += '<img id="badge" align="top" src="badges/article_silver.svg">'; 
+		}
+		else if(totalpubCount>=10 && totalpubCount <50){
+			title += '<img id="badge" align="top" src="badges/article_bronze.svg">'; 
+		}
+		if(hasSupversied){
+			title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
+		}
+		if (yearsActive >= 20){
+			title += '<img id="badge" align="top" src="badges/active_gold.svg">'; 
+		}
+		else if (yearsActive < 20 && yearsActive >= 10){
+			title += '<img id="badge" align="top" src="badges/active_silver.svg">'; 
+		}
+		else if (yearsActive < 10 && yearsActive >= 5){
+			title += '<img id="badge" align="top" src="badges/active_bronze.svg">'; 
+		}
+		
+		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
+		document.getElementById("bio").innerHTML = bio;
+		document.getElementById("name").innerHTML = title;
+		document.getElementById("collRelation").innerHTML = text;
+		document.getElementById("rtopics").innerHTML = researchTopicsText;
+
+		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax);
+		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax);
+		generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax);
+		generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax);
+		
+		for (var i=0;i<listOfSparklines.length;i++){
+			//console.log(listOfSparklines[i].sparklineID);
+			generateSparklineForMutualPublications(listOfSparklines[i].data,listOfSparklines[i].sparklineID, 20, 90, sYear,eYear, ymax);
+		}
 	}
 
-	var bio = generateSummary(pdata, adata, aObject, percentile);
-	var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
-	var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
-	researchTopicsText = generateResearchTopicsText(pdata, aObject); 
-	var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
-
-
-	//Displaying the badges 
-	if (totalpubCount>=100){
-		title += '<img id="badge" align="top" src="badges/article_gold.svg">'; 
-	}
-	else if(totalpubCount>=50 && totalpubCount<100){
-		title += '<img id="badge" align="top" src="badges/article_silver.svg">'; 
-	}
-	else if(totalpubCount>=10 && totalpubCount <50){
-		title += '<img id="badge" align="top" src="badges/article_bronze.svg">'; 
-	}
-	if(hasSupversied){
-		title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
-	}
-	if (yearsActive >= 20){
-		title += '<img id="badge" align="top" src="badges/active_gold.svg">'; 
-	}
-	else if (yearsActive < 20 && yearsActive >= 10){
-		title += '<img id="badge" align="top" src="badges/active_silver.svg">'; 
-	}
-	else if (yearsActive < 10 && yearsActive >= 5){
-		title += '<img id="badge" align="top" src="badges/active_bronze.svg">'; 
-	}
-
-	document.getElementById("bio").innerHTML = bio;
-	document.getElementById("name").innerHTML = title;
-	document.getElementById("collRelation").innerHTML = text;
-	document.getElementById("rtopics").innerHTML = researchTopicsText;
-	
-	var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
-
-	generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax);
-	generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax);
-	generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax);
-	generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax);
-	
-	for (var i=0;i<listOfSparklines.length;i++){
-		//console.log(listOfSparklines[i].sparklineID);
-		generateSparkline(listOfSparklines[i].data,listOfSparklines[i].sparklineID, 20, 90, sYear,eYear, 5);
-	}
-	
 }
 function findStartYear(aObject){
 	var sYear = d3.min(aObject.AllPublicationsPerYear, function(d){return d.Year});
@@ -93,23 +108,125 @@ function generateSummary(pdata, adata, a, p)
 	var pub = getPublications(pdata, a.Name);
 	//console.log(pub);
 	var sYear = d3.min(a.AllPublicationsPerYear, function(d){return d.Year;});
-	bio = getLastName(a.Name) + " is publishing since " + sYear + "." + " Until now, he has "+ "published " + (a.Journals+a.Conferences)
-	+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
-	+ a.Journals + " journal articles" + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
-	+ " and " + a.Conferences + " conference papers" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-	+ ".";
+	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 
-	var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,a.Name,"A");
-	var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,a.Name,"J");
-	var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,a.Name,"C");
+	if (eYear >= 2013) {
 
-	bio += " Out of " + (a.Journals+a.Conferences) + " publications, the author published " + sumAllValues(firstAuthorPubs) +
-	" articles as first author " + '<svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + ".";
+		bio = getLastName(a.Name) + " is publishing since " + sYear + "." + " Until now, he has "+ "published " + (a.Journals+a.Conferences)
+		+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+		+ a.Journals + " journal articles" + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+		+ " and " + a.Conferences + " conference papers" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+		+ ".";
+	}
+	else if (eYear < 2013){
+
+		bio = getLastName(a.Name) + " published from " + sYear + " to " + eYear + "." + " The author has "+ "published " + (a.Journals+a.Conferences)
+		+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+		+ a.Journals + " journal articles" + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+		+ " and " + a.Conferences + " conference papers" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+		+ ".";
+
+	}
+
+	if (pub.length < 100){
+		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,a.Name,"A");
+		var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,a.Name,"J");
+		var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,a.Name,"C");
+
+		bio += " Out of " + (a.Journals+a.Conferences) + " publications, the author published " + sumAllValues(firstAuthorPubs) +
+		" articles as first author " + '<svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + ".";
+	}
 
 	if (a.PhDThesisTitle != ""){
 		bio += " The author completed his/her PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
 		"\" was published in " + a.PhDYear+".";
 	}
+	
+	return bio;
+}
+function generateSummaryForOutliers(pdata, adata, a, p)
+{
+	var bio = "";
+	var pub = getPublications(pdata, a.Name);
+	console.log(a);
+	console.log(pub); 
+	var sYear = d3.min(a.AllPublicationsPerYear, function(d){return d.Year;});
+	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
+	
+	if (pub.length == 1){ //Case with Single Publication 
+		
+		if (a.Journals == 1){
+			bio += getLastName(a.Name) + " published one journal paper in " + sYear + "."; 
+		}
+		else {
+			bio += getLastName(a.Name) + " published one conference paper in " + sYear + "."; 
+		}
+		
+		//Showing publication on the sidebar 
+		document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pub.length + ") : " + a.Name  
+	  		+ ", " + sYear + "</span>" + "<br>" + "<hr>";
+		StringifyPublication(pub[0]);
+	}
+	
+	if (pub.length > 1 && eYear < 2013 ){ // Case of discontinued author 
+		if ( a.Journals > 0 && a.Conferences > 0) {
+			bio += getLastName(a.Name) + " published " + no2word[pub.length] + " research papers between " + sYear + " and " + eYear + ", including " + no2word[a.Journals] ;
+			if (a.Journals > 1){
+			  bio += " journal articles and ";
+			}
+			else{ 
+				bio += " journal article and ";
+			}
+			if (a.Conferences > 1){
+				bio += no2word[a.Conferences] + " conference papers."; 
+			}
+			else {
+				bio += no2word[a.Conferences] + " conference paper."; 
+			}
+		}
+		else {
+			bio += getLastName(a.Name) + " published " + no2word[pub.length] + " research papers between " + sYear + " and " + eYear + "."
+		}
+		//Showing publication on the sidebar 
+		document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pub.length + ") : " + a.Name  
+	  		+ ", " + sYear + "</span>" + "<br>" + "<hr>";
+	  	for (var i =0; i<pub.length;i++){
+			StringifyPublication(pub[i]);
+		}
+
+	}
+	else if (pub.length > 1 && eYear >= 2013 ){ 
+		if ( a.Journals > 0 && a.Conferences > 0) {
+			bio += getLastName(a.Name) + " has published " + no2word[pub.length] + " research papers so far, including " + no2word[a.Journals] ;
+			if (a.Journals > 1){
+			  bio += " journal articles and ";
+			}
+			else{ 
+				bio += " journal article and ";
+			}
+			if (a.Conferences > 1){
+				bio += no2word[a.Conferences] + " conference papers."; 
+			}
+			else {
+				bio += no2word[a.Conferences] + " conference paper."; 
+			}
+		}
+		else {
+			bio += getLastName(a.Name) + " has published " + no2word[pub.length] + " research papers so far."; 
+		}
+		//Showing publication on the sidebar 
+		document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pub.length + ") : " + a.Name  
+	  		+ ", " + sYear + "</span>" + "<br>" + "<hr>";
+	  	for (var i =0; i<pub.length;i++){
+			StringifyPublication(pub[i]);
+		}
+
+	}
+	if (a.PhDThesisTitle != ""){
+		bio += " The author completed his/her PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
+		"\" was published in " + a.PhDYear+".";
+	}
+
 	
 	return bio;
 }

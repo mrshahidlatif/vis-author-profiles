@@ -8,32 +8,42 @@ function process(name,container, l,u, t) {
 
   loadJSON("pubdata.json", function(response) {
     pdata = JSON.parse(response);
-    var c = 0;
-    for (var i = 0; i < pdata.length; i++) {
-      for (var j = 0; j < pdata[i].Authors.length; j++) {
-        if (pdata[i].Authors[j].Name == name) {
-          isFound = true;
-          authorPubCoun++;
-          for (var k = 0; k < pdata[i].Authors.length; k++) {
-            allCoAuthors.push(pdata[i].Authors[k].Name);
+
+  loadJSON("authordata.json", function(response) {
+    adata = JSON.parse(response);
+
+   for (var k = 0; k < adata.length; k++) {
+      if(adata[k].Name == name){
+        isFound = true; 
+      }
+   }
+    if (isFound) { //Author found so go ahead with process
+
+      var c = 0;
+      for (var i = 0; i < pdata.length; i++) {
+        for (var j = 0; j < pdata[i].Authors.length; j++) {
+          if (pdata[i].Authors[j].Name == name) {
+            isFound = true;
+            authorPubCoun++;
+            for (var k = 0; k < pdata[i].Authors.length; k++) {
+              allCoAuthors.push(pdata[i].Authors[k].Name);
+            }
           }
         }
       }
-    }
-    if (isFound) { //Author found so go ahead with process
+
       var distCoAuthors = compressArray(allCoAuthors, name);
       var topNCoAuthor = getTopNCoAuthors(distCoAuthors, l, u,t);
       var topNCoAuthorObjects = [];
 
-      loadJSON("authordata.json", function(response) {
-        adata = JSON.parse(response);
-        for (var i = 0; i < topNCoAuthor.length; i++) {
-          for (var j = 0; j < adata.length; j++) {
-            if (adata[j].Name == topNCoAuthor[i].Name) {
-              topNCoAuthorObjects.push(adata[j]);
-            }
+      
+      for (var i = 0; i < topNCoAuthor.length; i++) {
+        for (var j = 0; j < adata.length; j++) {
+          if (adata[j].Name == topNCoAuthor[i].Name) {
+            topNCoAuthorObjects.push(adata[j]);
           }
         }
+      }
 
         
         var dataForGantt = [];
@@ -55,7 +65,9 @@ function process(name,container, l,u, t) {
           
         }
         //console.log(dataForGantt);
-        generateVis(dataForGantt, topNCoAuthorObjects, container,pdata, name, adata);
+        if (dataForGantt.length > 0){
+          generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata);
+        }
         //Calling NLG function and generating text 
         var jpy;
         var cpy;
@@ -77,11 +89,12 @@ function process(name,container, l,u, t) {
          if(t==1){ // call once as process() is called twice with t=1 and t=2
             generateProfileText(pdata, adata, aObject, pct, dataForGantt);
           }
-      });
-    }
-    else {
-      document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
-    }
+      }
+    
+      else {
+        document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
+      }
+    });
   });
 }
 

@@ -3949,7 +3949,7 @@ $( function() {
             "Robin Skanberg",
             "Robin Valenza",
             "Rocco Gasteiger",
-            "Roch Guerin",
+            "Roch Guérin",
             "Rock Leung",
             "Roderick M. Riensche",
             "Rodolphe Devillers",
