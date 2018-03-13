@@ -1,5 +1,6 @@
 var hasSupversied = false; 
 var listOfSparklines = []; 
+var alreadyListedTopics = []; 
 function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	
 	//console.log(pdata);
@@ -894,21 +895,140 @@ function sortByValue(data) {
 function generateResearchTopicsText(pdata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
-	//Name of the following function needs to be renamed. It selected the top items from a list 
-	console.log(keywords);
-	var topKeywords = getTopNCoAuthors(keywords, 1, 3, 1);
-	var restKeywords = getTopNCoAuthors(keywords, 1, 5, 2);
+	//console.log(keywords);
+	//console.log(a); 
 
-	if (topKeywords.length == 1){
-		text += getLastNamePronoun(a.Name) + " core research area is " + topKeywords[0].Name + "."; 
-	}
-	else if (topKeywords.length == 2) {
-		text += getLastNamePronoun(a.Name) + " core research areas are " + topKeywords[0].Name + " and " +  topKeywords[1].Name + "."; 
-	}
-	
+	if (keywords.length > 0){
+		if (keywords[0].Value > 5) {
+			text += firstSentenceTopicsV1(keywords[0], a); 
+			text += secondSentenceTopicsV1(keywords, keywords[0].Name, a);
+			
+			text += thirdSentenceTopicsV1(a); 
 
+			text += fourthSentenceTopicsV1(keywords, a); 
+		}
+	}
 	return text; 
 
+}
+function firstSentenceTopicsV1(keyword, a){
+	var s = "";
+	var pubCount = a.Conferences + a.Journals; 
+	var sYear = findStartYear(a);
+	var eYear = findEndYear(a);
+
+	if (pubCount >= 100){
+		s += getLastName(a.Name) + " is a core member of the " + keyword.Name + " community with " + keyword.Value + " contributions since " + sYear + ". "; 
+	}
+	else if (pubCount > 50 && pubCount < 100){
+		s += getLastName(a.Name) + " is a member of the " + keyword.Name + " community with " + keyword.Value + " contributions since " + sYear + ". "; 
+	}
+	else {
+		s += getLastName(a.Name) + " is a contributor of the " + keyword.Name + " community since " + sYear + ". "; 
+	}
+	alreadyListedTopics.push(keyword.Name); 
+	return s;
+}
+function secondSentenceTopicsV1(keywords, community, a){
+	var s = "";
+	var subfields = []; 
+	var subs = subfields_community[community];
+	//console.log(subs); 
+	if (subs != undefined){
+		for (var i=0;i<keywords.length;i++){
+			if (subs.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1){
+				subfields.push(keywords[i].Name);
+				alreadyListedTopics.push(keywords[i].Name); 
+			}
+		}
+	}
+	//console.log(subfields); 
+	if (subfields.length > 0){
+		if (subfields.length == 1){
+			s += getLastNamePronoun(a.Name) + " expertise covers subfield of " + subfields[0] + "."
+
+		}
+		else if (subfields.length == 2){
+			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " + subfields[0] + " and " + subfields[1] + ".";
+		}
+		else if (subfields.length > 2) {
+			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " ;
+			for (var i=0;i<subfields.length;i++){
+				if(i==subfields.length-1){
+					s += "and " + subfields[i].Name +".";
+				}
+				else {
+					var ID = "sparkline_coll"+i;
+					s += subfields[i].Name + ", ";
+				}
+			}
+		}
+	}
+	return s; 
+}
+function thirdSentenceTopicsV1(a){
+	//Recent topics of author
+	var s="";
+	var topics = []; 
+	console.log(a); 
+	for (var i=0; i<a.Keywords.length;i++){
+		if(author_keywords[a.Keywords[i]] != undefined || author_keywords[a.Keywords[i]] == "unclear"){
+			topics.push(author_keywords[a.Keywords[i]]); 
+		}
+	}
+	var uniqueTopics = compressArray(topics, "");
+	uniqueTopics.sort(function(a, b) {
+    	return +(b.Value) - +(a.Value);
+  	});
+
+  	 uniqueTopics = uniqueTopics.slice(1,5); 
+
+  	if (uniqueTopics.length > 0){
+  		s += " Current focus areas are "
+  		for (var i=0;i<uniqueTopics.length;i++){
+				if(i==uniqueTopics.length-1){
+					s += "and " + uniqueTopics[i].Name +".";
+				}
+				else {
+					var ID = "sparkline_coll"+i;
+					s += uniqueTopics[i].Name + ", ";
+				}
+		}
+  	}
+	console.log(uniqueTopics); 
+	return s; 
+}
+function fourthSentenceTopicsV1(keywords, a){
+	var s="";
+	//console.log(alreadyListedTopics); 
+	var diverse_topics = [];
+	for (var i=0; i<keywords.length;i++){
+		if (alreadyListedTopics.indexOf(keywords[i].Name) == -1 && diverse_fields.indexOf(keywords[i].Name) != -1){
+			diverse_topics.push(keywords[i].Name); 
+		}
+	}
+	//console.log(diverse_topics); 
+	if (diverse_topics.length > 0){
+		if (diverse_topics.length == 1){
+			s += " The author has also worked on " + diverse_topics[0] + "."
+
+		}
+		else if (diverse_topics.length == 2){
+			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " + diverse_topics[0] + " and " + diverse_topics[1] + ".";
+		}
+		else if (diverse_topics.length > 2) {
+			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " ;
+			for (var i=0;i<diverse_topics.length;i++){
+				if(i==diverse_topics.length-1){
+					s += "and " + diverse_topics[i]+".";
+				}
+				else {
+					s += diverse_topics[i] + ", ";
+				}
+			}
+		}
+	}
+	return s; 
 }
 
 function getKeywords(pdata, a){
@@ -928,9 +1048,6 @@ function getKeywords(pdata, a){
     	return +(b.Value) - +(a.Value);
   	});
 
-  	var keydata = getKeywordsPerYear(pubs, allUniqueKeywords[0].Name); 
-  	// generateLinePlot(keydata, "line"); 
-	//console.log(allUniqueKeywords); 
 	return allUniqueKeywords; 
 }
 
