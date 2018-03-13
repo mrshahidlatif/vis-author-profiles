@@ -34,6 +34,7 @@ function process(name,container, l,u, t) {
             }
           }
         }
+
         
         var dataForGantt = [];
         for (var i = 0; i < topNCoAuthorObjects.length; i++) {

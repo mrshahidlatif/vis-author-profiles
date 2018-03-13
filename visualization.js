@@ -31,7 +31,7 @@ if(isFound) {
     height = +svg.attr("height") - margin.top - margin.bottom;
     //height = indPub.length*60 - margin.top - margin.bottom;
 
-    console.log(height);
+    // console.log(height);
     
   
   //Clearing the contents of SVG before second search
