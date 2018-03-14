@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing the transformation of KeyVis keywords to a clean textual list of keywords</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var keywordMapping = {
+        "Undefined Keyword" : {}, // for testing only
+        "Acoustics, Sound, Sonification": {
+            default: "acoustics-related visualization",
+            vis: "acoustics-related",
+        },
+        "Ambient Visualization": {
+            default: "ambient visualization",
+            vis: "ambient"
+        },
+        "Astronomy / Astrophysics": {
+            default: "astrophysical visualization",
+            vis: "astrophysical",
+            visOfData: "astrophysical"
+        },
+        "Biology and Bioinformatics": {
+            default: "biological visualization",
+            vis: "biological",
+            visOfData: "biological"
+        },
+        "Biomedical Science and Medicine": {
+            default: "medical visualization",
+            vis: "medical",
+            visOfData: "medical"
+        },
+        "Business, Finance, Economy, Manufacturing": {
+            default: "business-related visualization",
+            vis: "business-related",
+            visOfData: "business-related"
+        },
+        "Collaborative Visualization": {
+            default: "collaborative visualization",
+            vis: "collaborative"
+        },
+        "Color & Color Perception": {
+            default: "color"
+        },
+        "Comparison, Comparative Visualization and Similarity": {
+            default: "visual comparison",
+            vis: "comparative"
+        },
+        "Compression Techniques": {
+            default: "compression techniques"
+        }
+
+    }
+
+    var selectedKeywords = [];
+
+    function convertKeywordList(keywords) {
+        console.log(keywords);
+        var text = "";
+        var cleanedKeywords = [];
+        var allVisVersionsAvailable = true;
+        var allVisOfDataVersionsAvailable = true;
+        $.each(keywords, function(i, keyword){
+            if (keywordMapping[keyword].default) {
+                cleanedKeywords.push(keyword);
+                if (!keywordMapping[keyword].vis) {
+                    allVisVersionsAvailable = false;
+                }
+                if (!keywordMapping[keyword].visOfData) {
+                    allVisOfDataVersionsAvailable = false;
+                }
+            }
+        });
+        if (cleanedKeywords.length == 0) {
+            return "";
+        }
+        var isSingular = cleanedKeywords.length == 1;
+        $.each(cleanedKeywords, function(i, keyword){
+            var mapping = keywordMapping[keyword];
+            text += allVisOfDataVersionsAvailable?mapping.visOfData:
+                (allVisVersionsAvailable?mapping.vis:mapping.default);
+            if (i+2 < cleanedKeywords.length) {
+                 text += ", ";
+            } else if (i+1 < cleanedKeywords.length) {
+                text += (cleanedKeywords.length > 2)?", and ":" and ";
+            }
+        });
+        var pre = allVisOfDataVersionsAvailable?"the visualization of ":"";
+        var post = allVisOfDataVersionsAvailable?" data":(allVisVersionsAvailable?" visualization":"");
+        if (isSingular) {
+            return "A current focus area of the author is "+pre+text+post+".";
+        }
+        return "Current focus areas of the author are "+pre+text+post+".";
+    }
+
+    function appendKeyword(keyword) {
+        if (selectedKeywords.indexOf(keyword) < 0) {
+            selectedKeywords.push(keyword);
+            $("#keyword_text").text(convertKeywordList(selectedKeywords));
+        }
+    }
+
+    $(document).ready(function () {
+        var $keywordList = $("#keyword_list");
+        $.each(keywordMapping, function (keyword, mapping) {
+            $("<li>")
+                .text(keyword)
+                .click(function() {appendKeyword(keyword)})
+                .appendTo($keywordList);
+        });
+    });
+</script>
+<body>
+<h1>Testing the transformation of KeyVis keywords to a clean textual list of keywords</h1>
+<div>Please click on a keyword in the list to add it to the sentence.</div>
+<ul id="keyword_list"></ul>
+<div id="keyword_text"></div>
+</body>
+</html>
