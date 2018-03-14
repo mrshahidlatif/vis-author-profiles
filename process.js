@@ -1,16 +1,16 @@
-function process(name,container, l,u, t) {
+function process(pdata, adata, name,container, l,u, t) {
   //Processing the data 
-  var pdata;
-  var adata;
+  // var pdata;
+  // var adata;
   var allCoAuthors = [];
   var authorPubCoun = 0;
   var isFound = false;
 
-  loadJSON("pubdata.json", function(response) {
-    pdata = JSON.parse(response);
+  // loadJSON("pubdata.json", function(response) {
+  //   pdata = JSON.parse(response);
 
-  loadJSON("authordata.json", function(response) {
-    adata = JSON.parse(response);
+  // loadJSON("authordata.json", function(response) {
+  //   adata = JSON.parse(response);
 
    for (var k = 0; k < adata.length; k++) {
       if(adata[k].Name == name){
@@ -33,6 +33,7 @@ function process(name,container, l,u, t) {
       }
 
       var distCoAuthors = compressArray(allCoAuthors, name);
+      //console.log(distCoAuthors); 
       var topNCoAuthor = getTopNCoAuthors(distCoAuthors, l, u,t);
       var topNCoAuthorObjects = [];
 
@@ -44,8 +45,6 @@ function process(name,container, l,u, t) {
           }
         }
       }
-
-        
         var dataForGantt = [];
         for (var i = 0; i < topNCoAuthorObjects.length; i++) {
           var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
@@ -63,10 +62,6 @@ function process(name,container, l,u, t) {
           var mppy = getMutualPublications(pdata,name, dataForGantt[i].Name);
           dataForGantt[i]["MutualPubPerYear"] = mppy;
           
-        }
-        //console.log(dataForGantt);
-        if (dataForGantt.length > 0){
-          generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata);
         }
         //Calling NLG function and generating text 
         var jpy;
@@ -89,13 +84,58 @@ function process(name,container, l,u, t) {
          if(t==1){ // call once as process() is called twice with t=1 and t=2
             generateProfileText(pdata, adata, aObject, pct, dataForGantt);
           }
+
+        generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, distCoAuthors, 1); 
+
       }
     
       else {
         document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
       }
-    });
-  });
+  //   });
+  // });
+}
+function generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata , distCoAuthors, times){
+    if (dataForGantt.length > 0 && times == 1 ){
+            generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, distCoAuthors);
+          }
+    else 
+    {
+        console.log("loading more!!!");
+        // Preparing data for collaboration visualization 
+        //-----------------------------------------------------
+        var distCoAuthorsObjects = []; 
+        for (var i = 0; i < distCoAuthors.length; i++) {
+          for (var j = 0; j < adata.length; j++) {
+            if (adata[j].Name == distCoAuthors[i].Name) {
+              distCoAuthorsObjects.push(adata[j]);
+            }
+          }
+        }
+        //console.log(distCoAuthorsObjects); 
+          var dataForCollaborationVis = [];
+          for (var i = 0; i < distCoAuthorsObjects.length; i++) {
+            var sYear = Math.min(getMin(distCoAuthorsObjects[i].JournalsPerYear), getMin(distCoAuthorsObjects[i].ConfsPerYear));
+            var lYear = Math.max(getMax(distCoAuthorsObjects[i].JournalsPerYear), getMax(distCoAuthorsObjects[i].ConfsPerYear));
+            //console.log(distCoAuthorsObjects[i].Name + ":" + sYear + ":" + lYear);
+            var a = new Object();
+            a.Name = distCoAuthorsObjects[i].Name;
+            a.StartYear = sYear;
+            a.MutualPublications = distCoAuthors[i].Value;
+            //console.log(a.MutualPublications/(2017-a.StartYear)); 
+            dataForCollaborationVis.push(a);
+          }
+          
+          for (var i=0;i<dataForCollaborationVis.length;i++){
+            var mppy = getMutualPublications(pdata,name, dataForCollaborationVis[i].Name);
+            dataForCollaborationVis[i]["MutualPubPerYear"] = mppy;
+            
+          }
+          //console.log(dataForCollaborationVis);
+          //----------------------------------------------------------------------------------------------
+           //console.log(dataForGantt);
+          generateVis(dataForCollaborationVis, distCoAuthorsObjects, container, pdata, name, adata);
+    }
 }
 
 function getMutualPublications(pubData,aName, cName){

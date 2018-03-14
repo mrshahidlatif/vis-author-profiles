@@ -181,6 +181,17 @@ body
     fill:black;
     font-size:11px;
 }
+.moreBtn {
+    fill:black;
+    font-size:12px;
+  
+}
+.moreBtn:hover{
+     fill:blue;
+     cursor:pointer;
+    /*color:blue;*/
+    text-decoration:underline;
+}
 
 div.tooltip {
   position: absolute;

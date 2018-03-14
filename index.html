@@ -23,7 +23,7 @@
     <div id="search-container">
       <input type="text" id="search">
       <input type="text" disabled="disabled" id="suggestion" />
-      <button onclick="search()" >Search</button> 
+      <button id="srchbtn" >Search</button> 
     </div>
   </div>
 
@@ -43,8 +43,6 @@
       <svg width="330" height="200" id="CollabChart2"></svg> -->
 
       <svg  id="CollabChart1"></svg>
-      <svg  id="CollabChart2"></svg>
-      <svg width="330" height="200" id="line"></svg>
     </div>
     <div class="rightcolumn">
       <p id=dod></p>
@@ -52,15 +50,37 @@
   </div>
   <script>
 
-    var name = "";
-    var l=2;
-    var u=8;
-    function search(){
-      name = document.getElementById("search").value;
-      document.getElementById("search").value = "";
-      process(name,"CollabChart1",l,u,1); 
-      process(name,"CollabChart2",l,u,2); 
-    }
+     loadJSON("pubdata.json", function(response) {
+        pdata = JSON.parse(response);
+
+      loadJSON("authordata.json", function(response) {
+        adata = JSON.parse(response);
+        // console.log(pdata);
+        // console.log(adata); 
+
+          var name = "";
+          var l=2;
+          var u=8;
+
+          document.getElementById('search').onkeydown = function(event) {
+            if (event.keyCode == 13) {
+                //alert('5');
+              search(pdata, adata); 
+            }
+          }
+          document.getElementById('srchbtn').addEventListener('click', function(){
+              search(pdata, adata);
+          }); 
+
+          function search(pdata, adata){
+            name = document.getElementById("search").value;
+            document.getElementById("search").value = "";
+            process(pdata, adata, name,"CollabChart1",l,u,1); 
+            //process(pdata, adata, name,"CollabChart2",l,u,2); 
+          }
+      });
+  });
+
 
   </script>
   

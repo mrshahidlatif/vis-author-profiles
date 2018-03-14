@@ -5092,7 +5092,7 @@ $( function() {
         // 'enter' key was pressed
         var $suggest = $('#suggestion');
         var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13) {
+        if(code == 39) {
             $(this).val($suggest.val());
             $suggest.val("");
             return false;

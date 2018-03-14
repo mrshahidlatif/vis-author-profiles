@@ -1,4 +1,4 @@
-function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
+function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors){
   
   // console.log(gdata);
   // console.log(adata);
@@ -9,53 +9,59 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData){
     document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
     //Clear the previous conetens here
 
-}
-if(isFound) {
-  var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
-  //console.log(main_author);
-  //Data for individual Publications
-  var indPub = [];
-  for(var i=0;i<adata.length;i++){
-    for (var j=0; j<adata[i].AllPublicationsPerYear.length;j++){
-      adata[i].AllPublicationsPerYear[j]["Name"] = adata[i].Name; //adding name of each author to list
-    }
-    indPub.push(adata[i].AllPublicationsPerYear); 
   }
+  if(isFound) {
+    var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
+    //console.log(main_author);
+    //Data for individual Publications
+    var indPub = [];
+    for(var i=0;i<adata.length;i++){
+      for (var j=0; j<adata[i].AllPublicationsPerYear.length;j++){
+        adata[i].AllPublicationsPerYear[j]["Name"] = adata[i].Name; //adding name of each author to list
+      }
+      indPub.push(adata[i].AllPublicationsPerYear); 
+    }
+
+    var minYear=2017;
+    var maxYear=0;
+    var minCount=1000;
+    var maxCount=0;
+    var N = indPub.length;
+    for (var i=0;i<N;i++){
+      var temp1 = d3.min(indPub[i], function(d){return d.Year;})
+      var temp2 = d3.max(indPub[i], function(d){return d.Year;})
+      var temp3 = d3.min(indPub[i], function(d){return d.Value;})
+      var temp4 = d3.max(indPub[i], function(d){return d.Value;})
+      if (temp1<minYear)
+        minYear = temp1;
+      if (temp2 >maxYear)
+        maxYear = temp2;
+      if (temp3<minCount)
+        minCount=temp3;
+      if (temp4>maxCount)
+        maxCount = temp4;
+    }
+ 
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
+  var h = indPub.length*45 ; 
+  var w = (maxYear - minYear)*12;
+  
+  if (w > 700){ w=700;} // If computed width is greater than column width, reset it 
+  
   var svg = d3.select("#" + canvas)
-  .attr("height", indPub.length*50)
-  .attr("width",320 );
+  .attr("height", h )
+  .attr("width", w );
     margin = {top: 10, right: 0, bottom: 20, left: 20};
     width = +svg.attr("width") - margin.left - margin.right;
     height = +svg.attr("height") - margin.top - margin.bottom;
     //height = indPub.length*60 - margin.top - margin.bottom;
 
-    // console.log(height);
-    
+  // console.log(height);
   
   //Clearing the contents of SVG before second search
   svg.selectAll("*").remove();
 
-  var minYear=2017;
-  var maxYear=0;
-  var minCount=1000;
-  var maxCount=0;
-  var N = indPub.length;
-  for (var i=0;i<N;i++){
-    var temp1 = d3.min(indPub[i], function(d){return d.Year;})
-    var temp2 = d3.max(indPub[i], function(d){return d.Year;})
-    var temp3 = d3.min(indPub[i], function(d){return d.Value;})
-    var temp4 = d3.max(indPub[i], function(d){return d.Value;})
-    if (temp1<minYear)
-      minYear = temp1;
-    if (temp2 >maxYear)
-      maxYear = temp2;
-    if (temp3<minCount)
-      minCount=temp3;
-    if (temp4>maxCount)
-      maxCount = temp4;
-  }
   var xDomain = [];
   for(var i=0;i<maxYear-minYear+1;i++){
     xDomain.push(+minYear+i);
@@ -172,14 +178,24 @@ if(isFound) {
        .attr("stroke-width", "0.3px");
 
   }
-  //Draw Vertical line for showing the starting year of main author 
-  g.append("g")
-       .attr("transform", "translate("+x(main_author_start_year)+", 0)")
-       .append("line")
-       .attr("y2", height)
-       .attr("stroke", "#ff2b2b")
-       .attr("stroke-width", "0.5px");
-}
+    //Draw Vertical line for showing the starting year of main author 
+    g.append("g")
+         .attr("transform", "translate("+x(main_author_start_year)+", 0)")
+         .append("line")
+         .attr("y2", height)
+         .attr("stroke", "#ff2b2b")
+         .attr("stroke-width", "0.5px");
+
+   g.selectAll(".moreBtn")
+          .data(adata)
+          .enter().append("text")
+          .attr("class", "moreBtn")
+          .attr("x", width-25)
+          .attr("y",height+10)
+          .text("More")
+          //.on("click", function(d){});
+          .on("click", function(d){generateCollaborationChart(gdata, adata, canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
+  }
 }
 function showMutualPublications(pdata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 
@@ -238,8 +254,9 @@ function StringifyPublication(p){
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
 function loadMe(name){
-  process(name,"CollabChart1",l,u,1); 
-  process(name,"CollabChart2",l,u,2); 
+  alert("To be fixed soon!");
+  //process(name,"CollabChart1",l,u,1); 
+  //process(name,"CollabChart2",l,u,2); 
 }
 
 function getMutualPublicationObjects(pubData, year, aName, cName){

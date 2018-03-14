@@ -148,8 +148,8 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 {
 	var bio = "";
 	var pub = getPublications(pdata, a.Name);
-	console.log(a);
-	console.log(pub); 
+	//console.log(a);
+	//console.log(pub); 
 	var sYear = d3.min(a.AllPublicationsPerYear, function(d){return d.Year;});
 	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 	
@@ -1087,7 +1087,7 @@ function thirdSentenceTopicsV1(a){
 	//Recent topics of author
 	var s="";
 	var topics = []; 
-	console.log(a); 
+	//console.log(a); 
 	for (var i=0; i<a.Keywords.length;i++){
 		if(author_keywords[a.Keywords[i]] != undefined || author_keywords[a.Keywords[i]] == "unclear"){
 			topics.push(author_keywords[a.Keywords[i]]); 
@@ -1112,7 +1112,7 @@ function thirdSentenceTopicsV1(a){
 				}
 		}
   	}
-	console.log(uniqueTopics); 
+	//console.log(uniqueTopics); 
 	return s; 
 }
 function fourthSentenceTopicsV1(keywords, a){
