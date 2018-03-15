@@ -4,6 +4,7 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript"  src="loadJsonData.js"></script>
   <script type="text/javascript"  src="process.js"></script>
   <script type="text/javascript"  src="nlg.js"></script>
@@ -16,7 +17,12 @@
 <body>
   
   <div class="header">
-    <img id="logo" src="logo.svg">
+     <img id="logo" src="logo.svg">
+     <div class="title" id="name"></div>
+        <!-- <h1 id="name"></h1> -->
+     <div class="infoHead" id="info"></div>
+      <!-- <svg id="infoChart"></svg> -->
+    
   </div>
 
   <div class="topnav">
@@ -25,11 +31,6 @@
       <input type="text" disabled="disabled" id="suggestion" />
       <button id="srchbtn" >Search</button> 
     </div>
-  </div>
-
-  <div class="title">
-    <h1 id="name"></h1>
-
   </div>
 
   <div class="row">
@@ -58,7 +59,7 @@
         // console.log(pdata);
         // console.log(adata); 
 
-          var name = "";
+        //var name = "";
           var l=2;
           var u=8;
 
@@ -71,17 +72,15 @@
           document.getElementById('srchbtn').addEventListener('click', function(){
               search(pdata, adata);
           }); 
-
-          function search(pdata, adata){
-            name = document.getElementById("search").value;
-            document.getElementById("search").value = "";
-            process(pdata, adata, name,"CollabChart1",l,u,1); 
-            //process(pdata, adata, name,"CollabChart2",l,u,2); 
+        
+        function search(pdata, adata){
+          name = document.getElementById("search").value;
+          document.getElementById("search").value = "";
+          process(pdata, adata, name,"CollabChart1",l,u,1); 
+          //process(pdata, adata, name,"CollabChart2",l,u,2); 
           }
       });
   });
-
-
   </script>
   
   <div class="footer">

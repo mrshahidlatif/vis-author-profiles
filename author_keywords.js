@@ -3952,3 +3952,194 @@ var author_keywords = {
 "zooming":"Zooming and Navigation Techniques",
 "zooming and navigation techniques":"Zooming and Navigation Techniques"
 }; 
+
+var keywordMapping = {
+        //"Undefined Keyword": {}, // for testing only
+        "Acoustics, Sound, Sonification": {
+            default: "acoustics-related visualization",
+            vis: "acoustics-related",
+        },
+        "Ambient Visualization": {
+            default: "ambient visualization",
+            vis: "ambient"
+        },
+        "Astronomy / Astrophysics": {
+            default: "astrophysical visualization",
+            vis: "astrophysical",
+            visOfData: "astrophysical"
+        },
+        "Biology and Bioinformatics": {
+            default: "biological visualization",
+            vis: "biological",
+            visOfData: "biological"
+        },
+        "Biomedical Science and Medicine": {
+            default: "medical visualization",
+            vis: "medical",
+            visOfData: "medical"
+        },
+        "Business, Finance, Economy, Manufacturing": {
+            default: "business-related visualization",
+            vis: "business-related",
+            visOfData: "business-related"
+        },
+        "Collaborative Visualization": {
+            default: "collaborative visualization",
+            vis: "collaborative"
+        },
+        "Color & Color Perception": {
+            default: "color"
+        },
+        "Comparison, Comparative Visualization and Similarity": {
+            default: "visual comparison",
+            vis: "comparative"
+        },
+        "Compression Techniques": {
+            default: "compression techniques"
+        },
+        "Computer Networks & Network Security": {
+            default: "visualization related to computer networks",
+            vis: "computer network"
+        },
+        "Dimensionality Reduction": {
+            default: "dimensionality reduction techniques"
+        },
+        "Earth, Space, and Environmental Sciences": {
+            default: "environmental visualization",
+            vis: "environmental",
+            visOfData: "environmental"
+        },
+        "Emergency/Disaster Management": {
+            default: "emergency-related visualization",
+            vis: "emergency-related",
+            visOfData: "emergency-related"
+        },
+        "Engineering": {
+            default: "engineering visualization",
+            vis: "engineering",
+            visOfData: "engineering"
+        },
+        "Evaluation General": {
+            default: "evaluation of visualization"
+        },
+        "Flow Visualization, Data, and Techniques": {
+            default: "flow visualization",
+            vis: "flow",
+            visOfData: "flow"
+        },
+        "Focus + Context Techniques": {
+            default: "focus + context techniques"
+        },
+        "Geography, Geospatial Vis, Cartography, Terrain Vis": {
+            default: "geographic visualization",
+            vis: "geographic",
+            visOfData: "geographic"
+        },
+        "Glyphs, Glyph-based Techniques": {
+            default: "glyph-based techniques"
+        },
+        "GPU-based techniques": {
+            default: "GPU-based techniques"
+        },
+        "Graph/Network Data and Techniques": {
+            default: "graph visualization",
+            vis: "graph",
+            visOfData: "graph"
+        },
+        "Hierarchical/Tree Data and Techniques": {
+            default: "hierarchy visualization",
+            vis: "hierarchy",
+            visOfData: "hierarchy"
+        },
+        "Illumination": {
+            default: "illumination"
+        },
+        "Illustrative Visualization": {
+            default: "illustrative visualization",
+            vis: "illustrative"
+        },
+        "Immersive and Virtual Environments": {
+            default: "immersive visualization",
+            vis: "immersive"
+        },
+        "Microscopy": {
+            default: "microscopy-related visualization",
+            vis: "microscopy-related",
+            visOfData: "microscopy-related"
+        },
+        "Molecular Science and Chemistry": {
+            default: "molecular visualization",
+            vis: "molecular",
+            visOfData: "molecular"
+        },
+        "Multidimensional / Multivariate / Multifield Data and Techniques": {
+            default: "multivariate data visualization",
+            vis: "multivariate data",
+            visOfData: "multivariate"
+        },
+        "Multimedia (Image/Video/Music)": {
+            default: "multimedia visualization",
+            vis: "multimedia",
+            visOfData: "multimedia"
+        },
+        "Parallel Coordinates": {
+            default: "parallel coordinates",
+            vis: "parallel coordinates"
+        },
+        "Perception": {
+            default: "perception"
+        },
+        "Scalar Field Data & Techniques": {
+            default: "scalar field visualization",
+            vis: "scalar field",
+            visOfData: "scalar field"
+        },
+        "Set-related Data & Techniques": {
+            default: "set visualization",
+            vis: "set",
+            visOfData: "set"
+        },
+        "Social Networks and Social Media": {
+            default: "social data visualization",
+            vis: "social data",
+            visOfData: "social"
+        },
+        "Software Visualization": {
+            default: "software visualization",
+            vis: "software",
+            visOfData: "software"
+        },
+        "Spatiotemporal Data and Techniques": {
+            default: "spatiotemporal visualization",
+            vis: "spatiotemporal",
+            visOfData: "spatiotemporal"
+        },
+        "Sports Visualization": {
+            default: "sports visualization",
+            vis: "sports",
+            visOfData: "sports"
+        },
+        "Storytelling": {
+            default: "storytelling"
+        },
+        "Text, Document, Topic Analysis, Data, and Techniques": {
+            default: "document visualization",
+            vis: "document",
+            visOfData: "document"
+        },
+        "Timeseries, Time-Varying Data and Techniques": {
+            default: "visualization of time-oriented data",
+            vis: "time-oriented",
+            visOfData: "time-oriented"
+        },
+        "Uncertainty Techniques and Visualization": {
+            default: "uncertainty visualization",
+            vis: "uncertainty",
+            visOfData: "uncertain"
+        },
+        "Volume Rendering, Modeling, and Visualization": {
+            default: "volume visualization",
+            vis: "volume",
+            visOfData: "volume"
+        }
+    };

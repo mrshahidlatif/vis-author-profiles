@@ -46,7 +46,8 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
   //var svg = d3.select("#" + canvas),
   var h = indPub.length*45 ; 
   var w = (maxYear - minYear)*12;
-  
+  if (h<50){h=80;}
+  if (w<50){w=150;}
   if (w > 700){ w=700;} // If computed width is greater than column width, reset it 
   
   var svg = d3.select("#" + canvas)
@@ -254,9 +255,9 @@ function StringifyPublication(p){
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
 function loadMe(name){
-  alert("To be fixed soon!");
-  //process(name,"CollabChart1",l,u,1); 
-  //process(name,"CollabChart2",l,u,2); 
+  document.getElementById("search").value = name; 
+  console.log(document.getElementById("search").value);
+  
 }
 
 function getMutualPublicationObjects(pubData, year, aName, cName){
@@ -372,11 +373,13 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
     // add the x Axis
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x)
+        .ticks(1));
 
     // add the y Axis
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y)
+        .ticks(1));
     }
 }
 
@@ -514,10 +517,17 @@ function generateSparklineForMutualPublications(data,canvas, h, w, startYear, en
 
 // }
 
+// function enlargeMe(data, id, startYear, endYear, ymax){
+//   //console.log(data); 
+//     document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Publications" + "</span>" + "<br>" + "<hr>" 
+//   + '<svg width="400" height="200" id="figure"></svg>';
+//     generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
+
+// }
+
 function enlargeMe(data, id, startYear, endYear, ymax){
-  //console.log(data); 
-    document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Distribution of Publications" + "</span>" + "<br>" + "<hr>" 
-  + '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 125, 350, startYear, endYear, ymax);  
+   //console.log(data); 
+    document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
+    generateSparkline(data,"figure", 90, 300, startYear, endYear, ymax);  
 
 }

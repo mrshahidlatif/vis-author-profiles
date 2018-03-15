@@ -84,6 +84,9 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax);
 		generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax);
 		generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax);
+		//Initial Display of Info header graph
+		document.getElementById("info").innerHTML = '<svg width="350" height="100" id="figure"></svg>';
+		generateSparkline(aObject.AllPublicationsPerYear,"figure", 90, 300, sYear, eYear, ymax);  
 		
 		for (var i=0;i<listOfSparklines.length;i++){
 			//console.log(listOfSparklines[i].sparklineID);
@@ -1098,20 +1101,32 @@ function thirdSentenceTopicsV1(a){
     	return +(b.Value) - +(a.Value);
   	});
 
-  	 uniqueTopics = uniqueTopics.slice(1,5); 
-
-  	if (uniqueTopics.length > 0){
-  		s += " Current focus areas are "
-  		for (var i=0;i<uniqueTopics.length;i++){
-				if(i==uniqueTopics.length-1){
-					s += "and " + uniqueTopics[i].Name +".";
-				}
-				else {
-					var ID = "sparkline_coll"+i;
-					s += uniqueTopics[i].Name + ", ";
-				}
-		}
+	// console.log(uniqueTopics); 
+	//uniqueTopics = uniqueTopics.slice(1,20); 
+  	
+  	var listOfTopics = [];
+  	for (var i=0; i<uniqueTopics.length;i++){
+  		if (keywordMapping[uniqueTopics[i].Name] != undefined){
+  			listOfTopics.push(uniqueTopics[i].Name); 
+  		}
   	}
+  	// console.log(listOfTopics); 
+  
+  	s = convertKeywordList(listOfTopics);
+  	//console.log(s); 
+
+  // 	if (uniqueTopics.length > 0){
+  // 		s += " Current focus areas are "
+  // 		for (var i=0;i<uniqueTopics.length;i++){
+		// 		if(i==uniqueTopics.length-1){
+		// 			s += "and " + uniqueTopics[i].Name +".";
+		// 		}
+		// 		else {
+		// 			var ID = "sparkline_coll"+i;
+		// 			s += uniqueTopics[i].Name + ", ";
+		// 		}
+		// }
+  // 	}
 	//console.log(uniqueTopics); 
 	return s; 
 }
@@ -1182,4 +1197,49 @@ function getKeywordsPerYear(pubs, keyword){
   	});
 	//console.log(keywordPerYear); 
 	return keywordPerYear; 
+}
+
+function convertKeywordList(keywords) {
+    //console.log(keywords);
+    var text = "";
+    var cleanedKeywords = [];
+    var allVisVersionsAvailable = true;
+    var allVisOfDataVersionsAvailable = true;
+    $.each(keywords, function (i, keyword) {
+        if (keywordMapping[keyword].default) {
+            cleanedKeywords.push(keyword);
+            if (!keywordMapping[keyword].vis) {
+                allVisVersionsAvailable = false;
+            }
+            if (!keywordMapping[keyword].visOfData) {
+                allVisOfDataVersionsAvailable = false;
+            }
+        }
+    });
+    if (cleanedKeywords.length === 0) {
+        return "";
+    }
+    var isSingular = cleanedKeywords.length === 1;
+    $.each(cleanedKeywords, function (i, keyword) {
+        var mapping = keywordMapping[keyword];
+        text += allVisOfDataVersionsAvailable ? mapping.visOfData :
+            (allVisVersionsAvailable ? mapping.vis : mapping.default);
+        if (i + 2 < cleanedKeywords.length) {
+            text += ", ";
+        } else if (i + 1 < cleanedKeywords.length) {
+            text += (cleanedKeywords.length > 2) ? ", and " : " and ";
+        }
+    });
+    var pre = allVisOfDataVersionsAvailable ? "the visualization of " : "";
+    var post = allVisOfDataVersionsAvailable ? " data" : (allVisVersionsAvailable ? " visualization" : "");
+    if (isSingular) {
+        return "A current focus area of the author is " + pre + text + post + ".";
+    }
+    return "Current focus areas of the author are " + pre + text + post + ".";
+}
+function appendKeyword(keyword) {
+        if (selectedKeywords.indexOf(keyword) < 0) {
+            selectedKeywords.push(keyword);
+            $("#keyword_text").text(convertKeywordList(selectedKeywords));
+        }
 }
