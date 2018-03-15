@@ -47,7 +47,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
 			// var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
 		}
-		researchTopicsText = generateResearchTopicsText(pdata, aObject); 
+		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
 		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
 
 
@@ -1012,7 +1012,7 @@ function sortByValue(data) {
   });
   return data;
 }
-function generateResearchTopicsText(pdata, a){
+function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
 	//console.log(keywords);
@@ -1026,6 +1026,8 @@ function generateResearchTopicsText(pdata, a){
 			text += thirdSentenceTopicsV1(a); 
 
 			text += fourthSentenceTopicsV1(keywords, a); 
+
+			text += sixthSentenceTopicsV1(adata, a); 
 		}
 	}
 	return text; 
@@ -1163,6 +1165,30 @@ function fourthSentenceTopicsV1(keywords, a){
 	return s; 
 }
 
+function sixthSentenceTopicsV1(adata, a){
+	var s=""; 
+	var similarAuthors = findAuthorsWithSimilarResearchTopics(adata, a); 
+	if (similarAuthors.length > 0){
+		if (similarAuthors.length == 1){
+			s += " Another researchers with similar areas of expertise is " + similarAuthors[0] + ".";
+		}
+	 	else if (similarAuthors.length == 1){
+	 		s += " Researchers with similar areas of expertise are " + similarAuthors[0] + " and " + similarAuthors[1] +"." 
+	 	}
+	 	else {
+			s += " Researchers with similar areas of expertise are " ;
+			for (var i=0;i<similarAuthors.length;i++){
+				if(i==similarAuthors.length-1){
+					s += "and " + similarAuthors[i]+".";
+				}
+				else {
+					s += similarAuthors[i] + ", ";
+				}
+			}
+		}
+	}
+	return s; 
+}
 function getKeywords(pdata, a){
 	var allKeywords = []; 
 	var pubs = getPublications(pdata, a.Name);
@@ -1242,4 +1268,45 @@ function appendKeyword(keyword) {
             selectedKeywords.push(keyword);
             $("#keyword_text").text(convertKeywordList(selectedKeywords));
         }
+}
+
+function findAuthorsWithSimilarResearchTopics(adata, a){
+	var similarAuthors = []; 
+	var mainAuthorsTopics = [];
+	for (var i=0; i<a.Keywords.length;i++){
+		if(author_keywords[a.Keywords[i]] != undefined ){
+			mainAuthorsTopics.push(author_keywords[a.Keywords[i]]); 
+		}
+	} 
+	//console.log(mainAuthorsTopics); 
+	for (var j=0;j<adata.length;j++){
+		var currentAuthorTopics = [];
+		for (var k=0;k<adata[j].Keywords.length;k++){
+			if(author_keywords[adata[j].Keywords[k]] != undefined ){
+				currentAuthorTopics.push(author_keywords[adata[j].Keywords[k]]); 
+			}
+		}
+		var overlap = getIntersect(mainAuthorsTopics,currentAuthorTopics); 
+		if(overlap.length > 5 && overlap.length/mainAuthorsTopics.length > 0.5){
+			//console.log(adata[j].Name);
+			similarAuthors.push(adata[j].Name);  
+		}
+	}
+	var selfAuthorIndex = similarAuthors.indexOf(a.Name);
+	similarAuthors.splice(selfAuthorIndex, 1); 
+	return similarAuthors; 
+}
+function getIntersect(arr1, arr2) {
+    var r = [], o = {}, l = arr2.length, i, v;
+    for (i = 0; i < l; i++) {
+        o[arr2[i]] = true;
+    }
+    l = arr1.length;
+    for (i = 0; i < l; i++) {
+        v = arr1[i];
+        if (v in o) {
+            r.push(v);
+        }
+    }
+    return r;
 }
