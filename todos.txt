@@ -8,9 +8,9 @@ BUGS
 -Some title missing for some publications in the right side panel for Daniel a. kiem
 -Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters [FIXED]
 
---------------------------------
-Fabian's Feedback - Things to do
--------------------------------- 
+----------------------------------------------
+Fabian's Feedback - Suggestions / Things to do
+----------------------------------------------
 -we have “he” in the second standard sentence. We should replace it with the name or “the author”
 -Determine the gender of a first name (https://genderize.io/#singleusage)
 -And „conference papers“ should better be named “proceedings papers” (this category also comprises “workshops”, “symposiums”, “meetings”, etc.)
@@ -30,9 +30,18 @@ Fabian's Feedback - Things to do
 	Michael Bostock
 	Bostock is not publishing anymore. We need to change the first sentence to, for instance, “Bostock published between 2009 and 2011.” But actually, I would prefer to merge the first two sentences to, for instance, “Bostock published six publications between 2009 and 2011, including five journal articles and one conference paper.” (beware the singular for the conference paper; what about writing numbers twelve/ten and smaller as words? However, we should be consistent within a sentence or maybe a paragraph - https://www.dailywritingtips.com/10-rules-for-writing-numbers-and-numerals/ )
 
------
+LAYOUT 
+-Fill a somewhat wider area with the main content, i.e., text plus side bar (e.g., Stackoverflow: 1090px; Google Scholar: 1200) [FIXED]
+-Move the VAP logo to the left before the search field [FIXED]
+-Align the author name (title) on the left [FIXED]
+-Add a 10 px margin between the author name and the badges
+-Add a 5 px margin so that the bottom line of the text is on the same height as the south-west-west/south-east-east corner of the badge
+-Make the default gray font color lighter that the difference between clickable text and non-interactive text becomes clearer [FIXED IN DIFFERENT WAY]
+-Don’t let the side bar have a separate scrollbar (that sometimes gives two scoll bars, which can be confusing), but just increase the height of the page [FIXED]
+
+------
 TODOs
------
+------
 Appearance 
 -Making search bar case insensitive 
 -Remove numbers when displaying names of authors 

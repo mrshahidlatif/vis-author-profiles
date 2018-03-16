@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="12cm"
-   height="3.5cm"
-   viewBox="0 0 144 42"
+   width="150"
+   height="50"
+   viewBox="0 0 47.625 15.875"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
@@ -75,18 +75,18 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="216.84401"
-     inkscape:cy="26.973685"
+     inkscape:cy="28.236376"
      inkscape:document-units="mm"
-     inkscape:current-layer="g6254"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1001"
+     inkscape:window-height="1121"
      inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-y="166"
      inkscape:window-maximized="1"
      inkscape:snap-text-baseline="true"
      scale-x="1.2"
-     units="cm"
+     units="px"
      showguides="true"
      inkscape:guide-bbox="true">
     <sodipodi:guide
@@ -103,7 +103,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -111,180 +111,151 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-260)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:49.48215866px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#1e90ff;fill-opacity:1;stroke:none;stroke-width:1.23705506;"
-       x="47.113636"
-       y="285.77661"
-       id="text3705"
-       transform="scale(0.95470288,1.0474463)"><tspan
-         sodipodi:role="line"
-         id="tspan3703"
-         x="47.113636"
-         y="285.77661"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.48215866px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e90ff;stroke-width:1.23705506;fill-opacity:1;">P</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:49.48215866px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#1e90ff;fill-opacity:1;stroke:none;stroke-width:1.23705506;"
-       x="11.822803"
-       y="285.89716"
-       id="text3701"
-       transform="scale(0.95470288,1.0474463)"><tspan
-         sodipodi:role="line"
-         id="tspan3699"
-         x="11.822803"
-         y="285.89716"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.48215866px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e90ff;stroke-width:1.23705506;fill-opacity:1;">V</tspan></text>
-    <text
-       id="text3709"
-       y="-251.05666"
-       x="24.421515"
-       style="font-style:normal;font-weight:normal;font-size:49.97386551px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.2493459;"
-       xml:space="preserve"
-       transform="scale(0.95793937,-1.0439074)"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.97386551px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#aa0000;stroke-width:1.2493459;"
-         y="-251.05666"
-         x="24.421515"
-         id="tspan3707"
-         sodipodi:role="line">V</tspan></text>
-    <path
-       sodipodi:type="star"
-       id="path3729"
-       sodipodi:sides="3"
-       sodipodi:cx="65.581261"
-       sodipodi:cy="100.42325"
-       sodipodi:r1="1.6160969"
-       sodipodi:r2="0.80804843"
-       sodipodi:arg1="2.6224465"
-       sodipodi:arg2="3.6696441"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 64.178096,101.22506 0.70518,-1.20895 0.705181,-1.208943 0.694386,1.215173 0.694387,1.21518 -1.399567,-0.006 z"
-       inkscape:transform-center-x="0.0054010891"
-       inkscape:transform-center-y="-0.84223419"
-       style="fill:#1e90ff;stroke-width:0.26458332;fill-opacity:1"
-       transform="matrix(3.7711075,0,0,5.7182211,-207.97399,-279.5509)" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.15999985px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47592399"
-       x="77.133629"
-       y="268.95358"
-       id="text29"><tspan
-         sodipodi:role="line"
-         id="tspan27"
-         x="77.133629"
-         y="268.95358"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.15999985px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47592399"
-         dx="0 18.25 17.549999">VIS</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47297508"
-       x="74.867149"
-       y="281.90353"
-       id="text33"
-       transform="scale(0.99380136,1.0062373)"><tspan
-         sodipodi:role="line"
-         id="tspan31"
-         x="74.867149"
-         y="281.90353"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47297508">Author</tspan></text>
+     transform="translate(0,-286.125)">
     <g
-       id="g3776"
-       transform="matrix(1.760181,0,0,1.7728806,-67.071358,91.06172)"
-       style="fill:#aa0000">
-      <rect
-         y="110.52312"
-         x="71.909866"
-         height="6.949008"
-         width="1.3163567"
-         id="rect53"
-         style="fill:#aa0000;stroke-width:0.13767636" />
-      <rect
-         style="fill:#aa0000;stroke-width:0.12594351"
-         id="rect3760"
-         width="1.3163567"
-         height="5.8150792"
-         x="70.30629"
-         y="111.65704" />
-      <rect
-         y="112.38937"
-         x="73.513443"
-         height="5.0827503"
-         width="1.3163567"
-         id="rect3762"
-         style="fill:#aa0000;stroke-width:0.11774633" />
-      <rect
-         style="fill:#aa0000;stroke-width:0.10623883"
-         id="rect3764"
-         width="1.3163567"
-         height="4.1378098"
-         x="75.11702"
-         y="113.33431" />
-      <rect
-         y="116.45262"
-         x="76.720596"
-         height="1.0195063"
-         width="1.3163567"
-         id="rect3766"
-         style="fill:#aa0000;stroke-width:0.05273428" />
-      <rect
-         style="fill:#aa0000;stroke-width:0.07579605"
-         id="rect3768"
-         width="1.3163567"
-         height="2.1061878"
-         x="78.324173"
-         y="115.36594" />
-    </g>
-    <text
-       transform="scale(0.99380136,1.0062373)"
-       id="text42"
-       y="297.31097"
-       x="74.695938"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47297508"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47297508"
-         y="297.31097"
-         x="74.695938"
-         id="tspan40"
-         sodipodi:role="line"
-         dx="0 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001">Profile</tspan></text>
-    <g
-       id="g6254"
-       transform="translate(11.385682,1.6036172)">
-      <ellipse
-         ry="12.884999"
-         rx="12.69935"
-         cy="318.25079"
-         cx="57.845711"
-         id="path5638"
-         style="opacity:1;fill:#aa0000;fill-opacity:1;stroke-width:0.36574772" />
-      <ellipse
-         ry="9.2035704"
-         rx="9.3622942"
-         cy="318.25079"
-         cx="57.845711"
-         id="path5640"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.36574772" />
-      <rect
-         transform="matrix(0.78885436,0.61458019,-0.6730044,0.73963848,0,0)"
-         y="228.32227"
-         x="256.12463"
-         height="6.8528619"
-         width="3.045567"
-         id="rect6193"
-         style="opacity:1;fill:#aa0000;fill-opacity:1;stroke-width:0.23448317" />
-      <rect
-         inkscape:transform-center-y="0.64144687"
-         inkscape:transform-center-x="0.16036172"
-         transform="matrix(0.76553126,0.6433987,-0.64877989,0.76097612,0,0)"
-         y="222.24266"
-         x="246.48473"
-         height="14.551346"
-         width="6.3618884"
-         id="rect6195"
-         style="opacity:1;fill:#aa0000;fill-opacity:1;stroke-width:0.36575228" />
+       id="g6283"
+       transform="matrix(0.37674652,0,0,0.37674652,0.32406802,188.86083)">
+      <text
+         transform="scale(0.95470288,1.0474463)"
+         id="text3705"
+         y="284.39874"
+         x="35.859627"
+         style="font-style:normal;font-weight:normal;font-size:49.48215866px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#1e90ff;fill-opacity:1;stroke:none;stroke-width:1.23705506"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.48215866px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e90ff;fill-opacity:1;stroke-width:1.23705506"
+           y="284.39874"
+           x="35.859627"
+           id="tspan3703"
+           sodipodi:role="line">P</tspan></text>
+      <text
+         transform="scale(0.95470288,1.0474463)"
+         id="text3701"
+         y="284.51929"
+         x="0.5687933"
+         style="font-style:normal;font-weight:normal;font-size:49.48215866px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#1e90ff;fill-opacity:1;stroke:none;stroke-width:1.23705506"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.48215866px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1e90ff;fill-opacity:1;stroke-width:1.23705506"
+           y="284.51929"
+           x="0.5687933"
+           id="tspan3699"
+           sodipodi:role="line">V</tspan></text>
+      <text
+         transform="scale(0.95793937,-1.0439074)"
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:49.97386551px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1.2493459"
+         x="13.205528"
+         y="-249.6741"
+         id="text3709"><tspan
+           sodipodi:role="line"
+           id="tspan3707"
+           x="13.205528"
+           y="-249.6741"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:49.97386551px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#aa0000;stroke-width:1.2493459">V</tspan></text>
+      <path
+         transform="matrix(3.7711075,0,0,5.7182211,-218.71823,-280.99416)"
+         style="fill:#1e90ff;fill-opacity:1;stroke-width:0.26458332"
+         inkscape:transform-center-y="-0.84223419"
+         inkscape:transform-center-x="0.0054010891"
+         d="m 64.178096,101.22506 0.70518,-1.20895 0.705181,-1.208943 0.694386,1.215173 0.694387,1.21518 -1.399567,-0.006 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="false"
+         sodipodi:arg2="3.6696441"
+         sodipodi:arg1="2.6224465"
+         sodipodi:r2="0.80804843"
+         sodipodi:r1="1.6160969"
+         sodipodi:cy="100.42325"
+         sodipodi:cx="65.581261"
+         sodipodi:sides="3"
+         id="path3729"
+         sodipodi:type="star" />
+      <text
+         id="text29"
+         y="267.51031"
+         x="66.389397"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.15999985px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0.16509999px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47592399"
+         xml:space="preserve"><tspan
+           dx="0 0 18.25 17.549999"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.15999985px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0.16509999px;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47592399"
+           y="267.51031"
+           x="66.389397"
+           id="tspan27"
+           sodipodi:role="line">V IS</tspan></text>
+      <text
+         transform="scale(0.99380136,1.0062373)"
+         id="text33"
+         y="280.46924"
+         x="64.055901"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0.63499999px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47297508"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0.63499999px;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47297508"
+           y="280.46924"
+           x="64.055901"
+           id="tspan31"
+           sodipodi:role="line">Author</tspan></text>
+      <g
+         style="fill:#aa0000"
+         transform="matrix(1.760181,0,0,1.7728806,-77.815593,89.618465)"
+         id="g3776">
+        <rect
+           style="fill:#aa0000;stroke-width:0.13767636"
+           id="rect53"
+           width="1.3163567"
+           height="6.949008"
+           x="71.909866"
+           y="110.52312" />
+        <rect
+           y="111.65704"
+           x="70.30629"
+           height="5.8150792"
+           width="1.3163567"
+           id="rect3760"
+           style="fill:#aa0000;stroke-width:0.12594351" />
+        <rect
+           style="fill:#aa0000;stroke-width:0.11774633"
+           id="rect3762"
+           width="1.3163567"
+           height="5.0827503"
+           x="73.513443"
+           y="112.38937" />
+        <rect
+           y="113.33431"
+           x="75.11702"
+           height="4.1378098"
+           width="1.3163567"
+           id="rect3764"
+           style="fill:#aa0000;stroke-width:0.10623883" />
+        <rect
+           style="fill:#aa0000;stroke-width:0.05273428"
+           id="rect3766"
+           width="1.3163567"
+           height="1.0195063"
+           x="76.720596"
+           y="116.45262" />
+        <rect
+           y="115.36594"
+           x="78.324173"
+           height="2.1061878"
+           width="1.3163567"
+           id="rect3768"
+           style="fill:#aa0000;stroke-width:0.07579605" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.47942501px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47297508"
+         x="63.884689"
+         y="295.87668"
+         id="text42"
+         transform="scale(0.99380136,1.0062373)"><tspan
+           id="tspan6256"
+           dx="0 0 0 0 0 0 0 0 0 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001"
+           sodipodi:role="line"
+           x="63.884689"
+           y="295.87668"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.47942501px;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47297508"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.05000114px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.47942501px;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.47297508"
+             id="tspan6258"
+             dx="0 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001 0.80000001">Profiles</tspan></tspan></text>
     </g>
   </g>
 </svg>

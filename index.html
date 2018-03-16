@@ -15,10 +15,14 @@
   <script type="text/javascript"  src="author_autocomplete.js"></script>
   
 </head>
-<body>
+
     <div class="topnav">
 
-       <img id="logo" src="logo.svg">
+       <!-- <img id="logo" src="logo.svg" srcset="logo.svg"> -->
+       <div id="logo"> 
+           <object width="150" height="50" type="image/svg+xml" data="logo.svg">
+          </object>
+        </div>
        <div class="autocomplete">
           <input id="myInput" type="text" name="myCountry" placeholder="Search a VIS author">
        </div>
@@ -32,17 +36,19 @@
   </div>
   
   <div class="header">
-     <div class="leftcolumnHeader">
-      <div class="title" id="name"></div>
-     </div>
-        <!-- <h1 id="name"></h1> -->
-     <div class="rightcolumnHeader">
-      <div class="infoHead" id="info"></div>
-     </div>
+    <div class="rowHeader">
+       <div class="leftcolumnHeader" >
+        <div class="title" id="name"  style="display: table-cell; vertical-align: middle;"></div>
+       </div>
+          <!-- <h1 id="name"></h1> -->
+       <div class="rightcolumnHeader">
+        <div class="infoHead" id="info"></div>
+       </div>
+      </div>
       <!-- <svg id="infoChart"></svg> -->
     
   </div>
-
+<body>
   <div class="row">
     <div class="leftcolumn">
       <p id="bio"></p>
