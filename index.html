@@ -27,18 +27,13 @@
           <input id="myInput" type="text" name="myCountry" placeholder="Search a VIS author">
        </div>
        <input id="srchbtn" type="submit" value="Search">
-   <!--    <div id="search-container">
-        <input type="text" id="search">
-        <input type="text" disabled="disabled" id="suggestion" />
-        <button id="srchbtn" >Search</button> 
-      </div> -->
     
   </div>
   
   <div class="header">
     <div class="rowHeader">
        <div class="leftcolumnHeader" >
-        <div class="title" id="name"  style="display: table-cell; vertical-align: middle;"></div>
+        <div class="title" id="name"  style="display: table-cell; vertical-align: middle;">VIS Author Profiles</div>
        </div>
           <!-- <h1 id="name"></h1> -->
        <div class="rightcolumnHeader">
@@ -51,8 +46,12 @@
 <body>
   <div class="row">
     <div class="leftcolumn">
-      <p id="bio"></p>
-      <p id="rtopics"></p>
+      <p id="bio">
+        <b>VIS Author Profiles</b> describes publication records of authors from the visualization community in the form of interactive reports that combine automatically generated text and visualizations. The profiles are based on data from <a href="http://dblp.uni-trier.de/" target="_blank">DBLP</a>, the <a href="http://www.vispubdata.org/site/vispubdata/" target="_blank">Visualization Publication Data Collection</a>, and <a href="http://keyvis.org/expert.php" target="_blank">KeyVis</a>.
+      </p>
+      <p id="rtopics">
+        Every author has an individual profile page. Type an author name in the search box, start with a <a id="r" href="#">random author profile</a>, or select one of the most frequent contributors of the visualization community. 
+      </p>
       <p id="collRelation"></p>
 
       <br>
@@ -69,10 +68,11 @@
 
      autocomplete(document.getElementById("myInput"), authors_list);
 
+
      loadJSON("pubdata.json", function(response) {
         pdata = JSON.parse(response);
 
-      loadJSON("authordata.json", function(response) {
+     loadJSON("authordata.json", function(response) {
         adata = JSON.parse(response);
         // console.log(pdata);
         // console.log(adata); 
@@ -80,6 +80,12 @@
         //var name = "";
           var l=2;
           var u=8;
+
+          document.getElementById('r').addEventListener('click', function(){
+            var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
+            
+            process(pdata, adata, random_name , "CollabChart1",l,u,1);
+          }); 
 
           document.getElementById('myInput').onkeydown = function(event) {
             if (event.keyCode == 13) {
