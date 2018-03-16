@@ -6,7 +6,29 @@ BUGS
 -Author does not properly load when clicked on author's name in right side bar [FIXED]
 -Strange behavior for Catherine Plaisant and Tobias Shreck, Vidya Setlur
 -Some title missing for some publications in the right side panel for Daniel a. kiem
--Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters
+-Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters [FIXED]
+
+--------------------------------
+Fabian's Feedback - Things to do
+-------------------------------- 
+-we have “he” in the second standard sentence. We should replace it with the name or “the author”
+-Determine the gender of a first name (https://genderize.io/#singleusage)
+-And „conference papers“ should better be named “proceedings papers” (this category also comprises “workshops”, “symposiums”, “meetings”, etc.)
+	(I just realized that we currently count CoRR/arxiv publications as journal articles. This is misleading/incorrect. Often people use arxiv just to publish preprints. Sebastian Baltes is an example. I suggest we just ignore all CoRR/arxiv publications – although we might miss a few “real” publications, we get rid of all the preprints)
+-Subgroups of co-authors
+-Collaboration graph for those authors who have no coauthor in VIS community e.g. Roch Guerin 
+-PROBLEMS IN PROFILES OF OUR TEST CANDIDATES
+	R. Jordan Crouser
+	We should never say or stress that a collaboration ended at a certain year (that sounds too final - it might have continued, but we don’t know that). We can provide a range of joint publications instead (e.g., “with 10 joint publications between 2003 and 2010”). But only if the last publication is more than 5(?) years ago, I would provide an end year.
+	 
+	Ji Soo Yi
+	Yi is active too long (> 10 years) to have the first author information
+	Maybe, “top collaborator” is too imprecise and we should replace at least the first instance with “most frequent co-author”.
+	Jacko *is* the most frequent co-author, but *was* the supervisor – I believe this sentence need greater variety for covering, for instance, ongoing supervision vs. past supervision (only if we are sure that it is past). A more tricky case is past supervision, but ongoing collaboration.
+	Kwon and Kim are the same category of co-authors with a comparable number of joint publications with Yi – it would probably sound much if we could summarize them.
+	 
+	Michael Bostock
+	Bostock is not publishing anymore. We need to change the first sentence to, for instance, “Bostock published between 2009 and 2011.” But actually, I would prefer to merge the first two sentences to, for instance, “Bostock published six publications between 2009 and 2011, including five journal articles and one conference paper.” (beware the singular for the conference paper; what about writing numbers twelve/ten and smaller as words? However, we should be consistent within a sentence or maybe a paragraph - https://www.dailywritingtips.com/10-rules-for-writing-numbers-and-numerals/ )
 
 -----
 TODOs

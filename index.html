@@ -11,26 +11,36 @@
   <script type="text/javascript"  src="venue_keywords.js"></script>
   <script type="text/javascript"  src="subfields_community.js"></script>
   <script type="text/javascript"  src="author_keywords.js"></script>
-   <script type="text/javascript"  src="dictionary.js"></script>
+  <script type="text/javascript"  src="dictionary.js"></script>
+  <script type="text/javascript"  src="author_autocomplete.js"></script>
   
 </head>
 <body>
-  
-  <div class="header">
-     <img id="logo" src="logo.svg">
-     <div class="title" id="name"></div>
-        <!-- <h1 id="name"></h1> -->
-     <div class="infoHead" id="info"></div>
-      <!-- <svg id="infoChart"></svg> -->
+    <div class="topnav">
+
+       <img id="logo" src="logo.svg">
+       <div class="autocomplete">
+          <input id="myInput" type="text" name="myCountry" placeholder="Search a VIS author">
+       </div>
+       <input id="srchbtn" type="submit" value="Search">
+   <!--    <div id="search-container">
+        <input type="text" id="search">
+        <input type="text" disabled="disabled" id="suggestion" />
+        <button id="srchbtn" >Search</button> 
+      </div> -->
     
   </div>
-
-  <div class="topnav">
-    <div id="search-container">
-      <input type="text" id="search">
-      <input type="text" disabled="disabled" id="suggestion" />
-      <button id="srchbtn" >Search</button> 
-    </div>
+  
+  <div class="header">
+     <div class="leftcolumnHeader">
+      <div class="title" id="name"></div>
+     </div>
+        <!-- <h1 id="name"></h1> -->
+     <div class="rightcolumnHeader">
+      <div class="infoHead" id="info"></div>
+     </div>
+      <!-- <svg id="infoChart"></svg> -->
+    
   </div>
 
   <div class="row">
@@ -51,6 +61,8 @@
   </div>
   <script>
 
+     autocomplete(document.getElementById("myInput"), authors_list);
+
      loadJSON("pubdata.json", function(response) {
         pdata = JSON.parse(response);
 
@@ -63,22 +75,30 @@
           var l=2;
           var u=8;
 
-          document.getElementById('search').onkeydown = function(event) {
+          document.getElementById('myInput').onkeydown = function(event) {
             if (event.keyCode == 13) {
-                //alert('5');
-              search(pdata, adata); 
+                var sss = document.getElementById("myInput").value;
+                console.log(sss);
+                search(pdata, adata); 
             }
           }
+     
+          // document.getElementById('search').onkeydown = function(event) {
+          //   if (event.keyCode == 13) {
+          //       //alert('5');
+          //     search(pdata, adata); 
+          //   }
+          // }
           document.getElementById('srchbtn').addEventListener('click', function(){
               search(pdata, adata);
           }); 
         
         function search(pdata, adata){
-          name = document.getElementById("search").value;
-          document.getElementById("search").value = "";
+          // name = document.getElementById("search").value;
+          name = document.getElementById("myInput").value;
+          document.getElementById("myInput").value = "";
           process(pdata, adata, name,"CollabChart1",l,u,1); 
-          //process(pdata, adata, name,"CollabChart2",l,u,2); 
-          }
+        }
       });
   });
   </script>
@@ -89,7 +109,7 @@
 </body>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript"  src="authors-autocomplete.js"></script>
+  <!-- <script type="text/javascript"  src="authors-autocomplete.js"></script> -->
   <script type="text/javascript"  src="visualization.js"></script>
 
 </html> 

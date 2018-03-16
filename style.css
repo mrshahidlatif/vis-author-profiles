@@ -2,51 +2,53 @@
 /*@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');*/
 
 @font-face {
-font-family: 'Verlag Book';
-font-style: normal;
-font-weight: normal;
-src: local('Verlag Book'), url('Verlag-Book.woff') format('woff');
+    font-family: 'Verlag Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Verlag Book'), url('Verlag-Book.woff') format('woff');
 }
 #logo { 
-    float:left;
-    width:10%; 
+    float:right;
+    padding-right: 15px;
+    width:12%; 
 }
 #badge {
-    width:6%; 
+    width:8%; 
 }
-.infoHead{
+/*.infoHead{
     float: right;
     width:20%;
     padding-right: 100px
-}
+}*/
 
 .header {
     position: fixed;
-    top: 0;
     left: 0;
+    top: 40px;
     width: 100%;
-    height: 80px;
+    height: 100px;
     z-index: 10;
     background-color: #F1F1F1;
-    text-align: center;
     padding: 10px;
 }
 .topnav {
     position: fixed;
+    top: 0;
+    z-index: 11;
     /*margin: 100px auto;*/
-    overflow: hidden;
+    /*overflow: hidden;*/
     background-color: #aaa;
-    float: right;
+    height: 50px;
     width: 100%;
 }
 body
 {
-    margin: 100px auto;
+    margin: 130px auto;
     /*font-family: 'Source Sans Pro', sans-serif;*/
     font-family:'Verlag Book';
     /*font-family: Helvetica, Sans-Serif;*/
     color: #444444;
-    font-size: 12pt;
+    font-size: 14pt;
     text-align: justify;
     line-height: 1.5;
 }
@@ -55,31 +57,52 @@ body
     font-size: 24pt;
     font-weight: bold;
     float: left;
-    width: 10%
-    /*padding-left: 400px;*/
     padding-top: 10px;
 }
 
-/* Left column */
-.leftcolumn {   
+
+.leftcolumnHeader {
+    text-align: center;  
+    margin-left: 200px; 
     float: left;
-    width: 50%;
+    width: 560px; 
     padding-top: 20px;
-    padding-left: 150px;
+    /*padding-left: 150px;*/
     padding-right: 20px;
+}
+.rightcolumnHeader {
+    text-align: center; 
+    margin-right: 200px;
+    float: left;
+    width: 380px;
+    /*background-color: #f1f1f1;*/
+    /*padding-right: 150px;*/
+
+}
+/* Left column */
+.leftcolumn { 
+    margin-left: 200px; 
+    float: left;
+    width: 560px; 
+    padding-top: 20px;
+    /*padding-left: 150px;*/
+    /*padding-right: 20px;*/
 }
 /* Right column */
 .rightcolumn {
+    /*margin-right: 200px;*/
     float: left;
-    width: 25%;
+    width: 380px;
     /*background-color: #f1f1f1;*/
     padding-top: 20px;
     padding-left: 15px;
-    padding-right: 150px;
+    /*padding-right: 150px;*/
+    max-height: 1000px;
+    overflow-y: auto;
+
 }
 /* Clear floats after the columns */
 .row:after{
-
     content: "";
     display: table;
     clear: both;
@@ -89,48 +112,21 @@ body
     background-color: #aaa;
     text-align: center;
     padding: 3px;
-    height: 20px; 
+    height: 30px; 
     font-size: 0.6em;
     color: white;
-}
-
-/*Search Box */
-#search-container {
-    position: relative;
-}
-#search-container input {
-    padding: 5px;
-    font-size: .8em;
-    width: 200px;
-
-}
-#search {
-    position: relative;
-    color: #000;
-    z-index: 10;
-    border: 1px solid #666;
-    background: transparent;
-}
-#suggestion {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    color: #ccc;
-    background: white;
-    border: 1px solid #fff;
 }
 
 /*Clickable Names*/
 #linkedAuthorName {
     cursor:pointer;
-    color:#148be0;
+    color:black;
     /*text-decoration:underline;*/
     /*font-weight: bold;*/
 }
 #linkedAuthorName:hover {
     cursor:pointer;
-    /*color:blue;*/
+    color:#1E90FF;
     text-decoration:underline;
     /*font-weight: bold;*/
 }
@@ -139,24 +135,24 @@ body
 }
 
 #sideBarHead {
-    font-size: 14px;
+    font-size: 16px;
     color: black;
     position: absolute;
     text-align: center;
 }
 #dod {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.2;
 }
 
 #info {
     cursor:pointer;
-    color:#148be0;
+    color:black;
     /*font-weight: bold;*/
 }
 #info:hover {
     cursor:pointer;
-    /*color:blue;*/
+    color:#1E90FF;
     text-decoration:underline;
     /*font-weight: bold;*/
 }
@@ -171,8 +167,8 @@ body
     opacity: 0.1 
 }
 .mbar{
-    fill:red;
-    opacity: 0.5
+    fill:#AA0000;
+    opacity: 1
 }
 
 .bar:hover {
@@ -182,7 +178,7 @@ body
   fill: #fffd96;
 }
 .msbar {
-  fill: #b73c35;
+  fill: #AA0000;
 }
 .axis {
     font: 10px sans-serif;
@@ -208,7 +204,7 @@ body
   
 }
 .moreBtn:hover{
-     fill:blue;
+     fill:#1E90FF;
      cursor:pointer;
     /*color:blue;*/
     text-decoration:underline;
@@ -221,8 +217,62 @@ div.tooltip {
   height: 38px;
   padding: 2px;
   font: 10px sans-serif;
-  background: #fce394;
+  background: #fffd96;
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  padding-top: 10px;
+  padding-left:15px;
+  position: relative;
+  width: 300px;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 5px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit]{
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
 }
