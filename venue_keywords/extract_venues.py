@@ -17,7 +17,9 @@ for publication in data:
     # removing roman numbers - https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression
     venue = re.sub("\s((M{1,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})|M{0,4}(CM|C?D|D?C{1,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})|M{0,4}(CM|CD|D?C{0,3})(XC|X?L|L?X{1,3})(IX|IV|V?I{0,3})|M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|I?V|V?I{1,3})))(\s|\b|$)","",venue)
     # removing unneccessary phrases
-    venue = re.sub("proceedings of( the)?","",venue,flags=re.IGNORECASE)    
+    venue = re.sub("proceedings of( the)?","",venue,flags=re.IGNORECASE)
+    # removing commas
+    venue = re.sub(",","",venue)
     venue = venue.strip(" ")
     if not venue in venues:
         venues[venue] = 0
@@ -26,7 +28,8 @@ for publication in data:
 print("... %d distinct venues identified\n" % len(venues))
 
 print("Sorting by frequency ...")
-sortedVenues = sorted(venues.items(), key=operator.itemgetter(1), reverse=True)
+preSortedVenues = sorted(venues.items(), key=operator.itemgetter(0))
+sortedVenues = sorted(preSortedVenues, key=operator.itemgetter(1), reverse=True)
 print("... the top venues are:")
 for i in range(0,min(len(venues), 10)):
     print("\t" + str(sortedVenues[i]).strip("()"))
@@ -36,7 +39,9 @@ print("Writing data ...")
 print("... venues.csv ...")
 with open("venues.csv", "w", encoding="utf8") as out:
     for venue in sortedVenues:
-        out.write(str(venue).strip("()")+"\n")
+        line = str(venue).strip("()")
+        line = re.sub("'", "", line)
+        out.write(line+"\n")
 out.close()
 print("... done")
 
