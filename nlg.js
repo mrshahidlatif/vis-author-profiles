@@ -1089,22 +1089,22 @@ function secondSentenceTopicsV1(pdata, adata, keywords, community, a){
 	// console.log(subfields); 
 	if (subfields.length > 0){
 		if (subfields.length == 1){
-			s += getLastNamePronoun(a.Name) + " expertise covers subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0]) + "."
+			s += getLastNamePronoun(a.Name) + " expertise covers subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
 
 		}
 		else if (subfields.length == 2){
-			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0]) + 
-			" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1])+ ".";
+			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
+			" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1], "subfield")+ ".";
 		}
 		else if (subfields.length > 2) {
 			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " ;
 			for (var i=0;i<subfields.length;i++){
 				if(i==subfields.length-1){
-					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i]) +".";
+					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") +".";
 				}
 				else {
 					var ID = "sparkline_coll"+i;
-					s += makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i]) + ", ";
+					s += makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") + ", ";
 				}
 			}
 		}
