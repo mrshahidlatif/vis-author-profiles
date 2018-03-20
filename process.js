@@ -18,7 +18,7 @@ function process(pdata, adata, name,container, l,u, t) {
       }
    }
     if (isFound) { //Author found so go ahead with process
-
+      document.getElementById("pageTitle").innerHTML = name + " - VAP";
       var c = 0;
       for (var i = 0; i < pdata.length; i++) {
         for (var j = 0; j < pdata[i].Authors.length; j++) {
@@ -53,6 +53,7 @@ function process(pdata, adata, name,container, l,u, t) {
           var a = new Object();
           a.Name = topNCoAuthorObjects[i].Name;
           a.StartYear = sYear;
+          a.EndYear = lYear;
           a.MutualPublications = topNCoAuthor[i].Value;
           //console.log(a.MutualPublications/(2017-a.StartYear)); 
           dataForGantt.push(a);
@@ -81,11 +82,12 @@ function process(pdata, adata, name,container, l,u, t) {
           }
           //Generating graphs for author stats 
          var pct = percentRank(statData, pubCount);
+         
          if(t==1){ // call once as process() is called twice with t=1 and t=2
             generateProfileText(pdata, adata, aObject, pct, dataForGantt);
           }
 
-        generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, distCoAuthors, 1); 
+          generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, distCoAuthors, 1); 
 
       }
     
@@ -121,6 +123,7 @@ function generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container
             var a = new Object();
             a.Name = distCoAuthorsObjects[i].Name;
             a.StartYear = sYear;
+            a.EndYear = lYear;
             a.MutualPublications = distCoAuthors[i].Value;
             //console.log(a.MutualPublications/(2017-a.StartYear)); 
             dataForCollaborationVis.push(a);

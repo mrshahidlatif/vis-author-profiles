@@ -14,13 +14,14 @@
   <script type="text/javascript"  src="dictionary.js"></script>
   <script type="text/javascript"  src="author_autocomplete.js"></script>
   
+  <title id="pageTitle">VAP</title>
 </head>
 
     <div class="topnav">
 
        <!-- <img id="logo" src="logo.svg" srcset="logo.svg"> -->
        <div id="logo"> 
-           <object width="150" height="50" type="image/svg+xml" data="logo.svg">
+           <object width="90" height="30" type="image/svg+xml" data="logo.svg">
           </object>
         </div>
        <div class="autocomplete">
@@ -61,7 +62,7 @@
       <svg  id="CollabChart1"></svg>
     </div>
     <div class="rightcolumn">
-      <p id=dod></p>
+          <p id=dod> </p>
     </div>
   </div>
   <script>
@@ -83,14 +84,12 @@
 
           document.getElementById('r').addEventListener('click', function(){
             var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
-            
             process(pdata, adata, random_name , "CollabChart1",l,u,1);
           }); 
 
           document.getElementById('myInput').onkeydown = function(event) {
             if (event.keyCode == 13) {
                 var sss = document.getElementById("myInput").value;
-                console.log(sss);
                 search(pdata, adata); 
             }
           }
@@ -114,10 +113,6 @@
       });
   });
   </script>
-  
-  <div class="footer">
-    <p> University of Duisburg-Essen | shahid.latif@uni-due.de</p>
-  </div>
 </body>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

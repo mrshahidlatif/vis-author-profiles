@@ -11,11 +11,11 @@
     float:left;
     padding-left: 10px;
     padding-right: 15px;
+    padding-top: 10px;
 }
 #badge {
     padding-top: 2px;
-    width:6%; 
-    margin: 2.5PX; 
+    width:6%;  
 }
 
 .header {
@@ -55,6 +55,9 @@ body
     font-size: 14pt;
     text-align: justify;
     line-height: 1.5;
+}
+p {
+    text-align: justify;   
 }
 .title {
     /*background-color: #F1F1F1;*/
@@ -98,16 +101,17 @@ body
     width: 65%; 
     padding-top: 10px;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 20px;
+    text-align: center;
 }
 /* Right column */
 .rightcolumn {
     /*margin-right: 200px;*/
     float: left;
-    width: 30%;
+    width: 35%;
     /*background-color: #f1f1f1;*/
     padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 20px;
     /*padding-right: 150px;*/
     /*max-height: 1000px;*/
  /*   overflow-y: auto;*/
@@ -143,14 +147,14 @@ body
     /*font-weight: bold;*/
 }
 #publicationTitle {
-    font-weight: bold;
+    font-style: italic;
 }
 
 #sideBarHead {
     font-size: 16px;
     color: black;
     position: absolute;
-    text-align: center;
+    text-align: left;
 }
 #dod {
     font-size: 14px;
@@ -184,10 +188,10 @@ body
 }
 
 .bar:hover {
-  fill: #fffd96;
+  fill: DodgerBlue;
 }
 .mbar:hover {
-  fill: #fffd96;
+  fill: DodgerBlue;
 }
 .msbar {
   fill: #AA0000;
@@ -208,7 +212,7 @@ body
     font-family:'Verlag Book';
     /*font-weight: bold;*/
     fill:black;
-    font-size:11px;
+    font-size:14px;
 }
 .moreBtn {
     fill:black;
@@ -216,7 +220,7 @@ body
   
 }
 .moreBtn:hover{
-     fill:#1E90FF;
+     fill:DodgerBlue;
      cursor:pointer;
     /*color:blue;*/
     text-decoration:underline;

@@ -4,9 +4,13 @@ BUGS
 -Problem with author names having special characters like ü, ä, ö etc. [FIXED]
 -Line for active year of author is displayed in the beginning when author is the most senior 
 -Author does not properly load when clicked on author's name in right side bar [FIXED]
--Strange behavior for Catherine Plaisant and Tobias Shreck, Vidya Setlur
+-Strange behavior for Catherine Plaisant and Tobias Shreck, Vidya Setlur [FIXED]
 -Some title missing for some publications in the right side panel for Daniel a. kiem
 -Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters [FIXED]
+-Xavier Tricoche does not have sparklines although 20 pubs
+-Judy Diamond has only 5 pubs but sparklines – looks strange
+-Judy Diamond is a good example where the collaboration paragraph reads strange, because she has published her five papers with exactly the same crowd of people
+-Bug in the collaboration sparkline of Mark S. Drew
 
 ----------------------------------------------
 Fabian's Feedback - Suggestions / Things to do
@@ -27,8 +31,15 @@ Fabian's Feedback - Suggestions / Things to do
 	Jacko *is* the most frequent co-author, but *was* the supervisor – I believe this sentence need greater variety for covering, for instance, ongoing supervision vs. past supervision (only if we are sure that it is past). A more tricky case is past supervision, but ongoing collaboration.
 	Kwon and Kim are the same category of co-authors with a comparable number of joint publications with Yi – it would probably sound much if we could summarize them.
 	 
-	Michael Bostock
+	Michael Bostock [FIXED]
 	Bostock is not publishing anymore. We need to change the first sentence to, for instance, “Bostock published between 2009 and 2011.” But actually, I would prefer to merge the first two sentences to, for instance, “Bostock published six publications between 2009 and 2011, including five journal articles and one conference paper.” (beware the singular for the conference paper; what about writing numbers twelve/ten and smaller as words? However, we should be consistent within a sentence or maybe a paragraph - https://www.dailywritingtips.com/10-rules-for-writing-numbers-and-numerals/ )
+
+-“conference paper(s)” -> “proceedings paper(s)”
+-“active researcher/contributor” + since year + present perfect if publication within last two years (and more than 5 years and 10 publications); span + past tense if last -publication more than 5 years ago; since year + present perfect else
+-“longtime contributor” if more than 20 years in business
+-Only one sentence usually instead of two to describe #publications and type. Maybe, if somebody has more than 100 publications, we might start rounding (by 50ies) to kind of -highlight this achievement and split the first sentence into two sentences. (Roch Guérin)
+-“journal paper” -> “journal article” (Ovidiu Ancuta)
+-Maybe flip proceedings and journal if #proceedings > #journal
 
 LAYOUT 
 -Fill a somewhat wider area with the main content, i.e., text plus side bar (e.g., Stackoverflow: 1090px; Google Scholar: 1200) [FIXED]
@@ -38,7 +49,15 @@ LAYOUT
 -Add a 5 px margin so that the bottom line of the text is on the same height as the south-west-west/south-east-east corner of the badge
 -Make the default gray font color lighter that the difference between clickable text and non-interactive text becomes clearer [FIXED IN DIFFERENT WAY]
 -Don’t let the side bar have a separate scrollbar (that sometimes gives two scoll bars, which can be confusing), but just increase the height of the page [FIXED]
-
+-Add a page title so that the browser tab shows a nice label, e.g., “[author name] – VAP” [FIXED]
+-Reduce the size of the logo so that it has a larger margin within the grey bar [FIXED]
+-Change the font of “VIS Author Profiles” in the logo to the one used in the page (not sure it looks better, but the current font of the logo doesn’t fit really)
+-Correction: I didn’t mean a larger space between the badges, but between the author name and the first badge only. It should be at least the size as between two badges (currently it is half the size).
+-Make the badges a bit larger 
+-Have a larger space between the text and the side bar [FIXED]
+-There is an unnecessary ~20px margin on the right side of the side bar [FIXED]
+-Don’t use bold font for the title of a publication because it is not clickable – maybe try italics instead [FIXED]
+-Remove the footer (because double-blind submission) [FIXED]
 ------
 TODOs
 ------

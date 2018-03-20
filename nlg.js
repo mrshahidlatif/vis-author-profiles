@@ -1,7 +1,7 @@
 var hasSupversied = false; 
 var listOfSparklines = []; 
 var alreadyListedTopics = []; 
-var MAX_SUPERVISEES = 5 ; 
+var MAX_SUPERVISEES = 5; 
 function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	
 	//console.log(pdata);
@@ -11,7 +11,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	// console.log(percentile);
 	var bio = "";
 	var collab="";
-	var title= getFullNameWithoutNo(aObject.Name);
+	var title= getFullNameWithoutNo(aObject.Name)  ;
 	var researchTopicsText = "";
 	var text = ""; 
 
@@ -115,19 +115,28 @@ function generateSummary(pdata, adata, a, p)
 
 	if (eYear >= 2013) {
 
-		bio = getFullNameWithoutNo(a.Name) + " is publishing since " + sYear + "." + " Until now, the author has "+ "published " + (a.Journals+a.Conferences)
-		+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
-		+ a.Journals + " journal articles " + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
-		+ " and " + a.Conferences + " conference papers" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+		bio = getFullNameWithoutNo(a.Name) + " is publishing since " + sYear + "." + " Until now, the author has "+ "published " + 
+		makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
+		+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " including " +
+		makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+		+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+		+ " and " 
+		+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+
+		+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 		+ ".";
 	}
 	else if (eYear < 2013){
 
-		bio = getLastName(a.Name) + " published from " + sYear + " to " + eYear + "." + " The author has "+ "published " + (a.Journals+a.Conferences)
-		+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
-		+ a.Journals + " journal articles" + '<svg width="70" height="20" id="sparklineJournals"></svg>' 
-		+ " and " + a.Conferences + " conference papers" +  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-		+ ".";
+		bio = getLastName(a.Name) + " published from " + sYear + " to " + eYear + "." + " The author has "+ "published " + 
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
+			+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+			+ " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+			+  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
 
 	}
 
@@ -309,11 +318,11 @@ function secondSentenceV1(pdata, adata, a,c){
 	else if (lastYear<=2015){
 		s += " This ";
 		if (lastYear-startYear >20){
-			text += "was a long lasting "; 
+			s += "was a long lasting "; 
 		}
 		s += "collaboration ";
 			if (lastYear-startYear >20){
-				text += "that "
+				s += "that "
 			}
 		s += "ended in " + lastYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString(), a.Name, c.Name) 
 			 + " publications. "; 
@@ -406,8 +415,8 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 		s += "In addition to " +  makeMeLive_LastName(c.Name) + 
 		", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 		 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		for (var i=0;i<supervisees.length;i++){
-			if(i==supervisees.length-1){
+		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + 
 					" " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
@@ -430,8 +439,8 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 	else {
 		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 		" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		for (var i=0;i<supervisees.length;i++){
-			if(i==supervisees.length-1){
+		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " +  makeMeLive_FullName(supervisees[i].Name)+ " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
 					var obj = new Object();
@@ -460,8 +469,8 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 		supervisees = RemoveItemFromList(supervisees,c2.Name);
 		s += "In addition to " +  makeMeLive_LastName(c1.Name) + " and " +  makeMeLive_LastName(c2.Name) + ", further supervisees" +
 		 '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		for (var i=0;i<supervisees.length;i++){
-			if(i==supervisees.length-1){
+		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
 					var obj = new Object();
@@ -485,8 +494,8 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 			supervisees = RemoveItemFromList(supervisees,c1.Name);
 			s += "In addition to " + makeMeLive_LastName(c1.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<supervisees.length;i++){
-				if(i==supervisees.length-1){
+			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " +   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
 					var obj = new Object();
@@ -508,8 +517,8 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 			supervisees = RemoveItemFromList(supervisees,c2.Name);
 			s += "In addition to " +  makeMeLive_LastName(c2.Name) + ", further supervisees" + + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<supervisees.length;i++){
-				if(i==supervisees.length-1){
+			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " +   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
 					var obj = new Object();
@@ -531,8 +540,8 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 	else {
 		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
 		" with considerable amount of publications are " ;
-		for (var i=0;i<supervisees.length;i++){
-			if(i==supervisees.length-1){
+		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 				var ID = "sparkline_coll"+i;
 					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
 					var obj = new Object();
@@ -585,8 +594,8 @@ function fifthSenetenceV3(pdata, adata, a,list_c,supervisees){
 		if (supervisees.length > 2){
 			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<supervisees.length;i++){
-				if(i==supervisees.length-1){
+			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
+				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
 					var ID = "sparkline_coll"+i;
 					s += "and " + makeMeLive_FullName(supervisees[i].Name) +
 					 " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
@@ -1052,15 +1061,15 @@ function firstSentenceTopicsV1(pdata, adata, keyword, a){
 
 	if (pubCount >= 100){
 		s += getLastName(a.Name) + " is a core member of the " + keyword.Name + " community with " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value, a.Name, keyword.Name) + " contributions since " + sYear + ". "; 
+		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions ", a.Name, keyword.Name) + " since " + sYear + ". "; 
 	}
 	else if (pubCount > 50 && pubCount < 100){
 		s += getLastName(a.Name) + " is a member of the " + keyword.Name + " community with " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value, a.Name, keyword.Name) + " contributions since " + sYear + ". "; 
+		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions ", a.Name, keyword.Name) + " since " + sYear + ". "; 
 	}
 	else {
-		s += getLastName(a.Name) + " is a contributor of the " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value, a.Name, keyword.Name) + " community since " + sYear + ". "; 
+		s += getLastName(a.Name) + " is a contributor of the " + keyword.Name + " community with " + 
+		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions " , a.Name, keyword.Name) + " since " + sYear + ". "; 
 	}
 	alreadyListedTopics.push(keyword.Name); 
 	return s;
@@ -1359,6 +1368,30 @@ function makeMeLive_LoadDataOnTopic(pdata, adata, text, a, topic){
 	return  '<span id="linkedAuthorName" onclick="loadPublicationsOnTopic(pdata, adata, \''+a+'\', \''+topic+'\')">' + text + "</span>";
 }
 
+function makeMeLive_LoadAllIndividualPublications(pdata, adata, text, a){
+	//text : hyperlink 
+	//a : main author 
+	//c: coauthor 
+	//y : year
+	return  '<span id="linkedAuthorName" onclick="loadAllIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
+}
+
+function makeMeLive_loadJournalsIndividualPublications(pdata, adata, text, a){
+	//text : hyperlink 
+	//a : main author 
+	//c: coauthor 
+	//y : year
+	return  '<span id="linkedAuthorName" onclick="loadJournalsIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
+}
+function makeMeLive_loadConferenceIndividualPublications(pdata, adata, text, a){
+	//text : hyperlink 
+	//a : main author 
+	//c: coauthor 
+	//y : year
+	return  '<span id="linkedAuthorName" onclick="loadConferenceIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
+}
+
+
 function loadMutualPublications(pdata, adata, a, c){
   //Return array of mutual publications of Author and CoAuthor for Year "year"
   var mutualPublications = []; 
@@ -1372,6 +1405,10 @@ function loadMutualPublications(pdata, adata, a, c){
           mutualPublications.push(pdata[i]);
         }
   }
+  mutualPublications.sort(function(a, b) {
+    return +b.Year - +a.Year;
+  });
+
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + mutualPublications.length + ") : " + getLastName(a) + " and " +
    getLastName(c) + "</span>" + "<br>" + "<hr>";
   
@@ -1397,6 +1434,11 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
           	}
         }
   }
+
+  pubsOnTopic.sort(function(a, b) {
+    return +b.Year - +a.Year;
+  });
+
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Publications " + "(" + pubsOnTopic.length + ") : " + getLastName(a) +  "</span>" + "<br>" + "<hr>";
   
   for (var i=0; i<pubsOnTopic.length;i++){
@@ -1404,4 +1446,91 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
   }
   //console.log(pubsOnTopic); 
   //return pubsOnTopic; 
+}
+
+function loadAllIndividualPublications(pdata, adata, name){
+  var indPublications = []; 
+  for(var i=0;i<pdata.length;i++){
+      var tempAuthors = []; 
+      for (var j=0;j<pdata[i].Authors.length;j++){
+        tempAuthors.push(pdata[i].Authors[j].Name);
+        }
+        if(tempAuthors.indexOf(name) != -1)
+        {
+          indPublications.push(pdata[i]);
+        }
+  }
+
+   indPublications.sort(function(a, b) {
+    return +b.Year - +a.Year;
+  });
+
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + indPublications.length + ") : " + name  
+  + "</span>" + "<br>" + "<hr>";
+  
+  for (var i=0; i<indPublications.length;i++){
+    StringifyPublication(pdata, adata, indPublications[i]);
+  }
+
+  // return indPublications;
+}
+
+function loadJournalsIndividualPublications(pdata, adata, name){
+  
+  var indPublications = []; 
+  for(var i=0;i<pdata.length;i++){
+  	if (pdata[i].Type == "J"){
+      var tempAuthors = []; 
+      for (var j=0;j<pdata[i].Authors.length;j++){
+        tempAuthors.push(pdata[i].Authors[j].Name);
+        }
+        if(tempAuthors.indexOf(name) != -1)
+        {
+          indPublications.push(pdata[i]);
+        }
+    }
+  }
+
+  indPublications.sort(function(a, b) {
+    return +b.Year - +a.Year;
+  });
+
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Journal Publications " + "(" + indPublications.length + ") : " + name  
+  + "</span>" + "<br>" + "<hr>";
+  
+  for (var i=0; i<indPublications.length;i++){
+    StringifyPublication(pdata, adata, indPublications[i]);
+  }
+
+  // return indPublications;
+}
+
+function loadConferenceIndividualPublications(pdata, adata, name){
+  
+  var indPublications = []; 
+  for(var i=0;i<pdata.length;i++){
+  	if (pdata[i].Type == "C"){
+      var tempAuthors = []; 
+      for (var j=0;j<pdata[i].Authors.length;j++){
+        tempAuthors.push(pdata[i].Authors[j].Name);
+        }
+        if(tempAuthors.indexOf(name) != -1)
+        {
+          indPublications.push(pdata[i]);
+        }
+    }
+  }
+
+  indPublications.sort(function(a, b) {
+    return +b.Year - +a.Year;
+  });
+
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Conference Publications " + "(" + indPublications.length + ") : " + name  
+  + "</span>" + "<br>" + "<hr>";
+  
+  for (var i=0; i<indPublications.length;i++){
+    StringifyPublication(pdata, adata, indPublications[i]);
+  }
+
+  // return indPublications;
 }

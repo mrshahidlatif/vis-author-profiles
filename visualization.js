@@ -1,6 +1,6 @@
 function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors){
   
-  // console.log(gdata);
+   console.log(gdata);
   // console.log(adata);
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
@@ -44,11 +44,9 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
  
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
-  var h = indPub.length*45 ; 
-  var w = (maxYear - minYear)*12;
-  if (h<50){h=80;}
-  if (w<50){w=150;}
-  if (w > 700){ w=700;} // If computed width is greater than column width, reset it 
+  var h = indPub.length*50 ; 
+  var w = 550;
+  if (h<60){h=80;}
   
   var svg = d3.select("#" + canvas)
   .attr("height", h )
@@ -100,6 +98,8 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
         //     .attr("y", 6)
         //     .attr("dy", "0.71em")
         //     .attr("text-anchor", "end")
+
+        var MAX_WIDTH_OF_BAR = 15;
       
 
         //Drawing horizontal bar charts to mark start year of each coauthor 
@@ -109,7 +109,8 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
             .attr("class", "hbar")
             .attr("x", function(d) { return x(d.StartYear); })
             .attr("y", function(d,i) { return (i)*height/N;})
-            .attr("width", width+50)
+            // .attr("width", width+50)
+            .attr("width", function(d){return x(d.EndYear) - x(d.StartYear)+x.bandwidth();})
             .attr("height",height/N);
 
           //Adding names of coauthors 
@@ -129,7 +130,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("class", "bar")
           .attr("x", function(d) { return x(d.Year); })
           .attr("y", function(d) { return y(d.Value); })
-          .attr("width", x.bandwidth())
+          .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
           .on("mouseover", function(d) {
            div.transition()
@@ -153,7 +154,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("class", "mbar")
           .attr("x", function(d) { return x(d.Year); })
           .attr("y", function(d) { return y(d.Value); })
-          .attr("width", x.bandwidth())
+          .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
           .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
          .on("mouseover", function(d) {
            div.transition()
@@ -349,7 +350,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
             .padding(0.3);
   var y = d3.scaleLinear()
             .range([height, 0]);
-            
+
   // append the svg object to the body of the page
   // append a 'group' element to 'svg'
   // moves the 'group' element to the top left margin
@@ -357,10 +358,12 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
-      .on("click", function(d){enlargeMe(data2, this.id,startYear, endYear, ymax)})
-
+      // .attr("style", "outline: thin solid red;")  
+      .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax)})
+      // .on("mouseover", function(d){addBorder(this.id)})
+      // .on("mouseout", function(d){removeBorder(this.id)})
     .append("g")
-      .attr("transform", 
+    .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")")
     
   
@@ -382,10 +385,10 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
   
   if (largeScale){
     // add the x Axis
+
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
-        .ticks(1));
+        .call(d3.axisBottom(x))
 
     // add the y Axis
     svg.append("g")
@@ -393,6 +396,19 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
         .ticks(1));
     }
 }
+
+// function addBorder(container){
+//     var svg = d3.select("#" + container)
+//    .attr("style", "outline: thin solid DodgerBlue;")  ; 
+
+// }
+// function removeBorder(container){
+//   var svg = d3.select("#" + container)
+//    .attr("style", "outline: none") 
+//    .style("background-color", '#f2f2f2');
+  
+
+// }
 
 function generateSparklineForMutualPublications(pdata, adata, a, cName, data,canvas, h, w, startYear, endYear, ymax){
 
@@ -483,14 +499,14 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
           return +a.Year - +b.Year;
        });
 
-       svg.selectAll(".bar")
+      svg.selectAll(".bar")
       .data(data_mainAuthor)
       .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.Year); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
-      .attr("height", function(d) { return height - y(d.Value); });
+      .attr("height", function(d) { return height - y(d.Value); }); 
 
       // console.log(data2);
        svg.selectAll(".mbar")
@@ -500,16 +516,17 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .attr("x", function(d) { return x(d.Year); })
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.Value); })
-        .attr("height", function(d) { return height - y(d.Value); });
+        .attr("height", function(d) { return height - y(d.Value); })
+
     // add the x Axis
 
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+      svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
 
-    // add the y Axis
-    svg.append("g")
-        .call(d3.axisLeft(y));
+      // add the y Axis
+      svg.append("g")
+          .call(d3.axisLeft(y));
     }
 }
 
