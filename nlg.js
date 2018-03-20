@@ -112,7 +112,7 @@ function generateSummary(pdata, adata, a, p)
 	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 
 	if (eYear >= 2013) {
-		if (a.Journals+a.Conferences >= 10 && eYear-sYear >= 5 && eYear >=2015 ){
+		if (a.Journals+a.Conferences >= 10 && (a.Journals+a.Conferences) < 100 && eYear-sYear >= 5 && eYear >=2015 ){
 			bio = getFullNameWithoutNo(a.Name) + " is" ;
 			if (eYear-sYear >= 20) {
 				bio += " a longtime contributor ";
@@ -128,6 +128,17 @@ function generateSummary(pdata, adata, a, p)
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
+		else if (a.Journals+a.Conferences >= 100 && eYear-sYear >= 5 && eYear >=2015 ){
+			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, " hundred publications", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
+			+ " since " + sYear + ". His published work includes " 
+			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".";
 		}
@@ -184,10 +195,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 	if (pub.length == 1){ //Case with Single Publication 
 		
 		if (a.Journals == 1){
-			bio += getFullNameWithoutNo(a.Name) + " published a journal article in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published one journal article in " + sYear + "."; 
 		}
 		else {
-			bio += getFullNameWithoutNo(a.Name) + " published a proceedings paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published one proceedings paper in " + sYear + "."; 
 		}
 		
 		//Showing publication on the sidebar 
