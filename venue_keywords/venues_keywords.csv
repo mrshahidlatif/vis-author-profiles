@@ -5,12 +5,12 @@ IEEE Trans. Vis. Comput. Graph.	1253
 Medical Image Computing and Computer-Assisted Intervention	1029				1	1																																														
 IEEE Computer Graphics and Applications	918																																																			
 International Conference on Computer Graphics and Interactive Techniques	785									1																																										
-Graphics	737									1																																										
+Graphics	737																																																			
 The Visual Computer	687																																																			
 CHI Conference on Human Factors in Computing Systems	652																			1																																
 Annual Conference on Computer Graphics and Interactive Techniques	556									1																																										
 IEEE International Symposium on Biomedical Imaging: From Nano to Macro	528				1	1																																														
-Computer Vision	515																																																1			
+Computer Vision	515																																																			
 IEEE Trans. Med. Imaging	481				1	1																																														
 International Conference on Information Visualisation	481																						1																													1
 IEEE Conference on Computer Vision and Pattern Recognition	468																																																1			
@@ -57,8 +57,8 @@ IEEE Virtual Reality Conference	280																																													
 IEEE/RSJ International Conference on Intelligent Robots and Systems	280																																												1							
 Proceedings IEEE Visualization	275																																																			1
 IEEE Symposium on Information Visualization	268																						1																													1
-Vision	264																																																1			
-Eurographics	260									1																																										
+Vision	264																																																			
+Eurographics	260																																																			
 International Conference on Intelligent User Interfaces	260																			1																																
 J. Comput. Physics	251																																			1																
 IEEE Vehicular Technology Conference	250																																													1						
@@ -69,7 +69,7 @@ PVLDB	244												1
 Computer Aided Geometric Design	243								1																																											
 Pacific Conference on Computer Graphics and Applications	235																																																			
 IEEE International Symposium on Biomedical Imaging	232				1	1																																														
-Multimedia Tools Appl.	230																																															1				
+Multimedia Tools Appl.	230																											1																								
 International Conference on Data Engineering	226												1																																							
 IEEE Trans. Knowl. Data Eng.	224												1																																							
 IEEE International Conference on Systems	221																																																			
@@ -136,7 +136,7 @@ International Conference on Shape Modeling and Applications	146									1
 Interactions	145									1																																										
 ACM International Conference on Information and Knowledge Management	143												1																																							
 IEEE International Conference on Big Data	143																																																			
-Special Interest Group on Computer Graphics and Interactive Techniques Conference	141									1																																										
+Special Interest Group on Computer Graphics and Interactive Techniques Conference	141																																																			
 Algorithmica	140	1																																																		
 Canadian Conference on Computational Geometry	139								1																																											
 Computer Networks	139						1																																													
@@ -150,7 +150,7 @@ IEEE Trans. Signal Processing	135																																							1
 International Parallel and Distributed Processing Symposium	135																																1																			
 JASIST	134																																																			
 Theor. Comput. Sci.	134																																											1								
-J. Vis. Lang. Comput.	133																																																		1	
+J. Vis. Lang. Comput.	133																																																			
 IEEE International Conference on Bioinformatics and Biomedicine	132				1																																															
 Int. J. Hum.-Comput. Stud.	132																			1																																
 Remote Sensing	132																	1																																		
@@ -214,7 +214,7 @@ J. Graph Algorithms Appl.	102	1
 ACM SIGGRAPH/Eurographics Symposium on Computer Animation	100									1																																										
 Computer and Computing Technologies in Agriculture	100																																																			
 IEEE Journal on Selected Areas in Communications	100						1																																													
-The -th International Conference in Central Europe on Computer Graphics	100									1																																										
+The -th International Conference in Central Europe on Computer Graphics	100																																																			
 Algorithms	99	1																																																		
 Eurographics Symposium on Parallel Graphics and Visualization	99																																																			
 International Conference on Cyberworlds	99																																																			
@@ -334,12 +334,12 @@ ACM/IEEE SCConference on High Performance Networking and Computing	70											
 Appl. Soft Comput.	70																																																			
 IEEE International Symposium on Information Theory	70																																																			
 IEEE International Symposium on Personal	70																																																			
-IEEE Symposium on Visual Languages and Human-Centric Computing	70																																																		1	
+IEEE Symposium on Visual Languages and Human-Centric Computing	70																																																			
 IJHPCA	70																																																			
 International Conference on Biomedical Engineering and Informatics	70				1																																															
 Knowl. Inf. Syst.	70																																																			
 Simulation und Visualisierung	70																																																			
-Smart Graphics	70									1																																										
+Smart Graphics	70																																																			
 Comp. in Bio. and Med.	69				1																																															
 Global Telecommunications Conference	69						1																																													
 IEEE International Conference on Distributed Computing Systems	69																																1																			
@@ -429,7 +429,7 @@ IEEE	56
 IEEE International Conference on Automatic Face and Gesture Recognition	56																																																1			
 IEEE International Performance Computing and Communications Conference	56						1																																													
 Int. J. Systems Science	56																																																			
-International Conference on Computer Graphics and Interactive Techniques in Australasia and Southeast Asia	56									1										1																																
+International Conference on Computer Graphics and Interactive Techniques in Australasia and Southeast Asia	56																																																			
 Nordic Conference on Human-Computer Interaction	56																			1																																
 Security and Communication Networks	56						1																																1													
 ACM International Conference on Interactive Tabletops and Surfaces	55																			1																																
