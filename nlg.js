@@ -120,7 +120,7 @@ function generateSummary(pdata, adata, a, p)
 		makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 		+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 		+ " and " 
-		+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+		+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
 		+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 		+ ".";
@@ -133,7 +133,7 @@ function generateSummary(pdata, adata, a, p)
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
-			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 			+  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".";
 
@@ -170,7 +170,7 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 			bio += getFullNameWithoutNo(a.Name) + " published one journal paper in " + sYear + "."; 
 		}
 		else {
-			bio += getFullNameWithoutNo(a.Name) + " published one conference paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published one proceedings paper in " + sYear + "."; 
 		}
 		
 		//Showing publication on the sidebar 
@@ -189,10 +189,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 				bio += " journal article and ";
 			}
 			if (a.Conferences > 1){
-				bio += no2word[a.Conferences] + " conference papers."; 
+				bio += no2word[a.Conferences] + " proceedings papers."; 
 			}
 			else {
-				bio += no2word[a.Conferences] + " conference paper."; 
+				bio += no2word[a.Conferences] + " proceedings paper."; 
 			}
 		}
 		else {
@@ -216,10 +216,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 				bio += " journal article and ";
 			}
 			if (a.Conferences > 1){
-				bio += no2word[a.Conferences] + " conference papers."; 
+				bio += no2word[a.Conferences] + " proceedings papers."; 
 			}
 			else {
-				bio += no2word[a.Conferences] + " conference paper."; 
+				bio += no2word[a.Conferences] + " proceedings paper."; 
 			}
 		}
 		else {
@@ -1552,7 +1552,7 @@ function loadConferenceIndividualPublications(pdata, adata, name){
     return +b.Year - +a.Year;
   });
 
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Conference Publications " + "(" + indPublications.length + ") : " + name  
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "proceedings Papers " + "(" + indPublications.length + ") : " + name  
   + "</span>" + "<br>" + "<hr>";
   
   for (var i=0; i<indPublications.length;i++){
