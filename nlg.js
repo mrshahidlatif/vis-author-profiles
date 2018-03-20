@@ -103,7 +103,6 @@ function findEndYear(aObject){
 	return eYear; 
 }
 
-
 function generateSummary(pdata, adata, a, p)
 {
 	var bio = "";
@@ -113,30 +112,48 @@ function generateSummary(pdata, adata, a, p)
 	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 
 	if (eYear >= 2013) {
+		if (a.Journals+a.Conferences >= 10 && eYear-sYear >= 5 && eYear >=2015 ){
+			bio = getFullNameWithoutNo(a.Name) + " is" ;
+			if (eYear-sYear >= 20) {
+				bio += " a longtime contributor ";
+			}
+			else {
+				bio += " an active researcher "; 
+			}
+			bio += "since " + sYear + " and has "+ "published " + 
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + ", including " +
+			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+			+ " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-		bio = getFullNameWithoutNo(a.Name) + " is publishing since " + sYear + "." + " Until now, the author has "+ "published " + 
-		makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-		+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " including " +
-		makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
-		+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
-		+ " and " 
-		+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
+		else {
+			bio = getFullNameWithoutNo(a.Name) + " has published " + 
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers ", a.Name)
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " since " + sYear + ", including " +
+			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+			+ " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-		+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-		+ ".";
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
 	}
 	else if (eYear < 2013){
 
-		bio = getLastName(a.Name) + " published from " + sYear + " to " + eYear + "." + " The author has "+ "published " + 
-			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-			+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+		bio = getLastName(a.Name) + " published " + makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name)
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " between " +  sYear + " and " + eYear + "," + " including "
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 			+  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".";
-
 	}
 
 	if (pub.length < 100){
@@ -167,10 +184,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 	if (pub.length == 1){ //Case with Single Publication 
 		
 		if (a.Journals == 1){
-			bio += getFullNameWithoutNo(a.Name) + " published one journal paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published a journal article in " + sYear + "."; 
 		}
 		else {
-			bio += getFullNameWithoutNo(a.Name) + " published one proceedings paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published a proceedings paper in " + sYear + "."; 
 		}
 		
 		//Showing publication on the sidebar 
