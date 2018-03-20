@@ -7,10 +7,10 @@ BUGS
 -Strange behavior for Catherine Plaisant and Tobias Shreck, Vidya Setlur [FIXED]
 -Some title missing for some publications in the right side panel for Daniel a. kiem
 -Problem with "Roch Guerin" as his dblp name has e with accent whereas in VIS his name is with plane letters [FIXED]
--Xavier Tricoche does not have sparklines although 20 pubs
--Judy Diamond has only 5 pubs but sparklines – looks strange
+-Xavier Tricoche does not have sparklines although 20 pubs [FIXED]
+-Judy Diamond has only 5 pubs but sparklines – looks strange [FIXED]
 -Judy Diamond is a good example where the collaboration paragraph reads strange, because she has published her five papers with exactly the same crowd of people
--Bug in the collaboration sparkline of Mark S. Drew
+-Bug in the collaboration sparkline of Mark S. Drew [FIXED]
 
 ----------------------------------------------
 Fabian's Feedback - Suggestions / Things to do
