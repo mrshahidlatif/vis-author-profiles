@@ -1,605 +1,906 @@
-_venue	_frequeny	algorithms	applied mathematics	applied psychology	bioinformatics	biomedical imaging	communications	computational geometry	computer-aided design	computer graphics	cryptology	digital libraries	data management	education	electronics	expert systems	games	geoscience	high performance computing	human-computer interaction	image processing	information retrieval	information visualization	information systems	Internet technology	machine learning	multimedia	natural language processing	neural networks	parallel computing	programming languages	scientific computing	scientific visualization	scientometrics	security	sensors	signal processing	software engineering	speech technology	theory of computing	robotics	vehicular  technology	video technology	virtual/mixed reality	vision	visual analytics	visual languages	visualization
-Comput. Graph. Forum	1992																																															
-ACM Trans. Graph.	1701									1																																						
-IEEE Trans. Vis. Comput. Graph.	1253																																															
-Medical Image Computing and Computer-Assisted Intervention	1029				1	1																																										
-IEEE Computer Graphics and Applications	918																																															
-International Conference on Computer Graphics and Interactive Techniques	785									1																																						
-Graphics	737									1																																						
-The Visual Computer	687																																															
-CHI Conference on Human Factors in Computing Systems	652																			1																												
-Annual Conference on Computer Graphics and Interactive Techniques	556									1																																						
-IEEE International Symposium on Biomedical Imaging: From Nano to Macro	528				1	1																																										
-Computer Vision	515																																												1			
-IEEE Trans. Med. Imaging	481				1	1																																										
-International Conference on Information Visualisation	481																						1																									1
-IEEE Conference on Computer Vision and Pattern Recognition	468																																												1			
-Bioinformatics	463				1																																											
-IEEE International Conference on Robotics and Automation	461																																								1							
-International Conference on Image Processing	450																				1																											
-NeuroImage	438				1	1																																										
-International Conference on Human Factors in Computing Systems	434																			1																												
-Commun. ACM	433																																															
-IEEE International Conference on Acoustics	432																																				1											
-IEEE Visualization	431																																															1
-IEEE Trans. Pattern Anal. Mach. Intell.	422																									1																			1			
-Bildverarbeitung für die Medizin	420				1	1																																										
-IEEE International Conference on Communications	404						1																																									
-International Conference on Pattern Recognition	400																									1																			1			
-BMC Bioinformatics	399				1																																											
-Neurocomputing	399																									1																						
-IEEE Computer Society Conference on Computer Vision and Pattern Recognition	389																									1																			1			
-IEEE International Conference on Multimedia and Expo	388																										1																					
-Conference on Human Factors in Computing Systems	385																			1																												
-IEEE Trans. Vis. Comput. Graph. [InfoVis]	385																						1																									1
-Computer-Aided Design	375								1																																							
-IEEE Trans. Vis. Comput. Graph. [Vis]	355																																															1
-Graph Drawing	345																																															1
-IEEE International Conference on Computer Vision	345																																												1			
-IEEE Conference on Visual Analytics Science and Technology	338																																													1		1
-Journal of Visualization and Computer Animation	319									1																																						1
-Human-Computer Interaction	313																			1																												
-IEEE Trans. Image Processing	313																				1																											
-Visualization and Data Analysis	308																																															1
-Pattern Recognition	306																									1																						
-IEEE Visualization Conference	305																																															1
-IEEE International Geoscience and Remote Sensing Symposium	303																	1																														
-ACM SIGMOD International Conference on Management of Data	302												1																																			
-Advances in Visual Computing	295																																															
-Annual ACM Symposium on User Interface Software and Technology	292																			1																												
-Sensors	289																																			1												
-IEICE Transactions	286																																															
-IEEE International Conference on Image Processing	285																			1																												
-Graphics Interface Conference	284																																															
-Medical Image Analysis	283				1																					1																						
-IEEE Computer	282																																															
-IEEE Virtual Reality Conference	280																																											1				
-IEEE/RSJ International Conference on Intelligent Robots and Systems	280																																								1							
-Proceedings IEEE Visualization	275																																															1
-IEEE Symposium on Information Visualization	268																						1																									1
-Vision	264																																												1			
-Eurographics	260									1																																						
-International Conference on Intelligent User Interfaces	260																			1																												
-J. Comput. Physics	251																															1																
-IEEE Vehicular Technology Conference	250																																									1						
-IEEE Pacific Visualization Symposium	248																																															1
-Information Visualization	246																						1																									1
-Int. J. Computer Assisted Radiology and Surgery	244				1	1																																										
-PVLDB	244												1																																			
-Computer Aided Geometric Design	243								1																																							
-Pacific Conference on Computer Graphics and Applications	235																																															
-IEEE International Symposium on Biomedical Imaging	232				1	1																																										
-Multimedia Tools Appl.	230																																											1				
-International Conference on Data Engineering	226												1																																			
-IEEE Trans. Knowl. Data Eng.	224												1																																			
-IEEE International Conference on Systems	221																																															
-IEEE Trans. Industrial Electronics	217														1																																	
-Applied Mathematics and Computation	216		1																													1																
-IEEE Trans. Biomed. Engineering	213				1																																											
-International Journal of Computer Vision	209																																												1			
-Comput. Geom.	206							1																																								
-ACM SIGKDD International Conference on Knowledge Discovery and Data Mining	205																									1																						
-Annual International Conference of the IEEE Engineering in Medicine and Biology Society	205				1																																											
-IEEE International Conference on Robotics and Biomimetics	205																																								1							
-Symposium on Interactive 3D Graphics	204																																															
-International Conference on Fuzzy Systems and Knowledge Discovery	203																									1																						
-ACM International Conference on Multimedia	202																																															
-Inf. Sci.	202																										1																					
-ACM Symposium on Virtual Reality Software and Technology	201																																											1				
-Nucleic Acids Research	194				1																																											
-INTERSPEECH	192																																						1									
-Advances in Neural Networks	185																									1			1																			
-IEEE Trans. Parallel Distrib. Syst.	185																													1																		
-IEEE Trans. Geoscience and Remote Sensing	181																	1																		1												
-International Conference on Parallel Processing	181																													1																		
-AMIA  American Medical Informatics Association Annual Symposium	180				1																																											
-Hawaii International Conference on System Sciences	180																																															
-IEEE International Conference on Data Mining	180																									1																						
-IEEE Virtual Reality	180																																											1				
-Information Processing in Medical Imaging	180				1	1																																										
-International Conference on World Wide Web	174																								1																							
-SCIENCE CHINA Information Sciences	174																																															
-Extended Abstracts  Conference on Human Factors in Computing Systems	173																			1																												
-IEEE Trans. Multimedia	173																										1																					
-Signal Processing	171																																				1											
-J. Comput. Sci. Technol.	170																																															
-SIAM J. Scientific Computing	166																															1																
-Expert Syst. Appl.	165															1																																
-Pattern Recognition Letters	163																									1																						
-Computational Geometry	162							1																																								
-International Conference on Software Engineering	161																																					1										
-Presence	161																																											1				
-ACM SIGCHI Conference on Human Factors in Computing Systems	160																			1																												
-International Conference on Multimedia	158																										1																					
-Computational Science	157																															1																
-IEEE International Symposium on Mixed and Augmented Reality	157																																											1				
-IEEE Symposium on 3D User Interfaces	157									1																																						
-IEEE Wireless Communications and Networking Conference	157						1																																									
-International Joint Conference on Neural Networks	157																									1			1																			
-IEEE International Geoscience & Remote Sensing Symposium	156																	1																														
-Visualization	156																																															1
-Computing in Science and Engineering	155																															1																
-Graphical Models	154																																															
-IEEE Global Communications Conference	154						1																																									
-Computer Vision and Image Understanding	153																																												1			
-Future Generation Comp. Syst.	153																																															
-IEEE Symposium on Visual Analytics Science and Technology	153																																													1		1
-IEEE Trans. Vehicular Technology	152																																									1						
-Medical Imaging	152				1	1																																										
-SIAM International Conference on Data Mining	152																									1																						
-ACM Conference on Information and Knowledge Management	151												1																																			
-American Control Conference	148																																															
-IEEE Trans. Circuits Syst. Video Techn.	148																																										1					
-IEEE Conference on Decision and Control	147																																															
-IEEE Trans. Computers	146																																															
-International Conference on Shape Modeling and Applications	146									1																																						
-Interactions	145									1																																						
-ACM International Conference on Information and Knowledge Management	143												1																																			
-IEEE International Conference on Big Data	143																																															
-Special Interest Group on Computer Graphics and Interactive Techniques Conference	141									1																																						
-Algorithmica	140	1																																														
-Canadian Conference on Computational Geometry	139								1																																							
-Computer Networks	139						1																																									
-IEEE Trans. Vis. Comput. Graph. [VAST]	139																																													1		1
-Global Communications Conference	138						1																																									
-IJDSN	137						1																													1												
-Int. J. Comput. Geometry Appl.	137							1																																								
-IEEE Trans. Systems	136																																															
-ACM Trans. Comput.-Hum. Interact.	135																			1																												
-IEEE Trans. Signal Processing	135																																			1												
-International Parallel and Distributed Processing Symposium	135																													1																		
-JASIST	134																																															
-Theor. Comput. Sci.	134																																							1								
-J. Vis. Lang. Comput.	133																																														1	
-IEEE International Conference on Bioinformatics and Biomedicine	132				1																																											
-Int. J. Hum.-Comput. Stud.	132																			1																												
-Remote Sensing	132																	1																														
-Database Systems for Advanced Applications	131												1																																			
-CARS . Computer Assisted Radiology and Surgery.  International Congress and Exhibition	129				1																																											
-ACM Symposium on Applied Computing	128																																															
-J. Parallel Distrib. Comput.	128																													1																		
-Spring Conference on Computer Graphics	128																																															
-IEEE Congress on Evolutionary Computation	126																																															
-Inf. Process. Lett.	126																																															
-International Meshing Roundtable	126							1																																								
-International Symposium on Circuits and Systems	126																																															
-Symposium on Applied Perception in Graphics and Visualization	126																																															
-International Conference on Natural Computation	125																																															
-PLoS Computational Biology	125	1																																														
-ACM Symposium on Computational Geometry	124							1																																								
-Neural Information Processing	124																																															
-IEEE Trans. Vis. Comput. Graph. [SciVis]	123																																1															1
-Advances in Multimedia Information Processing	122																																															
-Concurrency and Computation: Practice and Experience	122																													1																		
-IEEE Trans. Wireless Communications	120						1																																									
-International Computer Music Conference	120																																															
-Journal of Computational Chemistry	119																															1																
-IEEE Geosci. Remote Sensing Lett.	118																	1																														
-Image Vision Comput.	118																																												1			
-International Journal of Geographical Information Science	118																	1																														
-Extended abstracts of the Conference on Human Factors in Computing Systems	117																			1																												
-IEEE Communications Letters	117						1																																									
-Knowl.-Based Syst.	115																																															
-SIGMOD Record	115																																															
-Advances in Knowledge Discovery and Data Mining	114																									1																						
-Computer Supported Cooperative Work	114																			1																												
-IEEE Data Eng. Bull.	114																																															
-International Conference on Computer-Aided Design and Computer Graphics	114								1																																							
-Medicine Meets Virtual Reality	113																																											1				
-Conference on Computer Vision and Pattern Recognition	112																																												1			
-Human Factors in Computing Systems	112																																															
-GRAPP	110																																															
-IEEE International Symposium on Circuits and Systems	110																																															
-J. Electronic Imaging	110																																															
-Database and Expert Systems Applications	109												1																																			
-Discrete Mathematics	109		1																																													
-ACM/IEEE Joint Conference on Digital Libraries	108											1																																				
-EuroVis: Joint Eurographics	108																																															
-IEEE International Conference on Data Engineering	108																																															
-Annual Symposium on Computational Geometry	107							1																																								
-Automatica	107																																															
-JCP	107																																															
-Parallel Computing	107																													1																		
-Human Vision and Electronic Imaging	106																																															
-Mathematics with Applications	106		1																																													
-IEEE International Conference on Cluster Computing	105																																															
-SIGIR	105																																															
-The ACM SIGKDD International Conference on Knowledge Discovery and Data Mining	105																									1																						
-British Machine Vision Conference	104																																												1			
-Genetic and Evolutionary Computation Conference	104																																															
-Joint Eurographics and IEEE TCVG Symposium on Visualization	103																																															1
-SIAM J. Comput.	103																																															
-IEEE International Conference on Computational Science and Engineering	102																															1																
-J. Graph Algorithms Appl.	102	1																																														
-ACM SIGGRAPH/Eurographics Symposium on Computer Animation	100									1																																						
-Computer and Computing Technologies in Agriculture	100																																															
-IEEE Journal on Selected Areas in Communications	100						1																																									
-The -th International Conference in Central Europe on Computer Graphics	100									1																																						
-Algorithms	99	1																																														
-Eurographics Symposium on Parallel Graphics and Visualization	99																																															
-International Conference on Cyberworlds	99																																															
-International Working Conference on Advanced Visual Interfaces	99																																															
-IEEE International Symposium on Parallel and Distributed Processing	98																																															
-CHI Extended Abstracts on Human Factors in Computing Systems	97																			1																												
-International Conference on Machine Learning	97																									1																						
-Personal and Ubiquitous Computing	97																																															
-Web-Age Information Management	97																																															
-Geosciences	96																	1																														
-International Conference on Very Large Data Bases	96												1																																			
-International Conference for High Performance Computing	95																		1																													
-Color and Imaging Conference	94																																															
-Computational Science and Its Applications	94																															1																
-Conference on Empirical Methods in Natural Language Processing	94																											1																				
-Hawaii International International Conference on Systems Science	94																																															
-IEEE Trans. Software Eng.	94																																					1										
-Pacific Asia Conference on Information Systems	94																							1																								
-J. Digital Imaging	93									1																																						
-European Signal Processing Conference	92																																				1											
-IEEE Trans. Communications	92						1																																									
-Int. J. Hum. Comput. Interaction	92																			1																												
-Journal of Systems and Software	92																																					1										
-Annual ACM Conference on Human Factors in Computing Systems	91																			1																												
-Annual Meeting of the Association for Computational Linguistics	91																																															
-Computer Communications	91						1																																									
-IEEE International Conference on Parallel and Distributed Systems	91																													1																		
-Wireless Personal Communications	91						1																																									
-Computer Graphics International	90																																															
-Principles and Practice of Constraint Programming	90																																															
-ACM Symposium on Solid and Physical Modeling	89																																															
-IEEE Access	89																																															
-IEEE Signal Process. Lett.	89																																				1											
-JSW	89																																															
-Machine Learning	89																									1																						
-IEEE Symposium on Large Data Analysis and Visualization	88																																															
-IEEE Trans. Automat. Contr.	88																																															
-Softw. Pract. Exper.	88																																					1										
-Algorithms and Data Structures	87	1																																														
-Simulation	87																																															
-ACM CIKM International Conference on Information and Knowledge Management	86												1																																			
-Data Compression Conference	86																																															
-working conference on Advanced visual interfaces	86																																															
-European Journal of Operational Research	85																																															
-International Conference on Document Analysis and Recognition	85																																															
-Computer Methods and Programs in Biomedicine	84				1																																											
-Machine Learning and Knowledge Discovery in Databases	84																									1																						
-Proceedings International Conference on Image Processing	84																				1																											
-Discrete Applied Mathematics	83		1																																													
-TAP	83																																															
-Twenty- International Joint Conference on Artificial Intelligence	83																									1																						
-EURASIP J. Adv. Sig. Proc.	82																																				1											
-IACR Cryptology ePrint Archive	82										1																																					
-IEEE Trans. Instrumentation and Measurement	82																																															
-IEEE Trans. on Circuits and Systems	82																																															
-IEICE Electronic Express	82																																															
-JNW	82																																															
-Advanced Data Mining and Applications	81																									1																						
-Eurographics Workshop on Rendering Techniques	81									1																																						
-Intelligent Robotics and Applications	81																																								1							
-International Conference on BioMedical Engineering and Informatics	81				1																																											
-Journal of Chemical Information and Modeling	81																																															
-Advances in Information Retrieval	80																					1																										
-Comp. Med. Imag. and Graph.	80				1	1																																										
-IBM Journal of Research and Development	80																																															
-IEEE Trans. Information Technology in Biomedicine	80				1																																											
-IEEE Trans. Information Theory	80																																															
-Jahrestagung der Deutschen Gesellschaft für Computer- und Roboterassistierte Chirurgie	80				1	1																																										
-SIAM J. Numerical Analysis	80		1																																													
-VISAPP	80																																												1			
-IEEE Trans. on CAD of Integrated Circuits and Systems	79								1																																							
-Inf. Process. Manage.	79																																															
-International Conference on Machine Learning and Cybernetics	79																									1																						
-Neural Networks	79																									1			1																			
-Scientometrics	79																																	1														
-Twenty- AAAI Conference on Artificial Intelligence	79																									1																						
-AI Magazine	78																									1																						
-Annual Meeting of the Cognitive Science Society	78			1																																												
-JAMIA	78																																															
-ACM Conference on Computer Supported Cooperative Work	77																			1																												
-IEEE MultiMedia	77																										1																					
-IEEE Pervasive Computing	77																																															
-IEEE/ACM Trans. Netw.	77						1																																									
-International World Wide Web Conference	77																								1																							
-J. Applied Mathematics	77		1																																													
-J. Sci. Comput.	77																															1																
-Medical Image Computing and Computer-Assisted Intervention -- MICCAI	77				1	1																																										
-ACM Comput. Surv.	76																																															
-IEEE/ACM Trans. Comput. Biology Bioinform.	76				1																																											
-J. Visualization	76																																															1
-Logic Programming	76																																															
-ACM Conference on Recommender Systems	75																									1																						
-Computer Graphics International Conference	75																																															
-Computer Physics Communications	75																																															
-Eurographics Symposium on Geometry Processing	75							1																																								
-Interacting with Computers	75																			1																												
-Journal of Biomedical Informatics	75				1																																											
-IEEE International Conference on Networking	74						1																																									
-IEEE International Parallel and Distributed Processing Symposium	74																													1																		
-The Annual ACM Symposium on User Interface Software and Technology	74																			1																												
-Data Analysis	73																																															
-IEEE International Conference on Web Services	73																																															
-International Conference on Computational Intelligence and Security	73																									1									1													
-International Conference on Wireless Communications & Signal Processing	73						1																																									
-J. Computational Applied Mathematics	73		1																																													
-J. Visual Communication and Image Representation	73																																															
-Journal of WSCG	73																																															
-IEEE Trans. Neural Networks	72																									1			1																			
-Journal of Machine Learning Research	72																									1																						
-Proceedings Supercomputing	72																		1																													
-Rendering Techniques	72									1																																						
-Symposium on Interactive 3D Graphics and Games	72									1							1																															
-VLDB J.	72												1																																			
-Annual Hawaii International Conference on System Sciences	71																																															
-BMC Systems Biology	71				1																																											
-ACM/IEEE SCConference on High Performance Networking and Computing	70																		1																													
-Appl. Soft Comput.	70																																															
-IEEE International Symposium on Information Theory	70																																															
-IEEE International Symposium on Personal	70																																															
-IEEE Symposium on Visual Languages and Human-Centric Computing	70																																														1	
-IJHPCA	70																																															
-International Conference on Biomedical Engineering and Informatics	70				1																																											
-Knowl. Inf. Syst.	70																																															
-Simulation und Visualisierung	70																																															
-Smart Graphics	70									1																																						
-Comp. in Bio. and Med.	69				1																																											
-Global Telecommunications Conference	69						1																																									
-IEEE International Conference on Distributed Computing Systems	69																													1																		
-IEEE International Conference on Nano/Micro Engineered and Molecular Systems	69				1																																											
-INFOCOM . IEEE International Conference on Computer Communications	69																																															
-International Conference on Wireless Communications and Signal Processing	69						1																														1											
-Journal of Mathematical Imaging and Vision	69																																												1			
-The Journal of Supercomputing	69																		1																													
-Web Technologies and Applications	69																								1																							
-Entropy	68																																															
-Research and Advanced Technology for Digital Libraries	68											1																																				
-IET Communications	67						1																																									
-Proceedings IEEE INFOCOM	67																																															
-SIGIR Forum	67																																															
-Virtual Reality	67																																											1				
-Winter Simulation Conference	67																															1																
-ACM Symposium on Document Engineering	66																																															
-Decision Support Systems	66																																															
-Game Tools	66																1																															
-IEEE Trans. Smart Grid	66																																															
-IJCAI	66																																															
-International Conference on Computer Science and Software Engineering	66																																					1										
-International Conference on Management of Data	66												1																																			
-J. Comput. Syst. Sci.	66																																															
-Journal of Intelligent and Fuzzy Systems	66																																															
-Appl. Math. Lett.	65		1																																													
-IEEE International Conference on Computer and Information Technology	65																																															
-Inf. Syst.	65																																															
-International Conference on Distributed Computing Systems	65																													1																		
-International Conference on Electronic and Mechanical Engineering and Information Technology	65																																															
-International Conference on Parallel and Distributed Processing Techniques and Applications	65																													1																		
-ACM Trans. Inf. Syst.	64																																															
-Algorithms and Computation	64	1																																														
-Annual Symposium on Foundations of Computer Science	64																																															
-IEEE Annual International Symposium on Personal	64																																															
-IEEE Trans. VLSI Syst.	64																																															
-International Conference on Computational Science	64																																															
-VisSym	64																																															1
-Advances in Neural Information Processing Systems : Annual Conference on Neural Information Processing Systems	63																												1																			
-Conference on Human-Computer Interaction with Mobile Devices and Services	63																			1																												
-Data Min. Knowl. Discov.	63																									1																						
-Neural Computing and Applications	63																																															
-SIGCSE Technical Symposium on Computer Science Education	63													1																																		
-Sig. Proc.: Image Comm.	63																																															
-UbiComp	63																			1																												
-Comput. J.	62																																															
-EURASIP J. Wireless Comm. and Networking	62						1																																									
-Extraction et gestion des connaissances	62																																															
-IEEE International Conference on Tools with Artificial Intelligence	62																									1																						
-Informatik	62																																															
-International Conference on Intelligent Information Hiding and Multimedia Signal Processing	62																																															
-ACM Trans. Database Syst.	61												1																																			
-Chemical Engineering	61																																															
-Eurographics Symposium on Rendering Techniques	61									1																																						
-I. J. Robotics Res.	61																																								1							
-IEEE Conference on Computer Communications	61						1																																									
-IEEE Conference on Computer Vision and Pattern Recognition Workshops	61																																												1			
-IEEE Trans. Consumer Electronics	61														1																																	
-IEEE Winter Conference on Applications of Computer Vision	61																																												1			
-International Conference on Information Fusion	61																																															
-KI	61																									1																						
-Mach. Vis. Appl.	61																																												1			
-SIGKDD Explorations	61																									1																						
-Soft Comput.	61																																															
-The Semantic Web	61																								1																							
-IEEE Software	60																																					1										
-IEEE Trans. Intelligent Transportation Systems	60																																															
-IEEE Trans. Mob. Comput.	60																																															
-Computational Aesthetics	59																																															
-IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining	59																																															
-TIIS	59																																															
-ACM Conference on Computer Supported Cooperative Work and Social Computing	58																			1																												
-Annual ACM Conference Extended Abstracts on Human Factors in Computing Systems	58																			1																												
-IEEE International Conference on Fuzzy Systems	58																																															
-IEEE Workshop on Applications of Computer Vision	58																																												1			
-International Conference on Scientific and Statistical Database Management	58												1																																			
-International Conference on Weblogs and Social Media	58																								1																							
-Scientific and Statistical Database Management	58												1																			1																
-Artificial Intelligence in Medicine	57				1																					1																						
-International Conference on Information Systems	57																							1																								
-Web Information Systems Engineering	57																																															
-World Wide Web	57																								1																							
-Advances in Swarm Intelligence	56																																															
-COLING	56																																															
-IBM Systems Journal	56																																															
-IEEE	56																																															
-IEEE International Conference on Automatic Face and Gesture Recognition	56																																												1			
-IEEE International Performance Computing and Communications Conference	56						1																																									
-Int. J. Systems Science	56																																															
-International Conference on Computer Graphics and Interactive Techniques in Australasia and Southeast Asia	56									1										1																												
-Nordic Conference on Human-Computer Interaction	56																			1																												
-Security and Communication Networks	56						1																												1													
-ACM International Conference on Interactive Tabletops and Surfaces	55																			1																												
-ACM Trans. Math. Softw.	55		1																																													
-Computing	55																																															
-I. J. Bifurcation and Chaos	55																																															
-IT	55																																															
-International Symposium on 3D Data Processing	55									1																																						
-International Symposium on Non-Photorealistic Animation and Rendering	55									1																																						
-J. ACM	55																																															
-Journal of Computational Biology	55				1																																											
-SIAM Conference on Parallel Processing for Scientific Computing	55																													1		1																
-Advances in Multimedia Modeling	54																										1																					
-Comp. Math. Methods in Medicine	54		1		1																																											
-Complexity	54	1																																														
-Design Automation Conference	54																																															
-Eng. Comput.	54																																															
-Human-Computer Interaction INTERACT: IFIP TC International Conference on Human-Computer Interaction	54																			1																												
-Industrial Engineering	54																																															
-International Conference on Tangible and Embedded Interaction	54																			1																												
-International Conference on the Foundations of Digital Games	54																1																															
-Medical Image Computing and Computer Assisted Intervention	54				1																																											
-Computers in Human Behavior	53																			1																												
-Euro-Par	53																																															
-IEEE Communications Magazine	53						1																																									
-Int. J. Image Graphics	53									1																																						
-International Conference on 3D Vision	53																																												1			
-Operations Research	53		1																																													
-SIGGRAPH ASIA	53									1																																						
-Sketch Based Interfaces and Modeling	53																			1																												
-Americas Conference on Information Systems	52																							1																								
-Annual National Conference on Digital Government Research	52																																															
-CSCW Computer Supported Cooperative Work	52																			1																												
-European Conference on Colour in Graphics	52									1																																						
-Fuzzy Sets and Systems	52																																															
-IEEE International Conference on Computer Supported Cooperative Work in Design	52																			1																												
-International Conference on Control	52																																															
-Microelectronics Reliability	52														1																																	
-SC Companion: High Performance Computing	52																		1																													
-The Twenty- IEEE Conference on Computer Vision and Pattern Recognition	52																																												1			
-Thirtieth AAAI Conference on Artificial Intelligence	52																									1																						
-ACM Multimedia Conference	51																										1																					
-ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming	51																													1																		
-HYPERTEXT	51																																															
-IEEE International Conference on Services Computing	51																																															
-IEEE Pacific Visualization Symposium PacificVis	51																																															1
-IJPRAI	51																																															
-International Journal of Parallel Programming	51																													1																		
-Machine Learning in Medical Imaging	51				1	1																				1																						
-SIBGRAPI Conference on Graphics	51									1																																						
-USENIX Annual Technical Conference	51																																															
-international conference on World Wide Web	51																								1																							
-ACM SIGGRAPH/EUROGRAPHICS Workshop on Graphics Hardware	50									1																																						
-ACM Symposium on Applied Perception	50			1																																												
-Cluster Computing	50																																															
-Data Knowl. Eng.	50																																															
-IEEE Intelligent Systems	50																																															
-IEEE International Conference on Control and Automation	50																																															
-International Conference on Advanced Information Networking and Applications	50						1																																									
-Mensch & Computer	50																			1																												
-OR	50																																															
-Robotics and Autonomous Systems	50																																								1							
-Symposium on Point Based Graphics	50																																															
-VLDB  International Conference on Very Large Data Bases	50												1																																			
-Wireless Communications and Mobile Computing	50																																															
-ACM Symposium on Software Visualization	49																																					1										1
-AI EDAM	49																																															
-Biocomputing	49				1																																											
-Design	49																																															
-Eurographics / IEEE VGTC Workshop on Volume Graphics	49																																1															1
-Grid and Cooperative Computing	49																																															
-IEEE International Symposium on Multimedia	49																										1																					
-IEEE Trans. Cybernetics	49																																															
-IEEE Trans. Information Forensics and Security	49																																		1													
-ISPRS Int. J. Geo-Information	49																	1																														
-J. Network and Computer Applications	49																																															
-Math. Comput.	49		1																																													
-ACM SIGGRAPH  Visual Proceedings: The art and interdisciplinary programs of SIGGRAPH	48																																															
-Advances in Web-Based Learning	48													1											1																							
-Computer Animation	48									1																																						
-GeoInformatica	48																	1																														
-IEEE J. Biomedical and Health Informatics	48				1																																											
-IEEE Trans. Contr. Sys. Techn.	48																																															
-IEEE/ACM International Symposium on Cluster	48																																															
-International Conference on Image and Graphics	48									1																																						
-Mathematical and Computer Modelling	48		1																																													
-Robotica	48																																								1							
-Artif. Intell.	47																									1																						
-CSSP	47																																															
-IEEE INFOCOM	47																																															
-IEEE Trans. Robotics and Automation	47																																								1							
-International Symposium on Wearable Computers	47																			1																												
-J. UCS	47																																															
-Science in China Series F: Information Sciences	47																																															
-Twenty-Ninth AAAI Conference on Artificial Intelligence	47																									1																						
-Visual Communications and Image Processing	47																				1																											
-Wireless Algorithms	47																																															
-Computer Communication Review	46						1																																									
-Electr. Notes Theor. Comput. Sci.	46																																															
-Euro-Par Parallel Processing	46																													1																		
-Intelligent Virtual Agents	46																																															
-MEDINFO	46																																															
-Software Technology	46																																					1										
-User Modeling	46																																															
-VAST	46																																													1		1
-ACM SIGSPATIAL International Symposium on Advances in Geographic Information Systems	45																	1																														
-Advances in Computer Science	45																																															
-Annual ACM Symposium on Theory of Computing	45																																							1								
-Conference on High Performance Computing Networking	45						1												1																													
-GRAPP & IVAPP	45																																															
-IEEE International Conference on Cloud Computing and Intelligence Systems	45																																															
-IEEE Workshop on Multimedia Signal Processing	45																																															
-IJMIC	45																																															
-International Conference on Advances in Computer Entertainment Technology	45																1																															
-International Conference on World Wide Web Companion	45																								1																							
-Multimedia Syst.	45																										1																					
-SIGSPATIAL International Conference on Advances in Geographic Information Systems	45																	1																														
-conference of the Centre for Advanced Studies on Collaborative Research	45																																															
-ACIS International Conference on Software Engineering	44																																					1										
-ACM SIGPLAN Conference on Programming Language Design and Implementation	44																														1																	
-ACM TIST	44																																															
-Advances in Computer Graphics	44									1																																						
-Automata Languages and Programming	44																														1									1								
-Computer Analysis of Images and Patterns	44																																															
-Dagstuhl Reports	44																																															
-ERCIM News	44																																															
-Eurographics Workshop on Visual Computing for Biomedicine	44				1																																											
-Int. J. on Digital Libraries	44											1																																				
-International Conference on Computer Graphics	44									1																																						
-International Journal of Man-Machine Studies	44																			1																												
-International Symposium on Visual Information Communication and Interaction	44																																															
-Quality and Reliability Eng. Int.	44																																															
-TLT	44																																															
-ACM Trans. Program. Lang. Syst.	43																																															
-Computers Environment and Urban Systems	43																																															
-Environmental Modelling and Software	43																																															
-ICEIS	43																																															
-IEEE International Conference on Information Reuse and Integration	43																																															
-IEEE Internet Computing	43																								1																							
-IEEE Trans. Fuzzy Systems	43																																															
-International ACM SIGGROUP Conference on Supporting Group Work	43																			1																												
-J. Sensors	43																																			1												
-Quantum Information Processing	43																																															
-Spring Simulation Multiconference	43																															1																
-The IEEE Conference on Computer Vision and Pattern Recognition	43																																												1			
-The International Conference on E-Business and E-Government	43																																															
-Virtual Reality Annual International Symposium	43																																											1				
-it - Information Technology	43																																															
-Advances in Database Technology	42												1																																			
-Brazilian Symposium on Computer Graphics and Image Processing	42									1																																						
-Fifth International Conference on Natural Computation	42																																															
-Human Factors	42																			1																												
-IEEE Workshop on Visual Languages	42																																														1	
-Information Computing and Applications	42																																															
-Int. J. Imaging Systems and Technology	42																																															
-International Conference on Semantics	42																																															
-International Journal of Shape Modeling	42																																															
-J. Intelligent Manufacturing	42																																															
-Languages and Compilers for Parallel Computing	42																													1	1																	
-TKDD	42																																															
-ACM technical symposium on Computer science education	41													1																																		
-Annual Southeast Regional Conference	41																																															
-Conference on Designing Interactive Systems	41																																															
-Graph Drawing and Network Visualization	41																																															1
-High Performance Computing	41																		1																													
-IEEE International Conference on e-Business Engineering	41																																															
-IEEE Symposium on Biological Data Visualization	41				1																																											1
-IEEE/ACIS International Conference on Computer and Information Science	41																																															
-International Conference on Extending Database Technology	41												1																																			
-International Conference on Multimodal Interfaces	41																			1																												
-International Conference on Parallel and Distributed Systems	41																													1																		
-International Workshop on Database and Expert Systems Applications	41												1																																			
-Journal of Multimedia	41																										1																					
+_venue	_frequeny	algorithms	applied mathematics	applied psychology	bioinformatics	biomedical imaging	communications	computational geometry	computer-aided design	computer graphics	cryptology	digital libraries	data management	education	electronics	expert systems	games	geoscience	high performance computing	human-computer interaction	image processing	information retrieval	information visualization	information systems	Internet technology	machine learning	mobile computing	multimedia	natural language processing	neural networks	operating systems	optimization	parallel computing	pervasive computing	programming languages	scientific computing	scientific visualization	scientometrics	security	sensors	signal processing	software engineering	speech technology	theory of computing	robotics	vehicular  technology	video technology	virtual/mixed reality	vision	visual analytics	visual languages	visualization
+Comput. Graph. Forum	1992																																																			
+ACM Trans. Graph.	1701									1																																										
+IEEE Trans. Vis. Comput. Graph.	1253																																																			
+Medical Image Computing and Computer-Assisted Intervention	1029				1	1																																														
+IEEE Computer Graphics and Applications	918																																																			
+International Conference on Computer Graphics and Interactive Techniques	785									1																																										
+Graphics	737									1																																										
+The Visual Computer	687																																																			
+CHI Conference on Human Factors in Computing Systems	652																			1																																
+Annual Conference on Computer Graphics and Interactive Techniques	556									1																																										
+IEEE International Symposium on Biomedical Imaging: From Nano to Macro	528				1	1																																														
+Computer Vision	515																																																1			
+IEEE Trans. Med. Imaging	481				1	1																																														
+International Conference on Information Visualisation	481																						1																													1
+IEEE Conference on Computer Vision and Pattern Recognition	468																																																1			
+Bioinformatics	463				1																																															
+IEEE International Conference on Robotics and Automation	461																																												1							
+International Conference on Image Processing	450																				1																															
+NeuroImage	438				1	1																																														
+International Conference on Human Factors in Computing Systems	434																			1																																
+Commun. ACM	433																																																			
+IEEE International Conference on Acoustics	432																																								1											
+IEEE Visualization	431																																																			1
+IEEE Trans. Pattern Anal. Mach. Intell.	422																									1																							1			
+Bildverarbeitung für die Medizin	420				1	1																																														
+IEEE International Conference on Communications	404						1																																													
+International Conference on Pattern Recognition	400																									1																							1			
+BMC Bioinformatics	399				1																																															
+Neurocomputing	399																									1																										
+IEEE Computer Society Conference on Computer Vision and Pattern Recognition	389																									1																							1			
+IEEE International Conference on Multimedia and Expo	388																											1																								
+Conference on Human Factors in Computing Systems	385																			1																																
+IEEE Trans. Vis. Comput. Graph. [InfoVis]	385																						1																													1
+Computer-Aided Design	375								1																																											
+IEEE Trans. Vis. Comput. Graph. [Vis]	355																																																			1
+Graph Drawing	345																																																			1
+IEEE International Conference on Computer Vision	345																																																1			
+IEEE Conference on Visual Analytics Science and Technology	338																																																	1		1
+Journal of Visualization and Computer Animation	319									1																																										1
+Human-Computer Interaction	313																			1																																
+IEEE Trans. Image Processing	313																				1																															
+Visualization and Data Analysis	308																																																			1
+Pattern Recognition	306																									1																										
+IEEE Visualization Conference	305																																																			1
+IEEE International Geoscience and Remote Sensing Symposium	303																	1																																		
+ACM SIGMOD International Conference on Management of Data	302												1																																							
+Advances in Visual Computing	295																																																			
+Annual ACM Symposium on User Interface Software and Technology	292																			1																																
+Sensors	289																																							1												
+IEICE Transactions	286																																																			
+IEEE International Conference on Image Processing	285																			1																																
+Graphics Interface Conference	284																																																			
+Medical Image Analysis	283				1																					1																										
+IEEE Computer	282																																																			
+IEEE Virtual Reality Conference	280																																															1				
+IEEE/RSJ International Conference on Intelligent Robots and Systems	280																																												1							
+Proceedings IEEE Visualization	275																																																			1
+IEEE Symposium on Information Visualization	268																						1																													1
+Vision	264																																																1			
+Eurographics	260									1																																										
+International Conference on Intelligent User Interfaces	260																			1																																
+J. Comput. Physics	251																																			1																
+IEEE Vehicular Technology Conference	250																																													1						
+IEEE Pacific Visualization Symposium	248																																																			1
+Information Visualization	246																						1																													1
+Int. J. Computer Assisted Radiology and Surgery	244				1	1																																														
+PVLDB	244												1																																							
+Computer Aided Geometric Design	243								1																																											
+Pacific Conference on Computer Graphics and Applications	235																																																			
+IEEE International Symposium on Biomedical Imaging	232				1	1																																														
+Multimedia Tools Appl.	230																																															1				
+International Conference on Data Engineering	226												1																																							
+IEEE Trans. Knowl. Data Eng.	224												1																																							
+IEEE International Conference on Systems	221																																																			
+IEEE Trans. Industrial Electronics	217														1																																					
+Applied Mathematics and Computation	216		1																																	1																
+IEEE Trans. Biomed. Engineering	213				1																																															
+International Journal of Computer Vision	209																																																1			
+Comput. Geom.	206							1																																												
+ACM SIGKDD International Conference on Knowledge Discovery and Data Mining	205																									1																										
+Annual International Conference of the IEEE Engineering in Medicine and Biology Society	205				1																																															
+IEEE International Conference on Robotics and Biomimetics	205																																												1							
+Symposium on Interactive 3D Graphics	204																																																			
+International Conference on Fuzzy Systems and Knowledge Discovery	203																									1																										
+ACM International Conference on Multimedia	202																																																			
+Inf. Sci.	202																											1																								
+ACM Symposium on Virtual Reality Software and Technology	201																																															1				
+Nucleic Acids Research	194				1																																															
+INTERSPEECH	192																																										1									
+Advances in Neural Networks	185																									1				1																						
+IEEE Trans. Parallel Distrib. Syst.	185																																1																			
+IEEE Trans. Geoscience and Remote Sensing	181																	1																						1												
+International Conference on Parallel Processing	181																																1																			
+AMIA  American Medical Informatics Association Annual Symposium	180				1																																															
+Hawaii International Conference on System Sciences	180																																																			
+IEEE International Conference on Data Mining	180																									1																										
+IEEE Virtual Reality	180																																															1				
+Information Processing in Medical Imaging	180				1	1																																														
+International Conference on World Wide Web	174																								1																											
+SCIENCE CHINA Information Sciences	174																																																			
+Extended Abstracts  Conference on Human Factors in Computing Systems	173																			1																																
+IEEE Trans. Multimedia	173																											1																								
+Signal Processing	171																																								1											
+J. Comput. Sci. Technol.	170																																																			
+SIAM J. Scientific Computing	166																																			1																
+Expert Syst. Appl.	165															1																																				
+Pattern Recognition Letters	163																									1																										
+Computational Geometry	162							1																																												
+International Conference on Software Engineering	161																																									1										
+Presence	161																																															1				
+ACM SIGCHI Conference on Human Factors in Computing Systems	160																			1																																
+International Conference on Multimedia	158																											1																								
+Computational Science	157																																			1																
+IEEE International Symposium on Mixed and Augmented Reality	157																																															1				
+IEEE Symposium on 3D User Interfaces	157									1																																										
+IEEE Wireless Communications and Networking Conference	157						1																																													
+International Joint Conference on Neural Networks	157																									1				1																						
+IEEE International Geoscience & Remote Sensing Symposium	156																	1																																		
+Visualization	156																																																			1
+Computing in Science and Engineering	155																																																			
+Graphical Models	154																																																			
+IEEE Global Communications Conference	154						1																																													
+Computer Vision and Image Understanding	153																																																1			
+Future Generation Comp. Syst.	153																																																			
+IEEE Symposium on Visual Analytics Science and Technology	153																																																	1		1
+IEEE Trans. Vehicular Technology	152																																													1						
+Medical Imaging	152				1	1																																														
+SIAM International Conference on Data Mining	152																									1																										
+ACM Conference on Information and Knowledge Management	151												1																																							
+American Control Conference	148																																																			
+IEEE Trans. Circuits Syst. Video Techn.	148																																														1					
+IEEE Conference on Decision and Control	147																																																			
+IEEE Trans. Computers	146																																																			
+International Conference on Shape Modeling and Applications	146									1																																										
+Interactions	145									1																																										
+ACM International Conference on Information and Knowledge Management	143												1																																							
+IEEE International Conference on Big Data	143																																																			
+Special Interest Group on Computer Graphics and Interactive Techniques Conference	141									1																																										
+Algorithmica	140	1																																																		
+Canadian Conference on Computational Geometry	139								1																																											
+Computer Networks	139						1																																													
+IEEE Trans. Vis. Comput. Graph. [VAST]	139																																																	1		1
+Global Communications Conference	138						1																																													
+IJDSN	137						1																																	1												
+Int. J. Comput. Geometry Appl.	137							1																																												
+IEEE Trans. Systems	136																																																			
+ACM Trans. Comput.-Hum. Interact.	135																			1																																
+IEEE Trans. Signal Processing	135																																							1												
+International Parallel and Distributed Processing Symposium	135																																1																			
+JASIST	134																																																			
+Theor. Comput. Sci.	134																																											1								
+J. Vis. Lang. Comput.	133																																																		1	
+IEEE International Conference on Bioinformatics and Biomedicine	132				1																																															
+Int. J. Hum.-Comput. Stud.	132																			1																																
+Remote Sensing	132																	1																																		
+Database Systems for Advanced Applications	131												1																																							
+CARS . Computer Assisted Radiology and Surgery.  International Congress and Exhibition	129				1																																															
+ACM Symposium on Applied Computing	128																																																			
+J. Parallel Distrib. Comput.	128																																1																			
+Spring Conference on Computer Graphics	128																																																			
+IEEE Congress on Evolutionary Computation	126																																																			
+Inf. Process. Lett.	126																																																			
+International Meshing Roundtable	126							1																																												
+International Symposium on Circuits and Systems	126																																																			
+Symposium on Applied Perception in Graphics and Visualization	126																																																			
+International Conference on Natural Computation	125																									1																										
+PLoS Computational Biology	125	1																																																		
+ACM Symposium on Computational Geometry	124							1																																												
+Neural Information Processing	124																																																			
+IEEE Trans. Vis. Comput. Graph. [SciVis]	123																																				1															1
+Advances in Multimedia Information Processing	122																																																			
+Concurrency and Computation: Practice and Experience	122																																1																			
+IEEE Trans. Wireless Communications	120						1																																													
+International Computer Music Conference	120																																																			
+Journal of Computational Chemistry	119																																			1																
+IEEE Geosci. Remote Sensing Lett.	118																	1																																		
+Image Vision Comput.	118																																																1			
+International Journal of Geographical Information Science	118																	1																																		
+Extended abstracts of the Conference on Human Factors in Computing Systems	117																			1																																
+IEEE Communications Letters	117						1																																													
+Knowl.-Based Syst.	115																																																			
+SIGMOD Record	115																																																			
+Advances in Knowledge Discovery and Data Mining	114																									1																										
+Computer Supported Cooperative Work	114																			1																																
+IEEE Data Eng. Bull.	114																																																			
+International Conference on Computer-Aided Design and Computer Graphics	114								1																																											
+Medicine Meets Virtual Reality	113																																															1				
+Conference on Computer Vision and Pattern Recognition	112																																																1			
+Human Factors in Computing Systems	112																																																			
+GRAPP	110																																																			
+IEEE International Symposium on Circuits and Systems	110																																																			
+J. Electronic Imaging	110																																																			
+Database and Expert Systems Applications	109												1																																							
+Discrete Mathematics	109		1																																																	
+ACM/IEEE Joint Conference on Digital Libraries	108											1																																								
+EuroVis: Joint Eurographics	108																																																			
+IEEE International Conference on Data Engineering	108																																																			
+Annual Symposium on Computational Geometry	107							1																																												
+Automatica	107																																																			
+JCP	107																																																			
+Parallel Computing	107																																1																			
+Human Vision and Electronic Imaging	106																																																			
+Mathematics with Applications	106		1																																																	
+IEEE International Conference on Cluster Computing	105																																																			
+SIGIR	105																																																			
+The ACM SIGKDD International Conference on Knowledge Discovery and Data Mining	105																									1																										
+British Machine Vision Conference	104																																																1			
+Genetic and Evolutionary Computation Conference	104																																																			
+Joint Eurographics and IEEE TCVG Symposium on Visualization	103																																																			1
+SIAM J. Comput.	103																																																			
+IEEE International Conference on Computational Science and Engineering	102																																			1																
+J. Graph Algorithms Appl.	102	1																																																		
+ACM SIGGRAPH/Eurographics Symposium on Computer Animation	100									1																																										
+Computer and Computing Technologies in Agriculture	100																																																			
+IEEE Journal on Selected Areas in Communications	100						1																																													
+The -th International Conference in Central Europe on Computer Graphics	100									1																																										
+Algorithms	99	1																																																		
+Eurographics Symposium on Parallel Graphics and Visualization	99																																																			
+International Conference on Cyberworlds	99																																																			
+International Working Conference on Advanced Visual Interfaces	99																																																			
+IEEE International Symposium on Parallel and Distributed Processing	98																																																			
+CHI Extended Abstracts on Human Factors in Computing Systems	97																			1																																
+International Conference on Machine Learning	97																									1																										
+Personal and Ubiquitous Computing	97																																	1																		
+Web-Age Information Management	97																																																			
+Geosciences	96																	1																																		
+International Conference on Very Large Data Bases	96												1																																							
+International Conference for High Performance Computing	95																		1																																	
+Color and Imaging Conference	94																																																			
+Computational Science and Its Applications	94																																			1																
+Conference on Empirical Methods in Natural Language Processing	94																												1																							
+Hawaii International International Conference on Systems Science	94																																																			
+IEEE Trans. Software Eng.	94																																									1										
+Pacific Asia Conference on Information Systems	94																							1																												
+J. Digital Imaging	93									1																																										
+European Signal Processing Conference	92																																								1											
+IEEE Trans. Communications	92						1																																													
+Int. J. Hum. Comput. Interaction	92																			1																																
+Journal of Systems and Software	92																																									1										
+Annual ACM Conference on Human Factors in Computing Systems	91																			1																																
+Annual Meeting of the Association for Computational Linguistics	91																																																			
+Computer Communications	91						1																																													
+IEEE International Conference on Parallel and Distributed Systems	91																																1																			
+Wireless Personal Communications	91						1																																													
+Computer Graphics International	90																																																			
+Principles and Practice of Constraint Programming	90																																																			
+ACM Symposium on Solid and Physical Modeling	89																																																			
+IEEE Access	89																																																			
+IEEE Signal Process. Lett.	89																																								1											
+JSW	89																																																			
+Machine Learning	89																									1																										
+IEEE Symposium on Large Data Analysis and Visualization	88																																																			
+IEEE Trans. Automat. Contr.	88																																																			
+Softw. Pract. Exper.	88																																									1										
+Algorithms and Data Structures	87	1																																																		
+Simulation	87																																																			
+ACM CIKM International Conference on Information and Knowledge Management	86												1																																							
+Data Compression Conference	86																																																			
+working conference on Advanced visual interfaces	86																																																			
+European Journal of Operational Research	85																																																			
+International Conference on Document Analysis and Recognition	85																																																			
+Computer Methods and Programs in Biomedicine	84				1																																															
+Machine Learning and Knowledge Discovery in Databases	84																									1																										
+Proceedings International Conference on Image Processing	84																				1																															
+Discrete Applied Mathematics	83		1																																																	
+TAP	83																																																			
+Twenty- International Joint Conference on Artificial Intelligence	83																									1																										
+EURASIP J. Adv. Sig. Proc.	82																																								1											
+IACR Cryptology ePrint Archive	82										1																																									
+IEEE Trans. Instrumentation and Measurement	82																																																			
+IEEE Trans. on Circuits and Systems	82																																																			
+IEICE Electronic Express	82																																																			
+JNW	82																																																			
+Advanced Data Mining and Applications	81																									1																										
+Eurographics Workshop on Rendering Techniques	81									1																																										
+Intelligent Robotics and Applications	81																																												1							
+International Conference on BioMedical Engineering and Informatics	81				1																																															
+Journal of Chemical Information and Modeling	81																																																			
+Advances in Information Retrieval	80																					1																														
+Comp. Med. Imag. and Graph.	80				1	1																																														
+IBM Journal of Research and Development	80																																																			
+IEEE Trans. Information Technology in Biomedicine	80				1																																															
+IEEE Trans. Information Theory	80																																																			
+Jahrestagung der Deutschen Gesellschaft für Computer- und Roboterassistierte Chirurgie	80				1	1																																														
+SIAM J. Numerical Analysis	80		1																																																	
+VISAPP	80																																																1			
+IEEE Trans. on CAD of Integrated Circuits and Systems	79								1																																											
+Inf. Process. Manage.	79																																																			
+International Conference on Machine Learning and Cybernetics	79																									1																										
+Neural Networks	79																									1				1																						
+Scientometrics	79																																					1														
+Twenty- AAAI Conference on Artificial Intelligence	79																									1																										
+AI Magazine	78																									1																										
+Annual Meeting of the Cognitive Science Society	78			1																																																
+JAMIA	78																																																			
+ACM Conference on Computer Supported Cooperative Work	77																			1																																
+IEEE MultiMedia	77																											1																								
+IEEE Pervasive Computing	77																																	1																		
+IEEE/ACM Trans. Netw.	77						1																																													
+International World Wide Web Conference	77																								1																											
+J. Applied Mathematics	77		1																																																	
+J. Sci. Comput.	77																																			1																
+Medical Image Computing and Computer-Assisted Intervention -- MICCAI	77				1	1																																														
+ACM Comput. Surv.	76																																																			
+IEEE/ACM Trans. Comput. Biology Bioinform.	76				1																																															
+J. Visualization	76																																																			1
+Logic Programming	76																																																			
+ACM Conference on Recommender Systems	75																									1																										
+Computer Graphics International Conference	75																																																			
+Computer Physics Communications	75																																																			
+Eurographics Symposium on Geometry Processing	75							1																																												
+Interacting with Computers	75																			1																																
+Journal of Biomedical Informatics	75				1																																															
+IEEE International Conference on Networking	74						1																																													
+IEEE International Parallel and Distributed Processing Symposium	74																																1																			
+The Annual ACM Symposium on User Interface Software and Technology	74																			1																																
+Data Analysis	73																																																			
+IEEE International Conference on Web Services	73																																																			
+International Conference on Computational Intelligence and Security	73																									1													1													
+International Conference on Wireless Communications & Signal Processing	73						1																																													
+J. Computational Applied Mathematics	73		1																																																	
+J. Visual Communication and Image Representation	73																																																			
+Journal of WSCG	73																																																			
+IEEE Trans. Neural Networks	72																									1				1																						
+Journal of Machine Learning Research	72																									1																										
+Proceedings Supercomputing	72																		1																																	
+Rendering Techniques	72									1																																										
+Symposium on Interactive 3D Graphics and Games	72									1							1																																			
+VLDB J.	72												1																																							
+Annual Hawaii International Conference on System Sciences	71																																																			
+BMC Systems Biology	71				1																																															
+ACM/IEEE SCConference on High Performance Networking and Computing	70																		1																																	
+Appl. Soft Comput.	70																																																			
+IEEE International Symposium on Information Theory	70																																																			
+IEEE International Symposium on Personal	70																																																			
+IEEE Symposium on Visual Languages and Human-Centric Computing	70																																																		1	
+IJHPCA	70																																																			
+International Conference on Biomedical Engineering and Informatics	70				1																																															
+Knowl. Inf. Syst.	70																																																			
+Simulation und Visualisierung	70																																																			
+Smart Graphics	70									1																																										
+Comp. in Bio. and Med.	69				1																																															
+Global Telecommunications Conference	69						1																																													
+IEEE International Conference on Distributed Computing Systems	69																																1																			
+IEEE International Conference on Nano/Micro Engineered and Molecular Systems	69				1																																															
+INFOCOM . IEEE International Conference on Computer Communications	69																																																			
+International Conference on Wireless Communications and Signal Processing	69						1																																		1											
+Journal of Mathematical Imaging and Vision	69																																																1			
+The Journal of Supercomputing	69																		1																																	
+Web Technologies and Applications	69																								1																											
+Entropy	68																																																			
+Research and Advanced Technology for Digital Libraries	68											1																																								
+IET Communications	67						1																																													
+Proceedings IEEE INFOCOM	67																																																			
+SIGIR Forum	67																																																			
+Virtual Reality	67																																															1				
+Winter Simulation Conference	67																																			1																
+ACM Symposium on Document Engineering	66																																																			
+Decision Support Systems	66																																																			
+Game Tools	66																1																																			
+IEEE Trans. Smart Grid	66																																																			
+IJCAI	66																																																			
+International Conference on Computer Science and Software Engineering	66																																									1										
+International Conference on Management of Data	66												1																																							
+J. Comput. Syst. Sci.	66																																																			
+Journal of Intelligent and Fuzzy Systems	66																																																			
+Appl. Math. Lett.	65		1																																																	
+IEEE International Conference on Computer and Information Technology	65																																																			
+Inf. Syst.	65																																																			
+International Conference on Distributed Computing Systems	65																																1																			
+International Conference on Electronic and Mechanical Engineering and Information Technology	65																																																			
+International Conference on Parallel and Distributed Processing Techniques and Applications	65																																1																			
+ACM Trans. Inf. Syst.	64																																																			
+Algorithms and Computation	64	1																																																		
+Annual Symposium on Foundations of Computer Science	64																																																			
+IEEE Annual International Symposium on Personal	64																																																			
+IEEE Trans. VLSI Syst.	64																																																			
+International Conference on Computational Science	64																																																			
+VisSym	64																																																			1
+Advances in Neural Information Processing Systems : Annual Conference on Neural Information Processing Systems	63																													1																						
+Conference on Human-Computer Interaction with Mobile Devices and Services	63																			1							1																									
+Data Min. Knowl. Discov.	63																									1																										
+Neural Computing and Applications	63																																																			
+SIGCSE Technical Symposium on Computer Science Education	63													1																																						
+Sig. Proc.: Image Comm.	63																																																			
+UbiComp	63																			1																																
+Comput. J.	62																																																			
+EURASIP J. Wireless Comm. and Networking	62						1																																													
+Extraction et gestion des connaissances	62																																																			
+IEEE International Conference on Tools with Artificial Intelligence	62																									1																										
+Informatik	62																																																			
+International Conference on Intelligent Information Hiding and Multimedia Signal Processing	62																																																			
+ACM Trans. Database Syst.	61												1																																							
+Chemical Engineering	61																																																			
+Eurographics Symposium on Rendering Techniques	61									1																																										
+I. J. Robotics Res.	61																																												1							
+IEEE Conference on Computer Communications	61						1																																													
+IEEE Conference on Computer Vision and Pattern Recognition Workshops	61																																																1			
+IEEE Trans. Consumer Electronics	61														1																																					
+IEEE Winter Conference on Applications of Computer Vision	61																																																1			
+International Conference on Information Fusion	61																																																			
+KI	61																									1																										
+Mach. Vis. Appl.	61																																																1			
+SIGKDD Explorations	61																									1																										
+Soft Comput.	61																																																			
+The Semantic Web	61																								1																											
+IEEE Software	60																																																			
+IEEE Trans. Intelligent Transportation Systems	60																																																			
+IEEE Trans. Mob. Comput.	60																																																			
+Computational Aesthetics	59																																																			
+IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining	59																																																			
+TIIS	59																																																			
+ACM Conference on Computer Supported Cooperative Work and Social Computing	58																			1																																
+Annual ACM Conference Extended Abstracts on Human Factors in Computing Systems	58																			1																																
+IEEE International Conference on Fuzzy Systems	58																																																			
+IEEE Workshop on Applications of Computer Vision	58																																																1			
+International Conference on Scientific and Statistical Database Management	58												1																																							
+International Conference on Weblogs and Social Media	58																								1																											
+Scientific and Statistical Database Management	58												1																							1																
+Artificial Intelligence in Medicine	57				1																					1																										
+International Conference on Information Systems	57																							1																												
+Web Information Systems Engineering	57																																																			
+World Wide Web	57																								1																											
+Advances in Swarm Intelligence	56																																																			
+COLING	56																																																			
+IBM Systems Journal	56																																																			
+IEEE	56																																																			
+IEEE International Conference on Automatic Face and Gesture Recognition	56																																																1			
+IEEE International Performance Computing and Communications Conference	56						1																																													
+Int. J. Systems Science	56																																																			
+International Conference on Computer Graphics and Interactive Techniques in Australasia and Southeast Asia	56									1										1																																
+Nordic Conference on Human-Computer Interaction	56																			1																																
+Security and Communication Networks	56						1																																1													
+ACM International Conference on Interactive Tabletops and Surfaces	55																			1																																
+ACM Trans. Math. Softw.	55		1																																																	
+Computing	55																																																			
+I. J. Bifurcation and Chaos	55																																																			
+IT	55																																																			
+International Symposium on 3D Data Processing	55									1																																										
+International Symposium on Non-Photorealistic Animation and Rendering	55									1																																										
+J. ACM	55																																																			
+Journal of Computational Biology	55				1																																															
+SIAM Conference on Parallel Processing for Scientific Computing	55																																1			1																
+Advances in Multimedia Modeling	54																											1																								
+Comp. Math. Methods in Medicine	54		1		1																																															
+Complexity	54	1																																																		
+Design Automation Conference	54																																																			
+Eng. Comput.	54																																																			
+Human-Computer Interaction INTERACT: IFIP TC International Conference on Human-Computer Interaction	54																			1																																
+Industrial Engineering	54																																																			
+International Conference on Tangible and Embedded Interaction	54																			1																																
+International Conference on the Foundations of Digital Games	54																1																																			
+Medical Image Computing and Computer Assisted Intervention	54				1																																															
+Computers in Human Behavior	53																			1																																
+Euro-Par	53																																																			
+IEEE Communications Magazine	53						1																																													
+Int. J. Image Graphics	53									1																																										
+International Conference on 3D Vision	53																																																1			
+Operations Research	53		1																													1																				
+SIGGRAPH ASIA	53									1																																										
+Sketch Based Interfaces and Modeling	53																			1																																
+Americas Conference on Information Systems	52																							1																												
+Annual National Conference on Digital Government Research	52																																																			
+CSCW Computer Supported Cooperative Work	52																			1																																
+European Conference on Colour in Graphics	52									1																																										
+Fuzzy Sets and Systems	52																																																			
+IEEE International Conference on Computer Supported Cooperative Work in Design	52																			1																																
+International Conference on Control	52																																																			
+Microelectronics Reliability	52														1																																					
+SC Companion: High Performance Computing	52																		1																																	
+The Twenty- IEEE Conference on Computer Vision and Pattern Recognition	52																																																1			
+Thirtieth AAAI Conference on Artificial Intelligence	52																									1																										
+ACM Multimedia Conference	51																											1																								
+ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming	51																																1																			
+HYPERTEXT	51																																																			
+IEEE International Conference on Services Computing	51																																																			
+IEEE Pacific Visualization Symposium PacificVis	51																																																			1
+IJPRAI	51																																																			
+International Journal of Parallel Programming	51																																1																			
+Machine Learning in Medical Imaging	51				1	1																				1																										
+SIBGRAPI Conference on Graphics	51									1																																										
+USENIX Annual Technical Conference	51																																																			
+international conference on World Wide Web	51																								1																											
+ACM SIGGRAPH/EUROGRAPHICS Workshop on Graphics Hardware	50									1																																										
+ACM Symposium on Applied Perception	50			1																																																
+Cluster Computing	50																																																			
+Data Knowl. Eng.	50																																																			
+IEEE Intelligent Systems	50																																																			
+IEEE International Conference on Control and Automation	50																																																			
+International Conference on Advanced Information Networking and Applications	50						1																																													
+Mensch & Computer	50																			1																																
+OR	50		1																													1																				
+Robotics and Autonomous Systems	50																																												1							
+Symposium on Point Based Graphics	50																																																			
+VLDB  International Conference on Very Large Data Bases	50												1																																							
+Wireless Communications and Mobile Computing	50																										1																									
+ACM Symposium on Software Visualization	49																																									1										1
+AI EDAM	49																																																			
+Biocomputing	49				1																																															
+Design	49																																																			
+Eurographics / IEEE VGTC Workshop on Volume Graphics	49																																				1															1
+Grid and Cooperative Computing	49																																																			
+IEEE International Symposium on Multimedia	49																											1																								
+IEEE Trans. Cybernetics	49																																																			
+IEEE Trans. Information Forensics and Security	49																																						1													
+ISPRS Int. J. Geo-Information	49																	1																																		
+J. Network and Computer Applications	49																																																			
+Math. Comput.	49		1																																																	
+ACM SIGGRAPH  Visual Proceedings: The art and interdisciplinary programs of SIGGRAPH	48																																																			
+Advances in Web-Based Learning	48													1											1																											
+Computer Animation	48									1																																										
+GeoInformatica	48																	1																																		
+IEEE J. Biomedical and Health Informatics	48				1																																															
+IEEE Trans. Contr. Sys. Techn.	48																																																			
+IEEE/ACM International Symposium on Cluster	48																																																			
+International Conference on Image and Graphics	48									1																																										
+Mathematical and Computer Modelling	48		1																																																	
+Robotica	48																																												1							
+Artif. Intell.	47																									1																										
+CSSP	47																																																			
+IEEE INFOCOM	47																																																			
+IEEE Trans. Robotics and Automation	47																																												1							
+International Symposium on Wearable Computers	47																			1																																
+J. UCS	47																																																			
+Science in China Series F: Information Sciences	47																																																			
+Twenty-Ninth AAAI Conference on Artificial Intelligence	47																									1																										
+Visual Communications and Image Processing	47																				1																															
+Wireless Algorithms	47																																																			
+Computer Communication Review	46						1																																													
+Electr. Notes Theor. Comput. Sci.	46																																																			
+Euro-Par Parallel Processing	46																																1																			
+Intelligent Virtual Agents	46																																																			
+MEDINFO	46																																																			
+Software Technology	46																																									1										
+User Modeling	46																																																			
+VAST	46																																																	1		1
+ACM SIGSPATIAL International Symposium on Advances in Geographic Information Systems	45																	1																																		
+Advances in Computer Science	45																																																			
+Annual ACM Symposium on Theory of Computing	45																																											1								
+Conference on High Performance Computing Networking	45						1												1																																	
+GRAPP & IVAPP	45																																																			
+IEEE International Conference on Cloud Computing and Intelligence Systems	45																																																			
+IEEE Workshop on Multimedia Signal Processing	45																																																			
+IJMIC	45																																																			
+International Conference on Advances in Computer Entertainment Technology	45																1																																			
+International Conference on World Wide Web Companion	45																								1																											
+Multimedia Syst.	45																											1																								
+SIGSPATIAL International Conference on Advances in Geographic Information Systems	45																	1																																		
+conference of the Centre for Advanced Studies on Collaborative Research	45																																																			
+ACIS International Conference on Software Engineering	44																																									1										
+ACM SIGPLAN Conference on Programming Language Design and Implementation	44																																		1																	
+ACM TIST	44																																																			
+Advances in Computer Graphics	44									1																																										
+Automata Languages and Programming	44																																		1									1								
+Computer Analysis of Images and Patterns	44																																																			
+Dagstuhl Reports	44																																																			
+ERCIM News	44																																																			
+Eurographics Workshop on Visual Computing for Biomedicine	44				1																																															
+Int. J. on Digital Libraries	44											1																																								
+International Conference on Computer Graphics	44									1																																										
+International Journal of Man-Machine Studies	44																			1																																
+International Symposium on Visual Information Communication and Interaction	44																																																			
+Quality and Reliability Eng. Int.	44																																																			
+TLT	44																																																			
+ACM Trans. Program. Lang. Syst.	43																																																			
+Computers Environment and Urban Systems	43																																																			
+Environmental Modelling and Software	43																																																			
+ICEIS	43																																																			
+IEEE International Conference on Information Reuse and Integration	43																																																			
+IEEE Internet Computing	43																								1																											
+IEEE Trans. Fuzzy Systems	43																																																			
+International ACM SIGGROUP Conference on Supporting Group Work	43																			1																																
+J. Sensors	43																																							1												
+Quantum Information Processing	43																																																			
+Spring Simulation Multiconference	43																																			1																
+The IEEE Conference on Computer Vision and Pattern Recognition	43																																																1			
+The International Conference on E-Business and E-Government	43																																																			
+Virtual Reality Annual International Symposium	43																																															1				
+it - Information Technology	43																																																			
+Advances in Database Technology	42												1																																							
+Brazilian Symposium on Computer Graphics and Image Processing	42									1																																										
+Fifth International Conference on Natural Computation	42																																																			
+Human Factors	42																			1																																
+IEEE Workshop on Visual Languages	42																																																		1	
+Information Computing and Applications	42																																																			
+Int. J. Imaging Systems and Technology	42																																																			
+International Conference on Semantics	42																																																			
+International Journal of Shape Modeling	42																																																			
+J. Intelligent Manufacturing	42																																																			
+Languages and Compilers for Parallel Computing	42																																1		1																	
+TKDD	42																																																			
+ACM technical symposium on Computer science education	41													1																																						
+Annual Southeast Regional Conference	41																																																			
+Conference on Designing Interactive Systems	41																																																			
+Graph Drawing and Network Visualization	41																																																			1
+High Performance Computing	41																		1																																	
+IEEE International Conference on e-Business Engineering	41																																																			
+IEEE Symposium on Biological Data Visualization	41				1																																															1
+IEEE/ACIS International Conference on Computer and Information Science	41																																																			
+International Conference on Extending Database Technology	41												1																																							
+International Conference on Multimodal Interfaces	41																			1																																
+International Conference on Parallel and Distributed Systems	41																																1																			
+International Workshop on Database and Expert Systems Applications	41												1																																							
+Journal of Multimedia	41																											1																								
+Recent Advances in Parallel Virtual Machine and Message Passing Interface	41																																1																			
+Systems and Computers in Japan	41																																																			
+Thirty- AAAI Conference on Artificial Intelligence	41																									1																										
+Working Conference on Reverse Engineering	41																																									1										
+ACM SIGCOMM Conference on Applications	40																																																			
+Computational Intelligence	40																																																			
+Concurrency	40																																1																			
+Conference on Creativity & Cognition	40			1																																																
+IEEE International Conference on Data Mining Workshops	40																									1																										
+IEEE Trans. Neural Netw. Learning Syst.	40																									1				1																						
+International Joint Conference on Computational Sciences and Optimization	40		1																																																	
+MONET	40																																																			
+TOMCCAP	40																																																			
+Asia-Pacific Software Engineering Conference	39																																									1										
+Briefings in Bioinformatics	39				1																																															
+CSIE  WRI World Congress on Computer Science and Information Engineering	39																																																			
+Data Warehousing and Knowledge Discovery	39																																																			
+IEEE / ACM International Symposium on Mixed and Augmented Reality	39																																															1				
+IEEE/CIC International Conference on Communications in China	39						1																																													
+Int. J. Communication Systems	39						1																																													
+International ACM SIGACCESS Conference on Computers and Accessibility	39																																																			
+International Conference on Computer Supported Cooperative Work in Design	39																			1																																
+International IEEE Conference on Intelligent Transportation Systems	39																																																			
+J. Graphics Tools	39																																																			
+JASIS	39																																																			
+JCM	39																																																			
+Med. Biol. Engineering and Computing	39				1																																															
+Medical Imaging and Augmented Reality	39				1	1																																										1				
+Microelectronics Journal	39														1																																					
+Operating Systems Review	39																														1																					
+SIAM J. Math. Analysis	39		1																																																	
+The International ACM SIGIR conference on research and development in Information Retrieval	39																					1																														
+Ad Hoc Networks	38						1																																													
+CHI  Conference Summary on Human Factors in Computing Systems	38																			1																																
+Cyberpsy. Behavior	38																																																			
+Diagrammatic Representation and Inference	38																																																			
+IEEE International Conference on Automation Science and Engineering	38																																																			
+IEEE International Conference on Multimedia and Expo Workshops	38																											1																								
+IEEE International Conference on Semantic Computing	38																																																			
+Informatik Spektrum	38																																																			
+International Conference on Data Engineering Workshops	38																																																			
+International Conference on Human-Computer Interaction with Mobile Devices and Services	38																			1							1																									
+International Wireless Communications and Mobile Computing Conference	38						1																				1																									
+J. Inf. Sci. Eng.	38																																																			
+J. Solid-State Circuits	38																																																			
+J. Symb. Comput.	38																																																			
+Neural Computation	38																																																			
+Service-Oriented Computing	38																																																			
+Advances in Artificial Intelligence	37																									1																										
+Annual Canadian Conference on Computational Geometry	37							1																																												
+Constraints	37																																																			
+Design Automation and Test in Europe	37																																																			
+Eurographics Workshop on Visual Computing for Biology and Medicine	37				1																																															
+Frontiers of Computer Science	37																																																			
+German Conference on Bioinformatics	37				1																																															
+IEEE International Conference on Mobile Adhoc and Sensor Systems	37																										1													1												
+IEEE Trans. Aerospace and Electronic Systems	37														1																																					
+IEEE/WIC/ACM International Conference on Web Intelligence	37																								1																											
+Image Analysis and Processing	37																				1																															
+Int. J. Computational Intelligence Systems	37																																																			
+International ACM SIGIR Conference on Research and Development in Information Retrieval	37																					1																														
+International Conference on Autonomic Computing	37																																																			
+J. Bioinformatics and Computational Biology	37				1																																															
+Joint International Conference on Digital Libraries	37											1																																								
+Proceeding of the International ACM SIGIR Conference on Research and Development in Information Retrieval	37																					1																														
+The International Conference on Geoinformatics: GIScience in Change	37																	1																																		
+Theory and Practice of Computer Graphics	37									1																																										
+Trans. GIS	37																	1																																		
+User Model. User-Adapt. Interact.	37																			1																																
+VLDB   International Conference on Very Large Data Bases	37												1																																							
+Virtual Reality Conference	37																																															1				
+WebNet	37																								1																											
+Annual SIGCSE Conference on Innovation and Technology in Computer Science Education	36													1																																						
+Ars Comb.	36																																																			
+Australasian Computer-Human Interaction Conference	36																			1																																
+Computational Intelligence and Security	36																																						1													
+EDBT  International Conference on Extending Database Technology	36												1																																							
+EG UK Theory and Practice of Computer Graphics	36									1																																										
+Eurographics Workshop on 3D Object Retrieval	36																																																1			
+IEEE International Solid-State Circuits Conference	36																																																			
+IEEE Systems Journal	36																																																			
+IEEE Trans. Industrial Informatics	36																																																			
+Interaction Design and Children	36																			1																																
+International Conference on Computer Vision	36																																																1			
+International Conference on Internet Multimedia Computing and Service	36																											1																								
+J. Comb. Optim.	36																																																			
+MultiMedia Modeling	36																											1																								
+Oper. Res. Lett.	36																																																			
+SIAM J. Imaging Sciences	36																																																			
+Sys. Safety	36																																						1													
+Twenty-Fifth International Joint Conference on Artificial Intelligence	36																									1																										
+Annual Symposium on User Interface Software and Technology	35																			1																																
+CIDR   Biennial Conference on Innovative Data Systems Research	35																																																			
+Computation	35																																																			
+Computing and Combinatorics	35																																																			
+Conceptual Modeling	35																																																			
+Database	35												1																																							
+Electrical Engineering	35																																																			
+Fifth International Conference on Fuzzy Systems and Knowledge Discovery	35																																																			
+High-Performance Computing and Networking	35						1												1																																	
+IEEE / WIC / ACM International Conference on Web Intelligence	35																								1																											
+IEEE Geoscience and Remote Sensing Symposium	35																	1																																		
+IEEE International Conference on High Performance Computing and Communications	35						1												1																																	
+IEEE Micro	35																																																			
+Information Systems Frontiers	35																																																			
+International Conference on Collaboration Technologies and Systems	35																			1																																
+International Conference on Multimedia Retrieval	35																											1																								
+International Conference on Parallel Processing Workshops	35																																1																			
+International Conference on Robotics and Automation	35																																												1							
+International Symposium on Computational Geometry	35							1																																												
+J. Comb. Theory	35																																																			
+J. Log. Program.	35																																																			
+Pervasive Computing	35																																	1																		
+Technologies for E-Learning and Digital Entertainment	35													1																																						
+ACM International Conference on Conference on Information and Knowledge Management	34													1																																						
+ACM International Conference on Web Search and Data Mining	34																					1				1																										
+ACM Symposium on Cloud Computing	34																																																			
+Advances in Natural Computation	34																																																			
+Cognitive Science	34			1																																																
+Computational Biology and Chemistry	34				1																																															
+D-Lib Magazine	34																																																			
+Eurographics Italian Chapter Conference	34																																																			
+Eurographics/ACM SIGGRAPH Symposium on Computer Animation	34																																																			
+Geometric Modeling and Processing	34																																																			
+HCI International	34																			1																																
+IEEE International Conference on Mobile Data Management	34												1														1																									
+IEEE International Workshop on Multimedia Signal Processing	34																											1													1											
+IEEE Network	34						1																																													
+International Conference on CSCW in Design	34																			1																																
+International Conference on Educational Data Mining	34													1												1																										
+International Conference on Machine Learning and Applications	34																									1																										
+International Conference on New Interfaces for Musical Expression	34																																																			
+JACIII	34																																																			
+On the Move to Meaningful Internet Systems	34																								1																											
+Scientific Programming	34																																			1																
+USENIX Symposium on Networked Systems Design and Implementation	34						1																																													
+ACM International Joint Conference on Pervasive and Ubiquitous Computing	33																																	1																		
+ACM on Conference on Information and Knowledge Management	33												1																																							
+Conference on Human Factors in Computing Systems: Common Ground	33																			1																																
+IEEE Annual Computer Software and Applications Conference	33																																																			
+IEEE Frontiers in Education Conference	33													1																																						
+IEEE International Conference on Advanced Learning Technologies	33																																																			
+IEEE International Conference on Cloud Computing	33																																																			
+IEEE International Symposium on High Performance Distributed Computing	33						1												1																																	
+Image Analysis and Recognition	33																																																1			
+International Conference on Cyber-Enabled Distributed Computing and Knowledge Discovery	33																																																			
+International Conference on Digital Image Processing	33																				1																															
+International Conference on Digital Preservation	33																																																			
+International Conference on Geoinformatics	33																	1																																		
+International Conference on Mobile and Ubiquitous Multimedia	33																										1	1																								
+International Conference on Virtual Reality Continuum and its Applications in Industry	33																																															1				
+International Joint Conference on Computer Vision	33																																																1			
+International Journal of Software Engineering and Knowledge Engineering	33																																									1										
+J. Medical Systems	33				1																																															
+Journal of Zhejiang University	33																																																			
+MASCOTS	33																																																			
+Mustererkennung	33																																																			
+Network and Parallel Computing	33						1																										1																			
+SIGGRAPH Conference on Sketches & Applications: in conjunction with the annual conference on Computer graphics and interactive techniques	33																																																			
+Social Computing	33																																																			
+ACM SIGGRAPH  Conference Abstracts and Applications	32									1																																										
+Advances in Spatial and Temporal Databases	32												1																																							
+Algorithms and Architectures for Parallel Processing	32																																1																			
+Annual International ACM SIGIR Conference on Research and Development in Information Retrieval	32																					1																														
+Artificial Neural Networks	32																									1				1																						
+Cooperative Design	32																																																			
+Eng. Appl. of AI	32																									1																										
+Front. Neuroinform.	32																																																			
+IEEE Custom Integrated Circuits Conference	32																																																			
+IEEE Global Conference on Signal and Information Processing	32																																								1											
+IEEE International Conference on Healthcare Informatics	32																																																			
+IEEE International Conference on Software Maintenance	32																																									1										
+IEEE Real-Time Systems Symposium	32																																																			
+IEEE Symposium on Computers and Communications	32						1																																													
+Information Processing in Computer-Assisted Interventions	32																																																			
+Int. J. Biomedical Imaging	32				1	1																																														
+Int. J. Digital Earth	32																																																			
+International Conference on Information Systems for Crisis Response and Management	32																																																			
+International Conference on Language Resources and Evaluation	32																																																			
+International Workshop on Program Comprehension	32																																									1										
+J. Intell. Inf. Syst.	32																																																			
+Mathematics and Computers in Simulation	32																																			1																
+Picture Coding Symposium	32																																																			
+SIGMOD	32																																																			
+SIGRAD	32																																																			
+Sci. Comput. Program.	32																																																			
+Statistical Analysis and Data Mining	32																									1																										
+Technometrics	32																																																			
+The ACM Conference on Ubiquitous Computing	32																																	1																		
+The ACM Technical Symposium on Computer Science Education	32													1																																						
+Vision Modeling and Visualization Conference	32																																																			
+Dagstuhl	31																																																			
+Digital Signal Processing	31																																								1											
+Entertainment Computing	31																1																																			
+Fuzzy Systems and Knowledge Discovery	31																																																			
+Geometric Modelling	31																																																			
+Graphs and Combinatorics	31																																																			
+IEEE Intelligent Vehicles Symposium	31																																													1						
+IEEE International Conference on High Performance Computing and Communications & IEEE International Conference on Embedded and Ubiquitous Computing	31																																																			
+IEEE International Conference on Multimedia Computing and Systems	31																											1																								
+IEEE International Conference on Pervasive Computing and Communications	31																																	1																		
+IEEE International Parallel and Distributed Processing Symposium Workshops	31																																1																			
+IEEE/ACM International Conference on Automated Software Engineering	31																																									1										
+Int. J. Control	31																																																			
+International Conference on Computer Communications and Networks	31						1																																													
+International Conference on Digital Image Computing: Techniques and Applications	31																																																			
+International Conference on Supercomputing	31																		1																																	
+Numerische Mathematik	31		1																																																	
+Privacy	31																																																			
+Signal Processing Systems	31																																								1											
+Trans. Edutainment	31													1			1																																			
+ACM International Conference on Bioinformatics	30				1																																															
+ACM on International Conference on Multimedia Retrieval	30																											1																								
+Adv. Comput. Math.	30		1																																																	
+Annual ACM Symposium on User Interface Software & Technology	30																			1																																
+Biomedical Image Registration	30				1	1																																														
+Biometric Recognition	30																																																			
+Computational Linguistics and Intelligent Text Processing	30																																																			
+Conference on lInteraction Homme-Machine	30																			1																																
+Fuzzy Information and Engineering	30																																																			
+I. J. Medical Informatics	30				1																																															
+IEEE International Conference on Network Protocols	30						1																																													
+IEEE International Conference on Trust	30																																																			
+IEEE Trans. Automation Science and Engineering	30																																																			
+IJSNet	30																																																			
+Image Analysis	30																																																1			
+International Conference on 3D Digital Imaging and Modeling	30																																																			
+JOCCH	30																																																			
+SPAA	30																																																			
+TBC	30																																																			
+Text REtrieval Conference	30																					1																														
+The International Joint Conference on Neural Networks	30																									1				1																						
+The International Symposium on Visual Information Communication and Interaction	30																																																			
+Twenty-Eighth AAAI Conference on Artificial Intelligence	30																									1																										
+Vision Modeling & Visualization	30																																																			
+Wireless Networks	30						1																																													
+Workshops  IEEE International Conference on Data Mining	30																									1																										
+ACM International Conference on Image and Video Retrieval	29																					1																														
+ACM SIGSOFT Software Engineering Notes	29																																									1										
+Advances in Neural Information Processing Systems	29																																																			
+Annual ACM Conference on Multimedia Conference	29																											1																								
+BMC Medical Imaging	29				1	1																																														
+Data Visualization: The State of the Art	29																																																			1
+Databases in Networked Information Systems	29						1						1																																							
+Distributed Computing	29																																1																			
+Document Recognition and Retrieval	29																					1																														
+IEEE and ACM International Symposium on Mixed and Augmented Reality	29																																															1				
+IJCAT	29																																																			
+Inf. Comput.	29																																																			
+Intelligent Data Engineering and Automated Learning	29																									1																										
+International Conference on Computing	29																																																			
+International Conference on Intelligent Systems Design and Applications	29																																																			
+International Symposium on Computational Intelligence and Design	29																																																			
+J. Optimization Theory and Applications	29		1																													1																				
+Progress in Pattern Recognition	29																																																			
+Scale Space and Variational Methods in Computer Vision	29																																																			
+Science & Technology Proceedings	29																																																			
+Soft Computing	29																																																			
+Workshop on Hyperspectral Image and Signal Processing: Evolution in Remote Sensing	29																																																			
+A	28																																																			
+ACL   Annual Meeting of the Association for Computational Linguistics	28																																																			
+ACM Crossroads	28																																																			
+ACM SIGMM International Workshop on Multimedia Information Retrieval	28																																																			
+Computational Imaging	28																																																			
+Designing Interactive Systems Conference	28																			1																																
+Ecological Informatics	28																																																			
+Eighth International Conference on Fuzzy Systems and Knowledge Discovery	28																																																			
+IEEE Asia-Pacific Services Computing Conference	28																																																			
+IEEE International Conference on Intelligence and Security Informatics	28																																						1													
+IEEE International Symposium on Broadband Multimedia Systems and Broadcasting	28																																																			
+IEEE Scientific Visualization Conference	28																																				1															1
+IEEE Symposium On Visual Analytics Science And Technology	28																																																	1		1
+IEEE VGTC Pacific Visualization Symposium	28																																																			1
+IEEE Working Conference on Software Visualization	28																																									1										1
+Intelligent Computing Theories and Application	28																																																			
+International Conference on Advanced Visual Interfaces	28																			1																																
+International Conference on Computer Communication and Networks	28						1																																													
+International Conference on Distributed Computing Systems Workshops	28																																1																			
+International Conference on High Performance Computing	28																		1																																	
+i-com	28																																																			
+international conference on Supercomputing	28																		1																																	
+ACM Conference on Computer Supported Cooperative Work & Social Computing	27																			1																																
+ACM SIGSAC Conference on Computer and Communications Security	27																																						1													
+ACM on Multimedia Conference	27																											1																								
+ACM/IEEE Conference on Supercomputing	27																		1																																	
+Algorithms for Molecular Biology	27	1			1																																															
+Algorithms in Bioinformatics	27	1			1																																															
+Annals OR	27		1																													1																				
+Annual International Conference on Digital Government Research	27																																																			
+CVGIP: Graphical Model and Image Processing	27																				1																															
+Discrete Geometry for Computer Imagery	27																																																			
+IEEE Real-Time and Embedded Technology and Applications Symposium	27																																																			
+IEEE Symposium on Parallel and Large-Data Visualization and Graphics	27																																																			1
+IEEE Wireless Commun.	27						1																																													
+IJCSE	27																																																			
+International Conference for Young Computer Scientists	27																																																			
+International Conference on Innovative Computing	27																																																			
+International Conference on Internet Computing	27																								1																											
+International Conference on Parallel and Distributed Computing	27																																1																			
+J. Algorithms	27	1																																																		
+J. Global Optimization	27		1																													1																				
