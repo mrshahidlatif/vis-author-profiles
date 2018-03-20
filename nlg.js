@@ -6,7 +6,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	
 	//console.log(pdata);
 	//console.log(adata);
-	// console.log(aObject);
+	 console.log(aObject);
 	hasSupversied = false; 
 	// console.log(percentile);
 	var bio = "";
@@ -26,7 +26,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	getKeywords(pdata, aObject); 
 
 	//For Outliers
-	if (totalpubCount < 5 ){
+	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
 
@@ -35,14 +35,13 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		document.getElementById("collRelation").innerHTML = text;
 		document.getElementById("rtopics").innerHTML = researchTopicsText;
 	}
-	else if (totalpubCount >= 5){
-
-		if (eYear <= 2013){
-			var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
-		}
-		else {
+	else if (totalpubCount >= 10){
+		// if (eYear <= 2013){
+		// 	var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
+		// }
+		// else {
 			var bio = generateSummary(pdata, adata, aObject, percentile);
-		}
+		// }
 		
 		if (topCoAuthors.length > 0){
 			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);

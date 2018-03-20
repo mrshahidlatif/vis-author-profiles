@@ -1,6 +1,6 @@
 function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors){
   
-   console.log(gdata);
+  //  console.log(gdata);
   // console.log(adata);
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
