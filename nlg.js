@@ -1195,21 +1195,21 @@ function fourthSentenceTopicsV1(pdata, adata, keywords, a){
 	//console.log(diverse_topics); 
 	if (diverse_topics.length > 0){
 		if (diverse_topics.length == 1){
-			s += " The author has also worked on " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0]) + "."
+			s += " The author has also worked on " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community") + "."
 
 		}
 		else if (diverse_topics.length == 2){
-			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0]) 
-			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1], a.Name, diverse_topics[1]) + ".";
+			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community")
+			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1], a.Name, diverse_topics[1], "community") + ".";
 		}
 		else if (diverse_topics.length > 2) {
 			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " ;
 			for (var i=0;i<diverse_topics.length;i++){
 				if(i==diverse_topics.length-1){
-					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i])+".";
+					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i], "community")+".";
 				}
 				else {
-					s += makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i]) + ", ";
+					s += makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i], "community") + ", ";
 				}
 			}
 		}
@@ -1387,12 +1387,12 @@ function makeMeLive_LoadData(pdata, adata, text, a, c){
 	return  '<span id="linkedAuthorName" onclick="loadMutualPublications(pdata, adata, \''+a+'\', \''+c+'\')">' + text + "</span>";
 }
 
-function makeMeLive_LoadDataOnTopic(pdata, adata, text, a, topic){
+function makeMeLive_LoadDataOnTopic(pdata, adata, text, a, topic, cssClass){
 	//text : hyperlink 
 	//a : main author 
 	//c: coauthor 
 	//y : year
-	return  '<span id="linkedAuthorName" onclick="loadPublicationsOnTopic(pdata, adata, \''+a+'\', \''+topic+'\')">' + text + "</span>";
+	return  '<span id="linkedAuthorName" class="'+cssClass+'" onclick="loadPublicationsOnTopic(pdata, adata, \''+a+'\', \''+topic+'\')">' + text + "</span>";
 }
 
 function makeMeLive_LoadAllIndividualPublications(pdata, adata, text, a){
