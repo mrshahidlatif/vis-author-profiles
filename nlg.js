@@ -103,7 +103,6 @@ function findEndYear(aObject){
 	return eYear; 
 }
 
-
 function generateSummary(pdata, adata, a, p)
 {
 	var bio = "";
@@ -113,30 +112,59 @@ function generateSummary(pdata, adata, a, p)
 	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 
 	if (eYear >= 2013) {
+		if (a.Journals+a.Conferences >= 10 && (a.Journals+a.Conferences) < 100 && eYear-sYear >= 5 && eYear >=2015 ){
+			bio = getFullNameWithoutNo(a.Name) + " is" ;
+			if (eYear-sYear >= 20) {
+				bio += " a longtime contributor ";
+			}
+			else {
+				bio += " an active researcher "; 
+			}
+			bio += "since " + sYear + " and has "+ "published " + 
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + ", including " +
+			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+			+ " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-		bio = getFullNameWithoutNo(a.Name) + " is publishing since " + sYear + "." + " Until now, the author has "+ "published " + 
-		makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-		+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " including " +
-		makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
-		+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
-		+ " and " 
-		+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
+		else if (a.Journals+a.Conferences >= 100 && eYear-sYear >= 5 && eYear >=2015 ){
+			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, " hundred publications", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
+			+ " since " + sYear + ". His published work includes " 
+			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
+		else {
+			bio = getFullNameWithoutNo(a.Name) + " has published " + 
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers ", a.Name)
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " since " + sYear + ", including " +
+			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
+			+ " and " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-		+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-		+ ".";
+			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".";
+		}
 	}
 	else if (eYear < 2013){
 
-		bio = getLastName(a.Name) + " published from " + sYear + " to " + eYear + "." + " The author has "+ "published " + 
-			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-			+ " articles " + '<svg width="70" height="20" id="sparklineAll"></svg>' + " including "
+		bio = getLastName(a.Name) + " published " + makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name)
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " between " +  sYear + " and " + eYear + "," + " including "
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
-			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " conference papers", a.Name) + " " 
+			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 			+  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".";
-
 	}
 
 	if (pub.length < 100){
@@ -167,10 +195,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 	if (pub.length == 1){ //Case with Single Publication 
 		
 		if (a.Journals == 1){
-			bio += getFullNameWithoutNo(a.Name) + " published one journal paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published one journal article in " + sYear + "."; 
 		}
 		else {
-			bio += getFullNameWithoutNo(a.Name) + " published one conference paper in " + sYear + "."; 
+			bio += getFullNameWithoutNo(a.Name) + " published one proceedings paper in " + sYear + "."; 
 		}
 		
 		//Showing publication on the sidebar 
@@ -189,10 +217,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 				bio += " journal article and ";
 			}
 			if (a.Conferences > 1){
-				bio += no2word[a.Conferences] + " conference papers."; 
+				bio += no2word[a.Conferences] + " proceedings papers."; 
 			}
 			else {
-				bio += no2word[a.Conferences] + " conference paper."; 
+				bio += no2word[a.Conferences] + " proceedings paper."; 
 			}
 		}
 		else {
@@ -216,10 +244,10 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 				bio += " journal article and ";
 			}
 			if (a.Conferences > 1){
-				bio += no2word[a.Conferences] + " conference papers."; 
+				bio += no2word[a.Conferences] + " proceedings papers."; 
 			}
 			else {
-				bio += no2word[a.Conferences] + " conference paper."; 
+				bio += no2word[a.Conferences] + " proceedings paper."; 
 			}
 		}
 		else {
@@ -1547,7 +1575,7 @@ function loadConferenceIndividualPublications(pdata, adata, name){
     return +b.Year - +a.Year;
   });
 
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Conference Publications " + "(" + indPublications.length + ") : " + name  
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "proceedings Papers " + "(" + indPublications.length + ") : " + name  
   + "</span>" + "<br>" + "<hr>";
   
   for (var i=0; i<indPublications.length;i++){
