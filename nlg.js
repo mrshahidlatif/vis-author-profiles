@@ -1180,14 +1180,14 @@ function thirdSentenceTopicsV1(a){
 }
 function fourthSentenceTopicsV1(pdata, adata, keywords, a){
 	var s="";
-	//console.log(alreadyListedTopics); 
+	//console.log(alreadyListedTopics);
 	var diverse_topics = [];
 	for (var i=0; i<keywords.length;i++){
-		if (alreadyListedTopics.indexOf(keywords[i].Name) == -1 && diverse_fields.indexOf(keywords[i].Name) != -1){
+    if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value > 1){
 			diverse_topics.push(keywords[i].Name); 
 		}
 	}
-	//console.log(diverse_topics); 
+	//console.log(diverse_topics);
 	if (diverse_topics.length > 0){
 		if (diverse_topics.length == 1){
 			s += " The author has also worked on " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community") + "."
