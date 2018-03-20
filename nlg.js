@@ -1099,21 +1099,16 @@ function generateResearchTopicsText(pdata, adata, a){
 }
 function firstSentenceTopicsV1(pdata, adata, keyword, a){
 	var s = "";
-	var pubCount = a.Conferences + a.Journals; 
-	var sYear = findStartYear(a);
-	var eYear = findEndYear(a);
+	var pubCount = a.Conferences + a.Journals;
 
 	if (pubCount >= 100){
-		s += getLastName(a.Name) + " is a core member of the " + keyword.Name + " community with " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions ", a.Name, keyword.Name) + " since " + sYear + ". "; 
+		s += getLastName(a.Name) + " is a core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
 	}
 	else if (pubCount > 50 && pubCount < 100){
-		s += getLastName(a.Name) + " is a member of the " + keyword.Name + " community with " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions ", a.Name, keyword.Name) + " since " + sYear + ". "; 
+		s += getLastName(a.Name) + " is a member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
 	}
 	else {
-		s += getLastName(a.Name) + " is a contributor of the " + keyword.Name + " community with " + 
-		makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Value + " contributions " , a.Name, keyword.Name) + " since " + sYear + ". "; 
+		s += getLastName(a.Name) + " is a contributor of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
 	}
 	alreadyListedTopics.push(keyword.Name); 
 	return s;

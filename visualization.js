@@ -242,7 +242,7 @@ function getIndividualPublicationsObjects(pubData, year, name){
 }
 
 function StringifyPublication(pdata, adata, p){
-  var authors=""; 
+  var authors="";
   for (var i =0;i<p.Authors.length; i++){
     // authors = authors + p.Authors[i].Name + ", ";
     if (authors_list.indexOf(p.Authors[i].Name) != -1){
@@ -259,7 +259,14 @@ function StringifyPublication(pdata, adata, p){
     }
   }
   var pString = '<span id="publicationTitle">' + p.Title + "</span>"
-  + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
+    + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
+  var pubKeywords = venue_keywords[p.Venue];
+  if (pubKeywords) {
+    pString += "<br/>";
+    for (var i = 0; i < pubKeywords.length; i++) {
+      pString += '<span class="community">' + pubKeywords[i] + '</span> ';
+    }
+  }
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
