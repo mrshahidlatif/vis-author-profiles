@@ -151,10 +151,16 @@ p {
 }
 
 /*Keywords*/
-.community {
-    background: rgba(33, 151, 255, 0.4);
+.community,
+.subfield {
     padding: 0 3px;
     border-radius: 4px;
+}
+.community {
+    background: rgba(33, 151, 255, 0.2);
+}
+.subfield {
+    background: rgba(33, 151, 255, 0.1);
 }
 
 #sideBarHead {
