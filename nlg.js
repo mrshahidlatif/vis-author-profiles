@@ -8,6 +8,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//console.log(adata);
 	//console.log(aObject);
 	hasSupversied = false; 
+	var alreadyListedTopics = []; 
 	// console.log(percentile);
 	var bio = "";
 	var collab="";
@@ -1088,7 +1089,6 @@ function sortByValue(data) {
   return data;
 }
 function generateResearchTopicsText(pdata, adata, a){
-	alreadyListedTopics = [];
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
 	//console.log(keywords);
