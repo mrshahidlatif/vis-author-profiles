@@ -1112,7 +1112,7 @@ function generateResearchTopicsText(pdata, adata, a){
 	if (keywords.length > 0) {
 		text += visCommunityPhraseTopics(pdata, adata, keywords, a);
 		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
-		text += thirdSentenceTopicsV1(a);
+		text += visAreaPhraseTopics(a);
 		text += otherCommunityPhraseTopics(pdata, adata, keywords, a);
 		text += sixthSentenceTopicsV1(adata, a);
 	}
@@ -1120,7 +1120,7 @@ function generateResearchTopicsText(pdata, adata, a){
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
-	console.log(keywords);
+	// console.log(keywords);
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
@@ -1172,13 +1172,13 @@ function visSubfieldPhraseTopics(pdata, adata, keywords, a){
 	}
 	return s; 
 }
-function thirdSentenceTopicsV1(a){
+function visAreaPhraseTopics(a){
 	//Recent topics of author
 	var s=" ";
 	var topics = []; 
-	//console.log(a); 
+	console.log(a); 
 	for (var i=0; i<a.Keywords.length;i++){
-		if(author_keywords[a.Keywords[i]] != undefined || author_keywords[a.Keywords[i]] == "unclear"){
+		if(author_keywords[a.Keywords[i]] != undefined && author_keywords[a.Keywords[i]] != "unclear"){
 			topics.push(author_keywords[a.Keywords[i]]); 
 		}
 	}
@@ -1187,16 +1187,17 @@ function thirdSentenceTopicsV1(a){
     	return +(b.Value) - +(a.Value);
   	});
 
-	// console.log(uniqueTopics); 
+	console.log(uniqueTopics); 
 	//uniqueTopics = uniqueTopics.slice(1,20); 
-  	
+	  
+	var topicThreshold = a.Conferences + a.Journals>= 100?3:2;
   	var listOfTopics = [];
   	for (var i=0; i<uniqueTopics.length;i++){
-  		if (keywordMapping[uniqueTopics[i].Name] != undefined){
+  		if (keywordMapping[uniqueTopics[i].Name] != undefined && uniqueTopics[i].Value >= topicThreshold){
   			listOfTopics.push(uniqueTopics[i].Name); 
   		}
   	}
-  	// console.log(listOfTopics); 
+  	console.log(listOfTopics); 
   
   	s += convertKeywordList(listOfTopics);
   	//console.log(s); 
@@ -1346,9 +1347,9 @@ function convertKeywordList(keywords) {
     var pre = allVisOfDataVersionsAvailable ? "the visualization of " : "";
     var post = allVisOfDataVersionsAvailable ? " data" : (allVisVersionsAvailable ? " visualization" : "");
     if (isSingular) {
-        return "A current focus area of the author is " + pre + text + post + ".";
+        return "A focus area of the author is " + pre + text + post + ".";
     }
-    return "Current focus areas of the author are " + pre + text + post + ".";
+    return "Focus areas of the author are " + pre + text + post + ".";
 }
 function appendKeyword(keyword) {
         if (selectedKeywords.indexOf(keyword) < 0) {
