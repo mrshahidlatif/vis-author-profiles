@@ -275,7 +275,7 @@ function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
 	var s = "" ;
 	//console.log(c.Name); makeMeLive(c.Name)
 	if (DoesExistInList(supervisees, c.Name)){
-		s = getLastNamePronoun(a.Name) + " top " + "collaborator" + '<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
 		" and supervisee" + '<span id=info onlick="showAdditionalInfo4()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ". ";
 		
@@ -287,7 +287,7 @@ function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
 
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
-			s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' +
+			s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' +
 			 " and supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " is "
 			 + makeMeLive_FullName(c.Name) + " " +
 			 '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ". ";
@@ -298,7 +298,7 @@ function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
 			listOfSparklines.push(obj); 
 	}
 	else {
-		s = getLastNamePronoun(a.Name) + " top " + "collaborator" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
 		" is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll"></svg>' + ". ";	
 		var obj = new Object();
 		obj.sparklineID = "sparkline_top_coll";
@@ -311,13 +311,13 @@ function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
 }
 function firstSentenceV2(pdata, adata, a,c1,c2){
 	var s = "";
-	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
 	" are " + makeMeLive_FullName(c1.Name) + " and " + makeMeLive_FullName(c2.Name) + ". "
 	return s;
 }
 function firstSentenceV3(pdata, adata, a,list_c){
 	var s = "";
-	s += getLastNamePronoun(a.Name) + " top collaborators" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
+	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
 		for (var i=0;i<list_c.length;i++){
 			if(i==list_c.length-1){
 					s += "and "+ makeMeLive_FullName(list_c[i].Name) +  ".";
