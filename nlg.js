@@ -1120,7 +1120,7 @@ function generateResearchTopicsText(pdata, adata, a){
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
-	console.log(a);
+	// console.log(a);
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
@@ -1299,23 +1299,29 @@ function similarResearchersPhraseTopics(adata, a){
 	return s; 
 }
 function getKeywords(pdata, a){
-	var allKeywords = []; 
+	var keywords = {};
 	var pubs = getPublications(pdata, a.Name);
-	for (var i=0;i<pubs.length; i++){
-		var listOfKeywords = venue_keywords[pubs[i].Venue];
-		if (listOfKeywords != undefined){
-			//console.log(listOfKeywords);
-			for (var j=0 ; j<listOfKeywords.length; j++){
-				allKeywords.push(listOfKeywords[j]);
+	for (var i = 0; i < pubs.length; i++) {
+		var pubKeywords = venue_keywords[pubs[i].Venue];
+		if (pubKeywords != undefined) {
+			for (var j = 0; j < pubKeywords.length; j++) {
+				var keyword = pubKeywords[j];
+				if (!keywords[keyword]) {
+					keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
+				}
+				keywords[keyword].Value++;
+				keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
 			}
 		}
 	}
-	var allUniqueKeywords = compressArray(allKeywords, "");
-	allUniqueKeywords.sort(function(a, b) {
-    	return +(b.Value) - +(a.Value);
-  	});
-
-	return allUniqueKeywords; 
+	var keywordList = Object.keys(keywords).map(function (keyword) {
+		return {Name: keyword, Value: keywords[keyword].Value, MaxYear: keywords[keyword].MaxYear};
+	});
+	keywordList.sort(function (a, b) {
+		return +(b.Value) - +(a.Value);
+	});
+	console.log(keywordList);
+	return keywordList;
 }
 
 function getKeywordsPerYear(pubs, keyword){
