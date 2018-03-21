@@ -1120,7 +1120,7 @@ function generateResearchTopicsText(pdata, adata, a){
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
-	// console.log(keywords);
+	console.log(a);
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
@@ -1277,19 +1277,19 @@ function sixthSentenceTopicsV1(adata, a){
 	var similarAuthors = findAuthorsWithSimilarResearchTopics(adata, a); 
 	if (similarAuthors.length > 0){
 		if (similarAuthors.length == 1){
-			s += " Another researcher with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0]) + ".";
+			s += " Another researcher with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
 		}
 	 	else if (similarAuthors.length == 1){
-	 		s += " Researchers with similar areas of expertise are " + makeMeLive_FullName(similarAuthors[0]) + " and " + makeMeLive_FullName(similarAuthors[1]) +"." 
+	 		s += " Researchers with similar areas of expertise are " + makeMeLive_FullName(similarAuthors[0].Name) + " and " + makeMeLive_FullName(similarAuthors[1]) +"." 
 	 	}
 	 	else {
 			s += " Researchers with similar areas of expertise are " ;
 			for (var i=0;i<similarAuthors.length;i++){
 				if(i==similarAuthors.length-1){
-					s += "and " + makeMeLive_FullName(similarAuthors[i])+".";
+					s += "and " + makeMeLive_FullName(similarAuthors[i].Name)+".";
 				}
 				else {
-					s += makeMeLive_FullName(similarAuthors[i]) + ", ";
+					s += makeMeLive_FullName(similarAuthors[i].Name) + ", ";
 				}
 			}
 		}
@@ -1332,45 +1332,51 @@ function getKeywordsPerYear(pubs, keyword){
 	return keywordPerYear; 
 }
 
-function findAuthorsWithSimilarResearchTopics(adata, a){
-	var similarAuthors = []; 
-	var mainAuthorsTopics = [];
-	for (var i=0; i<a.Keywords.length;i++){
-		if(author_keywords[a.Keywords[i]] != undefined ){
-			mainAuthorsTopics.push(author_keywords[a.Keywords[i]]); 
-		}
-	} 
-	//console.log(mainAuthorsTopics); 
-	for (var j=0;j<adata.length;j++){
-		var currentAuthorTopics = [];
-		for (var k=0;k<adata[j].Keywords.length;k++){
-			if(author_keywords[adata[j].Keywords[k]] != undefined ){
-				currentAuthorTopics.push(author_keywords[adata[j].Keywords[k]]); 
-			}
-		}
-		var overlap = getIntersect(mainAuthorsTopics,currentAuthorTopics); 
-		if(overlap.length > 5 && overlap.length/mainAuthorsTopics.length > 0.5){
-			//console.log(adata[j].Name);
-			similarAuthors.push(adata[j].Name);  
+function findAuthorsWithSimilarResearchTopics(adata, a) {
+	if (a.Keywords.length < 10) return [];
+	var keywordMap1 = createKeywordMap(a.Keywords);
+	var similarAuthors = [];
+	for (var i = 0; i < adata.length; i++) {
+		if (adata[i].Name === a.Name || adata[i].Keywords.length < 10) continue;
+		var keywordMap2 = createKeywordMap(adata[i].Keywords);
+		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
+		if (similarity > 0.5) {
+			similarAuthors.push({Name: adata[i].Name, Value: similarity});
 		}
 	}
-	var selfAuthorIndex = similarAuthors.indexOf(a.Name);
-	similarAuthors.splice(selfAuthorIndex, 1); 
-	return similarAuthors; 
+	similarAuthors.sort(function(a, b) {
+    	return b.Value - a.Value;
+  	});
+	return similarAuthors;
 }
-function getIntersect(arr1, arr2) {
-    var r = [], o = {}, l = arr2.length, i, v;
-    for (i = 0; i < l; i++) {
-        o[arr2[i]] = true;
-    }
-    l = arr1.length;
-    for (i = 0; i < l; i++) {
-        v = arr1[i];
-        if (v in o) {
-            r.push(v);
-        }
-    }
-    return r;
+function createKeywordMap(keywords) {
+	var keywordMap = {};
+	for (var i = 0; i < keywords.length; i++) {
+		var keyword = author_keywords[keywords[i]];
+		if (keyword === undefined || keyword === "unclear") {
+			continue;
+		}
+		if (!keywordMap[keyword]) {
+			keywordMap[keyword] = 0;
+		}
+		keywordMap[keyword]++;
+	}
+	return keywordMap;
+}
+function computeSimilarityOfKeywords(keywordMap1, keywordMap2) {
+	var sum = 0;
+	var length1 = 0;
+	var length2 = 0;
+	for (var keyword in keywordMap1) {
+		if (keyword in keywordMap2) {
+			sum += keywordMap1[keyword] * keywordMap2[keyword];
+		}
+		length1 += Math.pow(keywordMap1[keyword], 2);
+	}
+	for (var keyword in keywordMap2) {
+		length2 += Math.pow(keywordMap2[keyword], 2);
+	}
+	return sum / (Math.sqrt(length1) * Math.sqrt(length2));
 }
 function makeMeLive_FullName(name){
 	if (authors_list.indexOf(name) != 1){
