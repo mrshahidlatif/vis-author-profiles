@@ -1272,18 +1272,19 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive){
 				}
 			}
 		}
-		otherCommutiesOld = getTopNItems(otherCommutiesOld, 3, 6, 1);
-		var minNActiveCommunities = otherCommutiesActive[otherCommutiesActive.length - 1].Value;
-		var oldCommunitiesList = [];
-		for (var i = 0; i < otherCommutiesOld.length; i++) {
-			if (otherCommutiesOld[i].Value >= minNActiveCommunities) {
-				oldCommunitiesList.push(makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesOld[i].Name, a.Name, otherCommutiesOld[i].Name, "community"));
-			}
+	}
+	otherCommutiesOld = getTopNItems(otherCommutiesOld, 3, 6, 1);
+	var minNActiveCommunities = (otherCommutiesActive.length > 0)?otherCommutiesActive[otherCommutiesActive.length - 1].Value:0;
+	var oldCommunitiesList = [];
+	for (var i = 0; i < otherCommutiesOld.length; i++) {
+		if (otherCommutiesOld[i].Value >= minNActiveCommunities) {
+			oldCommunitiesList.push(makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesOld[i].Name, a.Name, otherCommutiesOld[i].Name, "community"));
 		}
-		if (oldCommunitiesList.length > 0) {
-			s += " In the past, the author also worked in the field" + ((oldCommunitiesList.length > 1) ? "s" : "") + " of " + stringifyList(oldCommunitiesList) + ".";
-		}
-	}	
+	}
+	if (oldCommunitiesList.length > 0) {
+		s += (otherCommutiesActive.length > 0)?" In the past, the": " The";
+		s += " author also worked in the field" + ((oldCommunitiesList.length > 1) ? "s" : "") + " of " + stringifyList(oldCommunitiesList) + ".";
+	}
 	return s; 
 }
 function stringifyList(list) {
