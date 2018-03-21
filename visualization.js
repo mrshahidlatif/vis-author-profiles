@@ -153,7 +153,8 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("class", "names")
           .attr("x", 0)
           .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return getLastName(d.Name) });
+          .text(function(d){return getLastName(d.Name); });
+          // .on("click", function(d){loadMe(pdata, adata, d.Name);});
     
       }
       //adding bars for individual publications 
