@@ -1107,8 +1107,6 @@ function sortByValue(data) {
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a);
-	//console.log(keywords);
-	// console.log(alreadyListedTopics); 
 	if (keywords.length > 0) {
 		text += visCommunityPhraseTopics(pdata, adata, keywords, a);
 		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
@@ -1118,24 +1116,24 @@ function generateResearchTopicsText(pdata, adata, a){
 	}
 	return text; 
 }
-function visCommunityPhraseTopics(pdata, adata, keywords, a){
-	var s = "";
-	// console.log(a);
+function visCommunityPhraseTopics(pdata, adata, keywords, a) {
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
 	var pubCount = keyword.Value;
-
-	if (pubCount >= 30){
-		s += getLastName(a.Name) + " is a core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
+	var currentYear = (new Date()).getFullYear();
+	var isActive = currentYear - keyword.MaxYear <= 5;
+	var s = getLastName(a.Name);
+	if (pubCount >= 30) {
+		s += (isActive ? " is a current" : " was a") + " core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
 	}
-	else if (pubCount > 10){
-		s += getLastName(a.Name) + " is a member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
+	else if (pubCount > 10) {
+		s += (isActive ? " is a current" : " was a") + " member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
 	}
 	else {
-		s += getLastName(a.Name) + " is a contributor of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
+		s += (isActive ? " is a current contributor of" : " made contributions to") + " the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " research community";
 	}
-	alreadyListedTopics.push(keyword.Name); 
+	alreadyListedTopics.push(keyword.Name);
 	return s;
 }
 function visSubfieldPhraseTopics(pdata, adata, keywords, a){
@@ -1320,7 +1318,6 @@ function getKeywords(pdata, a){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	console.log(keywordList);
 	return keywordList;
 }
 
