@@ -7,6 +7,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//console.log(pdata);
 	//console.log(adata);
 	//console.log(aObject);
+	console.log(topCoAuthors); 
 	hasSupversied = false; 
 	var alreadyListedTopics = []; 
 	// console.log(percentile);
@@ -181,9 +182,11 @@ function generateSummary(pdata, adata, a, p)
 		bio += " The author completed PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
 		"\" was published in " + a.PhDYear+".";
 	}
-	
+
 	return bio;
 }
+
+
 function generateSummaryForOutliers(pdata, adata, a, p)
 {
 	var bio = "";

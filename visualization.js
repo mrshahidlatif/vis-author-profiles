@@ -1,7 +1,41 @@
-function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors){
+var TOP_COAUTHORS ;  
+var RECORDS_TO_SHOW = 0; 
+function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors, t){
   
-  //  console.log(gdata);
-  // console.log(adata);
+   TOP_COAUTHORS = adata.length;
+   RECORDS_TO_SHOW = gdata.length; 
+  if (t==2){
+       RECORDS_TO_SHOW += 3;
+       var topNCoAuthorObjects = adata; // starting from the already listed authors 
+       for (var i = adata.length; i < distCoAuthors.length; i++) {
+          for (var j = 0; j < allAuthorsData.length; j++) {
+            if (allAuthorsData[j].Name == distCoAuthors[i].Name) {
+              topNCoAuthorObjects.push(allAuthorsData[j]);
+            }
+          }
+        }
+       var dataForGantt = gdata;
+       for (var i = gdata.length; i < topNCoAuthorObjects.length; i++) {
+        var sYear = Math.min(getMin(topNCoAuthorObjects[i].AllPublicationsPerYear));
+        var lYear = Math.min(getMax(topNCoAuthorObjects[i].AllPublicationsPerYear));
+        //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
+        var a = new Object();
+        a.Name = topNCoAuthorObjects[i].Name;
+        a.StartYear = sYear;
+        a.EndYear = lYear;
+        a.MutualPublications = distCoAuthors[i].Value;
+        //console.log(a.MutualPublications/(2017-a.StartYear)); 
+        dataForGantt.push(a);
+      }
+      for (var i=TOP_COAUTHORS;i<dataForGantt.length;i++){
+        var mppy = getMutualPublications(pdata,aName, dataForGantt[i].Name);
+        dataForGantt[i]["MutualPubPerYear"] = mppy;
+        
+      }
+      gdata = dataForGantt.slice(0, RECORDS_TO_SHOW); 
+      adata = topNCoAuthorObjects.slice(0,RECORDS_TO_SHOW); 
+  }
+
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
   if (typeof main_author === "undefined") {
@@ -101,7 +135,6 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
 
         var MAX_WIDTH_OF_BAR = 15;
       
-
         //Drawing horizontal bar charts to mark start year of each coauthor 
         g.selectAll(".hbar")
           .data(gdata)
@@ -196,7 +229,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("y",height+10)
           .text("More")
           //.on("click", function(d){});
-          .on("click", function(d){generateCollaborationChart(gdata, adata, canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
+          .on("click", function(d){generateVis(gdata, adata, canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
   }
 }
 function showMutualPublications(pdata, adata, year, aName, cName){
