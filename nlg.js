@@ -1139,7 +1139,7 @@ function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	return s;
 }
 function visSubfieldPhraseTopics(pdata, adata, keywords, a){
-	var s = "";
+	var s = ". ";
 	var subfields = []; 
 	for (var i=0;i<keywords.length;i++){
 		if (visSubfields.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1){
@@ -1150,15 +1150,15 @@ function visSubfieldPhraseTopics(pdata, adata, keywords, a){
 	// console.log(subfields); 
 	if (subfields.length > 0){
 		if (subfields.length == 1){
-			s += " with publications mainly within the subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
+			s = " with publications mainly within the subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
 
 		}
 		else if (subfields.length == 2){
-			s += ". "+getLastNamePronoun(a.Name) + " expertise mainly covers the subfields of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
+			s = ". "+getLastNamePronoun(a.Name) + " expertise mainly covers the subfields of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
 			" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1], "subfield")+ ".";
 		}
 		else if (subfields.length > 2) {
-			s += ". "+ getLastName(a.Name) + " has contributed to all " ;
+			s = ". "+ getLastName(a.Name) + " has contributed to all " ;
 			for (var i=0;i<subfields.length;i++){
 				if(i==subfields.length-1){
 					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") +".";
