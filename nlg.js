@@ -1240,31 +1240,33 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s="";
 	//console.log(a);
 	//console.log(alreadyListedTopics);
-	var keywordThreshold = (a.Conferences + a.Journals)>=100?3:2;
+	var keywordThreshold = 2;
 	var diverse_topics = [];
 	for (var i=0; i<keywords.length;i++){
     if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value >= keywordThreshold){
-			diverse_topics.push(keywords[i].Name); 
+			diverse_topics.push(keywords[i]); 
 		}
 	}
-	//console.log(diverse_topics);
+	// console.log(diverse_topics);
+	diverse_topics = getTopNItems(diverse_topics, 3, 6, 1);
+	// console.log(diverse_topics);
 	if (diverse_topics.length > 0){
 		if (diverse_topics.length == 1){
-			s += " The author has also contributed to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community") + "."
+			s += " The author has also contributed to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0].Name, a.Name, diverse_topics[0].Name, "community") + "."
 
 		}
 		else if (diverse_topics.length == 2){
-			s += " Other research areas of " + getLastName(a.Name) + " are " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community")
-			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1], a.Name, diverse_topics[1], "community") + ".";
+			s += " Other research areas of " + getLastName(a.Name) + " are " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0].Name, a.Name, diverse_topics[0].Name, "community")
+			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1].Name, a.Name, diverse_topics[1].Name, "community") + ".";
 		}
 		else if (diverse_topics.length > 2) {
 			s += " Other research areas of " + getLastName(a.Name) + " include " ;
 			for (var i=0;i<diverse_topics.length;i++){
 				if(i==diverse_topics.length-1){
-					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i], "community")+".";
+					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i].Name, a.Name, diverse_topics[i].Name, "community")+".";
 				}
 				else {
-					s += makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i], "community") + ", ";
+					s += makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i].Name, a.Name, diverse_topics[i].Name, "community") + ", ";
 				}
 			}
 		}
