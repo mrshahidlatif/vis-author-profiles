@@ -293,7 +293,7 @@ function getTopNItems(items, minN, maxN, t) {
   items.sort(function(a, b) {
     return b.Value - a.Value;
   });
-  console.log(items);
+  // console.log(items);
   if (maxN < items.length){
     for (var i = 0; i <= maxN; i++) {
         topItems.push(items[i]);
@@ -305,16 +305,16 @@ function getTopNItems(items, minN, maxN, t) {
   }
 
   if (topItems.length > minN){
-    console.log(topItems);
+    // console.log(topItems);
     var gaps = [];
     for(var i=minN;i<topItems.length;i++){
       var gap = topItems[i-1].Value - topItems[i].Value;
       gaps.push(gap);
     }
-    console.log(gaps);
+    // console.log(gaps);
     var maxGap = d3.max(gaps);
     var cutPoint = gaps.indexOf(maxGap) + minN ; // adding 1 due to 0-indexing system 
-    console.log(cutPoint);
+    // console.log(cutPoint);
     
     for (var i=0;i<cutPoint;i++){
       finaltopItems.push(topItems[i]);
@@ -323,7 +323,7 @@ function getTopNItems(items, minN, maxN, t) {
   else {
     finaltopItems = topItems;
   }
-  console.log(finaltopItems);
+  // console.log(finaltopItems);
   if (t==2){
     var tier2authors = subtractArrayOfObjects(topItems,finaltopItems);
     finaltopItems = tier2authors; 
