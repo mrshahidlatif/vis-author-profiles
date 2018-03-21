@@ -344,6 +344,12 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
     obj.Value = count;
     data2.push(obj);
  }
+
+    //tooltip 
+var div = d3.select("body").append("div")
+.attr("class", "tooltip")
+.style("opacity", 0);
+
  //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){

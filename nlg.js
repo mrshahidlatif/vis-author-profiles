@@ -339,8 +339,7 @@ function secondSentenceV1(pdata, adata, a,c){
 		if (lastYear - startYear > 20){
 			s += "a prolonged and still";
 		} 
-		s += " ongoing collaboration since " + startYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString(), a.Name, c.Name)
-			 + " publications. "; 
+		s += " ongoing collaboration since " + startYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + ". ";
 
 	}
 	else if (lastYear<=2015){
@@ -352,8 +351,7 @@ function secondSentenceV1(pdata, adata, a,c){
 			if (lastYear-startYear >20){
 				s += "that "
 			}
-		s += "ended in " + lastYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString(), a.Name, c.Name) 
-			 + " publications. "; 
+		s += "ended in " + lastYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + ". " ; 
 	}
 	return s;
 }
@@ -370,8 +368,8 @@ function thirdSentenceV1(pdata, adata, a,c,supervisors,supervisees){
 		listOfSparklines.push(obj); 
 
 		if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
-			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications, a.Name, c.Name)  +
-					" publications since " + startYear1;
+			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name)  +
+					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
 						s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
@@ -381,8 +379,8 @@ function thirdSentenceV1(pdata, adata, a,c,supervisors,supervisees){
 			}
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1>2015){
-			s += ", an ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications, a.Name, c.Name) +
-					" publications since " + startYear1;
+			s += ", an ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
+					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
 					s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
@@ -392,8 +390,8 @@ function thirdSentenceV1(pdata, adata, a,c,supervisors,supervisees){
 			}
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
-			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications, a.Name, c.Name) +
-					" publications in a span of " + (lastYear1 - startYear1) + " years and ended in " + lastYear1;
+			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
+					" in a span of " + (lastYear1 - startYear1) + " years and ended in " + lastYear1;
 			if (DoesExistInList(supervisees, c.Name)){
 					s += getLastName(a.Name) + " acted as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + 
 					"in this collaboration"
@@ -419,8 +417,8 @@ function fourthSentenceV1(pdata, adata, a, c, supervisors, supervisees){
 		obj.coauthor = c.Name; 
 		listOfSparklines.push(obj); 
 		if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
-			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications, a.Name, c.Name)+
-					"publications since " + startYear1;
+			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name)+
+					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
 						s += " and " + getLastName(a.Name) + " is acting as a supervisor. "
 			}
@@ -430,7 +428,7 @@ function fourthSentenceV1(pdata, adata, a, c, supervisors, supervisees){
 			}
 		}
 		else {
-			s += makeMeLive_LoadData(pdata, adata, c.MutualPublications, a.Name, c.Name) + " research papers since " + startYear1 + ". "; 
+			s += makeMeLive_LoadData(pdata, adata, c.MutualPublications + " research papers", a.Name, c.Name) + " since " + startYear1 + ". "; 
 		}
 		return s;
 
