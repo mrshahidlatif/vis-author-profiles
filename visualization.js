@@ -380,7 +380,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
             "translate(" + margin.left + "," + margin.top + ")")
     
   
-  svg.selectAll("*").remove();
+  svg.selectAll(".bar").remove();
   // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
   //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
@@ -488,7 +488,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
             "translate(" + margin.left + "," + margin.top + ")")
     
   
-  svg.selectAll("*").remove();
+  svg.selectAll("*.msbar").remove();
   // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
   //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
