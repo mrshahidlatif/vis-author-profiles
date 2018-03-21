@@ -1250,7 +1250,7 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 	otherCommutiesActive = getTopNItems(otherCommutiesActive, 3, 6, 1);
 	if (otherCommutiesActive.length > 0){
 		if (otherCommutiesActive.length == 1){
-			s += " The author is also contributing to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community") + "."
+			s += " The author is also currently contributing to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community") + "."
 
 		}
 		else if (otherCommutiesActive.length == 2){
@@ -1277,10 +1277,29 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 			}
 		}
 		if (oldCommunitiesList.length > 0) {
-			s += " In the past, the author also worked in the field of "+oldCommunitiesList[0]+"."
+			s += " In the past, the author also worked in the field" + ((oldCommunitiesList.length > 1) ? "s" : "") + " of " + stringifyList(oldCommunitiesList) + ".";
 		}
 	}	
 	return s; 
+}
+function stringifyList(list) {
+	switch (list.length) {
+		case 0: return "";
+		case 1: return list[0];
+		case 2: return list[0] + " and " + list[1];
+		default:
+			var s = "";
+			list.forEach(function (element, i) {
+				if (i > 0) {
+					s += ", ";
+					if (i === list.length - 1) {
+						s += "and ";
+					}
+				}
+				s += element;
+			});
+			return s;
+	}
 }
 
 function similarResearchersPhraseTopics(adata, a){
