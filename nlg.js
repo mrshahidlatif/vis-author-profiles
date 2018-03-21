@@ -1347,7 +1347,7 @@ function findAuthorsWithSimilarResearchTopics(adata, a) {
 	similarAuthors.sort(function(a, b) {
     	return b.Value - a.Value;
   	});
-	return similarAuthors;
+	return getTopNItems(similarAuthors, 3, 5, 1);
 }
 function createKeywordMap(keywords) {
 	var keywordMap = {};
