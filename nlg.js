@@ -1088,10 +1088,11 @@ function sortByValue(data) {
   return data;
 }
 function generateResearchTopicsText(pdata, adata, a){
+	alreadyListedTopics = [];
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
 	// console.log(keywords);
-	// console.log(a); 
+	// console.log(alreadyListedTopics); 
 
 	if (keywords.length > 0){
 		if (keywords[0].Value > 5) {
