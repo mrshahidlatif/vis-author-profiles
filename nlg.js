@@ -1097,13 +1097,14 @@ function generateResearchTopicsText(pdata, adata, a){
 		text += visCommunityPhraseTopics(pdata, adata, keywords, a);
 		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
 		text += thirdSentenceTopicsV1(a);
-		text += fourthSentenceTopicsV1(pdata, adata, keywords, a);
+		text += otherCommunityPhraseTopics(pdata, adata, keywords, a);
 		text += sixthSentenceTopicsV1(adata, a);
 	}
 	return text; 
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
+	console.log(keywords);
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
@@ -1199,7 +1200,7 @@ function thirdSentenceTopicsV1(a){
 	//console.log(uniqueTopics); 
 	return s; 
 }
-function fourthSentenceTopicsV1(pdata, adata, keywords, a){
+function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s="";
 	//console.log(a);
 	//console.log(alreadyListedTopics);
@@ -1213,15 +1214,15 @@ function fourthSentenceTopicsV1(pdata, adata, keywords, a){
 	//console.log(diverse_topics);
 	if (diverse_topics.length > 0){
 		if (diverse_topics.length == 1){
-			s += " The author has also worked on " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community") + "."
+			s += " The author has also contributed to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community") + "."
 
 		}
 		else if (diverse_topics.length == 2){
-			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community")
+			s += " Other research areas of " + getLastName(a.Name) + " are " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0], a.Name, diverse_topics[0], "community")
 			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1], a.Name, diverse_topics[1], "community") + ".";
 		}
 		else if (diverse_topics.length > 2) {
-			s += " Other research topics of " + getLastNamePronoun(a.Name) + " include " ;
+			s += " Other research areas of " + getLastName(a.Name) + " include " ;
 			for (var i=0;i<diverse_topics.length;i++){
 				if(i==diverse_topics.length-1){
 					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i], a.Name, diverse_topics[i], "community")+".";
