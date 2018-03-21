@@ -26,7 +26,7 @@ Fabian's Feedback - Suggestions / Things to do
 	We should never say or stress that a collaboration ended at a certain year (that sounds too final - it might have continued, but we don’t know that). We can provide a range of joint publications instead (e.g., “with 10 joint publications between 2003 and 2010”). But only if the last publication is more than 5(?) years ago, I would provide an end year.
 	 
 	Ji Soo Yi
-	Yi is active too long (> 10 years) to have the first author information
+	Yi is active too long (> 10 years) to have the first author information [FIXED]
 	Maybe, “top collaborator” is too imprecise and we should replace at least the first instance with “most frequent co-author”.
 	Jacko *is* the most frequent co-author, but *was* the supervisor – I believe this sentence need greater variety for covering, for instance, ongoing supervision vs. past supervision (only if we are sure that it is past). A more tricky case is past supervision, but ongoing collaboration.
 	Kwon and Kim are the same category of co-authors with a comparable number of joint publications with Yi – it would probably sound much if we could summarize them.
@@ -62,18 +62,18 @@ LAYOUT
 TODOs
 ------
 Appearance 
--Making search bar case insensitive 
--Remove numbers when displaying names of authors 
+-Making search bar case insensitive [FIXED IN DIFFERENT WAY]
+-Remove numbers when displaying names of authors [FIXED]
 -Extend tooltip to show year, count and type of publication [DONE]
 -Revise the highlight coloring scheme [DONE]
 -restrict width of the text to a fixed length according to layout instructions [DONE]
--side bar should have its own scroll bar 
+-side bar should have its own scroll bar [FIXED IN OTHER WAY]
 -use the gray background for active period [DONE]
 -remove any other gray backgrounds [DONE]
 -reduce the overall width of the page [DONE]
--Replace first name by the Second name of author in textual summary
--Make the text a bit larger especially in the right side bar 
--Sparklines shouldn't change the line height (use higher line width)
+-Replace first name by the Second name of author in textual summary [FIXED IN OTHER WAY]
+-Make the text a bit larger especially in the right side bar [FIXED]
+-Sparklines shouldn't change the line height (use higher line width) [FIXED]
 
 
 Functionality 
