@@ -1201,10 +1201,12 @@ function thirdSentenceTopicsV1(a){
 }
 function fourthSentenceTopicsV1(pdata, adata, keywords, a){
 	var s="";
+	//console.log(a);
 	//console.log(alreadyListedTopics);
+	var keywordThreshold = (a.Conferences + a.Journals)>=100?3:2;
 	var diverse_topics = [];
 	for (var i=0; i<keywords.length;i++){
-    if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value > 1){
+    if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value >= keywordThreshold){
 			diverse_topics.push(keywords[i].Name); 
 		}
 	}

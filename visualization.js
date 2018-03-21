@@ -263,9 +263,14 @@ function StringifyPublication(pdata, adata, p){
   var pubKeywords = venue_keywords[p.Venue];
   if (pubKeywords) {
     pString += "<br/>";
+    if (pubKeywords.indexOf("visualization") > -1) {
+      pString += '<span class="community">visualization</span> ';
+    }
     for (var i = 0; i < pubKeywords.length; i++) {
-      var cssClass = (visSubfields.indexOf(pubKeywords[i]) > -1)?"subfield":"community";
-      pString += '<span class="'+cssClass+'">' + pubKeywords[i] + '</span> ';
+      if (pubKeywords[i] != "visualization") {
+        var cssClass = (visSubfields.indexOf(pubKeywords[i]) > -1) ? "subfield" : "community";
+        pString += '<span class="' + cssClass + '">' + pubKeywords[i] + '</span> ';
+      }
     }
   }
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
