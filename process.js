@@ -219,7 +219,7 @@ function getMax(data) {
 
 // function getTopNItems(items, NoOfAuthorPublications, threshold) {
 //   //Basic! Returns the authors which are above a certain percent thresold
-//   var topAuthors = [];
+//   var topItems = [];
 //   // console.log("Here are his coauthors!!!")
 //   // items.sort(function(a, b) {
 //   //   return b.count - a.count;
@@ -228,14 +228,14 @@ function getMax(data) {
 //   for (var i = 0; i < items.length; i++) {
 //     var percentPublications = Math.round(items[i].Value / NoOfAuthorPublications * 100);
 //     if (percentPublications > threshold) {
-//       topAuthors.push(items[i]);
+//       topItems.push(items[i]);
 
 //     }
 //   }
-//   topAuthors.sort(function(a, b) {
+//   topItems.sort(function(a, b) {
 //     return b.Value - a.Value;
 //   });
-//   return topAuthors;
+//   return topItems;
 // }
 
 // function getTopNItems(items, NoOfAuthorPublications, minN, maxN, MinimumNoOfOutputItems) {
@@ -245,25 +245,25 @@ function getMax(data) {
 //   if (N==0){ N =1 ;}
 //   var minN = minN;
 //   var maxN = maxN;
-//   var topAuthors = [];
-//   var finalTopAuthors=[];
+//   var topItems = [];
+//   var finaltopItems=[];
 
 //   for (var i = 0; i < items.length; i++) {
 //     var percentPublications = Math.round(items[i].Value / NoOfAuthorPublications * 100);
 //     if (percentPublications >= minN && percentPublications <= maxN) {
-//       topAuthors.push(items[i]);
+//       topItems.push(items[i]);
 
 //     }
 //   }
-//   topAuthors.sort(function(a, b) {
+//   topItems.sort(function(a, b) {
 //     return b.Value - a.Value;
 //   });
 
-//   if (topAuthors.length > N){
-//     //console.log(topAuthors);
+//   if (topItems.length > N){
+//     //console.log(topItems);
 //     var gaps = [];
-//     for(var i=N;i<topAuthors.length;i++){
-//       var gap = topAuthors[i-1].Value - topAuthors[i].Value;
+//     for(var i=N;i<topItems.length;i++){
+//       var gap = topItems[i-1].Value - topItems[i].Value;
 //       gaps.push(gap);
 //     }
 //     //console.log(gaps);
@@ -273,64 +273,64 @@ function getMax(data) {
 
     
 //     for (var i=0;i<cutPoint;i++){
-//       finalTopAuthors.push(topAuthors[i]);
+//       finaltopItems.push(topItems[i]);
 //     }
 //   }
 //   else {
-//     finalTopAuthors = topAuthors;
+//     finaltopItems = topItems;
 //   }
-//   //console.log(finalTopAuthors);
+//   //console.log(finaltopItems);
 
-//   return finalTopAuthors;
+//   return finaltopItems;
 // }
 
 function getTopNItems(items, minN, maxN, t) {
  
   //Given [minN, maxN] range: returns the authors in that range by systematically cutting off the list
   //For instance, check for Fabian Beck, Thomas Ertl, Daniel A. Keim to see its effect
-  var topAuthors = [];
-  var finalTopAuthors=[];
+  var topItems = [];
+  var finaltopItems=[];
 
   items.sort(function(a, b) {
     return b.Value - a.Value;
   });
   console.log(items);
   if (maxN < items.length){
-    for (var i = 0; i < maxN; i++) {
-        topAuthors.push(items[i]);
+    for (var i = 0; i <= maxN; i++) {
+        topItems.push(items[i]);
 
     }   
   }
   else {
-    topAuthors = items;
+    topItems = items;
   }
 
-  if (topAuthors.length > minN){
-    // console.log(topAuthors);
+  if (topItems.length > minN){
+    console.log(topItems);
     var gaps = [];
-    for(var i=minN;i<topAuthors.length;i++){
-      var gap = topAuthors[i-1].Value - topAuthors[i].Value;
+    for(var i=minN;i<topItems.length;i++){
+      var gap = topItems[i-1].Value - topItems[i].Value;
       gaps.push(gap);
     }
-    // console.log(gaps);
+    console.log(gaps);
     var maxGap = d3.max(gaps);
     var cutPoint = gaps.indexOf(maxGap) + minN ; // adding 1 due to 0-indexing system 
-    //console.log(cutPoint);
+    console.log(cutPoint);
     
     for (var i=0;i<cutPoint;i++){
-      finalTopAuthors.push(topAuthors[i]);
+      finaltopItems.push(topItems[i]);
     }
   }
   else {
-    finalTopAuthors = topAuthors;
+    finaltopItems = topItems;
   }
-  console.log(finalTopAuthors);
+  console.log(finaltopItems);
   if (t==2){
-    var tier2authors = subtractArrayOfObjects(topAuthors,finalTopAuthors);
-    finalTopAuthors = tier2authors; 
-    //console.log(finalTopAuthors);
+    var tier2authors = subtractArrayOfObjects(topItems,finaltopItems);
+    finaltopItems = tier2authors; 
+    //console.log(finaltopItems);
   }
-  return finalTopAuthors;
+  return finaltopItems;
 }
 function subtractArrayOfObjects(a1,a2){
   for (var i=0; i<a1.length;i++){
