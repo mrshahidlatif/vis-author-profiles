@@ -1091,11 +1091,11 @@ function sortByValue(data) {
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a);
-	// console.log(keywords);
+	//console.log(keywords);
 	// console.log(alreadyListedTopics); 
 	if (keywords.length > 0) {
 		text += firstSentenceTopicsV1(pdata, adata, keywords, a);
-		text += secondSentenceTopicsV1(pdata, adata, keywords, keywords[0].Name, a);
+		text += secondSentenceTopicsV1(pdata, adata, keywords, a);
 		text += thirdSentenceTopicsV1(a);
 		text += fourthSentenceTopicsV1(pdata, adata, keywords, a);
 		text += sixthSentenceTopicsV1(adata, a);
@@ -1121,17 +1121,13 @@ function firstSentenceTopicsV1(pdata, adata, keywords, a){
 	alreadyListedTopics.push(keyword.Name); 
 	return s;
 }
-function secondSentenceTopicsV1(pdata, adata, keywords, community, a){
+function secondSentenceTopicsV1(pdata, adata, keywords, a){
 	var s = "";
 	var subfields = []; 
-	var subs = subfields_community[community];
-	//console.log(subs); 
-	if (subs != undefined){
-		for (var i=0;i<keywords.length;i++){
-			if (subs.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1){
-				subfields.push(keywords[i].Name);
-				alreadyListedTopics.push(keywords[i].Name); 
-			}
+	for (var i=0;i<keywords.length;i++){
+		if (visSubfields.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1){
+			subfields.push(keywords[i].Name);
+			alreadyListedTopics.push(keywords[i].Name); 
 		}
 	}
 	// console.log(subfields); 

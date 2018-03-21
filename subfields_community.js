@@ -1,3 +1,1 @@
-var subfields_community = {
-	"visualization" : ["information visualization", "scientific visualization", "visual analytics"]
-};
+var visSubfields = ["information visualization", "scientific visualization", "visual analytics"];
