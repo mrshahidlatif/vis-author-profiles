@@ -1114,7 +1114,7 @@ function generateResearchTopicsText(pdata, adata, a){
 		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
 		text += visAreaPhraseTopics(a);
 		text += otherCommunityPhraseTopics(pdata, adata, keywords, a);
-		text += sixthSentenceTopicsV1(adata, a);
+		text += similarResearchersPhraseTopics(adata, a);
 	}
 	return text; 
 }
@@ -1272,7 +1272,7 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 	return s; 
 }
 
-function sixthSentenceTopicsV1(adata, a){
+function similarResearchersPhraseTopics(adata, a){
 	var s=""; 
 	var similarAuthors = findAuthorsWithSimilarResearchTopics(adata, a); 
 	if (similarAuthors.length > 0){
