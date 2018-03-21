@@ -7,7 +7,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	//console.log(pdata);
 	//console.log(adata);
 	//console.log(aObject);
-	console.log(topCoAuthors); 
+	// console.log(topCoAuthors); 
 	hasSupversied = false; 
 	var alreadyListedTopics = []; 
 	// console.log(percentile);
