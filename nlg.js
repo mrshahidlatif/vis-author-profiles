@@ -1176,7 +1176,7 @@ function visAreaPhraseTopics(a) {
 	//Recent topics of author
 	var s = "";
 	var topics = [];
-	console.log(a);
+	// console.log(a);
 	for (var i = 0; i < a.Keywords.length; i++) {
 		if (author_keywords[a.Keywords[i]] != undefined && author_keywords[a.Keywords[i]] != "unclear") {
 			topics.push(author_keywords[a.Keywords[i]]);
@@ -1186,10 +1186,8 @@ function visAreaPhraseTopics(a) {
 	uniqueTopics.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-
-	console.log(uniqueTopics);
+	// console.log(uniqueTopics);
 	//uniqueTopics = uniqueTopics.slice(1,20); 
-
 	var topicThreshold = a.Conferences + a.Journals >= 100 ? 3 : 2;
 	var listOfTopics = [];
 	for (var i = 0; i < uniqueTopics.length; i++) {
@@ -1197,7 +1195,7 @@ function visAreaPhraseTopics(a) {
 			listOfTopics.push(uniqueTopics[i].Name);
 		}
 	}
-	console.log(listOfTopics);
+	// console.log(listOfTopics);
 	var text = "";
 	var cleanedKeywords = [];
 	var allVisVersionsAvailable = true;
