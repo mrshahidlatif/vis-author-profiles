@@ -1210,7 +1210,6 @@ function visAreaPhraseTopics(a) {
 		}
 	});
 	if (cleanedKeywords.length != 0) {
-
 		var isSingular = cleanedKeywords.length === 1;
 		$.each(cleanedKeywords, function (i, keyword) {
 			var mapping = keywordMapping[keyword];
@@ -1235,40 +1234,52 @@ function visAreaPhraseTopics(a) {
 	return s;
 }
 function otherCommunityPhraseTopics(pdata, adata, keywords, a){
-	var s="";
+	var s = "";
 	//console.log(a);
 	//console.log(alreadyListedTopics);
 	var keywordThreshold = 2;
-	var diverse_topics = [];
-	for (var i=0; i<keywords.length;i++){
-    if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value >= keywordThreshold){
-			diverse_topics.push(keywords[i]); 
+	var otherCommutiesActive = [];
+	var otherCommutiesOld = [];
+	for (var i = 0; i < keywords.length; i++) {
+		if (alreadyListedTopics.indexOf(keywords[i].Name) === -1 && keywords[i].Value >= keywordThreshold) {
+			var currentYear = (new Date()).getFullYear();
+			var isActive = currentYear - keywords[i].MaxYear <= 5;
+			(isActive?otherCommutiesActive:otherCommutiesOld).push(keywords[i]);
 		}
 	}
-	// console.log(diverse_topics);
-	diverse_topics = getTopNItems(diverse_topics, 3, 6, 1);
-	// console.log(diverse_topics);
-	if (diverse_topics.length > 0){
-		if (diverse_topics.length == 1){
-			s += " The author has also contributed to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0].Name, a.Name, diverse_topics[0].Name, "community") + "."
+	otherCommutiesActive = getTopNItems(otherCommutiesActive, 3, 6, 1);
+	if (otherCommutiesActive.length > 0){
+		if (otherCommutiesActive.length == 1){
+			s += " The author is also contributing to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community") + "."
 
 		}
-		else if (diverse_topics.length == 2){
-			s += " Other research areas of " + getLastName(a.Name) + " are " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[0].Name, a.Name, diverse_topics[0].Name, "community")
-			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[1].Name, a.Name, diverse_topics[1].Name, "community") + ".";
+		else if (otherCommutiesActive.length == 2){
+			s += " Other research areas the author is currently contributing to are " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community")
+			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[1].Name, a.Name, otherCommutiesActive[1].Name, "community") + ".";
 		}
-		else if (diverse_topics.length > 2) {
-			s += " Other research areas of " + getLastName(a.Name) + " include " ;
-			for (var i=0;i<diverse_topics.length;i++){
-				if(i==diverse_topics.length-1){
-					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i].Name, a.Name, diverse_topics[i].Name, "community")+".";
+		else if (otherCommutiesActive.length > 2) {
+			s += " Other research areas the author is currently contributing to are " ;
+			for (var i=0;i<otherCommutiesActive.length;i++){
+				if(i==otherCommutiesActive.length-1){
+					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[i].Name, a.Name, otherCommutiesActive[i].Name, "community")+".";
 				}
 				else {
-					s += makeMeLive_LoadDataOnTopic(pdata, adata, diverse_topics[i].Name, a.Name, diverse_topics[i].Name, "community") + ", ";
+					s += makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[i].Name, a.Name, otherCommutiesActive[i].Name, "community") + ", ";
 				}
 			}
 		}
-	}
+		otherCommutiesOld = getTopNItems(otherCommutiesOld, 3, 6, 1);
+		var minNActiveCommunities = otherCommutiesActive[otherCommutiesActive.length - 1].Value;
+		var oldCommunitiesList = [];
+		for (var i = 0; i < otherCommutiesOld.length; i++) {
+			if (otherCommutiesOld[i].Value >= minNActiveCommunities) {
+				oldCommunitiesList.push(makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesOld[i].Name, a.Name, otherCommutiesOld[i].Name, "community"));
+			}
+		}
+		if (oldCommunitiesList.length > 0) {
+			s += " In the past, the author also worked in the field of "+oldCommunitiesList[0]+"."
+		}
+	}	
 	return s; 
 }
 
