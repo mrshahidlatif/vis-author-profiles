@@ -264,7 +264,8 @@ function StringifyPublication(pdata, adata, p){
   if (pubKeywords) {
     pString += "<br/>";
     for (var i = 0; i < pubKeywords.length; i++) {
-      pString += '<span class="community">' + pubKeywords[i] + '</span> ';
+      var cssClass = (visSubfields.indexOf(pubKeywords[i]) > -1)?"subfield":"community";
+      pString += '<span class="'+cssClass+'">' + pubKeywords[i] + '</span> ';
     }
   }
   document.getElementById("dod").innerHTML += pString + "<br>" + "<br>"; 
