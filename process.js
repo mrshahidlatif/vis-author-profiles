@@ -34,8 +34,7 @@ function process(pdata, adata, name,container, minN,maxN, t) {
 
       var items = compressArray(allCoAuthors, name);
       //console.log(items); 
-      var topNCoAuthor = getTopNItems
-    (items, minN, maxN,t);
+      var topNCoAuthor = getTopNItems(items, minN, maxN,t);
       var topNCoAuthorObjects = [];
 
       
