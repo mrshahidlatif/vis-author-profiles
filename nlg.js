@@ -448,6 +448,7 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 			}
 			else {
@@ -457,6 +458,7 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 					var obj = new Object();
 						obj.sparklineID = ID; 
 						obj.data = supervisees[i].MutualPubPerYear; 
+						obj.coauthor = supervisees[i].Name; 
 						listOfSparklines.push(obj);
 			}
 		}
@@ -472,6 +474,7 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 						var obj = new Object();
 						obj.sparklineID = ID; 
 						obj.data = supervisees[i].MutualPubPerYear; 
+						obj.coauthor = supervisees[i].Name; 
 						listOfSparklines.push(obj); 
 				}
 				else {
@@ -480,6 +483,7 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 						var obj = new Object();
 							obj.sparklineID = ID; 
 							obj.data = supervisees[i].MutualPubPerYear; 
+							obj.coauthor = supervisees[i].Name; 
 							listOfSparklines.push(obj);
 				}
 			}
@@ -492,6 +496,7 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 			var obj = new Object();
 			obj.sparklineID = ID; 
 			obj.data = supervisees[0].MutualPubPerYear; 
+			obj.coauthor = supervisees[0].Name; 
 			listOfSparklines.push(obj);
 		}	
 		else if (supervisees.length == 2){
@@ -505,11 +510,13 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 			var obj = new Object();
 			obj.sparklineID = ID1; 
 			obj.data = supervisees[0].MutualPubPerYear; 
+			obj.coauthor = supervisees[0].Name; 
 			listOfSparklines.push(obj);
 
 			var obj = new Object();
 			obj.sparklineID = ID2; 
 			obj.data = supervisees[1].MutualPubPerYear; 
+			obj.coauthor = supervisees[1].Name; 
 			listOfSparklines.push(obj);
 		}
 	}
@@ -530,6 +537,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 			}
 			else {
@@ -538,6 +546,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 						obj.sparklineID = ID; 
 						obj.data = supervisees[i].MutualPubPerYear; 
+						obj.coauthor = supervisees[i].Name; 
 						listOfSparklines.push(obj);
 			}
 		}
@@ -555,6 +564,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 				}
 				else {
@@ -563,6 +573,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 						obj.sparklineID = ID; 
 						obj.data = supervisees[i].MutualPubPerYear; 
+						obj.coauthor = supervisees[i].Name; 
 						listOfSparklines.push(obj);
 				}
 			}
@@ -578,6 +589,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 				}
 				else {
@@ -586,6 +598,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 						obj.sparklineID = ID; 
 						obj.data = supervisees[i].MutualPubPerYear; 
+						obj.coauthor = supervisees[i].Name; 
 						listOfSparklines.push(obj); 
 				}
 			}
@@ -601,6 +614,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 			}
 			else {
@@ -609,6 +623,7 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 				var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 			}
 		}	
@@ -656,6 +671,7 @@ function fifthSenetenceV3(pdata, adata, a,list_c,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 				}
 				else {
@@ -664,6 +680,7 @@ function fifthSenetenceV3(pdata, adata, a,list_c,supervisees){
 					var obj = new Object();
 					obj.sparklineID = ID; 
 					obj.data = supervisees[i].MutualPubPerYear; 
+					obj.coauthor = supervisees[i].Name; 
 					listOfSparklines.push(obj); 
 				}
 			}
@@ -1050,15 +1067,16 @@ function findSupervisee(pubData, adata, author){
 			var AuthorStartYear = Math.min(getMin(aObject.JournalsPerYear), getMin(aObject.ConfsPerYear));
 			//console.log(AuthorStartYear);
 			if(SupervisorStartYear + 5 < AuthorStartYear ){
-				var mutualPubs = getAllMutualPublicationsForSuperVisee(pubs,aObject.Name,author.Name)
+				var mutualPubs = getAllMutualPublicationsForSuperVisee(pubs,aObject.Name,author.Name); // Publications of supervisee as first authors (deciding publications)
+				var allMutualPubs = getAllMutualPublications(pdata, aObject.Name, author.Name); // All mutual publications of supervisee with supervisor (for sparkline)
 				//console.log(mutualPubs);
 				if(supervisees.indexOf(firstAuthor) == -1 && mutualPubs.length > 1){
 					 var obj = new Object();
 					 obj.Name = firstAuthor;
-					 obj.Count = mutualPubs.length;
+					 obj.Count = allMutualPubs.length;
 					 var list = [];
-					 for(var j=0;j<mutualPubs.length;j++){
-					 	list.push(mutualPubs[j].Year); 
+					 for(var j=0;j<allMutualPubs.length;j++){
+					 	list.push(allMutualPubs[j].Year); 
 					 }
 					 var ppy = compressArray2(list);
 					 obj.MutualPubPerYear = ppy; 
