@@ -1107,22 +1107,21 @@ function sortByValue(data) {
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
 	var keywords = getKeywords(pdata, a);
+	var visKeyword = keywords.find(function (element) {
+		return element.Name === "visualization";
+	});
+	var visIsActive = (new Date()).getFullYear() - visKeyword.MaxYear <= 5;
 	if (keywords.length > 0) {
-		text += visCommunityPhraseTopics(pdata, adata, keywords, a);
-		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
-		text += visAreaPhraseTopics(a);
-		text += otherCommunityPhraseTopics(pdata, adata, keywords, a);
+		text += visCommunityPhraseTopics(pdata, adata, keywords, a, visKeyword, visIsActive);
+		text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
+		text += visAreaPhraseTopics(a, visIsActive);
+		text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
 		text += similarResearchersPhraseTopics(adata, a);
 	}
 	return text; 
 }
-function visCommunityPhraseTopics(pdata, adata, keywords, a) {
-	var keyword = keywords.find(function (element) {
-		return element.Name === "visualization";
-	});
+function visCommunityPhraseTopics(pdata, adata, keywords, a, keyword, isActive) {
 	var pubCount = keyword.Value;
-	var currentYear = (new Date()).getFullYear();
-	var isActive = currentYear - keyword.MaxYear <= 5;
 	var s = getLastName(a.Name);
 	if (pubCount >= 30) {
 		s += (isActive ? " is a current" : " was a") + " core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
@@ -1136,41 +1135,41 @@ function visCommunityPhraseTopics(pdata, adata, keywords, a) {
 	alreadyListedTopics.push(keyword.Name);
 	return s;
 }
-function visSubfieldPhraseTopics(pdata, adata, keywords, a){
+function visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive) {
 	var s = ". ";
-	var subfields = []; 
-	for (var i=0;i<keywords.length;i++){
-		if (visSubfields.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1){
+	var subfields = [];
+	for (var i = 0; i < keywords.length; i++) {
+		if (visSubfields.indexOf(keywords[i].Name) != -1 && keywords[i].Value > 1) {
 			subfields.push(keywords[i].Name);
-			alreadyListedTopics.push(keywords[i].Name); 
+			alreadyListedTopics.push(keywords[i].Name);
 		}
 	}
 	// console.log(subfields); 
-	if (subfields.length > 0){
-		if (subfields.length == 1){
+	if (subfields.length > 0) {
+		if (subfields.length == 1) {
 			s = " with publications mainly within the subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
 
 		}
-		else if (subfields.length == 2){
-			s = ". "+getLastNamePronoun(a.Name) + " expertise mainly covers the subfields of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
-			" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1], "subfield")+ ".";
+		else if (subfields.length == 2) {
+			s = ". " + getLastNamePronoun(a.Name) + " expertise mainly covers the subfields of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
+				" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1], "subfield") + ".";
 		}
 		else if (subfields.length > 2) {
-			s = ". "+ getLastName(a.Name) + " has contributed to all " ;
-			for (var i=0;i<subfields.length;i++){
-				if(i==subfields.length-1){
-					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") +".";
+			s = ". " + getLastName(a.Name) + (visIsActive ? "has " : "") + " contributed to all ";
+			for (var i = 0; i < subfields.length; i++) {
+				if (i == subfields.length - 1) {
+					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") + ".";
 				}
 				else {
-					var ID = "sparkline_coll"+i;
+					var ID = "sparkline_coll" + i;
 					s += makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") + ", ";
 				}
 			}
 		}
 	}
-	return s; 
+	return s;
 }
-function visAreaPhraseTopics(a) {
+function visAreaPhraseTopics(a, visIsActive) {
 	//Recent topics of author
 	var s = "";
 	var topics = [];
@@ -1226,14 +1225,14 @@ function visAreaPhraseTopics(a) {
 		var pre = allVisOfDataVersionsAvailable ? "the visualization of " : "";
 		var post = allVisOfDataVersionsAvailable ? " data" : (allVisVersionsAvailable ? " visualization" : "");
 		if (isSingular) {
-			s = " A focus area of the author is " + pre + text + post + ".";
+			s = " A focus area of the author " + (visIsActive ? "is " : "was ") + pre + text + post + ".";
 		} else {
-			s = " Focus areas of the author are " + pre + text + post + ".";
+			s = " Focus areas of the author " + (visIsActive ? "are " : "were ") + pre + text + post + ".";
 		}
 	}
 	return s;
 }
-function otherCommunityPhraseTopics(pdata, adata, keywords, a){
+function otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive){
 	var s = "";
 	//console.log(a);
 	//console.log(alreadyListedTopics);
@@ -1250,15 +1249,17 @@ function otherCommunityPhraseTopics(pdata, adata, keywords, a){
 	otherCommutiesActive = getTopNItems(otherCommutiesActive, 3, 6, 1);
 	if (otherCommutiesActive.length > 0){
 		if (otherCommutiesActive.length == 1){
-			s += " The author is also currently contributing to the area of " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community") + "."
+			s += (!visIsActive?"Currently, the author is ": " The author is also currently")+ " contributing to the area of ";
+			s +=  makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community") + "."
 
 		}
 		else if (otherCommutiesActive.length == 2){
-			s += " Other research areas the author is currently contributing to are " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community")
+			s += (!visIsActive?"Currently, research areas the author is contributing": " Other research areas the author is currently contributing")+ " to are ";
+			s += makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[0].Name, a.Name, otherCommutiesActive[0].Name, "community")
 			+ " and " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[1].Name, a.Name, otherCommutiesActive[1].Name, "community") + ".";
 		}
 		else if (otherCommutiesActive.length > 2) {
-			s += " Other research areas the author is currently contributing to are " ;
+			s += (!visIsActive?"Currently, research areas the author is contributing": " Other research areas the author is currently contributing")+ " to are ";
 			for (var i=0;i<otherCommutiesActive.length;i++){
 				if(i==otherCommutiesActive.length-1){
 					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, otherCommutiesActive[i].Name, a.Name, otherCommutiesActive[i].Name, "community")+".";
