@@ -6,7 +6,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	
 	//console.log(pdata);
 	//console.log(adata);
-	 console.log(aObject);
+	//console.log(aObject);
 	hasSupversied = false; 
 	// console.log(percentile);
 	var bio = "";
@@ -1091,12 +1091,12 @@ function generateResearchTopicsText(pdata, adata, a){
 	alreadyListedTopics = [];
 	var text = "";
 	var keywords = getKeywords(pdata, a); 
-	// console.log(keywords);
+	//console.log(keywords);
 	// console.log(alreadyListedTopics); 
 
 	if (keywords.length > 0){
 		if (keywords[0].Value > 5) {
-			text += firstSentenceTopicsV1(pdata, adata, keywords[0], a); 
+			text += firstSentenceTopicsV1(pdata, adata, keywords, a); 
 			text += secondSentenceTopicsV1(pdata, adata, keywords, keywords[0].Name, a);
 			
 			text += thirdSentenceTopicsV1(a); 
@@ -1109,14 +1109,17 @@ function generateResearchTopicsText(pdata, adata, a){
 	return text; 
 
 }
-function firstSentenceTopicsV1(pdata, adata, keyword, a){
+function firstSentenceTopicsV1(pdata, adata, keywords, a){
 	var s = "";
-	var pubCount = a.Conferences + a.Journals;
+	var keyword = keywords.find(function (element) {
+		return element.Name === "visualization";
+	});
+	var pubCount = keyword.Value;
 
-	if (pubCount >= 100){
+	if (pubCount >= 30){
 		s += getLastName(a.Name) + " is a core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
 	}
-	else if (pubCount > 50 && pubCount < 100){
+	else if (pubCount > 10){
 		s += getLastName(a.Name) + " is a member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
 	}
 	else {
