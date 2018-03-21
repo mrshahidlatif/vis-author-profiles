@@ -1094,15 +1094,15 @@ function generateResearchTopicsText(pdata, adata, a){
 	//console.log(keywords);
 	// console.log(alreadyListedTopics); 
 	if (keywords.length > 0) {
-		text += firstSentenceTopicsV1(pdata, adata, keywords, a);
-		text += secondSentenceTopicsV1(pdata, adata, keywords, a);
+		text += visCommunityPhraseTopics(pdata, adata, keywords, a);
+		text += visSubfieldPhraseTopics(pdata, adata, keywords, a);
 		text += thirdSentenceTopicsV1(a);
 		text += fourthSentenceTopicsV1(pdata, adata, keywords, a);
 		text += sixthSentenceTopicsV1(adata, a);
 	}
 	return text; 
 }
-function firstSentenceTopicsV1(pdata, adata, keywords, a){
+function visCommunityPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
 	var keyword = keywords.find(function (element) {
 		return element.Name === "visualization";
@@ -1110,18 +1110,18 @@ function firstSentenceTopicsV1(pdata, adata, keywords, a){
 	var pubCount = keyword.Value;
 
 	if (pubCount >= 30){
-		s += getLastName(a.Name) + " is a core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
+		s += getLastName(a.Name) + " is a core member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
 	}
 	else if (pubCount > 10){
-		s += getLastName(a.Name) + " is a member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
+		s += getLastName(a.Name) + " is a member of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
 	}
 	else {
-		s += getLastName(a.Name) + " is a contributor of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community. ";
+		s += getLastName(a.Name) + " is a contributor of the " + makeMeLive_LoadDataOnTopic(pdata, adata, keyword.Name, a.Name, keyword.Name, "community") + " community";
 	}
 	alreadyListedTopics.push(keyword.Name); 
 	return s;
 }
-function secondSentenceTopicsV1(pdata, adata, keywords, a){
+function visSubfieldPhraseTopics(pdata, adata, keywords, a){
 	var s = "";
 	var subfields = []; 
 	for (var i=0;i<keywords.length;i++){
@@ -1133,15 +1133,15 @@ function secondSentenceTopicsV1(pdata, adata, keywords, a){
 	// console.log(subfields); 
 	if (subfields.length > 0){
 		if (subfields.length == 1){
-			s += getLastNamePronoun(a.Name) + " expertise covers subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
+			s += " with publications mainly within the subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
 
 		}
 		else if (subfields.length == 2){
-			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
+			s += ". "+getLastNamePronoun(a.Name) + " expertise mainly covers the subfields of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") +
 			" and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[1], a.Name, subfields[1], "subfield")+ ".";
 		}
 		else if (subfields.length > 2) {
-			s += getLastNamePronoun(a.Name) + " expertise covers subfields such as " ;
+			s += ". "+ getLastName(a.Name) + " has contributed to all " ;
 			for (var i=0;i<subfields.length;i++){
 				if(i==subfields.length-1){
 					s += "and " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[i], a.Name, subfields[i], "subfield") +".";
