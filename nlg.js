@@ -1218,8 +1218,10 @@ function visAreaPhraseTopics(a) {
 		var isSingular = cleanedKeywords.length === 1;
 		$.each(cleanedKeywords, function (i, keyword) {
 			var mapping = keywordMapping[keyword];
+			text += '<span class="topic">'
 			text += allVisOfDataVersionsAvailable ? mapping.visOfData :
 				(allVisVersionsAvailable ? mapping.vis : mapping.default);
+			text += '</span>'
 			if (i + 2 < cleanedKeywords.length) {
 				text += ", ";
 			} else if (i + 1 < cleanedKeywords.length) {

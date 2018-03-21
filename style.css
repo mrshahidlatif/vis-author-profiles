@@ -152,7 +152,8 @@ p {
 
 /*Keywords*/
 .community,
-.subfield {
+.subfield,
+.topic {
     padding: 0 3px;
     border-radius: 4px;
 }
@@ -161,6 +162,9 @@ p {
 }
 .subfield {
     background: rgba(33, 151, 255, 0.1);
+}
+.topic {
+    background: rgba(100, 100, 100, 0.1);
 }
 
 #sideBarHead {
