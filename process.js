@@ -31,12 +31,13 @@ function process(pdata, adata, name,container, minN,maxN, t) {
           }
         }
       }
-
+      // console.log(allCoAuthors);
       var items = compressArray(allCoAuthors, name);
       //console.log(items); 
       var topNCoAuthor = getTopNItems(items, minN, maxN,t);
+      // console.log(topNCoAuthor); 
+      
       var topNCoAuthorObjects = [];
-
       
       for (var i = 0; i < topNCoAuthor.length; i++) {
         for (var j = 0; j < adata.length; j++) {
@@ -45,10 +46,31 @@ function process(pdata, adata, name,container, minN,maxN, t) {
           }
         }
       }
+      // console.log(topNCoAuthorObjects); 
+      if (topNCoAuthorObjects.length == 0){
+        //Top Authors are non-VIS authors 
+        //So get their data from DBLP and add them to the list of topNCoAuthorObjects[]
+        //so that they are displayed on the coauthor visualization 
+        for (var i=0;i<topNCoAuthor.length;i++){
+            var allpubYears = getAllPublicationYears(pdata, topNCoAuthor[i].Name);
+            var author_object = new  Object();
+            var ppy = compressArray2(allpubYears);
+
+            author_object.Name = topNCoAuthor[i].Name;
+            ppy.sort(function(a,b){return +a.Year - +b.Year;});
+            author_object.AllPublicationsPerYear = ppy; 
+       
+            console.log(author_object); 
+            topNCoAuthorObjects.push(author_object); 
+
+        }
+      }
         var dataForGantt = [];
         for (var i = 0; i < topNCoAuthorObjects.length; i++) {
-          var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
-          var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
+          // var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
+          // var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
+          var sYear = Math.min(getMin(topNCoAuthorObjects[i].AllPublicationsPerYear));
+          var lYear = Math.min(getMax(topNCoAuthorObjects[i].AllPublicationsPerYear));
           //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
           var a = new Object();
           a.Name = topNCoAuthorObjects[i].Name;
@@ -86,59 +108,27 @@ function process(pdata, adata, name,container, minN,maxN, t) {
          if(t==1){ // call once as process() is called twice with t=1 and t=2
             generateProfileText(pdata, adata, aObject, pct, dataForGantt);
           }
-
-          generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items, 1); 
+          generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items);
 
       }
     
       else {
         document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
       }
-  //   });
-  // });
 }
-function generateCollaborationChart(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata , items, times){
-    if (dataForGantt.length > 0 && times == 1 ){
-            generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items);
-          }
-    else 
-    {
-        console.log("loading more!!!");
-        // Preparing data for collaboration visualization 
-        //-----------------------------------------------------
-        var itemsObjects = []; 
-        for (var i = 0; i < items.length; i++) {
-          for (var j = 0; j < adata.length; j++) {
-            if (adata[j].Name == items[i].Name) {
-              itemsObjects.push(adata[j]);
-            }
-          }
+function getAllPublicationYears(pdata, authorName){
+  var pubYears = []; 
+  for(var i=0;i<pdata.length;i++){
+      var tempAuthors = []; 
+      for (var j=0;j<pdata[i].Authors.length;j++){
+        tempAuthors.push(pdata[i].Authors[j].Name);
         }
-        //console.log(itemsObjects); 
-          var dataForCollaborationVis = [];
-          for (var i = 0; i < itemsObjects.length; i++) {
-            var sYear = Math.min(getMin(itemsObjects[i].JournalsPerYear), getMin(itemsObjects[i].ConfsPerYear));
-            var lYear = Math.max(getMax(itemsObjects[i].JournalsPerYear), getMax(itemsObjects[i].ConfsPerYear));
-            //console.log(itemsObjects[i].Name + ":" + sYear + ":" + lYear);
-            var a = new Object();
-            a.Name = itemsObjects[i].Name;
-            a.StartYear = sYear;
-            a.EndYear = lYear;
-            a.MutualPublications = items[i].Value;
-            //console.log(a.MutualPublications/(2017-a.StartYear)); 
-            dataForCollaborationVis.push(a);
-          }
-          
-          for (var i=0;i<dataForCollaborationVis.length;i++){
-            var mppy = getMutualPublications(pdata,name, dataForCollaborationVis[i].Name);
-            dataForCollaborationVis[i]["MutualPubPerYear"] = mppy;
-            
-          }
-          //console.log(dataForCollaborationVis);
-          //----------------------------------------------------------------------------------------------
-           //console.log(dataForGantt);
-          generateVis(dataForCollaborationVis, itemsObjects, container, pdata, name, adata);
-    }
+        if(tempAuthors.indexOf(authorName) != -1)
+        {
+          pubYears.push(pdata[i].Year);
+        }
+  }
+  return pubYears; 
 }
 
 function getMutualPublications(pubData,aName, cName){
@@ -246,6 +236,7 @@ function getMax(data) {
 //   var maxN = maxN;
 //   var topItems = [];
 //   var finaltopItems=[];
+
 
 //   for (var i = 0; i < items.length; i++) {
 //     var percentPublications = Math.round(items[i].Value / NoOfAuthorPublications * 100);
