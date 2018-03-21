@@ -524,7 +524,7 @@ var author_keywords = {
 "line charts":"Charts, Diagrams, Plots",
 "mosaic plots":"Charts, Diagrams, Plots",
 "nominal axis":"Charts, Diagrams, Plots",
-"ordered treemaps":"Charts, Diagrams, Plots",
+"ordered treemaps":"Hierarchical Data and Techniques",
 "organizational chart":"Charts, Diagrams, Plots",
 "sankey diagram":"Charts, Diagrams, Plots",
 "sparklines":"Charts, Diagrams, Plots",
@@ -1643,11 +1643,13 @@ var author_keywords = {
 "spiral trees":"Hierarchical Data and Techniques",
 "tables & tree layouts":"Hierarchical Data and Techniques",
 "tree":"Hierarchical Data and Techniques",
+"trees":"Hierarchical Data and Techniques",
 "tree browsing and navigation":"Hierarchical Data and Techniques",
 "tree comparison":"Hierarchical Data and Techniques",
 "tree structure":"Hierarchical Data and Techniques",
 "tree visualization":"Hierarchical Data and Techniques",
 "treemap":"Hierarchical Data and Techniques",
+"treemaps":"Hierarchical Data and Techniques",
 "treemap layout algorithm":"Hierarchical Data and Techniques",
 "visual hierarchy":"Hierarchical Data and Techniques",
 "zoomable treemaps":"Hierarchical Data and Techniques",
@@ -3924,7 +3926,7 @@ var author_keywords = {
 "voronoi diagram":"Voronoi-based Techniques",
 "voronoi spline":"Voronoi-based Techniques",
 "voronoi tessellations":"Voronoi-based Techniques",
-"voronoi treemaps":"Voronoi-based Techniques",
+"voronoi treemaps":"Hierarchical Data and Techniques",
 "3d navigation and exploration":"Zooming and Navigation Techniques",
 "browsing":"Zooming and Navigation Techniques",
 "constrained navigation":"Zooming and Navigation Techniques",
@@ -4046,7 +4048,7 @@ var keywordMapping = {
             vis: "graph",
             visOfData: "graph"
         },
-        "Hierarchical/Tree Data and Techniques": {
+        "Hierarchical Data and Techniques": {
             default: "hierarchy visualization",
             vis: "hierarchy",
             visOfData: "hierarchy"
