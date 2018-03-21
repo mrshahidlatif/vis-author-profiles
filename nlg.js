@@ -1090,24 +1090,17 @@ function sortByValue(data) {
 }
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
-	var keywords = getKeywords(pdata, a); 
-	//console.log(keywords);
+	var keywords = getKeywords(pdata, a);
+	// console.log(keywords);
 	// console.log(alreadyListedTopics); 
-
-	if (keywords.length > 0){
-		if (keywords[0].Value > 5) {
-			text += firstSentenceTopicsV1(pdata, adata, keywords, a); 
-			text += secondSentenceTopicsV1(pdata, adata, keywords, keywords[0].Name, a);
-			
-			text += thirdSentenceTopicsV1(a); 
-
-			text += fourthSentenceTopicsV1(pdata, adata, keywords, a); 
-
-			text += sixthSentenceTopicsV1(adata, a); 
-		}
+	if (keywords.length > 0) {
+		text += firstSentenceTopicsV1(pdata, adata, keywords, a);
+		text += secondSentenceTopicsV1(pdata, adata, keywords, keywords[0].Name, a);
+		text += thirdSentenceTopicsV1(a);
+		text += fourthSentenceTopicsV1(pdata, adata, keywords, a);
+		text += sixthSentenceTopicsV1(adata, a);
 	}
 	return text; 
-
 }
 function firstSentenceTopicsV1(pdata, adata, keywords, a){
 	var s = "";
