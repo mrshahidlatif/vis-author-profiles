@@ -416,7 +416,7 @@ var div = d3.select("body").append("div")
       // .on("mouseout", function(d){removeBorder(this.id)})
     .append("g")
     .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")")
+            "translate(" + margin.left + "," + margin.top + ")"); 
     
   
   svg.selectAll(".bar").remove();
@@ -527,18 +527,26 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
   // append the svg object to the body of the page
   // append a 'group' element to 'svg'
   // moves the 'group' element to the top left margin
+  if(!largeScale){
   var svg = d3.select("#" + canvas)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .style("background-color", '#f2f2f2');
-    if(!largeScale){
-      svg.on("click", function(d){enlargeMe_MutualPublications(pdata, adata, a, cName, data2, this.id,startYear, endYear, ymax)});
-    }
-
-    svg.append("g")
+      .style("background-color", '#f2f2f2')
+      .on("click", function(d){enlargeMe_MutualPublications(pdata, adata, a, cName, data2, this.id,startYear, endYear, ymax)})
+      .append("g")
       .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")")
-    
+            "translate(" + margin.left + "," + margin.top + ")");
+  }
+  if(largeScale){
+      var svg = d3.select("#" + canvas)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("background-color", '#f2f2f2')
+      .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")");
+      
+  }
   
   svg.selectAll("*.msbar").remove();
   // Scale the range of the data in the domains
