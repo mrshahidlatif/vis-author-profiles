@@ -326,7 +326,7 @@ function StringifyPublication(pdata, adata, p){
 function loadMe(pdata, adata, name){
   // console.log(pdata);
   // console.log(adata); 
-  console.log(name); 
+  // console.log(name); 
   process(pdata, adata, name, "CollabChart1", 2, 8, 1); 
   
 }

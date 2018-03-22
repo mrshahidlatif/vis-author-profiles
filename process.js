@@ -3,7 +3,7 @@ function process(pdata, adata, name,container, minN,maxN, t) {
   // var pdata;
   // var adata;
   //Clearing Stuff when searching for new author
-  console.log(name); 
+  // console.log(name); 
   document.getElementById("dod").innerHTML= ""; 
   listOfSparklines = []; 
 
