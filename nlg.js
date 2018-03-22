@@ -1115,13 +1115,15 @@ function generateResearchTopicsText(pdata, adata, a){
 	var visKeyword = keywords.find(function (element) {
 		return element.Name === "visualization";
 	});
-	var visIsActive = (new Date()).getFullYear() - visKeyword.MaxYear <= 5;
-	if (keywords.length > 0) {
-		text += visCommunityPhraseTopics(pdata, adata, keywords, a, visKeyword, visIsActive);
-		text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
-		text += visAreaPhraseTopics(a, visIsActive);
-		text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
-		text += similarResearchersPhraseTopics(adata, a);
+	if (visKeyword != undefined){
+		var visIsActive = (new Date()).getFullYear() - visKeyword.MaxYear <= 5;
+		if (keywords.length > 0) {
+			text += visCommunityPhraseTopics(pdata, adata, keywords, a, visKeyword, visIsActive);
+			text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
+			text += visAreaPhraseTopics(a, visIsActive);
+			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
+			text += similarResearchersPhraseTopics(adata, a);
+		}
 	}
 	return text; 
 }

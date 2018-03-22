@@ -54,7 +54,7 @@ function process(pdata, adata, name,container, minN,maxN, t) {
             ppy.sort(function(a,b){return +a.Year - +b.Year;});
             author_object.AllPublicationsPerYear = ppy; 
        
-            console.log(author_object); 
+            // console.log(author_object); 
             topNCoAuthorObjects.push(author_object); 
 
         }
