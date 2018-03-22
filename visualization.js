@@ -346,7 +346,7 @@ function getAuthorObjectByName(adata, name){
   return obj;
 }
 
-function generateSparkline(data,canvas, h, w, startYear, endYear, ymax){
+function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
 
  //console.log(ymax); 
  var largeScale = false;
@@ -411,7 +411,7 @@ var div = d3.select("body").append("div")
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
       // .attr("style", "outline: thin solid red;")  
-      .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax)})
+      .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax,name)})
       // .on("mouseover", function(d){addBorder(this.id)})
       // .on("mouseout", function(d){removeBorder(this.id)})
     .append("g")
@@ -426,18 +426,30 @@ var div = d3.select("body").append("div")
   y.domain([0, ymax]);
 
   // append the rectangles for the bar chart
+  if (!largeScale){
   svg.selectAll(".bar")
       .data(data2)
-    .enter().append("rect")
+      .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.Year); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); });
+    }
+    if(largeScale){
+       svg.selectAll(".bar")
+      .data(data2)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.Year); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.Value); })
+      .attr("height", function(d) { return height - y(d.Value); })
+      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)});
+    }
   
   if (largeScale){
     // add the x Axis
-
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
@@ -448,7 +460,6 @@ var div = d3.select("body").append("div")
         .ticks(1));
     }
 }
-
 // function addBorder(container){
 //     var svg = d3.select("#" + container)
 //    .attr("style", "outline: thin solid DodgerBlue;")  ; 
@@ -519,10 +530,12 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
   var svg = d3.select("#" + canvas)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .style("background-color", '#f2f2f2')
-      .on("click", function(d){enlargeMe_MutualPublications(pdata, adata, a, cName, data2, this.id,startYear, endYear, ymax)})
+      .style("background-color", '#f2f2f2');
+    if(!largeScale){
+      svg.on("click", function(d){enlargeMe_MutualPublications(pdata, adata, a, cName, data2, this.id,startYear, endYear, ymax)});
+    }
 
-    .append("g")
+    svg.append("g")
       .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")")
     
@@ -585,10 +598,10 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
     }
 }
 
-function enlargeMe(data, id, startYear, endYear, ymax){
+function enlargeMe(data, id, startYear, endYear, ymax, name){
    //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 90, 300, startYear, endYear, ymax); 
+    generateSparkline(data,"figure", 90, 300, startYear, endYear, ymax, name); 
 
 }
 function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYear, endYear, ymax){
