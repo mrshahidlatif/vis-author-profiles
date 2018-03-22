@@ -412,13 +412,15 @@ var div = d3.select("body").append("div")
       .style("background-color", '#f2f2f2')
       // .attr("style", "outline: thin solid red;")  
       .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax,name)})
-      // .on("mouseover", function(d){addBorder(this.id)})
-      // .on("mouseout", function(d){removeBorder(this.id)})
-    .append("g")
-    .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")"); 
+      .append("g")
+      .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")"); 
+  if (!largeScale){
+      d3.select("#" + canvas)
+      .on("mouseover", function(d){addBorder(this.id)})
+      .on("mouseout", function(d){removeBorder(this.id)}); 
+  }
     
-  
   svg.selectAll(".bar").remove();
   // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
@@ -460,18 +462,18 @@ var div = d3.select("body").append("div")
         .ticks(1));
     }
 }
-// function addBorder(container){
-//     var svg = d3.select("#" + container)
-//    .attr("style", "outline: thin solid DodgerBlue;")  ; 
 
-// }
-// function removeBorder(container){
-//   var svg = d3.select("#" + container)
-//    .attr("style", "outline: none") 
-//    .style("background-color", '#f2f2f2');
+function addBorder(container){
+    var svg = d3.select("#" + container)
+        .attr("style", "outline: thin solid DodgerBlue;")  ; 
+
+}
+function removeBorder(container){
+  var svg = d3.select("#" + container)
+   .attr("style", "outline: none") 
+   .style("background-color", '#f2f2f2');
   
-
-// }
+}
 
 function generateSparklineForMutualPublications(pdata, adata, a, cName, data,canvas, h, w, startYear, endYear, ymax){
 
@@ -532,10 +534,13 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
+      .on("mouseover", function(d){addBorder(this.id)})
+      .on("mouseout", function(d){removeBorder(this.id)})
       .on("click", function(d){enlargeMe_MutualPublications(pdata, adata, a, cName, data2, this.id,startYear, endYear, ymax)})
       .append("g")
       .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")");
+   
   }
   if(largeScale){
       var svg = d3.select("#" + canvas)
