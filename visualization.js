@@ -380,9 +380,9 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
  }
 
     //tooltip 
-var div = d3.select("body").append("div")
-.attr("class", "tooltip")
-.style("opacity", 0);
+  var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
  //console.log(data2); 
   // set the dimensions and margins of the graph
@@ -412,11 +412,17 @@ var div = d3.select("body").append("div")
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
       // .attr("style", "outline: thin solid red;")  
-      .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax,name)})
+
       .append("g")
       .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")"); 
   if (!largeScale){
+     var svg = d3.select("#" + canvas)
+           .on("click", function(d){enlargeMe(data2, this.id, startYear, endYear, ymax,name)})
+           .append("g")
+          .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")")
+      
       d3.select("#" + canvas)
       .on("mouseover", function(d){addBorder(this.id)})
       .on("mouseout", function(d){removeBorder(this.id)}); 
@@ -448,7 +454,7 @@ var div = d3.select("body").append("div")
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); })
-        .on("mouseover", function(d) {
+      .on("mouseover", function(d) {
            div.transition()
              .duration(200)
              .style("opacity", .9);
@@ -456,7 +462,7 @@ var div = d3.select("body").append("div")
              .style("left", (d3.event.pageX) + 5  + "px")
              .style("top", (d3.event.pageY ) - 38 + "px");
            })
-       .on("mouseout", function(d) {
+      .on("mouseout", function(d) {
            div.transition()
              .duration(500)
              .style("opacity", 0);
@@ -465,7 +471,6 @@ var div = d3.select("body").append("div")
     }
   
   if (largeScale){
-    // add the x Axis
 
       svg.append("g")
      .attr("transform", "translate(-20," + height + ")")
@@ -681,13 +686,6 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
          .attr("y2", height)
          .text("-" + ymax);  
          
-      // svg.append("g")
-      //     .attr("transform", "translate(0," + height + ")")
-      //     .call(d3.axisBottom(x));
-
-      // // add the y Axis
-      // svg.append("g")
-      //     .call(d3.axisLeft(y));
     }
 }
 

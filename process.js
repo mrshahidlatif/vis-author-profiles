@@ -2,6 +2,11 @@ function process(pdata, adata, name,container, minN,maxN, t) {
   //Processing the data 
   // var pdata;
   // var adata;
+  //Clearing Stuff when searching for new author
+  document.getElementById("dod").innerHTML= ""; 
+  listOfSparklines = []; 
+
+
   var allCoAuthors = [];
   var authorPubCoun = 0;
   var isFound = false;
