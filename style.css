@@ -262,12 +262,11 @@ div.tooltip {
   height: 38px;
   padding: 2px;
   font: 10px sans-serif;
-  background: #fffd96;
+  background: #FFD700;
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
 }
-
 
 * {
   box-sizing: border-box;

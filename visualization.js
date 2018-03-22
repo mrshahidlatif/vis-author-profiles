@@ -78,7 +78,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
  
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
-  var h = indPub.length*50 ; 
+  var h = indPub.length*50 + 30; //adding thirty for the margins 
   var w = 550;
   if (h<60){h=80;}
   
@@ -133,7 +133,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
         //     .attr("dy", "0.71em")
         //     .attr("text-anchor", "end")
 
-        var MAX_WIDTH_OF_BAR = 15;
+        var MAX_WIDTH_OF_BAR = 12;
       
         //Drawing horizontal bar charts to mark start year of each coauthor 
         g.selectAll(".hbar")
