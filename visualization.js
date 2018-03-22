@@ -79,7 +79,8 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
   var h = indPub.length*50 + 30; //adding thirty for the margins 
-  var w = 550;
+  var w = (maxYear-minYear)*20;
+  if (w > 550) {w = 550;}
   if (h<60){h=80;}
   
   var svg = d3.select("#" + canvas)
