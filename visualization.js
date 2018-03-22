@@ -103,7 +103,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
 
   for (var j=0;j<N;j++){
     data = indPub[j];
-    var x = d3.scaleBand().rangeRound([50, width]).padding(0.3),
+    var x = d3.scaleBand().rangeRound([60, width]).padding(0.3),
         y = d3.scaleLinear().rangeRound([(j+1)*height/N, j*height/N+3]);
 
     var g = svg.append("g")
@@ -149,14 +149,26 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
 
           //Adding names of coauthors 
         g.selectAll(".names")
-          .data(adata)
+          .data(gdata)
           .enter().append("text")
           .attr("class", "names")
           .attr("x", 0)
           .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return getLastName(d.Name); })
-          // .on("click", function(d){loadMe(pdata, adata, d.Name);});
-    
+          .text(function(d){return getLastName(d.Name) + " (" + d.MutualPublications + ")"; })
+          .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html( "<br/>" + getFullNameWithoutNo(d.Name))
+             .style("left", (d3.event.pageX) + 5 + "px")
+             .style("top", (d3.event.pageY - 38) + "px");
+           })
+         .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           });
+
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
