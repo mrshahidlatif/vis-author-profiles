@@ -244,6 +244,10 @@ p {
     font-size:12px;
   
 }
+.xlabelBar{
+    fill:black;
+    font-size:12px;
+}
 .moreBtn:hover{
      fill:DodgerBlue;
      cursor:pointer;

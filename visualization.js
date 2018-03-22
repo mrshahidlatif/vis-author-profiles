@@ -386,7 +386,7 @@ var div = d3.select("body").append("div")
  //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 20, bottom: 20, left: 30},
+    var margin = {top: 10, right: 20, bottom: 10, left: 30},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -452,14 +452,28 @@ var div = d3.select("body").append("div")
   
   if (largeScale){
     // add the x Axis
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
 
-    // add the y Axis
-    svg.append("g")
-        .call(d3.axisLeft(y)
-        .ticks(1));
+      svg.append("g")
+     .attr("transform", "translate(-20," + height + ")")
+     .append("text")
+     .attr("class", "xlabelBar")
+     .attr("y2", height)
+     .text(startYear);
+
+     svg.append("g")
+     .attr("transform", "translate("+width+"," + height + ")")
+     .append("text")
+     .attr("class", "xlabelBar")
+     .attr("y2", height)
+     .text(endYear);  
+
+
+     svg.append("g")
+     .attr("transform", "translate("+width+",0)")
+     .append("text")
+     .attr("class", "xlabelBar")
+     .attr("y2", height)
+     .text("-" + ymax);  
     }
 }
 
@@ -509,7 +523,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
  }
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 20, bottom: 20, left: 30},
+    var margin = {top: 10, right: 30, bottom: 10, left: 30},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -600,14 +614,35 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
 
     // add the x Axis
-
       svg.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+         .attr("transform", "translate(-20," + height + ")")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text(startYear);
 
-      // add the y Axis
-      svg.append("g")
-          .call(d3.axisLeft(y));
+         svg.append("g")
+         .attr("transform", "translate("+width+"," + height + ")")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text(endYear);  
+
+
+         svg.append("g")
+         .attr("transform", "translate("+width+",0)")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text("-" + ymax);  
+         
+      // svg.append("g")
+      //     .attr("transform", "translate(0," + height + ")")
+      //     .call(d3.axisBottom(x));
+
+      // // add the y Axis
+      // svg.append("g")
+      //     .call(d3.axisLeft(y));
     }
 }
 

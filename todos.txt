@@ -11,6 +11,8 @@ BUGS
 -Judy Diamond has only 5 pubs but sparklines – looks strange [FIXED]
 -Judy Diamond is a good example where the collaboration paragrap
 -Daniel A. Keim don't have focus areas. Why???
+-resetting everything on loading new author
+-special information on non-vis author (may be * and more info like author not in database)
 
 ----------------------------------------------
 Fabian's Feedback - Suggestions / Things to do
@@ -40,6 +42,7 @@ Fabian's Feedback - Suggestions / Things to do
 -Only one sentence usually instead of two to describe #publications and type. Maybe, if somebody has more than 100 publications, we might start rounding (by 50ies) to kind of -highlight this achievement and split the first sentence into two sentences. (Roch Guérin)
 -“journal paper” -> “journal article” (Ovidiu Ancuta)
 -Maybe flip proceedings and journal if #proceedings > #journal
+-more similar authors in second paragraphs
 
 LAYOUT 
 -Fill a somewhat wider area with the main content, i.e., text plus side bar (e.g., Stackoverflow: 1090px; Google Scholar: 1200) [FIXED]
@@ -58,6 +61,8 @@ LAYOUT
 -There is an unnecessary ~20px margin on the right side of the side bar [FIXED]
 -Don’t use bold font for the title of a publication because it is not clickable – maybe try italics instead [FIXED]
 -Remove the footer (because double-blind submission) [FIXED]
+-Only two labels for x-axis and 1 for y (only the max value on the right)
+-Text should describe the authors within the visualization 
 ------
 TODOs
 ------
