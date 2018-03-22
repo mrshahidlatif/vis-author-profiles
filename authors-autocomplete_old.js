@@ -1,104 +1,5 @@
-function autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
-  var currentFocus;
-  /*execute a function when someone writes in the text field:*/
-  inp.addEventListener("input", function(e) { 
-      var a, b, i, val = this.value;
-      /*close any already open lists of autocompleted values*/
-      closeAllLists();
-      if (!val) { return false;}
-      currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
-      a = document.createElement("DIV");
-      a.setAttribute("id", this.id + "autocomplete-list");
-      a.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
-      this.parentNode.appendChild(a);
-      /*for each item in the array...*/
-      for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-          /*create a DIV element for each matching element:*/
-          b = document.createElement("DIV");
-          /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
-          /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-
-          /*execute a function when someone clicks on the item value (DIV element):*/
-          b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
-              inp.value = this.getElementsByTagName("input")[0].value;
-              console.log(inp.value);
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
-              closeAllLists();
-          });
-          a.appendChild(b);
-        }
-      }
-  });
-  /*execute a function presses a key on the keyboard:*/
-  inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
-          if (x) x[currentFocus].click();
-        }
-      }
-  });
-  function addActive(x) {
-    /*a function to classify an item as "active":*/
-    if (!x) return false;
-    /*start by removing the "active" class on all items:*/
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    /*add class "autocomplete-active":*/
-    x[currentFocus].classList.add("autocomplete-active");
-  }
-  function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
-    }
-  }
-  function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
-      }
-    }
-  }
-  /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function (e) {
-      closeAllLists(e.target);
-      });
-}
-
-/*An array containing all the country names in the world:*/
-var authors_list = [
+$( function() {
+    var availableAuthors = [
             "A. E. Mynett",
             "A. F. Westdorp",
             "A. Gay",
@@ -1222,7 +1123,7 @@ var authors_list = [
             "Dirk Zeckzer",
             "Dmitriy Morozov",
             "Dmitry A. Karpeyev",
-            "D&apos;nardo Colucci",
+            "D'nardo Colucci",
             "Doanna Meads",
             "Doantam Phan",
             "Dogan Demir",
@@ -1295,7 +1196,7 @@ var authors_list = [
             "E. P. Szuszczewicz",
             "E. Pepke",
             "E. S. Panduranga",
-            "E. Timothy O&apos;Brien",
+            "E. Timothy O'Brien",
             "E. Wes Bethel",
             "E. Yanli",
             "Eamonn Maguire",
@@ -2076,7 +1977,7 @@ var authors_list = [
             "James D. Foley",
             "James D. Hollan",
             "James Davey",
-            "James F. O&apos;Brien",
+            "James F. O'Brien",
             "James H. Fallon",
             "James H. Garrett Jr.",
             "James Harrison",
@@ -2087,7 +1988,7 @@ var authors_list = [
             "James K. Rayson",
             "James L. Montine",
             "James N. Scott",
-            "James O&apos;Brien",
+            "James O'Brien",
             "James P. Ahrens",
             "James R. Eagan",
             "James Roberge",
@@ -3633,7 +3534,7 @@ var authors_list = [
             "Patrick Mackey",
             "Patrick Min",
             "Patrick Oesterling",
-            "Patrick O&apos;Leary",
+            "Patrick O'Leary",
             "Patrick Riehmann",
             "Patrick S. McCormick",
             "Patrizia Palamidese",
@@ -4021,7 +3922,7 @@ var authors_list = [
             "Robert L. Grossman",
             "Robert L. Van Uitert Jr.",
             "Robert M. Edsall",
-            "Robert M. O&apos;Bara",
+            "Robert M. O'Bara",
             "Robert M. Sweet",
             "Robert McDermott",
             "Robert Michael Kirby",
@@ -4293,7 +4194,7 @@ var authors_list = [
             "Shimon Slavin",
             "Shing-Chi Cheung",
             "Shing-Tung Yau",
-            "Shin&apos;ichi Satoh",
+            "Shin'ichi Satoh",
             "Shiping Huang",
             "Shiqing He",
             "Shiry Ginosar",
@@ -4559,7 +4460,7 @@ var authors_list = [
             "Teng-Yok Lee",
             "Teodora Chitiboi",
             "Tera Marie Green",
-            "Teresa O&apos;Connell",
+            "Teresa O'Connell",
             "Terry Myerson",
             "Terry S. Yoo",
             "Terry Welsh",
@@ -4570,7 +4471,7 @@ var authors_list = [
             "Theo van Walsum",
             "Theodoros Damoulas",
             "Theodosios Pavlidis",
-            "Theresa A. O&apos;Connell",
+            "Theresa A. O'Connell",
             "Theresa-Marie Rhyne",
             "Theresia Gschwandtner",
             "Thierry Delmarcelle",
@@ -4709,7 +4610,7 @@ var authors_list = [
             "Travis L. Bauer",
             "Trenton Pulsipher",
             "Trevor Kennedy",
-            "Trevor M. O&apos;Brien",
+            "Trevor M. O'Brien",
             "Trung-Tien Phan-Quang",
             "Trustin Clear",
             "Tsai-Ching Lu",
@@ -5173,7 +5074,7 @@ var authors_list = [
             "Zhu He",
             "Zhuming Ai",
             "Zhuofeng Wu",
-            "Zi&apos;ang Ding",
+            "Zi'ang Ding",
             "Zicheng Liao",
             "Zichun Zhong",
             "Ziyi Zheng",
@@ -5185,7 +5086,36 @@ var authors_list = [
             "Zsolt Horváth",
             "Zuchao Wang",
             "Zvi Polunsky",
+        
     ];
+     $('#search').keyup(function(e) {
+        // 'enter' key was pressed
+        var $suggest = $('#suggestion');
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 39) {
+            $(this).val($suggest.val());
+            $suggest.val("");
+            return false;
+        }
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-// autocomplete(document.getElementById("myInput"), countries);
+        // some other key was pressed
+        var needle = $(this).val();
+
+        // is the field empty?
+        if (!$.trim(needle).length) {
+            $suggest.val("");
+            return false;
+        }
+
+        // compare input with availableAuthors
+        $.each(availableAuthors, function(i, term) {
+            var regex = new RegExp('^' + needle, 'i');
+            if (regex.test(term)) {
+                $suggest.val(needle + term.slice(needle.length));
+                // use first result
+                return false;
+            }
+            $suggest.val("");
+        });
+    });
+});

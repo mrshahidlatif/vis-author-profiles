@@ -90,7 +90,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax, aObject.Name);
 		//Initial Display of Info header graph
 		document.getElementById("info").innerHTML = '<svg width="350" height="100" id="figure"></svg>';
-		generateSparkline(aObject.AllPublicationsPerYear,"figure", 90, 300, sYear, eYear, ymax, aObject.Name);  
+		generateSparkline(aObject.AllPublicationsPerYear,"figure", 90, 320, sYear, eYear, ymax, aObject.Name);  
 		
 		for (var i=0;i<listOfSparklines.length;i++){
 			// console.log(listOfSparklines[i]);
