@@ -1,7 +1,7 @@
 var TOP_COAUTHORS ;  
 var RECORDS_TO_SHOW = 0; 
 function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors, t){
-  
+
    TOP_COAUTHORS = adata.length;
    RECORDS_TO_SHOW = gdata.length; 
   if (t==2){
@@ -153,7 +153,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("class", "names")
           .attr("x", 0)
           .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return getLastName(d.Name); });
+          .text(function(d){return getLastName(d.Name); })
           // .on("click", function(d){loadMe(pdata, adata, d.Name);});
     
       }
@@ -248,9 +248,9 @@ function showMutualPublications(pdata, adata, year, aName, cName){
 
 function showIndividualPublications(pdata, adata, year, name){
   //Prints the mutual publications on mouse click in side panel 
-  //console.log("Hi from Call me ");
-  //console.log(year + aName+cName);
+  // console.log(year + name);
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
+  // console.log(pubs);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + name  
   + ", " + year + "</span>" + "<br>" + "<hr>";
   
@@ -311,10 +311,9 @@ function StringifyPublication(pdata, adata, p){
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
 function loadMe(pdata, adata, name){
-  // console.log("You called me....!");
   // console.log(pdata);
   // console.log(adata); 
-  // console.log(name); 
+  console.log(name); 
   process(pdata, adata, name, "CollabChart1", 2, 8, 1); 
   
 }
@@ -465,7 +464,7 @@ var div = d3.select("body").append("div")
 
 function generateSparklineForMutualPublications(pdata, adata, a, cName, data,canvas, h, w, startYear, endYear, ymax){
 
- //console.log(ymax); 
+ // console.log(ymax); 
  aName = a.Name; 
  var largeScale = false;
  if (h>100 || w>200){
@@ -559,7 +558,9 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .attr("x", function(d) { return x(d.Year); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
-      .attr("height", function(d) { return height - y(d.Value); }); 
+      .attr("height", function(d) { return height - y(d.Value); })
+      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
+      
 
       // console.log(data2);
        svg.selectAll(".mbar")
@@ -570,6 +571,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.Value); })
         .attr("height", function(d) { return height - y(d.Value); })
+        .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
 
     // add the x Axis
 

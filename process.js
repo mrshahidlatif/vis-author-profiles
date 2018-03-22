@@ -6,12 +6,6 @@ function process(pdata, adata, name,container, minN,maxN, t) {
   var authorPubCoun = 0;
   var isFound = false;
 
-  // loadJSON("pubdata.json", function(response) {
-  //   pdata = JSON.parse(response);
-
-  // loadJSON("authordata.json", function(response) {
-  //   adata = JSON.parse(response);
-
    for (var k = 0; k < adata.length; k++) {
       if(adata[k].Name == name){
         isFound = true; 
