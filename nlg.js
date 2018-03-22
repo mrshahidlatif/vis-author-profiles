@@ -1528,10 +1528,15 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
 
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Publications " + "(" + pubsOnTopic.length + ") : " + getLastName(a) +  "</span>" + "<br>" + "<hr>";
   
+  var pubsForSparkline = {}; 
   for (var i=0; i<pubsOnTopic.length;i++){
     StringifyPublication(pdata, adata, pubsOnTopic[i]);
+	    if (!pubsForSparkline[pubsOnTopic[i].Year]) {
+	    	pubsForSparkline[pubsOnTopic[i].Year]=0;
+	    } 
+	    pubsForSparkline[pubsOnTopic[i].Year]++ ; 
   }
-  //console.log(pubsOnTopic); 
+  console.log(pubsForSparkline); 
   //return pubsOnTopic; 
 }
 

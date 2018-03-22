@@ -448,6 +448,19 @@ var div = d3.select("body").append("div")
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); })
+        .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5  + "px")
+             .style("top", (d3.event.pageY ) - 38 + "px");
+           })
+       .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
       .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)});
     }
   
@@ -567,6 +580,11 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
             "translate(" + margin.left + "," + margin.top + ")");
       
   }
+    //tooltip 
+    var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+      
   
   svg.selectAll("*.msbar").remove();
   // Scale the range of the data in the domains
@@ -600,6 +618,19 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); })
+      .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5  + "px")
+             .style("top", (d3.event.pageY ) - 38 + "px");
+           })
+       .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
       .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
       
 
@@ -612,6 +643,19 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.Value); })
         .attr("height", function(d) { return height - y(d.Value); })
+         .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5  + "px")
+             .style("top", (d3.event.pageY ) - 38 + "px");
+           })
+       .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
         .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
 
     // add the x Axis
