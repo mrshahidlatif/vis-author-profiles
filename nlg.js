@@ -1122,7 +1122,7 @@ function generateResearchTopicsText(pdata, adata, a){
 			text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
 			text += visAreaPhraseTopics(a, visIsActive);
 			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
-			text += similarResearchersPhraseTopics(adata, a);
+			text += similarResearchersPhraseTopics(pdata,adata, a);
 		}
 	}
 	return text; 
@@ -1311,9 +1311,9 @@ function stringifyList(list) {
 	}
 }
 
-function similarResearchersPhraseTopics(adata, a){
+function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
-	var similarAuthors = findAuthorsWithSimilarResearchTopics(adata, a); 
+	var similarAuthors = findAuthorsWithSimilarResearchTopics(pdata, adata, a); 
 	if (similarAuthors.length > 0){
 		if (similarAuthors.length == 1){
 			s += " Another researcher with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
@@ -1376,12 +1376,26 @@ function getKeywordsPerYear(pubs, keyword){
 	return keywordPerYear; 
 }
 
-function findAuthorsWithSimilarResearchTopics(adata, a) {
+function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
+	var publications = getPublications(pdata, a.Name);
+	var coauthorFreq = {};
+	for (var i = 0; i < publications.length; i++) {
+		var authors = publications[i].Authors;
+		for (let j = 0; j < authors.length; j++) {
+			var name = authors[j].Name;
+			if (name === a.Name) continue;
+			if (!coauthorFreq[name]) {
+				coauthorFreq[name] = 0;
+			}
+			coauthorFreq[name]++;			
+		}
+	}
+	console.log(coauthorFreq);
 	if (a.Keywords.length < 10) return [];
 	var keywordMap1 = createKeywordMap(a.Keywords);
 	var similarAuthors = [];
 	for (var i = 0; i < adata.length; i++) {
-		if (adata[i].Name === a.Name || adata[i].Keywords.length < 10) continue;
+		if (adata[i].Name === a.Name || adata[i].Keywords.length < 10 || coauthorFreq[adata[i].Name] > 2) continue;
 		var keywordMap2 = createKeywordMap(adata[i].Keywords);
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
 		if (similarity > 0.5) {
