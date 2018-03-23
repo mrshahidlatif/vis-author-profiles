@@ -975,7 +975,7 @@ function generateResearchTopicsText(pdata, adata, a){
 			text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
 			text += visAreaPhraseTopics(a, visIsActive);
 			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
-			text += similarResearchersPhraseTopics(adata, a);
+			text += similarResearchersPhraseTopics(pdata,adata, a);
 		}
 	}
 	return text; 
@@ -1164,9 +1164,9 @@ function stringifyList(list) {
 	}
 }
 
-function similarResearchersPhraseTopics(adata, a){
+function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
-	var similarAuthors = findAuthorsWithSimilarResearchTopics(adata, a); 
+	var similarAuthors = findAuthorsWithSimilarResearchTopics(pdata, adata, a); 
 	if (similarAuthors.length > 0){
 		if (similarAuthors.length == 1){
 			s += " Another researcher with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
@@ -1229,13 +1229,27 @@ function getKeywordsPerYear(pubs, keyword){
 	return keywordPerYear; 
 }
 
-function findAuthorsWithSimilarResearchTopics(adata, a) {
-	if (a.Keywords.length < 10) return [];
-	var keywordMap1 = createKeywordMap(a.Keywords);
+function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
+	var publications = getPublications(pdata, a.Name);
+	var coauthorFreq = {};
+	for (var i = 0; i < publications.length; i++) {
+		var authors = publications[i].Authors;
+		for (let j = 0; j < authors.length; j++) {
+			var name = authors[j].Name;
+			if (name === a.Name) continue;
+			if (!coauthorFreq[name]) {
+				coauthorFreq[name] = 0;
+			}
+			coauthorFreq[name]++;			
+		}
+	}
+	if (a.Keywords.length < 20) return [];
+	var keywordMap1 = createKeywordMap(a.Keywords); //getKeywords(pdata, a));
 	var similarAuthors = [];
 	for (var i = 0; i < adata.length; i++) {
-		if (adata[i].Name === a.Name || adata[i].Keywords.length < 10) continue;
-		var keywordMap2 = createKeywordMap(adata[i].Keywords);
+		if (adata[i].Name === a.Name || adata[i].Keywords.length < 20 || coauthorFreq[adata[i].Name] > 2) continue;
+		//var venueKeywords = getKeywords(pdata, adata[i]);
+		var keywordMap2 = createKeywordMap(adata[i].Keywords);//, venueKeywords);
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
 		if (similarity > 0.5) {
 			similarAuthors.push({Name: adata[i].Name, Value: similarity});
@@ -1246,8 +1260,13 @@ function findAuthorsWithSimilarResearchTopics(adata, a) {
   	});
 	return getTopNItems(similarAuthors, 3, 5, 1);
 }
-function createKeywordMap(keywords) {
+function createKeywordMap(keywords, venueKeywords) {
 	var keywordMap = {};
+	if (venueKeywords) {
+		for (var i = 0; i < venueKeywords.length; i++) {
+			keywordMap[venueKeywords[i].Name] = venueKeywords[i].Value;
+		}
+	}
 	for (var i = 0; i < keywords.length; i++) {
 		var keyword = author_keywords[keywords[i]];
 		if (keyword === undefined || keyword === "unclear") {
