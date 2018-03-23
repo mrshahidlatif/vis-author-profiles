@@ -1,40 +1,8 @@
-var TOP_COAUTHORS ;  
-var RECORDS_TO_SHOW = 0; 
-function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAuthors, t){
 
-   TOP_COAUTHORS = adata.length;
-   RECORDS_TO_SHOW = gdata.length; 
-  if (t==2){
-       RECORDS_TO_SHOW += 3;
-       var topNCoAuthorObjects = adata; // starting from the already listed authors 
-       for (var i = adata.length; i < distCoAuthors.length; i++) {
-          for (var j = 0; j < allAuthorsData.length; j++) {
-            if (allAuthorsData[j].Name == distCoAuthors[i].Name) {
-              topNCoAuthorObjects.push(allAuthorsData[j]);
-            }
-          }
-        }
-       var dataForGantt = gdata;
-       for (var i = gdata.length; i < topNCoAuthorObjects.length; i++) {
-        var sYear = Math.min(getMin(topNCoAuthorObjects[i].AllPublicationsPerYear));
-        var lYear = Math.min(getMax(topNCoAuthorObjects[i].AllPublicationsPerYear));
-        //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
-        var a = new Object();
-        a.Name = topNCoAuthorObjects[i].Name;
-        a.StartYear = sYear;
-        a.EndYear = lYear;
-        a.MutualPublications = distCoAuthors[i].Value;
-        //console.log(a.MutualPublications/(2017-a.StartYear)); 
-        dataForGantt.push(a);
-      }
-      for (var i=TOP_COAUTHORS;i<dataForGantt.length;i++){
-        var mppy = getMutualPublications(pdata,aName, dataForGantt[i].Name);
-        dataForGantt[i]["MutualPubPerYear"] = mppy;
-        
-      }
-      gdata = dataForGantt.slice(0, RECORDS_TO_SHOW); 
-      adata = topNCoAuthorObjects.slice(0,RECORDS_TO_SHOW); 
-  }
+function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAuthors, t){
+
+  // console.log(gdata);
+  // console.log(adata);
 
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
@@ -81,6 +49,7 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
   var h = indPub.length*50 + 30; //adding thirty for the margins 
   var w = (maxYear-minYear)*20;
   if (w > 550) {w = 550;}
+  if (w < 250) {w=250;}
   if (h<60){h=80;}
   
   var svg = d3.select("#" + canvas)
@@ -243,8 +212,57 @@ function generateVis(gdata, adata, canvas,pdata,aName, allAuthorsData, distCoAut
           .attr("y",height+10)
           .text("More")
           //.on("click", function(d){});
-          .on("click", function(d){generateVis(gdata, adata, canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
+          .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
   }
+}
+
+function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors, t){
+     var MORE_TO_SHOW = 5; 
+     var authorObjects = [];
+     console.log(distCoAuthors); 
+     var visAuthor = false; 
+      for (var i = 0; i < Math.min(distCoAuthors.length, MORE_TO_SHOW); i++) {
+        visAuthor = false; 
+        for (var j = 0; j < adata.length; j++) {
+          if (adata[j].Name === distCoAuthors[i].Name) {
+            authorObjects.push(adata[j]);
+            visAuthor = true;
+          }
+        }
+        if(!visAuthor){
+           var allpubYears = getAllPublicationYears(pdata, distCoAuthors[i].Name);
+           var author_object = new  Object();
+           var ppy = compressArray2(allpubYears);
+           author_object.Name = distCoAuthors[i].Name;
+           ppy.sort(function(a,b){return +a.Year - +b.Year;});
+           author_object.AllPublicationsPerYear = ppy; 
+           authorObjects.push(author_object); 
+        }
+     }
+     console.log(authorObjects);
+        var dataForGantt = [];
+        for (var i = 0; i < authorObjects.length; i++) {
+          var sYear = Math.min(getMin(authorObjects[i].AllPublicationsPerYear));
+          var lYear = Math.min(getMax(authorObjects[i].AllPublicationsPerYear));
+
+          var a = new Object();
+          a.Name = authorObjects[i].Name;
+          a.StartYear = sYear;
+          a.EndYear = lYear;
+          a.MutualPublications = distCoAuthors[i].Value;
+          //console.log(a.MutualPublications/(2017-a.StartYear)); 
+          dataForGantt.push(a);
+        }
+        console.log(dataForGantt);
+        for (var i=0;i<dataForGantt.length;i++){
+          var mppy = getMutualPublications(pdata, aName, dataForGantt[i].Name);
+          // console.log(mppy);
+          dataForGantt[i]["MutualPubPerYear"] = mppy;
+          
+        }
+
+    generateVis(dataForGantt, authorObjects, canvas,pdata,aName, adata, distCoAuthors, t); 
+
 }
 function showMutualPublications(pdata, adata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 
@@ -327,7 +345,7 @@ function loadMe(pdata, adata, name){
   // console.log(pdata);
   // console.log(adata); 
   // console.log(name); 
-  process(pdata, adata, name, "CollabChart1", 2, 8, 1); 
+  process(pdata, adata, name, "CollabChart1", 3, 8, 1); 
   
 }
 
