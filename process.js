@@ -7,15 +7,11 @@ function process(pdata, adata, name,container, minN,maxN, t) {
   document.getElementById("dod").innerHTML= ""; 
   listOfSparklines = []; 
 
-
   var allCoAuthors = [];
-  var authorPubCoun = 0;
   var isFound = false;
 
-   for (var k = 0; k < adata.length; k++) {
-      if(adata[k].Name == name){
+   if(authors_list.indexOf(name) > -1){
         isFound = true; 
-      }
    }
     if (isFound) { //Author found so go ahead with process
       document.getElementById("pageTitle").innerHTML = name + " - VAP";
@@ -23,8 +19,6 @@ function process(pdata, adata, name,container, minN,maxN, t) {
       for (var i = 0; i < pdata.length; i++) {
         for (var j = 0; j < pdata[i].Authors.length; j++) {
           if (pdata[i].Authors[j].Name == name) {
-            isFound = true;
-            authorPubCoun++;
             for (var k = 0; k < pdata[i].Authors.length; k++) {
               allCoAuthors.push(pdata[i].Authors[k].Name);
             }
@@ -33,45 +27,35 @@ function process(pdata, adata, name,container, minN,maxN, t) {
       }
       // console.log(allCoAuthors);
       var items = compressArray(allCoAuthors, name);
-      //console.log(items); 
       var topNCoAuthor = getTopNItems(items, minN, maxN,t);
       // console.log(topNCoAuthor); 
       
       var topNCoAuthorObjects = [];
-      
+      var visAuthor = false; 
       for (var i = 0; i < topNCoAuthor.length; i++) {
+        visAuthor = false; 
         for (var j = 0; j < adata.length; j++) {
           if (adata[j].Name == topNCoAuthor[i].Name) {
             topNCoAuthorObjects.push(adata[j]);
+            visAuthor = true; 
           }
         }
-      }
-      // console.log(topNCoAuthorObjects); 
-      if (topNCoAuthorObjects.length == 0){
-        //Top Authors are non-VIS authors 
-        //So get their data from DBLP and add them to the list of topNCoAuthorObjects[]
-        //so that they are displayed on the coauthor visualization 
-        for (var i=0;i<topNCoAuthor.length;i++){
-            var allpubYears = getAllPublicationYears(pdata, topNCoAuthor[i].Name);
-            var author_object = new  Object();
-            var ppy = compressArray2(allpubYears);
-
-            author_object.Name = topNCoAuthor[i].Name;
-            ppy.sort(function(a,b){return +a.Year - +b.Year;});
-            author_object.AllPublicationsPerYear = ppy; 
-       
-            // console.log(author_object); 
-            topNCoAuthorObjects.push(author_object); 
-
+        if(!visAuthor){
+               var allpubYears = getAllPublicationYears(pdata, topNCoAuthor[i].Name);
+               var author_object = new  Object();
+               var ppy = compressArray2(allpubYears);
+               author_object.Name = topNCoAuthor[i].Name;
+               ppy.sort(function(a,b){return +a.Year - +b.Year;});
+               author_object.AllPublicationsPerYear = ppy; 
+               topNCoAuthorObjects.push(author_object); 
         }
       }
+
         var dataForGantt = [];
         for (var i = 0; i < topNCoAuthorObjects.length; i++) {
-          // var sYear = Math.min(getMin(topNCoAuthorObjects[i].JournalsPerYear), getMin(topNCoAuthorObjects[i].ConfsPerYear));
-          // var lYear = Math.max(getMax(topNCoAuthorObjects[i].JournalsPerYear), getMax(topNCoAuthorObjects[i].ConfsPerYear));
           var sYear = Math.min(getMin(topNCoAuthorObjects[i].AllPublicationsPerYear));
           var lYear = Math.min(getMax(topNCoAuthorObjects[i].AllPublicationsPerYear));
-          //console.log(topNCoAuthorObjects[i].Name + ":" + sYear + ":" + lYear);
+
           var a = new Object();
           a.Name = topNCoAuthorObjects[i].Name;
           a.StartYear = sYear;
@@ -102,11 +86,9 @@ function process(pdata, adata, name,container, minN,maxN, t) {
               cpy = adata[i].ConfsPerYear;
             }
           }
-          //Generating graphs for author stats 
-         var pct = percentRank(statData, pubCount);
          
          if(t==1){ // call once as process() is called twice with t=1 and t=2
-            generateProfileText(pdata, adata, aObject, pct, dataForGantt);
+            generateProfileText(pdata, adata, aObject, dataForGantt);
           }
           generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items);
 
@@ -206,74 +188,6 @@ function getMax(data) {
   else return 1800;
 }
 
-// function getTopNItems(items, NoOfAuthorPublications, threshold) {
-//   //Basic! Returns the authors which are above a certain percent thresold
-//   var topItems = [];
-//   // console.log("Here are his coauthors!!!")
-//   // items.sort(function(a, b) {
-//   //   return b.count - a.count;
-//   // });
-//   console.log(items);
-//   for (var i = 0; i < items.length; i++) {
-//     var percentPublications = Math.round(items[i].Value / NoOfAuthorPublications * 100);
-//     if (percentPublications > threshold) {
-//       topItems.push(items[i]);
-
-//     }
-//   }
-//   topItems.sort(function(a, b) {
-//     return b.Value - a.Value;
-//   });
-//   return topItems;
-// }
-
-// function getTopNItems(items, NoOfAuthorPublications, minN, maxN, MinimumNoOfOutputItems) {
- 
-//   //Given [minN, maxN] percentage range and N (minimum desired authors) returns the authors that lie in the percent interval [minN, maxN]
-//   var N = MinimumNoOfOutputItems; 
-//   if (N==0){ N =1 ;}
-//   var minN = minN;
-//   var maxN = maxN;
-//   var topItems = [];
-//   var finaltopItems=[];
-
-
-//   for (var i = 0; i < items.length; i++) {
-//     var percentPublications = Math.round(items[i].Value / NoOfAuthorPublications * 100);
-//     if (percentPublications >= minN && percentPublications <= maxN) {
-//       topItems.push(items[i]);
-
-//     }
-//   }
-//   topItems.sort(function(a, b) {
-//     return b.Value - a.Value;
-//   });
-
-//   if (topItems.length > N){
-//     //console.log(topItems);
-//     var gaps = [];
-//     for(var i=N;i<topItems.length;i++){
-//       var gap = topItems[i-1].Value - topItems[i].Value;
-//       gaps.push(gap);
-//     }
-//     //console.log(gaps);
-//     var maxGap = d3.max(gaps);
-//     var cutPoint = gaps.indexOf(maxGap) + N ; // adding 1 due to 0-indexing system 
-//     //console.log(cutPoint);
-
-    
-//     for (var i=0;i<cutPoint;i++){
-//       finaltopItems.push(topItems[i]);
-//     }
-//   }
-//   else {
-//     finaltopItems = topItems;
-//   }
-//   //console.log(finaltopItems);
-
-//   return finaltopItems;
-// }
-
 function getTopNItems(items, minN, maxN, t) {
  
   //Given [minN, maxN] range: returns the authors in that range by systematically cutting off the list
@@ -314,45 +228,10 @@ function getTopNItems(items, minN, maxN, t) {
   else {
     finaltopItems = topItems;
   }
-  // console.log(finaltopItems);
-  if (t==2){
-    var tier2authors = subtractArrayOfObjects(topItems,finaltopItems);
-    finaltopItems = tier2authors; 
-    //console.log(finaltopItems);
-  }
+  // console.log(finaltopItems); 
+
   return finaltopItems;
 }
-function subtractArrayOfObjects(a1,a2){
-  for (var i=0; i<a1.length;i++){
-    for (var j=0;j<a2.length;j++){
-      if (a1[i].Name == a2[j].Name){
-        a1.splice(i,1);
-      }
-    }
-  }
-  return a1;
-}
-
-function percentRank(array, n) {
-  var L = 0;
-  var S = 0;
-  var N = array.length
-
-  for (var i = 0; i < array.length; i++) {
-    if (array[i] < n) {
-      L += 1
-    } else if (array[i] === n) {
-      S += 1
-    } else {
-
-    }
-  }
-
-  var pct = (L + (0.5 * S)) / N
-
-  return pct * 100;
-}
-
 //Counting frequency of each element in array and return a (key,value) pair
 //Also removes the self author
 function compressArray(original, name) {
