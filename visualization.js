@@ -1,4 +1,4 @@
-
+var MORE_TO_SHOW = 3; 
 function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAuthors, t){
 
   // console.log(gdata);
@@ -217,7 +217,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
 }
 
 function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors, t){
-     var MORE_TO_SHOW = 5; 
+     MORE_TO_SHOW += 3; 
      var authorObjects = [];
      console.log(distCoAuthors); 
      var visAuthor = false; 
