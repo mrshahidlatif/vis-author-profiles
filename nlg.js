@@ -2,20 +2,15 @@ var hasSupversied = false;
 var listOfSparklines = []; 
 var alreadyListedTopics = []; 
 var MAX_SUPERVISEES = 5; 
-function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
-	
-	//console.log(pdata);
-	//console.log(adata);
-	//console.log(aObject);
-	// console.log(topCoAuthors); 
+function generateProfileText(pdata, adata, aObject, topCoAuthors) {
+ 
 	hasSupversied = false; 
 	var alreadyListedTopics = []; 
-	// console.log(percentile);
 	var bio = "";
 	var collab="";
 	var title= getFullNameWithoutNo(aObject.Name)  ;
 	var researchTopicsText = "";
-	var text = ""; 
+	var collaborationRelationText = ""; 
 
 
 	var sYear = findStartYear(aObject);
@@ -29,31 +24,25 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 
 	if (totalpubCount > 2) {
 		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
+		// collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
 	}
 	//For Outliers
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
-		var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
+		var bio = generateSummaryForOutliers(pdata, adata, aObject);
 
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = text;
+		document.getElementById("collRelation").innerHTML = collaborationRelationText;
 		document.getElementById("rtopics").innerHTML = researchTopicsText;
 	}
 	else if (totalpubCount >= 10){
-		// if (eYear <= 2013){
-		// 	var bio = generateSummaryForOutliers(pdata, adata, aObject, percentile);
-		// }
-		// else {
-			var bio = generateSummary(pdata, adata, aObject, percentile);
-		// }
+			var bio = generateSummary(pdata, adata, aObject);
 		
 		if (topCoAuthors.length > 0){
-			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
-			// var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
+			collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
 		}
 		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
-
 
 		//Displaying the badges 
 		if (totalpubCount>=100){
@@ -81,7 +70,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = text;
+		document.getElementById("collRelation").innerHTML = collaborationRelationText;
 		document.getElementById("rtopics").innerHTML = researchTopicsText;
 
 		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name);
@@ -440,12 +429,13 @@ function stringifyListWithSparklines(list) {
 	switch (list.length) {
 		case 0: return "";
 		case 1: 
+		console.log(list[0]); 
 			var ID = "sparkline_coll"+0;
 			s = makeMeLive_FullName(list[0].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>';
 			var obj = new Object();
 			obj.sparklineID = ID; 
-			obj.data = supervisees[0].MutualPubPerYear; 
-			obj.coauthor = supervisees[0].Name; 
+			obj.data = list[0].MutualPubPerYear; 
+			obj.coauthor = list[0].Name; 
 			listOfSparklines.push(obj);
 			return s; 
 
@@ -457,14 +447,14 @@ function stringifyListWithSparklines(list) {
 
 			var obj = new Object();
 			obj.sparklineID = ID1; 
-			obj.data = supervisees[0].MutualPubPerYear; 
-			obj.coauthor = supervisees[0].Name; 
+			obj.data = list[0].MutualPubPerYear; 
+			obj.coauthor = list[0].Name; 
 			listOfSparklines.push(obj);
 
 			var obj = new Object();
 			obj.sparklineID = ID2; 
-			obj.data = supervisees[1].MutualPubPerYear; 
-			obj.coauthor = supervisees[1].Name; 
+			obj.data = list[1].MutualPubPerYear; 
+			obj.coauthor = list[1].Name; 
 			listOfSparklines.push(obj);
 			return s; 
 
@@ -497,19 +487,19 @@ function superviseePhrase_InAdditionTo1(pdata, adata, a,c,supervisees){
 		s += "In addition to " +  makeMeLive_LastName(c.Name) + 
 		", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 		 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		 s += stringifyListWithSparklines(supervisees); 
+		 s += stringifyListWithSparklines(supervisees) + "."; 
 	}
 	else {
 		if (supervisees.length > 2){
 			s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			s+=stringifyListWithSparklines(supervisees); 
+			s+=stringifyListWithSparklines(supervisees)+ "."; 
 		}
 		else if (supervisees.length == 1){
 			var ID = "sparkline_coll"+0;
 			s += "Supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;  
-			s+=stringifyListWithSparklines(supervisees); 
+			s+=stringifyListWithSparklines(supervisees) + "."; 
 		}	
 	
 	}
@@ -531,19 +521,19 @@ function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 			supervisees = RemoveItemFromList(supervisees,c1.Name);
 			s += "In addition to " + makeMeLive_LastName(c1.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			s+=stringifyListWithSparklines(supervisees);
+			s+=stringifyListWithSparklines(supervisees)+ ".";
 		}
 		else if (DoesExistInList(supervisees, c2.Name)){
 			supervisees = RemoveItemFromList(supervisees,c2.Name);
 			s += "In addition to " +  makeMeLive_LastName(c2.Name) + ", further supervisees" + + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			s+=stringifyListWithSparklines(supervisees);
+			s+=stringifyListWithSparklines(supervisees)+ ".";
 		}
 	}
 	else {
 		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
 		" with considerable amount of publications are " ;
-		s+=stringifyListWithSparklines(supervisees);	
+		s+=stringifyListWithSparklines(supervisees)+ ".";	
 	}
 	return s;
 }
@@ -580,23 +570,49 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 		if (supervisees.length > 2){
 			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			s+=stringifyListWithSparklines(supervisees);
+			s+=stringifyListWithSparklines(supervisees)+ ".";
 		}
 		else if (supervisees.length == 1){
+			console.log(supervisees);
 			s +=  ", another supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications is " ;
-			s+=stringifyListWithSparklines(supervisees);
+			s += stringifyListWithSparklines(supervisees)+ ".";
 		}
 	}
 	return s;
 }
-function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
+function collaborationGroupPhrase(pdata, adata, a){
+	var s=""; 
+	var groups = a.CollaborationGroups;
+	var maxGroups = []; //w.r.t. publications 
+	var biggestGroup = []; //w.r.t to members 
+
+	var maxMembers = d3.max(groups, function(d){return d.Members.length;});
+	// console.log(groups);
+
+	if (groups.length > 0){
+		for (var i=0;i<groups.length;i++){
+			if(groups[i].Publications >= 10){
+				maxGroups.push(groups[i]); 
+			}
+			if(groups[i].Publications >= 10 && groups[i].Members.length == maxMembers){
+				biggestGroup.push(groups[i]);
+			}
+		}
+	}
+
+	if (maxGroups.length > 0){
+		s += " Going beyond the pairwise collaborations, the author along with " + stringifyList(maxGroups[0].Members) + " has published " +
+		maxGroups[0].Publications + " research papers. " ; 
+	}
+	return s; 
+
+}
+
+function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	var text = "";
-	//console.log(topCoAuthors);
 	var supervisees = findSupervisee(pdata, adata, a);
-	//console.log(supervisees);
 	sortByValue(supervisees);
-	//console.log(supervisees);
 
 	var supervisors = []; 
 	var main_author_startYear = getStartYear(a);
@@ -604,15 +620,12 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 	for (var i=0;i<topCoAuthors.length;i++){
 		if(topCoAuthors[i].StartYear < main_author_startYear + 5) {
 			var pubs = getAllMutualPublications(pdata, a.Name, topCoAuthors[i].Name)
-			//console.log(pubs); 
 			if (isSupervisor(pubs,a.Name,topCoAuthors[i].Name)){
 				supervisors.push(topCoAuthors[i].Name);
-				//console.log (topCoAuthors[i].Name + " : " + "YES");
+				
 			}
 		}
 	}
-	//console.log(supervisors);
-
 	if (topCoAuthors.length > 0){
 		
 		if (topCoAuthors.length == 1){
@@ -625,7 +638,7 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 		}
 		else if (topCoAuthors.length == 2){
 			if (topCoAuthors[0].MutualPublications == topCoAuthors[1].MutualPublications){	
-				text += mostFrequentCoauthorPhrase_V2(pdata, adata, a,topCoAuthors[0],topCoAuthors[1]);
+				text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],topCoAuthors[1]);
 			}
 			else {
 				text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees); 
@@ -649,6 +662,7 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 			}
 		}
 	}
+	text += collaborationGroupPhrase(pdata, adata, a); 
 	return text; 
 }
 function RemoveItemFromList(list, name){
@@ -1349,7 +1363,6 @@ function makeMeLive_loadConferenceIndividualPublications(pdata, adata, text, a){
 	//y : year
 	return  '<span id="linkedAuthorName" onclick="loadConferenceIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
 }
-
 
 function loadMutualPublications(pdata, adata, a, c){
   //Return array of mutual publications of Author and CoAuthor for Year "year"
