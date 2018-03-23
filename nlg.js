@@ -188,7 +188,6 @@ function generateSummary(pdata, adata, a, p)
 	return bio;
 }
 
-
 function generateSummaryForOutliers(pdata, adata, a, p)
 {
 	var bio = "";
@@ -276,7 +275,7 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 	return bio;
 }
 
-function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
+function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees){
 	var s = "" ;
 	//console.log(c.Name); makeMeLive(c.Name)
 	if (DoesExistInList(supervisees, c.Name)){
@@ -314,13 +313,13 @@ function firstSentenceV1(pdata, adata, a, c, supervisors,supervisees){
 	return s;
 
 }
-function firstSentenceV2(pdata, adata, a,c1,c2){
+function mostFrequentCoauthorPhrase_2(pdata, adata, a,c1,c2){
 	var s = "";
 	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
 	" are " + makeMeLive_FullName(c1.Name) + " and " + makeMeLive_FullName(c2.Name) + ". "
 	return s;
 }
-function firstSentenceV3(pdata, adata, a,list_c){
+function mostFrequentCoauthorPhrase_N(pdata, adata, a,list_c){
 	var s = "";
 	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
 		for (var i=0;i<list_c.length;i++){
@@ -333,7 +332,7 @@ function firstSentenceV3(pdata, adata, a,list_c){
 		}
 		return s;
 }
-function secondSentenceV1(pdata, adata, a,c){
+function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 
 	var s = "";
 	var startYear = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
@@ -345,7 +344,6 @@ function secondSentenceV1(pdata, adata, a,c){
 			s += "a prolonged and still";
 		} 
 		s += " ongoing collaboration since " + startYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + ". ";
-
 	}
 	else if (lastYear<=2015){
 		s += " This ";
@@ -360,7 +358,7 @@ function secondSentenceV1(pdata, adata, a,c){
 	}
 	return s;
 }
-function thirdSentenceV1(pdata, adata, a,c,supervisors,supervisees){
+function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervisees){
 		var s = "";
 		var startYear1 = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
 		var lastYear1 = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
@@ -410,7 +408,7 @@ function thirdSentenceV1(pdata, adata, a,c,supervisors,supervisees){
 		s += ". ";
 		return s;
 }
-function fourthSentenceV1(pdata, adata, a, c, supervisors, supervisees){
+function thirdCoauthorPhrase(pdata, adata, a, c, supervisors, supervisees){
 	var s = "";
 	var startYear1 = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
 	var lastYear1 = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
@@ -438,79 +436,24 @@ function fourthSentenceV1(pdata, adata, a, c, supervisors, supervisees){
 		return s;
 
 }
-function fifthSenetenceV1(pdata, adata, a,c,supervisees){
-	var s = "";
-	if(DoesExistInList(supervisees, c.Name)){
-		supervisees = RemoveItemFromList(supervisees,c.Name);
-		s += "In addition to " +  makeMeLive_LastName(c.Name) + 
-		", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
-		 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-					var ID = "sparkline_coll"+i;
-					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + 
-					" " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-			}
-			else {
-					var ID = "sparkline_coll"+i;
-					s +=  makeMeLive_FullName(supervisees[i].Name) + 
-					" " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-					var obj = new Object();
-						obj.sparklineID = ID; 
-						obj.data = supervisees[i].MutualPubPerYear; 
-						obj.coauthor = supervisees[i].Name; 
-						listOfSparklines.push(obj);
-			}
-		}
-	}
-	else {
-		if (supervisees.length > 2){
-			s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
-			" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-						var ID = "sparkline_coll"+i;
-						s += "and " +  makeMeLive_FullName(supervisees[i].Name)+ " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-						var obj = new Object();
-						obj.sparklineID = ID; 
-						obj.data = supervisees[i].MutualPubPerYear; 
-						obj.coauthor = supervisees[i].Name; 
-						listOfSparklines.push(obj); 
-				}
-				else {
-						var ID = "sparkline_coll"+i;
-						s +=  makeMeLive_FullName(supervisees[i].Name)+ " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-						var obj = new Object();
-							obj.sparklineID = ID; 
-							obj.data = supervisees[i].MutualPubPerYear; 
-							obj.coauthor = supervisees[i].Name; 
-							listOfSparklines.push(obj);
-				}
-			}
-		}
-		else if (supervisees.length == 1){
+function stringifyListWithSparklines(list) {
+	switch (list.length) {
+		case 0: return "";
+		case 1: 
 			var ID = "sparkline_coll"+0;
-			s += "Supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
-			" of " + getLastName(a.Name) + " with considerable amount of publications is " +  makeMeLive_FullName(supervisees[0].Name)+ " " + 
-			'<svg width="70" height="20" id="' + ID + '"></svg>';
+			s = makeMeLive_FullName(list[0].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>';
 			var obj = new Object();
 			obj.sparklineID = ID; 
 			obj.data = supervisees[0].MutualPubPerYear; 
 			obj.coauthor = supervisees[0].Name; 
 			listOfSparklines.push(obj);
-		}	
-		else if (supervisees.length == 2){
+			return s; 
+
+		case 2: 
 			var ID1 = "sparkline_coll"+0;
 			var ID2 = "sparkline_coll"+1;
- 			s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
-			" of " + getLastName(a.Name) + " with considerable amount of publications are " +  makeMeLive_FullName(supervisees[0].Name)+ " "
-			+ '<svg width="70" height="20" id="' + ID1 + '"></svg>' +
-			makeMeLive_FullName(supervisees[1].Name) + " " + '<svg width="70" height="20" id="' + ID2 + '"></svg>' + "." 
+			s = makeMeLive_FullName(list[0].Name) + " " + '<svg width="70" height="20" id="' + ID1 + '"></svg>' + " and " +
+			 makeMeLive_FullName(list[1].Name) + " " + '<svg width="70" height="20" id="' + ID2 + '"></svg>' ;
 
 			var obj = new Object();
 			obj.sparklineID = ID1; 
@@ -523,38 +466,64 @@ function fifthSenetenceV1(pdata, adata, a,c,supervisees){
 			obj.data = supervisees[1].MutualPubPerYear; 
 			obj.coauthor = supervisees[1].Name; 
 			listOfSparklines.push(obj);
+			return s; 
+
+		default:
+			var s = "";
+			for (var i=0; i<Math.min(list.length,MAX_SUPERVISEES);i++){
+			// list.forEach(function (element, i) {
+				element = list[i]; 
+				if (i > 0) {
+					s += ", ";
+					if (i === Math.min(list.length,MAX_SUPERVISEES) - 1) {
+						s += "and ";
+					}
+				}
+				var ID = "sparkline_coll"+i;
+				s += makeMeLive_FullName(element.Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' ;
+				var obj = new Object();
+				obj.sparklineID = ID; 
+				obj.data = element.MutualPubPerYear; 
+				obj.coauthor = element.Name; 
+				listOfSparklines.push(obj); 
+			}
+			return s;
+	}
+}
+function superviseePhrase_InAdditionTo1(pdata, adata, a,c,supervisees){
+	var s = "";
+	if(DoesExistInList(supervisees, c.Name)){
+		supervisees = RemoveItemFromList(supervisees,c.Name);
+		s += "In addition to " +  makeMeLive_LastName(c.Name) + 
+		", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+		 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+		 s += stringifyListWithSparklines(supervisees); 
+	}
+	else {
+		if (supervisees.length > 2){
+			s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+			s+=stringifyListWithSparklines(supervisees); 
 		}
+		else if (supervisees.length == 1){
+			var ID = "sparkline_coll"+0;
+			s += "Supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;  
+			s+=stringifyListWithSparklines(supervisees); 
+		}	
+	
 	}
 	return s;
 }
 
-function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
+function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 	var s = "";
 	if (DoesExistInList(supervisees, c1.Name) && DoesExistInList(supervisees, c2.Name)){
 		supervisees = RemoveItemFromList(supervisees,c1.Name);
 		supervisees = RemoveItemFromList(supervisees,c2.Name);
 		s += "In addition to " +  makeMeLive_LastName(c1.Name) + " and " +  makeMeLive_LastName(c2.Name) + ", further supervisees" +
 		 '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-					var ID = "sparkline_coll"+i;
-					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-			}
-			else {
-					var ID = "sparkline_coll"+i;
-					s +=  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-					var obj = new Object();
-						obj.sparklineID = ID; 
-						obj.data = supervisees[i].MutualPubPerYear; 
-						obj.coauthor = supervisees[i].Name; 
-						listOfSparklines.push(obj);
-			}
-		}
+		s+=stringifyListWithSparklines(supervisees);
 	}
 	else if (DoesExistInList(supervisees, c1.Name) || DoesExistInList(supervisees, c2.Name)){
 		
@@ -562,80 +531,23 @@ function fifthSenetenceV2(pdata, adata, a,c1,c2,supervisees){
 			supervisees = RemoveItemFromList(supervisees,c1.Name);
 			s += "In addition to " + makeMeLive_LastName(c1.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-					var ID = "sparkline_coll"+i;
-					s += "and " +   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-				}
-				else {
-					var ID = "sparkline_coll"+i;
-					s +=   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-					var obj = new Object();
-						obj.sparklineID = ID; 
-						obj.data = supervisees[i].MutualPubPerYear; 
-						obj.coauthor = supervisees[i].Name; 
-						listOfSparklines.push(obj);
-				}
-			}
+			s+=stringifyListWithSparklines(supervisees);
 		}
 		else if (DoesExistInList(supervisees, c2.Name)){
 			supervisees = RemoveItemFromList(supervisees,c2.Name);
 			s += "In addition to " +  makeMeLive_LastName(c2.Name) + ", further supervisees" + + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-					var ID = "sparkline_coll"+i;
-					s += "and " +   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-				}
-				else {
-					var ID = "sparkline_coll"+i;
-					s +=   makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-					var obj = new Object();
-						obj.sparklineID = ID; 
-						obj.data = supervisees[i].MutualPubPerYear; 
-						obj.coauthor = supervisees[i].Name; 
-						listOfSparklines.push(obj); 
-				}
-			}
+			s+=stringifyListWithSparklines(supervisees);
 		}
 	}
 	else {
 		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
 		" with considerable amount of publications are " ;
-		for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-			if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-				var ID = "sparkline_coll"+i;
-					s += "and " +  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-			}
-			else {
-				var ID = "sparkline_coll"+i;
-				s +=  makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-				var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-			}
-		}	
+		s+=stringifyListWithSparklines(supervisees);	
 	}
 	return s;
 }
-function fifthSenetenceV3(pdata, adata, a,list_c,supervisees){
+function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 	var s = "";
 	var alreadySupervisees = [];
 	for (var i=0; i< list_c.length ; i++){
@@ -668,36 +580,12 @@ function fifthSenetenceV3(pdata, adata, a,list_c,supervisees){
 		if (supervisees.length > 2){
 			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
-			for (var i=0;i<Math.min(MAX_SUPERVISEES,supervisees.length);i++){
-				if(i==Math.min(MAX_SUPERVISEES,supervisees.length)-1){
-					var ID = "sparkline_coll"+i;
-					s += "and " + makeMeLive_FullName(supervisees[i].Name) +
-					 " " + '<svg width="70" height="20" id="' + ID + '"></svg>' +".";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-				}
-				else {
-					var ID = "sparkline_coll"+i;
-					s += makeMeLive_FullName(supervisees[i].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' + ", ";
-					var obj = new Object();
-					obj.sparklineID = ID; 
-					obj.data = supervisees[i].MutualPubPerYear; 
-					obj.coauthor = supervisees[i].Name; 
-					listOfSparklines.push(obj); 
-				}
-			}
-		}
-		else if (supervisees.length == 2){
-			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
-			"of " + getLastName(a.Name) + " with considerable amount of publications are " +
-			 makeMeLive_FullName(supervisees[0].Name) + " and " +  makeMeLive_FullName(supervisees[1].Name) + ".";
+			s+=stringifyListWithSparklines(supervisees);
 		}
 		else if (supervisees.length == 1){
 			s +=  ", another supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
-			"of " + getLastName(a.Name) + " with considerable amount of publications is " +	 makeMeLive_FullName(supervisees[0].Name) + ".";
+			"of " + getLastName(a.Name) + " with considerable amount of publications is " ;
+			s+=stringifyListWithSparklines(supervisees);
 		}
 	}
 	return s;
@@ -728,36 +616,36 @@ function generateCollaborationRelationship(pdata, adata, a, topCoAuthors){
 	if (topCoAuthors.length > 0){
 		
 		if (topCoAuthors.length == 1){
-			text += firstSentenceV1(pdata, adata, a,topCoAuthors[0],supervisors, supervisees);
-			text += secondSentenceV1(pdata, adata, a,topCoAuthors[0]);
+			text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees);
+			text += firstCollaborationDescriptionPhrase(pdata, adata, a,topCoAuthors[0]);
 			if (supervisees.length > 0){
 				hasSupversied = true;
-				text += fifthSenetenceV1(pdata, adata, a,topCoAuthors[0], supervisees); 
+				text += superviseePhrase_InAdditionTo1(pdata, adata, a,topCoAuthors[0], supervisees); 
 			}
 		}
 		else if (topCoAuthors.length == 2){
 			if (topCoAuthors[0].MutualPublications == topCoAuthors[1].MutualPublications){	
-				text += firstSentenceV2(pdata, adata, a,topCoAuthors[0],topCoAuthors[1]);
+				text += mostFrequentCoauthorPhrase_V2(pdata, adata, a,topCoAuthors[0],topCoAuthors[1]);
 			}
 			else {
-				text += firstSentenceV1(pdata, adata, a,topCoAuthors[0],supervisors, supervisees); 
-				text += secondSentenceV1(pdata, adata, a,topCoAuthors[0]);
-				text += thirdSentenceV1(pdata, adata, a,topCoAuthors[1],supervisors,supervisees);
+				text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees); 
+				text += firstCollaborationDescriptionPhrase(pdata, adata, a,topCoAuthors[0]);
+				text += secondMostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[1],supervisors,supervisees);
 				if (supervisees.length > 0){
 					hasSupversied = true;
-					text += fifthSenetenceV2(pdata, adata, a,topCoAuthors[0],topCoAuthors[1],supervisees);
+					text += superviseePhrase_InAdditionTo1OR2(pdata, adata, a,topCoAuthors[0],topCoAuthors[1],supervisees);
 				}
 			}		
 
 		}
 		else if (topCoAuthors.length > 2){
-			text += firstSentenceV1(pdata, adata, a,topCoAuthors[0],supervisors, supervisees); 
-			text += secondSentenceV1(pdata, adata, a,topCoAuthors[0]);
-			text += thirdSentenceV1(pdata, adata, a,topCoAuthors[1],supervisors,supervisees);
-			text += fourthSentenceV1(pdata, adata, a,topCoAuthors[2],supervisors,supervisees);
+			text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees); 
+			text += firstCollaborationDescriptionPhrase(pdata, adata, a,topCoAuthors[0]);
+			text += secondMostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[1],supervisors,supervisees);
+			text += thirdCoauthorPhrase(pdata, adata, a,topCoAuthors[2],supervisors,supervisees);
 			if (supervisees.length > 0){
 				hasSupversied = true;
-				text += fifthSenetenceV3(pdata, adata, a,topCoAuthors,supervisees);
+				text += superviseePhrase_InAdditionToN(pdata, adata, a,topCoAuthors,supervisees);
 			}
 		}
 	}
@@ -791,41 +679,6 @@ function DoesExistInSupervisors(list, name){
 		}
 	}
 	return r;
-}
-
-function generateCollaborationText(pdata, adata, a, topCoAuthors){
-	//console.log(topCoAuthors);
-	var collab = "";
-	//top collaboration 
-	collab = collab + getLastNamePronoun(a.Name) + " top collaborator" + '<span id=info onclick="showAdditionalInfo()">&#9432</span>' 
-	+ " is " + topCoAuthors[0].Name 
-	+ " and this collaboration resulted in " + topCoAuthors[0].MutualPublications + " research articles over a span of ";
-	var range = +d3.max(topCoAuthors[0].MutualPubPerYear, function(d){return d.Year}) - 
-	+d3.min(topCoAuthors[0].MutualPubPerYear, function(d){return d.Year}) + 1;
-	collab = collab + range + " years. ";
-	
-	//active collaboration
-	var avgPaperPerYear = []; 
-	for (var i=0;i<topCoAuthors.length;i++){
-		var at = topCoAuthors[i];
-		var range = +d3.max(at.MutualPubPerYear, function(d){return d.Year}) - 
-		+d3.min(at.MutualPubPerYear, function(d){return d.Year});
-		//console.log(at.Name + ":" + at.MutualPublications + " : " + range);
-		//console.log(at.MutualPublications/(range+1));
-		var ppy = at.MutualPublications/(range+1);  	
-		avgPaperPerYear.push(ppy);
-
-	}
-	var maxPPY = d3.max(avgPaperPerYear);
-	var aci = avgPaperPerYear.indexOf(maxPPY); // aci : active collaborator index
-	var duration = +d3.max(topCoAuthors[aci].MutualPubPerYear, function(d){return d.Year}) - 
-		+d3.min(topCoAuthors[aci].MutualPubPerYear, function(d){return d.Year});
-	if(duration > 5 && maxPPY > 3){ //active collaborator is different from top collaborator 
-		collab += "Among the top collaborators, " + getLastNamePronoun(a.Name) + " most active collaboration" +  
-		'<span id=info onclick="showAdditionalInfo2()">&#9432</span>' + " is with " + topCoAuthors[aci].Name + " with an average of "
-		+ Math.round(avgPaperPerYear[aci]) + " articles per year.";
-	}
-	return collab;
 }
 
 function isSupervisor(pdata,aName,cName){
@@ -1644,4 +1497,37 @@ function loadConferenceIndividualPublications(pdata, adata, name){
   }
 
   // return indPublications;
+}
+
+function analyzeTimeSeries(){
+
+	//INCOMPLETE
+	// timeseries = [1,2,0,1,7,1,2,1,1];
+	timeseries = [1,3,5,7,6,7,6,6,7];
+	// console.log(timeseries);
+	var max = Math.max.apply(null, timeseries);
+	timeseries.splice(timeseries.indexOf(max), 1);
+	var secondMax = Math.max.apply(null, timeseries);
+ 
+	if (max > 2*secondMax){
+		console.log("Peak is found in data"); 
+	}
+
+	timeseries.push(max);
+	// console.log(timeseries);
+
+	var mean = timeseries.reduce(function(a,b){return a+b})/timeseries.length; 
+
+	// console.log(mean); 
+
+	var lowerBound = mean - 0.2*mean;
+	var upperBound = mean + 0.2*mean;
+	var seqOfindices=[];
+	for(var i=0;i<timeseries.length;i++){
+		if(timeseries[i]<=upperBound && timeseries[i] >= lowerBound){
+			seqOfindices.push(i); 
+		}
+	}
+	// console.log(seqOfindices);
+
 }
