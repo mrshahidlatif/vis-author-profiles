@@ -1390,13 +1390,13 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 			coauthorFreq[name]++;			
 		}
 	}
-	console.log(coauthorFreq);
-	if (a.Keywords.length < 10) return [];
-	var keywordMap1 = createKeywordMap(a.Keywords);
+	if (a.Keywords.length < 20) return [];
+	var keywordMap1 = createKeywordMap(a.Keywords); //getKeywords(pdata, a));
 	var similarAuthors = [];
 	for (var i = 0; i < adata.length; i++) {
-		if (adata[i].Name === a.Name || adata[i].Keywords.length < 10 || coauthorFreq[adata[i].Name] > 2) continue;
-		var keywordMap2 = createKeywordMap(adata[i].Keywords);
+		if (adata[i].Name === a.Name || adata[i].Keywords.length < 20 || coauthorFreq[adata[i].Name] > 2) continue;
+		//var venueKeywords = getKeywords(pdata, adata[i]);
+		var keywordMap2 = createKeywordMap(adata[i].Keywords);//, venueKeywords);
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
 		if (similarity > 0.5) {
 			similarAuthors.push({Name: adata[i].Name, Value: similarity});
@@ -1407,8 +1407,13 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
   	});
 	return getTopNItems(similarAuthors, 3, 5, 1);
 }
-function createKeywordMap(keywords) {
+function createKeywordMap(keywords, venueKeywords) {
 	var keywordMap = {};
+	if (venueKeywords) {
+		for (var i = 0; i < venueKeywords.length; i++) {
+			keywordMap[venueKeywords[i].Name] = venueKeywords[i].Value;
+		}
+	}
 	for (var i = 0; i < keywords.length; i++) {
 		var keyword = author_keywords[keywords[i]];
 		if (keyword === undefined || keyword === "unclear") {
