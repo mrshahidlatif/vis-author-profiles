@@ -1555,7 +1555,7 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors){
 		.appendTo($dod);
 	$.each(similarAuthors, function(i, similarAuthor) {
 		$("<li>")
-			.text(getFullNameWithoutNo(similarAuthor.Name) +" ("+similarAuthor.Value.toFixed(2)+")")
+			.html(makeMeLive_FullName(similarAuthor.Name) +" ("+similarAuthor.Value.toFixed(2)+")")
 			.appendTo($similarAuthorList);
 	});
 }
