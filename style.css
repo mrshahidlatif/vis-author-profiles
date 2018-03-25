@@ -167,23 +167,44 @@ p {
     background: rgba(80, 90, 120, 0.08);
 }
 
+#dod {
+    font-size: 14px;
+    line-height: 1.2;
+}
 #sideBarHead {
     font-size: 16px;
     color: black;
     position: absolute;
     text-align: left;
 }
-#dod {
-    font-size: 14px;
-    line-height: 1.2;
+#dod li {
+    line-height: 1.6;
+}
+#dod .sim9 {
+    background: rgba(33, 151, 255, 0.55);
+}
+#dod .sim8 {
+    background: rgba(33, 151, 255, 0.45);
+}
+#dod .sim7 {
+    background: rgba(33, 151, 255, 0.35);
+}
+#dod .sim6 {
+    background: rgba(33, 151, 255, 0.25);
+}
+#dod .sim5 {
+    background: rgba(33, 151, 255, 0.15);
+}
+#dod .sim4 {
+    background: rgba(33, 151, 255, 0.05);
 }
 
-#info {
+.info {
     cursor:pointer;
     color:black;
     /*font-weight: bold;*/
 }
-#info:hover {
+.info:hover {
     cursor:pointer;
     color:#1E90FF;
     text-decoration:underline;

@@ -70,7 +70,6 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = collaborationRelationText;
 		document.getElementById("rtopics").innerHTML = researchTopicsText;
 
 		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name);
@@ -311,6 +310,7 @@ function mostFrequentCoauthorPhrase_2(pdata, adata, a,c1,c2){
 function mostFrequentCoauthorPhrase_N(pdata, adata, a,list_c){
 	var s = "";
 	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="infoMostFrequentCoAuthor()">&#9432</span>' + " are " ;
+
 		for (var i=0;i<list_c.length;i++){
 			if(i==list_c.length-1){
 					s += "and "+ makeMeLive_FullName(list_c[i].Name) +  ".";
@@ -532,6 +532,7 @@ function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 	}
 	else {
 		s += "Supervisees" + '<span id=info onclick="infoSupervisee()">&#9432</span>' + "of " + getLastName(a.Name) + 
+
 		" with considerable amount of publications are " ;
 		s+=stringifyListWithSparklines(supervisees)+ ".";	
 	}
@@ -575,6 +576,7 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 		else if (supervisees.length == 1){
 			console.log(supervisees);
 			s +=  ", another supervisee" + '<span id=info onclick="infoSupervisee()">&#9432</span>' + 
+
 			"of " + getLastName(a.Name) + " with considerable amount of publications is " ;
 			s += stringifyListWithSparklines(supervisees)+ ".";
 		}
@@ -1039,6 +1041,7 @@ function sortByValue(data) {
 }
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
+	var $rtopics = $("#rtopics");
 	var keywords = getKeywords(pdata, a);
 	var visKeyword = keywords.find(function (element) {
 		return element.Name === "visualization";
@@ -1050,10 +1053,11 @@ function generateResearchTopicsText(pdata, adata, a){
 			text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
 			text += visAreaPhraseTopics(a, visIsActive);
 			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
-			text += similarResearchersPhraseTopics(pdata,adata, a);
+			$similarResearchers = similarResearchersPhraseTopics(pdata,adata, a);
 		}
 	}
-	return text; 
+	$rtopics.html(text);
+	$rtopics.append($similarResearchers)
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a, keyword, isActive) {
 	var pubCount = keyword.Value;
@@ -1242,28 +1246,33 @@ function stringifyList(list) {
 function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
 	var similarAuthors = findAuthorsWithSimilarResearchTopics(pdata, adata, a); 
-	if (similarAuthors.length > 0){
-		if (similarAuthors.length == 1){
-			s += " Another researcher " +'<span id=info onclick="infoSimilarResearcher()">&#9432</span>' + 
-			" with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
+	var similarAuthorsFiltered = getTopNItems(similarAuthors, 3, 5, 1);
+	similarAuthors = getTopNItems(similarAuthors, 10, 15, 1);
+	var info = '<span class="info" onclick="">&#9432</span>';
+	if (similarAuthorsFiltered.length > 0){
+		if (similarAuthorsFiltered.length == 1){
+			s += " Another researcher with similar areas of expertise"+info+" is " + makeMeLive_FullName(similarAuthorsFiltered[0].Name) + ".";
 		}
-	 	else if (similarAuthors.length == 1){
-	 		s += " Researchers "+'<span id=info onclick="infoSimilarResearcher()">&#9432</span>' + 
-	 		" with similar areas of expertise are " + makeMeLive_FullName(similarAuthors[0].Name) + " and " + makeMeLive_FullName(similarAuthors[1]) +"." 
+	 	else if (similarAuthorsFiltered.length == 1){
+	 		s += " Researchers with similar areas of expertise"+info+" are " + makeMeLive_FullName(similarAuthorsFiltered[0].Name) + " and " + makeMeLive_FullName(similarAuthorsFiltered[1]) +"." 
 	 	}
 	 	else {
-			s += " Researchers " +'<span id=info onclick="infoSimilarResearcher()">&#9432</span>' + " with similar areas of expertise are " ;
-			for (var i=0;i<similarAuthors.length;i++){
-				if(i==similarAuthors.length-1){
-					s += "and " + makeMeLive_FullName(similarAuthors[i].Name)+".";
+			s += " Researchers with similar areas of expertise"+info+" are " ;
+			for (var i=0;i<similarAuthorsFiltered.length;i++){
+				if(i==similarAuthorsFiltered.length-1){
+					s += "and " + makeMeLive_FullName(similarAuthorsFiltered[i].Name)+".";
 				}
 				else {
-					s += makeMeLive_FullName(similarAuthors[i].Name) + ", ";
+					s += makeMeLive_FullName(similarAuthorsFiltered[i].Name) + ", ";
 				}
 			}
 		}
 	}
-	return s; 
+	$similarResearchers = $("<span>"+s+"<span>");
+	$similarResearchers.find(".info").click(function() {
+		showAdditionalInfoAuthorSimilarity(a, similarAuthors);
+	});
+	return $similarResearchers;
 }
 function getKeywords(pdata, a){
 	var keywords = {};
@@ -1328,14 +1337,14 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 		//var venueKeywords = getKeywords(pdata, adata[i]);
 		var keywordMap2 = createKeywordMap(adata[i].Keywords);//, venueKeywords);
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
-		if (similarity > 0.5) {
+		if (similarity > 0.45) {
 			similarAuthors.push({Name: adata[i].Name, Value: similarity});
 		}
 	}
 	similarAuthors.sort(function(a, b) {
     	return b.Value - a.Value;
   	});
-	return getTopNItems(similarAuthors, 3, 5, 1);
+	return similarAuthors;
 }
 function createKeywordMap(keywords, venueKeywords) {
 	var keywordMap = {};
@@ -1606,4 +1615,47 @@ function analyzeTimeSeries(){
 	}
 	// console.log(seqOfindices);
 
+}
+
+
+function showAdditionalInfo(){
+	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "About Top Collaborator" + "</span>" + "<br>" + "<hr>" + 
+	"Top collaborator is decided on the basis of maximum number of mutual publications."; 
+}
+
+function showAdditionalInfo2(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Active Collaboration" + "</span>" + "<br>" + "<hr>" + 
+	"Active collaboration is measured in terms of maximum number of average articles published per year."; 
+}
+
+function showAdditionalInfo3(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisor Relationship" + "</span>" + "<br>" + "<hr>" + 
+	"Supervisor relationship is calculated based on the seniority and the order of authors in publications. If a coauthor started working "+
+	"at least 5 year prior to the main author and appeared as the last author in half of the mutual publications, then that coauthor is " +
+	"categorized as the supervisor of the main author.";
+}
+function showAdditionalInfo4(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisee Relationship" + "</span>" + "<br>" + "<hr>" +
+	"To be added....!";
+}
+
+function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
+	$dod = $("#dod");
+	$dod.empty();
+	$("<span id='sideBarHead'>Similar authors to " + getFullNameWithoutNo(author.Name) + "</span>")
+		.appendTo($dod);
+	$("<br/><hr/>").appendTo($dod);
+	$("<p>")
+		.text("Similar authors are computed based having a similar distribution of keywords assigned to their publications (cosine similarity). Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available.")
+		.appendTo($dod);
+	$("<p>")
+		.text("The most similar authors are:")
+		.appendTo($dod);
+	$similarAuthorList = $("<ul>")
+		.appendTo($dod);
+	$.each(similarAuthors, function (i, similarAuthor) {
+		$("<li>")
+			.html("<span class='sim" + similarAuthor.Value.toFixed(2)[2] + "'>" + makeMeLive_FullName(similarAuthor.Name) + " (" + similarAuthor.Value.toFixed(2) + ")</span>")
+			.appendTo($similarAuthorList);
+	});
 }
