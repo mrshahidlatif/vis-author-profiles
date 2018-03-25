@@ -67,8 +67,6 @@
   <script>
 
      autocomplete(document.getElementById("myInput"), authors_list);
-
-
      loadJSON("pubdata.json", function(response) {
         pdata = JSON.parse(response);
 
@@ -78,7 +76,7 @@
         // console.log(adata); 
 
         //var name = "";
-          var l=2;
+          var l=3;
           var u=8;
 
           document.getElementById('r').addEventListener('click', function(){
@@ -107,7 +105,7 @@
           // name = document.getElementById("search").value;
           name = document.getElementById("myInput").value;
           document.getElementById("myInput").value = "";
-          process(pdata, adata, name,"CollabChart1",l,u,1); 
+          process(pdata, adata, name,"CollabChart1",l,u); 
         }
       });
   });

@@ -1,16 +1,16 @@
 var MORE_TO_SHOW = 3; 
 function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAuthors, t){
-
   // console.log(gdata);
   // console.log(adata);
-
+  if (t==1){
+    MORE_TO_SHOW =3;
+  }
+  MORE_TO_SHOW = gdata.length; 
   var isFound = true; //Assume author exist in the records
   var main_author = getAuthorObjectByName(allAuthorsData, aName);
   if (typeof main_author === "undefined") {
     isFound = false ; // Author not found [Auhtor deosn't belong to VIS authors]
     document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
-    //Clear the previous conetens here
-
   }
   if(isFound) {
     var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
@@ -51,6 +51,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   if (w > 550) {w = 550;}
   if (w < 250) {w=250;}
   if (h<60){h=80;}
+
   
   var svg = d3.select("#" + canvas)
   .attr("height", h )
@@ -89,22 +90,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       y.domain([0,maxCount]);
       
       if (j==0){
-        // g.append("g")
-        //     .attr("class", "axis axis--x")
-        //     .attr("transform", "translate(0," + height + ")")
-        //     .call(d3.axisBottom(x));
-
-        // g.append("g")
-        //     .attr("class", "axis axis--y")
-        //     .call(d3.axisRight(y).ticks(2))
-        //   .append("text")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", 6)
-        //     .attr("dy", "0.71em")
-        //     .attr("text-anchor", "end")
-
         var MAX_WIDTH_OF_BAR = 12;
-      
         //Drawing horizontal bar charts to mark start year of each coauthor 
         g.selectAll(".hbar")
           .data(gdata)
@@ -117,6 +103,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             .attr("height",height/N);
 
           //Adding names of coauthors 
+          // loadMe(pdata, adata, this.innerHTML)
         g.selectAll(".names")
           .data(gdata)
           .enter().append("text")
@@ -136,8 +123,9 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
            div.transition()
              .duration(500)
              .style("opacity", 0);
-           });
-
+           })
+         .on("click", function(d){loadMe(pdata, allAuthorsData, d.Name)});
+         // .on("click", function(d){alert(d.Name)});
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
@@ -162,7 +150,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
              .style("opacity", 0);
            })
             .on("click", function(d){showIndividualPublications(pdata, allAuthorsData, d.Year, d.Name)});
-  
       //Adding bars for mutual publications
       g.selectAll(".mbar")
         .data(gdata[j].MutualPubPerYear)
@@ -186,7 +173,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
              .style("opacity", 0);
            })
             .on("click", function(d){showMutualPublications(pdata, allAuthorsData, d.Year, aName, d.Name)});
-    
+
       //Adding horizontal lines 
       g.append("g")
        .attr("transform", "translate(0, "+(j+1)*height/N+")")
@@ -204,7 +191,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
          .attr("stroke", "#ff2b2b")
          .attr("stroke-width", "0.5px");
 
-   g.selectAll(".moreBtn")
+    g.selectAll(".moreBtn")
           .data(adata)
           .enter().append("text")
           .attr("class", "moreBtn")
@@ -212,14 +199,14 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .attr("y",height+10)
           .text("More")
           //.on("click", function(d){});
-          .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors, 2);});
+          .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors);});
   }
 }
 
-function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors, t){
+function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
      MORE_TO_SHOW += 3; 
      var authorObjects = [];
-     console.log(distCoAuthors); 
+     // console.log(distCoAuthors); 
      var visAuthor = false; 
       for (var i = 0; i < Math.min(distCoAuthors.length, MORE_TO_SHOW); i++) {
         visAuthor = false; 
@@ -239,7 +226,7 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors, t){
            authorObjects.push(author_object); 
         }
      }
-     console.log(authorObjects);
+     // console.log(authorObjects);
         var dataForGantt = [];
         for (var i = 0; i < authorObjects.length; i++) {
           var sYear = Math.min(getMin(authorObjects[i].AllPublicationsPerYear));
@@ -253,15 +240,14 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors, t){
           //console.log(a.MutualPublications/(2017-a.StartYear)); 
           dataForGantt.push(a);
         }
-        console.log(dataForGantt);
+        // console.log(dataForGantt);
         for (var i=0;i<dataForGantt.length;i++){
           var mppy = getMutualPublications(pdata, aName, dataForGantt[i].Name);
           // console.log(mppy);
           dataForGantt[i]["MutualPubPerYear"] = mppy;
           
         }
-
-    generateVis(dataForGantt, authorObjects, canvas,pdata,aName, adata, distCoAuthors, t); 
+        generateVis(dataForGantt, authorObjects, canvas, pdata,aName, adata, distCoAuthors, 2); 
 
 }
 function showMutualPublications(pdata, adata, year, aName, cName){
@@ -270,7 +256,7 @@ function showMutualPublications(pdata, adata, year, aName, cName){
   //console.log(year + aName+cName);
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + pubs.length + ") : " +
-   aName + " and " + cName + ", " + year + "</span>" + "<br>" + "<hr>";
+   getLastName(aName) + " and " + getLastName(cName) + ", " + year + "</span>" + "<br>" + "<hr>";
   
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pdata, adata, pubs[i]);
@@ -282,7 +268,7 @@ function showIndividualPublications(pdata, adata, year, name){
   // console.log(year + name);
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
   // console.log(pubs);
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + name  
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + getLastName(name)
   + ", " + year + "</span>" + "<br>" + "<hr>";
   
   for (var i=0; i<pubs.length;i++){
@@ -345,7 +331,7 @@ function loadMe(pdata, adata, name){
   // console.log(pdata);
   // console.log(adata); 
   // console.log(name); 
-  process(pdata, adata, name, "CollabChart1", 3, 8, 1); 
+  process(pdata, adata, name, "CollabChart1", 3, 8); 
   
 }
 
@@ -498,9 +484,6 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
              .style("opacity", 0);
            })
       .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)});
-    }
-  
-  if (largeScale){
 
       svg.append("g")
      .attr("transform", "translate(-20," + height + ")")

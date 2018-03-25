@@ -1,4 +1,4 @@
-function process(pdata, adata, name,container, minN,maxN, t) {
+function process(pdata, adata, name,container, minN,maxN) {
   //Processing the data 
   // var pdata;
   // var adata;
@@ -27,7 +27,7 @@ function process(pdata, adata, name,container, minN,maxN, t) {
       }
       // console.log(allCoAuthors);
       var items = compressArray(allCoAuthors, name);
-      var topNCoAuthor = getTopNItems(items, minN, maxN,t);
+      var topNCoAuthor = getTopNItems(items, minN, maxN);
       // console.log(topNCoAuthor); 
       
       var topNCoAuthorObjects = [];
@@ -86,12 +86,8 @@ function process(pdata, adata, name,container, minN,maxN, t) {
               cpy = adata[i].ConfsPerYear;
             }
           }
-         
-         if(t==1){ // call once as process() is called twice with t=1 and t=2
-            generateProfileText(pdata, adata, aObject, dataForGantt);
-          }
-          generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items);
-
+          generateProfileText(pdata, adata, aObject, dataForGantt);
+          generateVis(dataForGantt, topNCoAuthorObjects, container, pdata, name, adata, items, 1);
       }
     
       else {
@@ -188,7 +184,7 @@ function getMax(data) {
   else return 1800;
 }
 
-function getTopNItems(items, minN, maxN, t) {
+function getTopNItems(items, minN, maxN) {
  
   //Given [minN, maxN] range: returns the authors in that range by systematically cutting off the list
   //For instance, check for Fabian Beck, Thomas Ertl, Daniel A. Keim to see its effect
