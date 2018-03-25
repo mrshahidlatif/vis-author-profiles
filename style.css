@@ -177,6 +177,27 @@ p {
     position: absolute;
     text-align: left;
 }
+#dod li {
+    line-height: 1.6;
+}
+#dod .sim9 {
+    background: rgba(33, 151, 255, 0.55);
+}
+#dod .sim8 {
+    background: rgba(33, 151, 255, 0.45);
+}
+#dod .sim7 {
+    background: rgba(33, 151, 255, 0.35);
+}
+#dod .sim6 {
+    background: rgba(33, 151, 255, 0.25);
+}
+#dod .sim5 {
+    background: rgba(33, 151, 255, 0.15);
+}
+#dod .sim4 {
+    background: rgba(33, 151, 255, 0.05);
+}
 
 .info {
     cursor:pointer;

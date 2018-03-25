@@ -1539,11 +1539,11 @@ function showAdditionalInfo4(){
 	"To be added....!";
 }
 
-function showAdditionalInfoAuthorSimilarity(author, similarAuthors){
+function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 	$dod = $("#dod");
 	$dod.empty();
-	$("<span id='sideBarHead'>Similar authors to "+ getFullNameWithoutNo(author.Name) + "</span>")
-	   .appendTo($dod);
+	$("<span id='sideBarHead'>Similar authors to " + getFullNameWithoutNo(author.Name) + "</span>")
+		.appendTo($dod);
 	$("<br/><hr/>").appendTo($dod);
 	$("<p>")
 		.text("Similar authors are computed based having a similar distribution of keywords assigned to their publications (cosine similarity). Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available.")
@@ -1553,9 +1553,9 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors){
 		.appendTo($dod);
 	$similarAuthorList = $("<ul>")
 		.appendTo($dod);
-	$.each(similarAuthors, function(i, similarAuthor) {
+	$.each(similarAuthors, function (i, similarAuthor) {
 		$("<li>")
-			.html(makeMeLive_FullName(similarAuthor.Name) +" ("+similarAuthor.Value.toFixed(2)+")")
+			.html("<span class='sim" + similarAuthor.Value.toFixed(2)[2] + "'>" + makeMeLive_FullName(similarAuthor.Name) + " (" + similarAuthor.Value.toFixed(2) + ")</span>")
 			.appendTo($similarAuthorList);
 	});
 }
