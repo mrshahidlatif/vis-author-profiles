@@ -46,10 +46,12 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		// }
 		// else {
 			var bio = generateSummary(pdata, adata, aObject, percentile);
+			bio += '<span class="info" onclick="showAdditionalInfo()">&#9432</span>';
 		// }
 		
 		if (topCoAuthors.length > 0){
 			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
+			text += '<span class="info" onclick="showAdditionalInfo()">&#9432</span>';
 			// var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
 		}
 		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
@@ -279,8 +281,8 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	var s = "" ;
 	//console.log(c.Name); makeMeLive(c.Name)
 	if (DoesExistInList(supervisees, c.Name)){
-		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
-		" and supervisee" + '<span id=info onlick="showAdditionalInfo4()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="showAdditionalInfo()">&#9432</span>' + 
+		" and supervisee" + '<span class="info" onlick="showAdditionalInfo4()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ". ";
 		
 		var obj = new Object();
@@ -291,8 +293,8 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
-			s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' +
-			 " and supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + " is "
+			s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="showAdditionalInfo()">&#9432</span>' +
+			 " and supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' + " is "
 			 + makeMeLive_FullName(c.Name) + " " +
 			 '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ". ";
 			var obj = new Object();
@@ -302,7 +304,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 			listOfSparklines.push(obj); 
 	}
 	else {
-		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="showAdditionalInfo()">&#9432</span>' + 
 		" is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll"></svg>' + ". ";	
 		var obj = new Object();
 		obj.sparklineID = "sparkline_top_coll";
@@ -315,13 +317,13 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 }
 function mostFrequentCoauthorPhrase_2(pdata, adata, a,c1,c2){
 	var s = "";
-	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + 
+	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span class="info" onclick="showAdditionalInfo()">&#9432</span>' + 
 	" are " + makeMeLive_FullName(c1.Name) + " and " + makeMeLive_FullName(c2.Name) + ". "
 	return s;
 }
 function mostFrequentCoauthorPhrase_N(pdata, adata, a,list_c){
 	var s = "";
-	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span id=info onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
+	s += getLastNamePronoun(a.Name) + " most frequent co-authors" +'<span class="info" onclick="showAdditionalInfo()">&#9432</span>' + " are " ;
 		for (var i=0;i<list_c.length;i++){
 			if(i==list_c.length-1){
 					s += "and "+ makeMeLive_FullName(list_c[i].Name) +  ".";
@@ -374,34 +376,34 @@ function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervis
 			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name)  +
 					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
-						s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+						s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
 			if (DoesExistInSupervisors(supervisors, c.Name)){
 						s += " and " + makeMeLive_LastName(c.Name) + 
-						" is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+						" is acting as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1>2015){
 			s += ", an ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
 					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
-					s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+					s += " and " + getLastName(a.Name) + " is acting as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
 			if (DoesExistInSupervisors(supervisors, c.Name)){
 					s += " and " +  makeMeLive_LastName(c.Name) +
-					 " is acting as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' ;
+					 " is acting as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' ;
 			}
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
 			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
 					" in a span of " + (lastYear1 - startYear1) + " years and ended in " + lastYear1;
 			if (DoesExistInList(supervisees, c.Name)){
-					s += getLastName(a.Name) + " acted as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + 
+					s += getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' + 
 					"in this collaboration"
 			}
 			if (DoesExistInSupervisors(supervisors, c.Name)){
 					s +=  makeMeLive_LastName(c.Name) + 
-					" acted as a supervisor" +'<span id=info onclick="showAdditionalInfo3()">&#9432</span>' + 
+					" acted as a supervisor" +'<span class="info" onclick="showAdditionalInfo3()">&#9432</span>' + 
 					 "in this collaboration"
 			}
 		}
@@ -495,19 +497,19 @@ function superviseePhrase_InAdditionTo1(pdata, adata, a,c,supervisees){
 	if(DoesExistInList(supervisees, c.Name)){
 		supervisees = RemoveItemFromList(supervisees,c.Name);
 		s += "In addition to " +  makeMeLive_LastName(c.Name) + 
-		", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+		", further supervisees" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' +
 		 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 		 s += stringifyListWithSparklines(supervisees); 
 	}
 	else {
 		if (supervisees.length > 2){
-			s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			s += "Supervisees" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + 
 			" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 			s+=stringifyListWithSparklines(supervisees); 
 		}
 		else if (supervisees.length == 1){
 			var ID = "sparkline_coll"+0;
-			s += "Supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			s += "Supervisee" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + 
 			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;  
 			s+=stringifyListWithSparklines(supervisees); 
 		}	
@@ -522,26 +524,26 @@ function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 		supervisees = RemoveItemFromList(supervisees,c1.Name);
 		supervisees = RemoveItemFromList(supervisees,c2.Name);
 		s += "In addition to " +  makeMeLive_LastName(c1.Name) + " and " +  makeMeLive_LastName(c2.Name) + ", further supervisees" +
-		 '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+		 '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 		s+=stringifyListWithSparklines(supervisees);
 	}
 	else if (DoesExistInList(supervisees, c1.Name) || DoesExistInList(supervisees, c2.Name)){
 		
 		if (DoesExistInList(supervisees, c1.Name)){
 			supervisees = RemoveItemFromList(supervisees,c1.Name);
-			s += "In addition to " + makeMeLive_LastName(c1.Name) + ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+			s += "In addition to " + makeMeLive_LastName(c1.Name) + ", further supervisees" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 			s+=stringifyListWithSparklines(supervisees);
 		}
 		else if (DoesExistInList(supervisees, c2.Name)){
 			supervisees = RemoveItemFromList(supervisees,c2.Name);
-			s += "In addition to " +  makeMeLive_LastName(c2.Name) + ", further supervisees" + + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' +
+			s += "In addition to " +  makeMeLive_LastName(c2.Name) + ", further supervisees" + + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' +
 			 " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 			s+=stringifyListWithSparklines(supervisees);
 		}
 	}
 	else {
-		s += "Supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
+		s += "Supervisees" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + "of " + getLastName(a.Name) + 
 		" with considerable amount of publications are " ;
 		s+=stringifyListWithSparklines(supervisees);	
 	}
@@ -578,12 +580,12 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 			}
 		}
 		if (supervisees.length > 2){
-			s +=  ", further supervisees" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			s +=  ", further supervisees" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 			s+=stringifyListWithSparklines(supervisees);
 		}
 		else if (supervisees.length == 1){
-			s +=  ", another supervisee" + '<span id=info onclick="showAdditionalInfo4()">&#9432</span>' + 
+			s +=  ", another supervisee" + '<span class="info" onclick="showAdditionalInfo4()">&#9432</span>' + 
 			"of " + getLastName(a.Name) + " with considerable amount of publications is " ;
 			s+=stringifyListWithSparklines(supervisees);
 		}
@@ -707,27 +709,6 @@ function isSupervisor(pdata,aName,cName){
 		}
 	}
 	else return false; 
-}
-
-function showAdditionalInfo(){
-	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "About Top Collaborator" + "</span>" + "<br>" + "<hr>" + 
-	"Top collaborator is decided on the basis of maximum number of mutual publications."; 
-}
-
-function showAdditionalInfo2(){
-	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Active Collaboration" + "</span>" + "<br>" + "<hr>" + 
-	"Active collaboration is measured in terms of maximum number of average articles published per year."; 
-}
-
-function showAdditionalInfo3(){
-	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisor Relationship" + "</span>" + "<br>" + "<hr>" + 
-	"Supervisor relationship is calculated based on the seniority and the order of authors in publications. If a coauthor started working "+
-	"at least 5 year prior to the main author and appeared as the last author in half of the mutual publications, then that coauthor is " +
-	"categorized as the supervisor of the main author.";
-}
-function showAdditionalInfo4(){
-	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisee Relationship" + "</span>" + "<br>" + "<hr>" +
-	"To be added....!";
 }
 
 function getLastNamePronoun(fullName){
@@ -1166,16 +1147,17 @@ function stringifyList(list) {
 
 function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
+	var info = '<span class="info" onclick="showAdditionalInfoAuthorSimilarity()">&#9432</span>';
 	var similarAuthors = findAuthorsWithSimilarResearchTopics(pdata, adata, a); 
 	if (similarAuthors.length > 0){
 		if (similarAuthors.length == 1){
-			s += " Another researcher with similar areas of expertise is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
+			s += " Another researcher with similar areas of expertise"+info+" is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
 		}
 	 	else if (similarAuthors.length == 1){
-	 		s += " Researchers with similar areas of expertise are " + makeMeLive_FullName(similarAuthors[0].Name) + " and " + makeMeLive_FullName(similarAuthors[1]) +"." 
+	 		s += " Researchers with similar areas of expertise"+info+" are " + makeMeLive_FullName(similarAuthors[0].Name) + " and " + makeMeLive_FullName(similarAuthors[1]) +"." 
 	 	}
 	 	else {
-			s += " Researchers with similar areas of expertise are " ;
+			s += " Researchers with similar areas of expertise"+info+" are " ;
 			for (var i=0;i<similarAuthors.length;i++){
 				if(i==similarAuthors.length-1){
 					s += "and " + makeMeLive_FullName(similarAuthors[i].Name)+".";
@@ -1530,4 +1512,31 @@ function analyzeTimeSeries(){
 	}
 	// console.log(seqOfindices);
 
+}
+
+
+function showAdditionalInfo(){
+	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "About Top Collaborator" + "</span>" + "<br>" + "<hr>" + 
+	"Top collaborator is decided on the basis of maximum number of mutual publications."; 
+}
+
+function showAdditionalInfo2(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Active Collaboration" + "</span>" + "<br>" + "<hr>" + 
+	"Active collaboration is measured in terms of maximum number of average articles published per year."; 
+}
+
+function showAdditionalInfo3(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisor Relationship" + "</span>" + "<br>" + "<hr>" + 
+	"Supervisor relationship is calculated based on the seniority and the order of authors in publications. If a coauthor started working "+
+	"at least 5 year prior to the main author and appeared as the last author in half of the mutual publications, then that coauthor is " +
+	"categorized as the supervisor of the main author.";
+}
+function showAdditionalInfo4(){
+	document.getElementById("dod").innerHTML = '<span id=sideBarHead>' + "About Supervisee Relationship" + "</span>" + "<br>" + "<hr>" +
+	"To be added....!";
+}
+
+function showAdditionalInfoAuthorSimilarity(){
+	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Author Similarity" + "</span>" + "<br>" + "<hr>" + 
+	"Similar authors are computed based having a similar distribution of keywords assigned to their publications. Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available."; 
 }
