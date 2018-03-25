@@ -14,7 +14,6 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	var bio = "";
 	var collab="";
 	var title= getFullNameWithoutNo(aObject.Name)  ;
-	var researchTopicsText = "";
 	var text = ""; 
 
 
@@ -28,7 +27,7 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 	getKeywords(pdata, aObject); 
 
 	if (totalpubCount > 2) {
-		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
+	 	generateResearchTopicsText(pdata, adata, aObject); 
 	}
 	//For Outliers
 	if (totalpubCount < 10 ){
@@ -38,7 +37,6 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
 		document.getElementById("collRelation").innerHTML = text;
-		document.getElementById("rtopics").innerHTML = researchTopicsText;
 	}
 	else if (totalpubCount >= 10){
 		// if (eYear <= 2013){
@@ -84,7 +82,6 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
 		document.getElementById("collRelation").innerHTML = text;
-		document.getElementById("rtopics").innerHTML = researchTopicsText;
 
 		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name);
 		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax, aObject.Name);
@@ -945,6 +942,7 @@ function sortByValue(data) {
 }
 function generateResearchTopicsText(pdata, adata, a){
 	var text = "";
+	var $rtopics = $("#rtopics");
 	var keywords = getKeywords(pdata, a);
 	var visKeyword = keywords.find(function (element) {
 		return element.Name === "visualization";
@@ -956,10 +954,11 @@ function generateResearchTopicsText(pdata, adata, a){
 			text += visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive);
 			text += visAreaPhraseTopics(a, visIsActive);
 			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
-			text += similarResearchersPhraseTopics(pdata,adata, a);
+			$similarResearchers = similarResearchersPhraseTopics(pdata,adata, a);
 		}
 	}
-	return text; 
+	$rtopics.html(text);
+	$rtopics.append($similarResearchers)
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a, keyword, isActive) {
 	var pubCount = keyword.Value;
@@ -1147,8 +1146,8 @@ function stringifyList(list) {
 
 function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
-	var info = '<span class="info" onclick="showAdditionalInfoAuthorSimilarity()">&#9432</span>';
 	var similarAuthors = findAuthorsWithSimilarResearchTopics(pdata, adata, a); 
+	var info = '<span class="info" onclick="">&#9432</span>';
 	if (similarAuthors.length > 0){
 		if (similarAuthors.length == 1){
 			s += " Another researcher with similar areas of expertise"+info+" is " + makeMeLive_FullName(similarAuthors[0].Name) + ".";
@@ -1168,7 +1167,11 @@ function similarResearchersPhraseTopics(pdata, adata, a){
 			}
 		}
 	}
-	return s; 
+	$similarResearchers = $("<span>"+s+"<span>");
+	$similarResearchers.find(".info").click(function() {
+		showAdditionalInfoAuthorSimilarity(a, similarAuthors);
+	});
+	return $similarResearchers;
 }
 function getKeywords(pdata, a){
 	var keywords = {};
@@ -1536,7 +1539,23 @@ function showAdditionalInfo4(){
 	"To be added....!";
 }
 
-function showAdditionalInfoAuthorSimilarity(){
-	document.getElementById("dod").innerHTML =  '<span id=sideBarHead>' + "Author Similarity" + "</span>" + "<br>" + "<hr>" + 
-	"Similar authors are computed based having a similar distribution of keywords assigned to their publications. Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available."; 
+function showAdditionalInfoAuthorSimilarity(author, similarAuthors){
+	$dod = $("#dod");
+	$dod.empty();
+	$("<span id='sideBarHead'>Similar authors to "+ getFullNameWithoutNo(author.Name) + "</span>")
+	   .appendTo($dod);
+	$("<br/><hr/>").appendTo($dod);
+	$("<p>")
+		.text("Similar authors are computed based having a similar distribution of keywords assigned to their publications (cosine similarity). Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available.")
+		.appendTo($dod);
+	$("<p>")
+		.text("The most similar authors are:")
+		.appendTo($dod);
+	$similarAuthorList = $("<ul>")
+		.appendTo($dod);
+	$.each(similarAuthors, function(i, similarAuthor) {
+		$("<li>")
+			.text(getFullNameWithoutNo(similarAuthor.Name) +" ("+similarAuthor.Value.toFixed(2)+")")
+			.appendTo($similarAuthorList);
+	});
 }
