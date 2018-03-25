@@ -44,12 +44,10 @@ function generateProfileText(pdata, adata, aObject, percentile, topCoAuthors) {
 		// }
 		// else {
 			var bio = generateSummary(pdata, adata, aObject, percentile);
-			bio += '<span class="info" onclick="showAdditionalInfo()">&#9432</span>';
 		// }
 		
 		if (topCoAuthors.length > 0){
 			var text = generateCollaborationRelationship(pdata, adata, aObject, topCoAuthors);
-			text += '<span class="info" onclick="showAdditionalInfo()">&#9432</span>';
 			// var collab = generateCollaborationText(pdata, adata, aObject, topCoAuthors);
 		}
 		var firstAuthorPubs = getPublicationsAsFirstAuthor(pdata,aObject.Name,"A");
