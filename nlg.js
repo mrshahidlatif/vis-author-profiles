@@ -25,16 +25,19 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 	if (totalpubCount > 2) {
 		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
 		// collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
-
+		document.getElementById("info").innerHTML = ""; //resetting bar chart on new profile load
 	}
+	else document.getElementById("rtopics").innerHTML = ""; 
 	//For Outliers
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject);
-
+		collaborationRelationText = getLastName(aObject.Name) + " worked with " + stringifyListWithAuthorLinks(convertToStringArray(topCoAuthors)) + "."; 
+		$collRelation = $("#collRelation");
+		$collRelation.html(collaborationRelationText); 
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = collaborationRelationText;
+		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 	}
 	else if (totalpubCount >= 10){
 			var bio = generateSummary(pdata, adata, aObject);
@@ -132,7 +135,7 @@ function generateSummary(pdata, adata, a, p)
 			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
 			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " publications", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
-			+ " since " + sYear + trend +". His published work includes " 
+			+ " since " + sYear + trend +". " + getLastNamePronoun(a.Name) + " published work includes " 
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
@@ -347,9 +350,9 @@ function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 		}
 		s += "collaboration ";
 			if (lastYear-startYear >20){
-				s += "that "
+				s += "that "; 
 			}
-		s += "ended in " + lastYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + ". " ; 
+		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + " in " + (lastYear - startYear) + " years. " ; 
 	}
 	return s;
 }
@@ -596,33 +599,44 @@ function collaborationGroupPhrase(pdata, adata, a){
 		groups[i]["Value"]= groups[i].Publications;
 	}
 	// console.log(groups);
-	var topGroups = getTopNItems(groups, 1,2);
+	var topGroups = getTopNItems(groups, 2,3);
 	// console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
-		case 1: s += " Analyzing the subgroups within " + getLastNamePronoun (a.Name) + " co-authors"+ info + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
-				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
-				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
+		case 1: s += " Analyzing subgroups within " + getLastNamePronoun (a.Name) + " co-author network, the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
+				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
+				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
 				$subgroups = $("<span>"+s+"<span>");
 				$subgroups.find(".info").click(function() {
 					showAdditionalInfoGroups(a, a.CollaborationGroups);
 				});
 				// console.log(s);
 				return $subgroups;
-		case 2: s+= " Analyzing the subgroups within " + getLastNamePronoun (a.Name) + " co-authors"+ info + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
-				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
-				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." + 
-				 " Another notable group is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
-				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) + " in the field of " +
-				 stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)); 
+		case 2: s += " Analyzing subgroups within " + getLastNamePronoun (a.Name) + " co-author network, the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
+				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
+				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
+				s+= (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group " ;
+				s+= " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
+				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) ;
+				 s+= (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". "; 
 				 $subgroups = $("<span>"+s+"<span>");
 				 $subgroups.find(".info").click(function() {
 					showAdditionalInfoGroups(a, a.CollaborationGroups);
 				});
 				return $subgroups;
 		default:
-			var s = "";
-			return s;
+			s += " Analyzing subgroups within " + getLastNamePronoun (a.Name) + " co-author network, the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
+				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
+				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
+				s+= (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group " ;
+				s+= " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
+				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) ;
+				 s+= (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". "; 
+				 $subgroups = $("<span>"+s+"<span>");
+				 $subgroups.find(".info").click(function() {
+					showAdditionalInfoGroups(a, a.CollaborationGroups);
+				});
+				return $subgroups;
 	}
 }
 function getGroupKeywords(pdata, a, groupMembers){
@@ -648,8 +662,11 @@ function getGroupKeywords(pdata, a, groupMembers){
 		return +(b.Value) - +(a.Value);
 	});
 	// console.log(keywordList);
+	FilteredkeywordList = keywordList.filter(function(d){return d.Value > 1; });
+	FilteredkeywordList = FilteredkeywordList.filter(function(d){return d.Name != "visualization"}); 
+	// console.log(FilteredkeywordList);
 
-	return convertToStringArray(keywordList);
+	return convertToStringArray(FilteredkeywordList);
 }
 function getGroupPublications(pubs, groupMembers){
 	// console.log(pubs);
@@ -695,6 +712,7 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	var $collRelation = $("#collRelation");
 	var supervisors = []; 
 	var main_author_startYear = getStartYear(a);
+	var pubCount = a.Journals + a.Conferences; 
 	//console.log(main_author_startYear);
 	for (var i=0;i<topCoAuthors.length;i++){
 		if(topCoAuthors[i].StartYear < main_author_startYear + 5) {
@@ -706,7 +724,7 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 		}
 	}
 	if (topCoAuthors.length > 0){
-		
+
 		if (topCoAuthors.length == 1){
 			text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees);
 			text += firstCollaborationDescriptionPhrase(pdata, adata, a,topCoAuthors[0]);
@@ -1665,14 +1683,14 @@ function loadConferenceIndividualPublications(pdata, adata, name){
 function analyzeTimeSeries(timeseries,author){
 	// console.log(timeseries); 
 	var result= ""; 
-	console.log(author); 
+	// console.log(author); 
 	var totalpubCount = author.Journals + author.Conferences; 
 	var minYear = d3.min(timeseries, function(d){return d.Year;});
 	var maxYear = d3.max(timeseries, function(d){return d.Year;});
 
 	var sortedTimeseries = timeseries.slice(0); 
 	sortedTimeseries.sort(function(a,b){return b.Value - a.Value});
-	console.log(timeseries); 
+	// console.log(timeseries); 
 
 	var max = sortedTimeseries[0].Value;
 	var secondMax = sortedTimeseries[1].Value;
@@ -1681,33 +1699,46 @@ function analyzeTimeSeries(timeseries,author){
 	//Looking for a peak in data 
 	if (max >= 2*secondMax){ 
 		result = " with a clear peak at " + timeseries.find(function(d){return d.Value == max}).Year + " (" + max + " publications )"; 
+		return result; 
 	}
 
 
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
-	console.log(midYear); 
+	// console.log(midYear); 
 
-	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { result = " with the majority of the publications in the first half"}; 
-	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) { result = " with the majority of the publications in the second half"}; 
-
+	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { 
+		result = " with the majority of the publications in the first half";
+		return result; 
+	}
+	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) {
+		 result = " with the majority of the publications in the second half";
+		 return result; 
+	}
 
 	//Dividing interval in three parts
 	var firstPointYear = Math.round((+maxYear - +minYear) / 3 + +minYear);
 	var secondPointYear = Math.round((+maxYear - +minYear)*2/3 + +minYear); 
-	console.log(firstPointYear);
-	console.log(secondPointYear);
+	// console.log(firstPointYear);
+	// console.log(secondPointYear);
 
 	var sum13 = computeSum(timeseries, minYear, firstPointYear);
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
 	
 	console.log(totalpubCount); 
-	if(sum13/totalpubCount > 0.45){result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;}
-	if(sum23/totalpubCount > 0.45){result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;}
-	if(sum33/totalpubCount > 0.45){result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;}
-	if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
-
-
+	if(sum13/totalpubCount > 0.45){
+		result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;
+		return result;
+	}
+	if(sum23/totalpubCount > 0.45){
+		result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;
+		return result; 	
+	}
+	if(sum33/totalpubCount > 0.45){
+		result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;
+		return result; 
+	}
+	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
 	return result; 
 }
 
@@ -1791,8 +1822,8 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 	});
 }
 function showAdditionalInfoGroups(author, groups){
-	console.log(author);
-	console.log(groups); 
+	// console.log(author);
+	// console.log(groups); 
 
 	$dod = $("#dod");
 	$dod.empty();
