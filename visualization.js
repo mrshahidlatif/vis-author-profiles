@@ -518,7 +518,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
 
 
      svg.append("g")
-     .attr("transform", "translate("+width+",0)")
+     .attr("transform", "translate("+width+",3)")
      .append("text")
      .attr("class", "xlabelBar")
      .attr("y2", height)
@@ -695,7 +695,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 
     // add the x Axis
       svg.append("g")
-         .attr("transform", "translate(-20," + height + ")")
+         .attr("transform", "translate(-25," + height + ")")
          .append("text")
          .attr("class", "xlabelBar")
          .attr("y2", height)
@@ -710,7 +710,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 
 
          svg.append("g")
-         .attr("transform", "translate("+width+",0)")
+         .attr("transform", "translate("+width+",3)")
          .append("text")
          .attr("class", "xlabelBar")
          .attr("y2", height)
