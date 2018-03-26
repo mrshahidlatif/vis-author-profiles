@@ -135,7 +135,7 @@ function generateSummary(pdata, adata, a, p)
 			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
 			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " publications", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
-			+ " since " + sYear + trend +". His published work includes " 
+			+ " since " + sYear + trend +". " + getLastNamePronoun(a.Name) + " published work includes " 
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
@@ -1666,15 +1666,21 @@ function analyzeTimeSeries(timeseries,author){
 	//Looking for a peak in data 
 	if (max >= 2*secondMax){ 
 		result = " with a clear peak at " + timeseries.find(function(d){return d.Value == max}).Year + " (" + max + " publications )"; 
+		return result; 
 	}
 
 
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
 	// console.log(midYear); 
 
-	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { result = " with the majority of the publications in the first half"}; 
-	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) { result = " with the majority of the publications in the second half"}; 
-
+	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { 
+		result = " with the majority of the publications in the first half";
+		return result; 
+	}
+	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) {
+		 result = " with the majority of the publications in the second half";
+		 return result; 
+	}
 
 	//Dividing interval in three parts
 	var firstPointYear = Math.round((+maxYear - +minYear) / 3 + +minYear);
@@ -1687,12 +1693,19 @@ function analyzeTimeSeries(timeseries,author){
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
 	
 	console.log(totalpubCount); 
-	if(sum13/totalpubCount > 0.45){result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;}
-	if(sum23/totalpubCount > 0.45){result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;}
-	if(sum33/totalpubCount > 0.45){result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;}
+	if(sum13/totalpubCount > 0.45){
+		result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;
+		return result;
+	}
+	if(sum23/totalpubCount > 0.45){
+		result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;
+		return result; 	
+	}
+	if(sum33/totalpubCount > 0.45){
+		result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;
+		return result; 
+	}
 	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
-
-
 	return result; 
 }
 
