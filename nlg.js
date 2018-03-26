@@ -661,10 +661,10 @@ function getGroupKeywords(pdata, a, groupMembers){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	console.log(keywordList);
+	// console.log(keywordList);
 	FilteredkeywordList = keywordList.filter(function(d){return d.Value > 1; });
 	FilteredkeywordList = FilteredkeywordList.filter(function(d){return d.Name != "visualization"}); 
-	console.log(FilteredkeywordList);
+	// console.log(FilteredkeywordList);
 
 	return convertToStringArray(FilteredkeywordList);
 }
@@ -1650,14 +1650,14 @@ function loadConferenceIndividualPublications(pdata, adata, name){
 function analyzeTimeSeries(timeseries,author){
 	// console.log(timeseries); 
 	var result= ""; 
-	console.log(author); 
+	// console.log(author); 
 	var totalpubCount = author.Journals + author.Conferences; 
 	var minYear = d3.min(timeseries, function(d){return d.Year;});
 	var maxYear = d3.max(timeseries, function(d){return d.Year;});
 
 	var sortedTimeseries = timeseries.slice(0); 
 	sortedTimeseries.sort(function(a,b){return b.Value - a.Value});
-	console.log(timeseries); 
+	// console.log(timeseries); 
 
 	var max = sortedTimeseries[0].Value;
 	var secondMax = sortedTimeseries[1].Value;
@@ -1670,7 +1670,7 @@ function analyzeTimeSeries(timeseries,author){
 
 
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
-	console.log(midYear); 
+	// console.log(midYear); 
 
 	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { result = " with the majority of the publications in the first half"}; 
 	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) { result = " with the majority of the publications in the second half"}; 
@@ -1679,8 +1679,8 @@ function analyzeTimeSeries(timeseries,author){
 	//Dividing interval in three parts
 	var firstPointYear = Math.round((+maxYear - +minYear) / 3 + +minYear);
 	var secondPointYear = Math.round((+maxYear - +minYear)*2/3 + +minYear); 
-	console.log(firstPointYear);
-	console.log(secondPointYear);
+	// console.log(firstPointYear);
+	// console.log(secondPointYear);
 
 	var sum13 = computeSum(timeseries, minYear, firstPointYear);
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
@@ -1776,8 +1776,8 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 	});
 }
 function showAdditionalInfoGroups(author, groups){
-	console.log(author);
-	console.log(groups); 
+	// console.log(author);
+	// console.log(groups); 
 
 	$dod = $("#dod");
 	$dod.empty();
