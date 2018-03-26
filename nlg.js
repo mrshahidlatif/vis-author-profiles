@@ -126,7 +126,7 @@ function generateSummary(pdata, adata, a, p)
 		}
 		else if (a.Journals+a.Conferences >= 100 && eYear-sYear >= 5 && eYear >=2015 ){
 			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
-			makeMeLive_LoadAllIndividualPublications(pdata, adata, " hundred publications", a.Name) + " "
+			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " publications", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
 			+ " since " + sYear + ". His published work includes " 
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
