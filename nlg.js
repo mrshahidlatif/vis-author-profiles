@@ -71,7 +71,7 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = collaborationRelationText;
+		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 
 		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name);
 		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax, aObject.Name);
@@ -584,26 +584,39 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 }
 function collaborationGroupPhrase(pdata, adata, a){
 	// console.log(a.CollaborationGroups);
+	var s="";
 	var groups = a.CollaborationGroups;
-
+	var info = '<span class="info" onclick="">&#9432</span>';
 	//Adding attribute "Value" for using in getTopNItems()
 	for(var i=0;i<groups.length ;i++){
 		groups[i]["Value"]= groups[i].Publications;
 	}
 	// console.log(groups);
 	var topGroups = getTopNItems(groups, 1,2);
-	// console.log(topGroups);
+	console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
-		case 1: return " Going beyond the pairwise collaborations, the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
+		case 1: s += " Analyzing the subgroups within " + getLastNamePronoun (a.Name) + " co-authors"+ info + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
-		case 2: return " Going beyond the pairwise collaborations, the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
+				$subgroups = $("<span>"+s+"<span>");
+				$subgroups.find(".info").click(function() {
+					showAdditionalInfoGroups(a, a.CollaborationGroups);
+				});
+				console.log(s);
+				return $subgroups;
+		case 2: s+= " Analyzing the subgroups within " + getLastNamePronoun (a.Name) + " co-authors"+ info + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." + 
 				 " Another notable group is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) + " in the field of " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)); 
+				 $subgroups = $("<span>"+s+"<span>");
+				 $subgroups.find(".info").click(function() {
+					showAdditionalInfoGroups(a, a.CollaborationGroups);
+				});
+				console.log(s);
+				return $subgroups;
 		default:
 			var s = "";
 			return s;
@@ -678,7 +691,7 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	var text = "";
 	var supervisees = findSupervisee(pdata, adata, a);
 	sortByValue(supervisees);
-
+	var $collRelation = $("#collRelation");
 	var supervisors = []; 
 	var main_author_startYear = getStartYear(a);
 	//console.log(main_author_startYear);
@@ -727,8 +740,10 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 			}
 		}
 	}
-	text += collaborationGroupPhrase(pdata, adata, a); 
-	return text; 
+	$subgroups = collaborationGroupPhrase(pdata, adata, a); 
+	$collRelation.html(text);
+	$collRelation.append($subgroups);
+	// return text; 
 }
 function RemoveItemFromList(list, name){
 	var r = [];
@@ -1674,5 +1689,28 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 		$("<li>")
 			.html("<span class='sim" + similarAuthor.Value.toFixed(2)[2] + "'>" + makeMeLive_FullName(similarAuthor.Name) + " (" + similarAuthor.Value.toFixed(2) + ")</span>")
 			.appendTo($similarAuthorList);
+	});
+}
+function showAdditionalInfoGroups(author, groups){
+	console.log(author);
+	console.log(groups); 
+
+	$dod = $("#dod");
+	$dod.empty();
+	$("<span id='sideBarHead'>Sub-groups within " + getLastNamePronoun(author.Name) + " co-authors" + "</span>")
+		.appendTo($dod);
+	$("<br/><hr/>").appendTo($dod);
+	$("<p>")
+		.text("Similar authors are computed based having a similar distribution of keywords assigned to their publications (cosine similarity). Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available.")
+		.appendTo($dod);
+	$("<p>")
+		.text("The most notable groups are:")
+		.appendTo($dod);
+	$topGroups = $("<ul>")
+		.appendTo($dod);
+	$.each(groups, function (i, groups) {
+		$("<li>")
+			.html("<span " + groups.Score.toFixed(2)[2] + "'>" + stringifyListWithAuthorLinks(groups.Members) + " (" + groups.Value.toFixed(2) + ")</span>")
+			.appendTo($topGroups);
 	});
 }
