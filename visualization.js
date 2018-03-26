@@ -110,7 +110,9 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .attr("class", "names")
           .attr("x", 0)
           .attr("y", function (d, i) { return (i + 1) * height / N - 5 })
-          .text(function (d) { return getLastName(d.Name) + " (" + d.MutualPublications + ")"; })
+          .text(function (d) { 
+            return getLastName(d.Name) + " (" + d.MutualPublications + ")"; 
+          })
           //   .on("mouseover", function(d) {
           //    div.transition()
           //      .duration(200)
@@ -501,7 +503,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
       .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)});
 
       svg.append("g")
-     .attr("transform", "translate(-20," + height + ")")
+     .attr("transform", "translate(-25," + height + ")")
      .append("text")
      .attr("class", "xlabelBar")
      .attr("y2", height)
