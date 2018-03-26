@@ -27,12 +27,14 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		// collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
 		document.getElementById("info").innerHTML = ""; //resetting bar chart on new profile load
 	}
+	else document.getElementById("rtopics").innerHTML = ""; 
 	//For Outliers
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject);
-		collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
-
+		collaborationRelationText = getLastName(aObject.Name) + " worked with " + stringifyListWithAuthorLinks(convertToStringArray(topCoAuthors)) + "."; 
+		$collRelation = $("#collRelation");
+		$collRelation.html(collaborationRelationText); 
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
 		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
@@ -696,6 +698,7 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	var $collRelation = $("#collRelation");
 	var supervisors = []; 
 	var main_author_startYear = getStartYear(a);
+	var pubCount = a.Journals + a.Conferences; 
 	//console.log(main_author_startYear);
 	for (var i=0;i<topCoAuthors.length;i++){
 		if(topCoAuthors[i].StartYear < main_author_startYear + 5) {
@@ -707,7 +710,7 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 		}
 	}
 	if (topCoAuthors.length > 0){
-		
+
 		if (topCoAuthors.length == 1){
 			text += mostFrequentCoauthorPhrase(pdata, adata, a,topCoAuthors[0],supervisors, supervisees);
 			text += firstCollaborationDescriptionPhrase(pdata, adata, a,topCoAuthors[0]);
