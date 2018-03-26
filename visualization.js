@@ -722,7 +722,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 function enlargeMe(data, id, startYear, endYear, ymax, name){
    //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 90, 320, startYear, endYear, ymax, name); 
+    generateSparkline(data,"figure", 90, 360, startYear, endYear, ymax, name); 
 
 }
 function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYear, endYear, ymax){
@@ -732,7 +732,7 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
     //cName : Name of coauthor 
    //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
-    generateSparklineForMutualPublications(pdata, adata, a, cName, data,"figure", 90, 320, startYear, endYear, ymax); 
+    generateSparklineForMutualPublications(pdata, adata, a, cName, data,"figure", 90, 360, startYear, endYear, ymax); 
 
     loadMutualPublications(pdata, adata, a.Name, cName); 
 
