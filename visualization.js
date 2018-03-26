@@ -124,7 +124,11 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
              .duration(500)
              .style("opacity", 0);
            })
-         .on("click", function(d){loadMe(pdata, allAuthorsData, d.Name);});
+         .on("click", function(d){
+            div.transition()
+               .duration(500)
+               .style("opacity", 0);
+            loadMe(pdata, allAuthorsData, d.Name);});
          // .on("click", function(d){alert(d.Name)});
       }
       //adding bars for individual publications 
