@@ -25,16 +25,17 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 	if (totalpubCount > 2) {
 		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
 		// collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
-
+		document.getElementById("info").innerHTML = ""; //resetting bar chart on new profile load
 	}
 	//For Outliers
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject);
+		collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
 
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		document.getElementById("collRelation").innerHTML = collaborationRelationText;
+		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 	}
 	else if (totalpubCount >= 10){
 			var bio = generateSummary(pdata, adata, aObject);
@@ -347,9 +348,9 @@ function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 		}
 		s += "collaboration ";
 			if (lastYear-startYear >20){
-				s += "that "
+				s += "that "; 
 			}
-		s += "ended in " + lastYear + " with " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + ". " ; 
+		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + " in " + (lastYear - startYear) + " years. " ; 
 	}
 	return s;
 }
