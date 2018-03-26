@@ -389,7 +389,7 @@ function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervis
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
 			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
-					" in a span of " + (lastYear1 - startYear1) + " years and ended in " + lastYear1;
+					" in a span of " + (lastYear1 - startYear1) + " years. ";
 			if (DoesExistInList(supervisees, c.Name)){
 					s += getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
 					"in this collaboration"
