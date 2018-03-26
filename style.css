@@ -15,8 +15,8 @@
 }
 
 .badge {
-    padding-top: 2px;
-    width:6%;  
+    padding-top: -5px;
+    width: 50px;  
 }
 
 .badge:first-child {
