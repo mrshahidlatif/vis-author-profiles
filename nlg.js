@@ -592,7 +592,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 	}
 	// console.log(groups);
 	var topGroups = getTopNItems(groups, 1,2);
-	console.log(topGroups);
+	// console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
 		case 1: return " Going beyond the pairwise collaborations, the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
@@ -633,7 +633,7 @@ function getGroupKeywords(pdata, a, groupMembers){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	console.log(keywordList);
+	// console.log(keywordList);
 
 	return convertToStringArray(keywordList);
 }
@@ -1400,8 +1400,7 @@ function makeMeLive_LastName(name){
 	}
 }
 function makeMeLive_LoadGroupPublications(pdata, adata, text, author, group){
-	console.log(author);
-	console.log(group); 
+
 	return  '<span id="linkedAuthorName" onclick="loadGroupPublications(pdata, adata, \''+author+'\', \''+group+'\');">' + text + "</span>";
 }
 function makeMeLive_LoadData(pdata, adata, text, a, c){
@@ -1441,9 +1440,7 @@ function makeMeLive_loadConferenceIndividualPublications(pdata, adata, text, a){
 }
 
 function loadGroupPublications(pdata,adata, a, g){
-	console.log(a);
 	var groupMembers = g.split(",");
-	console.log(groupMembers); 
 
 	var pubs = getPublications(pdata, a);
 	var groupPubs = [];
@@ -1453,7 +1450,6 @@ function loadGroupPublications(pdata,adata, a, g){
 			groupPubs.push(pubs[i]);
 		}
 	}
-	console.log(groupPubs);
 
 	document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Group Publications " + "(" + groupPubs.length + ") : " + 
 	a + ", " + stringifyList(groupMembers) + "</span>" + "<br>" + "<hr>";
