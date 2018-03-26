@@ -14,12 +14,12 @@
     padding-top: 10px;
 }
 
-#badge {
+.badge {
     padding-top: 2px;
     width:6%;  
 }
 
-#badge:first-child {
+.badge:first-child {
     margin-left: 10px; 
 }
 

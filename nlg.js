@@ -50,25 +50,25 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 
 		//Displaying the badges 
 		if (totalpubCount>=100){
-			title += '<img id="badge" align="top" src="badges/article_gold.svg">'; 
+			title += '<img class="badge" align="top" src="badges/article_gold.svg">'; 
 		}
 		else if(totalpubCount>=50 && totalpubCount<100){
-			title += '<img id="badge" align="top" src="badges/article_silver.svg">'; 
+			title += '<img class="badge" align="top" src="badges/article_silver.svg">'; 
 		}
 		else if(totalpubCount>=10 && totalpubCount <50){
-			title += '<img id="badge" align="top" src="badges/article_bronze.svg">'; 
+			title += '<img class="badge" align="top" src="badges/article_bronze.svg">'; 
 		}
 		if(hasSupversied){
-			title += '<img id="badge" align="top" src="badges/supervisor_badge.svg">'; 
+			title += '<img class="badge" align="top" src="badges/supervisor_badge.svg">'; 
 		}
 		if (yearsActive >= 20){
-			title += '<img id="badge" align="top" src="badges/active_gold.svg">'; 
+			title += '<img class="badge" align="top" src="badges/active_gold.svg">'; 
 		}
 		else if (yearsActive < 20 && yearsActive >= 10){
-			title += '<img id="badge" align="top" src="badges/active_silver.svg">'; 
+			title += '<img class="badge" align="top" src="badges/active_silver.svg">'; 
 		}
 		else if (yearsActive < 10 && yearsActive >= 5){
-			title += '<img id="badge" align="top" src="badges/active_bronze.svg">'; 
+			title += '<img class="badge" align="top" src="badges/active_bronze.svg">'; 
 		}
 		
 		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
@@ -1375,29 +1375,6 @@ function getPublicationKeywords(publication) {
 	if (venue_keywords[publication.Venue]) {
 		pubKeywords = venue_keywords[publication.Venue].slice();
 	}
-	var titleKeywords = {
-		"visualization": "visualization",
-		"visualizing": "visualization",
-		"charting": "visualization",
-		"information visualization": "information visualization",
-		"graph visualization" : "information visualization",
-		"network visualization" : "information visualization",
-		"network layout": "information visualization",
-		"parallel coordinates": "information visualization",
-		"node-link": "information visualization",
-		"treemap" : "information visualization",
-		"flow visualization": "scientific visualization",
-		"visual analytics": "visual analytics",
-		"raycasting": "computer graphics",
-		"rendering": "computer graphics",
-		"human-computer": "human-computer interaction",
-		"human computer": "human-computer interaction",
-		"human-machine": "human-computer interaction",
-		"hci": "human-computer interaction",
-		"user interface": "human-computer interaction",
-		"biomedical": "bioinformatics",
-		"health record": "bioinformatics",
-	};
 	$.each(titleKeywords, function (term) {
 		if (publication.Title.toLowerCase().indexOf(term) > -1) {
 			var keyword = titleKeywords[term];
