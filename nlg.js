@@ -131,16 +131,19 @@ function generateSummary(pdata, adata, a, p)
 			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".";
 		}
-		else if (a.Journals+a.Conferences >= 100 && eYear-sYear >= 5 && eYear >=2015 ){
-			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with more than " +
-			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " publications", a.Name) + " "
-			+ '<svg width="70" height="20" id="sparklineAll"></svg>' 
-			+ " since " + sYear + trend +". " + getLastNamePronoun(a.Name) + " published work includes " 
-			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
-			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and " 
-			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
-			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-			+ ".";
+		else if (a.Journals + a.Conferences >= 100 && eYear - sYear >= 5 && eYear >= 2015) {
+			var nPub = a.Journals + a.Conferences
+			var nPubRoundedDownToFifties = Math.floor(nPub / 50.0) * 50;
+			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with "
+			bio += (nPub === nPubRoundedDownToFifties) ? "" : "more than "
+			bio += makeMeLive_LoadAllIndividualPublications(pdata, adata, nPubRoundedDownToFifties + " publications", a.Name) + " "
+				+ '<svg width="70" height="20" id="sparklineAll"></svg>'
+				+ " since " + sYear + trend + ". " + getLastNamePronoun(a.Name) + " published work includes "
+				+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+				+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and "
+				+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " "
+				+ ' <svg width="70" height="20" id="sparklineConfs"></svg>'
+				+ ".";
 		}
 		else {
 			bio = getFullNameWithoutNo(a.Name) + " has published " + 
