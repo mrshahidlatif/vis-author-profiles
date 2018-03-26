@@ -662,8 +662,11 @@ function getGroupKeywords(pdata, a, groupMembers){
 		return +(b.Value) - +(a.Value);
 	});
 	console.log(keywordList);
+	FilteredkeywordList = keywordList.filter(function(d){return d.Value > 1; });
+	FilteredkeywordList = FilteredkeywordList.filter(function(d){return d.Name != "visualization"}); 
+	console.log(FilteredkeywordList);
 
-	return convertToStringArray(keywordList);
+	return convertToStringArray(FilteredkeywordList);
 }
 function getGroupPublications(pubs, groupMembers){
 	// console.log(pubs);
