@@ -604,40 +604,42 @@ function collaborationGroupPhrase(pdata, adata, a){
 	// console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
-		case 1: s += " Analysis of subgroups within " + getLastNamePronoun (a.Name) + " co-author network shows that the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
-				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
-				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
-				$subgroups = $("<span>"+s+"<span>");
-				$subgroups.find(".info").click(function() {
-					showAdditionalInfoGroups(a, a.CollaborationGroups);
-				});
-				// console.log(s);
-				return $subgroups;
-		case 2: s += " Analysis of subgroups within " + getLastNamePronoun (a.Name) + " co-author network shows that the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
-				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
-				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
-				s+= (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group " ;
-				s+= " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
-				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) ;
-				 s+= (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". "; 
-				 $subgroups = $("<span>"+s+"<span>");
-				 $subgroups.find(".info").click(function() {
-					showAdditionalInfoGroups(a, a.CollaborationGroups);
-				});
-				return $subgroups;
+		case 1:
+			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network shows that the author along with" + info + " " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			$subgroups = $("<span>" + s + "<span>");
+			$subgroups.find(".info").click(function () {
+				showAdditionalInfoGroups(a, a.CollaborationGroups);
+			});
+			// console.log(s);
+			return $subgroups;
+		case 2:
+			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network shows that the author along with" + info + " " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
+			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
+				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". ";
+			$subgroups = $("<span>" + s + "<span>");
+			$subgroups.find(".info").click(function () {
+				showAdditionalInfoGroups(a, a.CollaborationGroups);
+			});
+			return $subgroups;
 		default:
-			s += " Analysis of subgroups within " + getLastNamePronoun (a.Name) + " co-author network shows that the author along with"  + info + stringifyListWithAuthorLinks(topGroups[0].Members) ;
-				s+= (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : ""; 
-				s+= " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
-				s+= (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group " ;
-				s+= " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
-				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) ;
-				 s+= (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". "; 
-				 $subgroups = $("<span>"+s+"<span>");
-				 $subgroups.find(".info").click(function() {
-					showAdditionalInfoGroups(a, a.CollaborationGroups);
-				});
-				return $subgroups;
+			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network shows that the author along with" + info + " " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
+			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
+				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[1].Members) >= 1) ? " in the field of " + stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)) : ". ";
+			$subgroups = $("<span>" + s + "<span>");
+			$subgroups.find(".info").click(function () {
+				showAdditionalInfoGroups(a, a.CollaborationGroups);
+			});
+			return $subgroups;
 	}
 }
 function getGroupKeywords(pdata, a, groupMembers){
