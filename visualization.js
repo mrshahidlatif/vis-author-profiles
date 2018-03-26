@@ -109,27 +109,37 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .enter().append("text")
           .attr("class", "names")
           .attr("x", 0)
-          .attr("y", function(d,i){return (i+1)*height/N-5})
-          .text(function(d){return getLastName(d.Name) + " (" + d.MutualPublications + ")"; })
-          .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html( "<br/>" + getFullNameWithoutNo(d.Name))
-             .style("left", (d3.event.pageX) + 5 + "px")
-             .style("top", (d3.event.pageY - 38) + "px");
-           })
-         .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-         .on("click", function(d){
+          .attr("y", function (d, i) { return (i + 1) * height / N - 5 })
+          .text(function (d) { return getLastName(d.Name) + " (" + d.MutualPublications + ")"; })
+          //   .on("mouseover", function(d) {
+          //    div.transition()
+          //      .duration(200)
+          //      .style("opacity", .9);
+          //    div.html( "<br/>" + getFullNameWithoutNo(d.Name))
+          //      .style("left", (d3.event.pageX) + 5 + "px")
+          //      .style("top", (d3.event.pageY - 38) + "px");
+          //    })
+          //  .on("mouseout", function(d) {
+          //    div.transition()
+          //      .duration(500)
+          //      .style("opacity", 0);
+          //    })
+          .on("click", function (d) {
             div.transition()
-               .duration(500)
-               .style("opacity", 0);
-            loadMe(pdata, allAuthorsData, d.Name);});
-         // .on("click", function(d){alert(d.Name)});
+              .duration(500)
+              .style("opacity", 0);
+            loadMe(pdata, allAuthorsData, d.Name);
+          })
+          .append("svg:title")
+          .text(function (d) {
+            var jointPubsStartYear = d.MutualPubPerYear[0].Year;
+            var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
+            var s = getFullNameWithoutNo(d.Name) + " has published ";
+            s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
+            s += " (marked in red) with " + getFullNameWithoutNo(aName);
+            s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
+            return s + ".";
+          });
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
