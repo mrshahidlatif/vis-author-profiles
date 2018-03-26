@@ -520,6 +520,7 @@ function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 	if (DoesExistInList(supervisees, c1.Name) && DoesExistInList(supervisees, c2.Name)){
 		supervisees = RemoveItemFromList(supervisees,c1.Name);
 		supervisees = RemoveItemFromList(supervisees,c2.Name);
+		console.log(c1.Name + " : " + c2.Name); 
 		s += "In addition to " +  makeMeLive_LastName(c1.Name) + " and " +  makeMeLive_LastName(c2.Name) + ", further supervisees" +
 		 '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 		s+=stringifyListWithSparklines(supervisees);
@@ -556,7 +557,7 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 			supervisees = RemoveItemFromList(supervisees, list_c[i].Name);
 		}
 	}
-	//console.log(alreadySupervisees); 
+	// console.log(alreadySupervisees); 
 	if (alreadySupervisees.length > 0 && supervisees.length > 0){
 		if (alreadySupervisees.length == 1){
 			s += "In addition to " + makeMeLive_LastName(alreadySupervisees[0].Name) ;
@@ -564,11 +565,11 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 		else if (alreadySupervisees.length == 2){
 			s += "In addition to " +  makeMeLive_LastName(alreadySupervisees[0].Name) + " and " +  makeMeLive_LastName(alreadySupervisees[1].Name) ; 
 		}
-		else if (alreadySupervisees > 2){
+		else {
+			// console.log(alreadySupervisees); 
 			s += "In addition to ";
 			for (var i=0;i<alreadySupervisees.length;i++){
 				if(i==alreadySupervisees.length-1){
-					var ID = "sparkline_coll"+i;
 					s += "and " + makeMeLive_LastName(alreadySupervisees[i].Name)+" " +".";
 				}
 				else {
@@ -719,7 +720,6 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 			var pubs = getAllMutualPublications(pdata, a.Name, topCoAuthors[i].Name)
 			if (isSupervisor(pubs,a.Name,topCoAuthors[i].Name)){
 				supervisors.push(topCoAuthors[i].Name);
-				
 			}
 		}
 	}
@@ -758,11 +758,45 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 				text += superviseePhrase_InAdditionToN(pdata, adata, a,topCoAuthors,supervisees);
 			}
 		}
+		text += supSupervisorPhrase(pdata, adata, a, supervisees); 
 	}
 	$subgroups = collaborationGroupPhrase(pdata, adata, a); 
 	$collRelation.html(text);
 	$collRelation.append($subgroups);
 	// return text; 
+}
+function supSupervisorPhrase(pdata, adata, author, supervisees){
+	var s="";
+	var supSupervisees = supSupervisor(pdata, adata, author, supervisees); 
+
+	// var names = stringifyListWithAuthorLinks(convertToStringArray(supSupervisees));
+
+	if (supSupervisees.length > 0){
+		s+= " " + getLastNamePronoun(author.Name) ;
+		s+= (supSupervisees.length == 1) ? " supervisee, " : " supvervisees, " ; 
+		s+= stringifyListWithAuthorLinks(convertToStringArray(supSupervisees)) ;
+		s+= (supSupervisees.length == 1) ? " is " : " are " ;
+		s+= " already supervising other researchers. ";
+	}
+	// console.log(s); 
+	return s; 
+
+}
+function supSupervisor(pdata, adata, author, supervisees){
+	var supSupervisees = [];
+	// console.log(author);
+	// console.log(supervisees); 
+	for (var i=0; i<supervisees.length;i++){
+		var superviseeObj = findAuthorObjectByName(adata,supervisees[i].Name);
+		var supViseeList = findSupervisee(pdata, adata, superviseeObj);
+		// console.log(supervisees[i]); 
+		if (supViseeList.length >1){
+			supSupervisees.push(supervisees[i]); 
+		}
+	}
+	// console.log(supSupervisees); 
+	return supSupervisees;
+
 }
 function RemoveItemFromList(list, name){
 	var r = [];
