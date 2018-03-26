@@ -247,6 +247,7 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
           dataForGantt[i]["MutualPubPerYear"] = mppy;
           
         }
+        // console.log(dataForGantt);
         generateVis(dataForGantt, authorObjects, canvas, pdata,aName, adata, distCoAuthors, 2); 
 
 }
