@@ -1690,7 +1690,7 @@ function analyzeTimeSeries(timeseries,author){
 	if(sum13/totalpubCount > 0.45){result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;}
 	if(sum23/totalpubCount > 0.45){result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;}
 	if(sum33/totalpubCount > 0.45){result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;}
-	if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
+	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
 
 
 	return result; 
