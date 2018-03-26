@@ -13,9 +13,14 @@
     padding-right: 15px;
     padding-top: 10px;
 }
+
 #badge {
     padding-top: 2px;
     width:6%;  
+}
+
+#badge:first-child {
+    margin-left: 10px; 
 }
 
 .header {
