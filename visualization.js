@@ -211,8 +211,8 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .data(adata)
           .enter().append("text")
           .attr("class", "moreBtn")
-          .attr("x", width-25)
-          .attr("y",height+10)
+          .attr("x", width-30)
+          .attr("y",height+14)
           .text("More")
           //.on("click", function(d){});
           .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors);});
