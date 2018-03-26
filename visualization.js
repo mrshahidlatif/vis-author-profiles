@@ -311,8 +311,8 @@ function StringifyPublication(pdata, adata, p){
   }
   var pString = '<span id="publicationTitle">' + p.Title + "</span>"
     + "<br>" + authors  + "<br>" + p.Venue + ", " + p.Year;
-  var pubKeywords = venue_keywords[p.Venue];
-  if (pubKeywords) {
+  var pubKeywords = getPublicationKeywords(p);
+  if (pubKeywords.length > 0) {
     pString += "<br/>";
     if (pubKeywords.indexOf("visualization") > -1) {
       pString += '<span class="community">visualization</span> ';
