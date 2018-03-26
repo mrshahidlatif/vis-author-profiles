@@ -595,13 +595,13 @@ function collaborationGroupPhrase(pdata, adata, a){
 	console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
-		case 1: return " Going beyond the pairwise collaborations, the author along with " + stringifyList(topGroups[0].Members) + " has worked on " +
+		case 1: return " Going beyond the pairwise collaborations, the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
-		case 2: return " Going beyond the pairwise collaborations, the author along with " + stringifyList(topGroups[0].Members) + " has worked on " +
+		case 2: return " Going beyond the pairwise collaborations, the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members) + " has worked on " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." + 
-				 " Another notable group is with " + stringifyList(topGroups[1].Members) + " resulting in " + 
+				 " Another notable group is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " + 
 				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) + " in the field of " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)); 
 		default:
@@ -1223,6 +1223,27 @@ function stringifyList(list) {
 			return s;
 	}
 }
+
+function stringifyListWithAuthorLinks(list) {
+	switch (list.length) {
+		case 0: return "";
+		case 1: return makeMeLive_FullName(list[0]);
+		case 2: return makeMeLive_FullName(list[0]) + " and " + makeMeLive_FullName(list[1]);
+		default:
+			var s = "";
+			list.forEach(function (element, i) {
+				if (i > 0) {
+					s += ", ";
+					if (i === list.length - 1) {
+						s += "and ";
+					}
+				}
+				s += makeMeLive_FullName(element);
+			});
+			return s;
+	}
+}
+
 
 function similarResearchersPhraseTopics(pdata, adata, a){
 	var s=""; 
