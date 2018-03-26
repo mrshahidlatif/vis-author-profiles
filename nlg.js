@@ -1624,34 +1624,6 @@ function loadConferenceIndividualPublications(pdata, adata, name){
 
 function analyzeTimeSeries(){
 
-	//INCOMPLETE
-	// timeseries = [1,2,0,1,7,1,2,1,1];
-	timeseries = [1,3,5,7,6,7,6,6,7];
-	// console.log(timeseries);
-	var max = Math.max.apply(null, timeseries);
-	timeseries.splice(timeseries.indexOf(max), 1);
-	var secondMax = Math.max.apply(null, timeseries);
- 
-	if (max > 2*secondMax){
-		console.log("Peak is found in data"); 
-	}
-
-	timeseries.push(max);
-	// console.log(timeseries);
-
-	var mean = timeseries.reduce(function(a,b){return a+b})/timeseries.length; 
-
-	// console.log(mean); 
-
-	var lowerBound = mean - 0.2*mean;
-	var upperBound = mean + 0.2*mean;
-	var seqOfindices=[];
-	for(var i=0;i<timeseries.length;i++){
-		if(timeseries[i]<=upperBound && timeseries[i] >= lowerBound){
-			seqOfindices.push(i); 
-		}
-	}
-	// console.log(seqOfindices);
 
 }
 
@@ -1697,11 +1669,11 @@ function showAdditionalInfoGroups(author, groups){
 
 	$dod = $("#dod");
 	$dod.empty();
-	$("<span id='sideBarHead'>Sub-groups within " + getLastNamePronoun(author.Name) + " co-authors" + "</span>")
+	$("<span id='sideBarHead'>Sub-groups within " + getLastNamePronoun(author.Name) + " co-author network" + "</span>")
 		.appendTo($dod);
 	$("<br/><hr/>").appendTo($dod);
 	$("<p>")
-		.text("Similar authors are computed based having a similar distribution of keywords assigned to their publications (cosine similarity). Frequent co-authors of the selected author are excluded from the list because they naturally cover similar keywords. Read more on co-author collaboration in the next paragraph if available.")
+		.text("Sub-groups within the co-author network are computed using the Formal Concept Analysis (FCA). It provides us with paired sets of co-authors and joint publications that are maximal both w.r.t to co-authors and publications. To extract higher-order sub-groups, sub-groups with fewer than three publications and two co-authors are discarded. Further we rate groups according to a score (n^(1/2)*m) where n is number of publications and m is the number of co-authors in a sub-group.")
 		.appendTo($dod);
 	$("<p>")
 		.text("The most notable groups are:")
@@ -1710,7 +1682,7 @@ function showAdditionalInfoGroups(author, groups){
 		.appendTo($dod);
 	$.each(groups, function (i, groups) {
 		$("<li>")
-			.html("<span " + groups.Score.toFixed(2)[2] + "'>" + stringifyListWithAuthorLinks(groups.Members) + " (" + groups.Value.toFixed(2) + ")</span>")
+			.html("<span " + groups.Score.toFixed(2)[2] + "'>" + stringifyListWithAuthorLinks(groups.Members) + " (" + groups.Value + ")</span>")
 			.appendTo($topGroups);
 	});
 }
