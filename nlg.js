@@ -596,10 +596,13 @@ function collaborationGroupPhrase(pdata, adata, a){
 	switch (topGroups.length) {
 		case 0: return "";
 		case 1: return " Going beyond the pairwise collaborations, the author along with " + stringifyList(topGroups[0].Members) + " has worked on " +
-				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + topGroups[0].Value + " research papers." ;
+				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
+				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." ;
 		case 2: return " Going beyond the pairwise collaborations, the author along with " + stringifyList(topGroups[0].Members) + " has worked on " +
-				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + topGroups[0].Value + " research papers." + 
-				 " Another notable group is with " + stringifyList(topGroups[1].Members) + " resulting in " + topGroups[1].Value + " publications in the field of " +
+				 stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and produced " + 
+				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " ." + 
+				 " Another notable group is with " + stringifyList(topGroups[1].Members) + " resulting in " + 
+				 makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members) + " in the field of " +
 				 stringifyList(getGroupKeywords(pdata, a, topGroups[1].Members)); 
 		default:
 			var s = "";
@@ -1375,6 +1378,11 @@ function makeMeLive_LastName(name){
 		return getLastName(name); 
 	}
 }
+function makeMeLive_LoadGroupPublications(pdata, adata, text, author, group){
+	console.log(author);
+	console.log(group); 
+	return  '<span id="linkedAuthorName" onclick="loadGroupPublications(pdata, adata, \''+author+'\', \''+group+'\');">' + text + "</span>";
+}
 function makeMeLive_LoadData(pdata, adata, text, a, c){
 	//text : hyperlink 
 	//a : main author 
@@ -1392,10 +1400,7 @@ function makeMeLive_LoadDataOnTopic(pdata, adata, text, a, topic, cssClass){
 }
 
 function makeMeLive_LoadAllIndividualPublications(pdata, adata, text, a){
-	//text : hyperlink 
-	//a : main author 
-	//c: coauthor 
-	//y : year
+
 	return  '<span id="linkedAuthorName" onclick="loadAllIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
 }
 
@@ -1412,6 +1417,29 @@ function makeMeLive_loadConferenceIndividualPublications(pdata, adata, text, a){
 	//c: coauthor 
 	//y : year
 	return  '<span id="linkedAuthorName" onclick="loadConferenceIndividualPublications(pdata, adata, \''+a+'\')">' + text + "</span>";
+}
+
+function loadGroupPublications(pdata,adata, a, g){
+	console.log(a);
+	var groupMembers = g.split(",");
+	console.log(groupMembers); 
+
+	var pubs = getPublications(pdata, a);
+	var groupPubs = [];
+	for (var i=0;i<pubs.length;i++){
+		var allAuthors = convertToStringArray(pubs[i].Authors);
+		if(isGroupPublication(allAuthors,groupMembers)){
+			groupPubs.push(pubs[i]);
+		}
+	}
+	console.log(groupPubs);
+
+	document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Group Publications " + "(" + groupPubs.length + ") : " + 
+	a + ", " + stringifyList(groupMembers) + "</span>" + "<br>" + "<hr>";
+  
+	  for (var i=0; i<groupPubs.length;i++){
+	    StringifyPublication(pdata, adata, groupPubs[i]);
+	  }
 }
 
 function loadMutualPublications(pdata, adata, a, c){
