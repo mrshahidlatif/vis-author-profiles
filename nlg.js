@@ -632,16 +632,14 @@ function getGroupKeywords(pdata, a, groupMembers){
 	var groupPubs = getGroupPublications(pubs, groupMembers);
 	// console.log(groupPubs);
 	for (var i = 0; i < groupPubs.length; i++) {
-		var pubKeywords = venue_keywords[groupPubs[i].Venue];
-		if (pubKeywords != undefined) {
-			for (var j = 0; j < pubKeywords.length; j++) {
-				var keyword = pubKeywords[j];
-				if (!keywords[keyword]) {
-					keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
-				}
-				keywords[keyword].Value++;
-				keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
+		var pubKeywords = getPublicationKeywords(groupPubs[i])
+		for (var j = 0; j < pubKeywords.length; j++) {
+			var keyword = pubKeywords[j];
+			if (!keywords[keyword]) {
+				keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
 			}
+			keywords[keyword].Value++;
+			keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
 		}
 	}
 	var keywordList = Object.keys(keywords).map(function (keyword) {
@@ -1299,16 +1297,15 @@ function getKeywords(pdata, a){
 	var keywords = {};
 	var pubs = getPublications(pdata, a.Name);
 	for (var i = 0; i < pubs.length; i++) {
-		var pubKeywords = venue_keywords[pubs[i].Venue];
-		if (pubKeywords != undefined) {
-			for (var j = 0; j < pubKeywords.length; j++) {
-				var keyword = pubKeywords[j];
-				if (!keywords[keyword]) {
-					keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
-				}
-				keywords[keyword].Value++;
-				keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
+		var pubKeywords = getPublicationKeywords(pubs[i])
+		console.log(pubKeywords);
+		for (var j = 0; j < pubKeywords.length; j++) {
+			var keyword = pubKeywords[j];
+			if (!keywords[keyword]) {
+				keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
 			}
+			keywords[keyword].Value++;
+			keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
 		}
 	}
 	var keywordList = Object.keys(keywords).map(function (keyword) {
@@ -1317,14 +1314,21 @@ function getKeywords(pdata, a){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
+	console.log(keywordList);
 	return keywordList;
+}
+
+function getPublicationKeywords(publication) {
+	if (venue_keywords[publication.Venue]) {
+		return venue_keywords[publication.Venue];
+	}
+	return [];
 }
 
 function getKeywordsPerYear(pubs, keyword){
 	var keywordPerYear = []; 
 	for (var i=0;i<pubs.length; i++){
-		//console.log(venue_keywords[pubs[i].Venue]);
-		if (venue_keywords[pubs[i].Venue] != undefined && venue_keywords[pubs[i].Venue].indexOf(keyword) != -1) {
+		if (getPublicationKeywords(pubs[i]).indexOf(keyword) != -1) {
 			keywordPerYear.push(pubs[i].Year); 
 		}
 	}
@@ -1513,9 +1517,9 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
       for (var j=0;j<pdata[i].Authors.length;j++){
         tempAuthors.push(pdata[i].Authors[j].Name);
         }
-        if(tempAuthors.indexOf(a) != -1 && venue_keywords[pdata[i].Venue] != undefined)
+        if(tempAuthors.indexOf(a) != -1)
         {
-        	if (venue_keywords[pdata[i].Venue].indexOf(topic) != -1){
+        	if (getPublicationKeywords(pdata[i]).indexOf(topic) != -1){
           		pubsOnTopic.push(pdata[i]);
           	}
         }
