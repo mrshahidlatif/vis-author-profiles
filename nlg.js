@@ -1315,7 +1315,7 @@ function getKeywords(pdata, a){
 	var pubs = getPublications(pdata, a.Name);
 	for (var i = 0; i < pubs.length; i++) {
 		var pubKeywords = getPublicationKeywords(pubs[i])
-		console.log(pubKeywords);
+		// console.log(pubKeywords);
 		for (var j = 0; j < pubKeywords.length; j++) {
 			var keyword = pubKeywords[j];
 			if (!keywords[keyword]) {
@@ -1331,7 +1331,7 @@ function getKeywords(pdata, a){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	console.log(keywordList);
+	// console.log(keywordList);
 	return keywordList;
 }
 

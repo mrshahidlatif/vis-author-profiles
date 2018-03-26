@@ -20,6 +20,7 @@ function process(pdata, adata, name,container, minN,maxN) {
         for (var j = 0; j < pdata[i].Authors.length; j++) {
           if (pdata[i].Authors[j].Name == name) {
             for (var k = 0; k < pdata[i].Authors.length; k++) {
+              if (pdata[i].Authors[k].Name == "") continue;
               allCoAuthors.push(pdata[i].Authors[k].Name);
             }
           }
@@ -28,7 +29,7 @@ function process(pdata, adata, name,container, minN,maxN) {
       // console.log(allCoAuthors);
       var items = compressArray(allCoAuthors, name);
       var topNCoAuthor = getTopNItems(items, minN, maxN);
-      // console.log(topNCoAuthor); 
+      // console.log(items); 
       
       var topNCoAuthorObjects = [];
       var visAuthor = false; 
