@@ -1297,7 +1297,6 @@ function getKeywords(pdata, a){
 	var pubs = getPublications(pdata, a.Name);
 	for (var i = 0; i < pubs.length; i++) {
 		var pubKeywords = getPublicationKeywords(pubs[i])
-		console.log(pubKeywords);
 		for (var j = 0; j < pubKeywords.length; j++) {
 			var keyword = pubKeywords[j];
 			if (!keywords[keyword]) {
@@ -1318,10 +1317,44 @@ function getKeywords(pdata, a){
 }
 
 function getPublicationKeywords(publication) {
+	var pubKeywords = [];
 	if (venue_keywords[publication.Venue]) {
-		return venue_keywords[publication.Venue];
+		pubKeywords = venue_keywords[publication.Venue].slice();
 	}
-	return [];
+	var titleKeywords = {
+		"visualization": "visualization",
+		"visualizing": "visualization",
+		"charting": "visualization",
+		"information visualization": "information visualization",
+		"graph visualization" : "information visualization",
+		"network visualization" : "information visualization",
+		"network layout": "information visualization",
+		"parallel coordinates": "information visualization",
+		"node-link": "information visualization",
+		"treemap" : "information visualization",
+		"flow visualization": "scientific visualization",
+		"visual analytics": "visual analytics",
+		"raycasting": "computer graphics",
+		"rendering": "computer graphics",
+		"human-computer": "human-computer interaction",
+		"human computer": "human-computer interaction",
+		"human-machine": "human-computer interaction",
+		"hci": "human-computer interaction",
+		"user interface": "human-computer interaction",
+		"biomedical": "bioinformatics",
+		"health record": "bioinformatics",
+	};
+	$.each(titleKeywords, function (term) {
+		if (publication.Title.toLowerCase().indexOf(term) > -1) {
+			var keyword = titleKeywords[term];
+			if (pubKeywords.indexOf(keyword) == -1) {
+				pubKeywords.push(keyword);
+				// console.log(keyword + "->" + publication.Title);
+			}
+
+		}
+	})
+	return pubKeywords;
 }
 
 function getKeywordsPerYear(pubs, keyword){
