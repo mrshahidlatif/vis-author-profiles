@@ -2,27 +2,17 @@
 BUGS
 ----
 
--Line for active year of author is displayed in the beginning when author is the most senior 
--Some title missing for some publications in the right side panel for Daniel a. kiem
--Judy Diamond is a good example where the collaboration paragrap
 -Daniel A. Keim don't have focus areas. Why???
--resetting everything on loading new author
 -special information on non-vis author (may be * and more info like author not in database)
 
 ----------------------------------------------
 Fabian's Feedback - Suggestions / Things to do
 ----------------------------------------------
 -Determine the gender of a first name (https://genderize.io/#singleusage)
--And „conference papers“ should better be named “proceedings papers” (this category also comprises “workshops”, “symposiums”, “meetings”, etc.)
 	(I just realized that we currently count CoRR/arxiv publications as journal articles. This is misleading/incorrect. Often people use arxiv just to publish preprints. Sebastian Baltes is an example. I suggest we just ignore all CoRR/arxiv publications – although we might miss a few “real” publications, we get rid of all the preprints)
--Subgroups of co-authors
--Collaboration graph for those authors who have no coauthor in VIS community e.g. Roch Guerin 
 -PROBLEMS IN PROFILES OF OUR TEST CANDIDATES
-	R. Jordan Crouser
-	We should never say or stress that a collaboration ended at a certain year (that sounds too final - it might have continued, but we don’t know that). We can provide a range of joint publications instead (e.g., “with 10 joint publications between 2003 and 2010”). But only if the last publication is more than 5(?) years ago, I would provide an end year.
 	 
 	Ji Soo Yi
-	Maybe, “top collaborator” is too imprecise and we should replace at least the first instance with “most frequent co-author”.
 	Jacko *is* the most frequent co-author, but *was* the supervisor – I believe this sentence need greater variety for covering, for instance, ongoing supervision vs. past supervision (only if we are sure that it is past). A more tricky case is past supervision, but ongoing collaboration.
 	Kwon and Kim are the same category of co-authors with a comparable number of joint publications with Yi – it would probably sound much if we could summarize them.
 
@@ -30,11 +20,7 @@ Fabian's Feedback - Suggestions / Things to do
 LAYOUT 
 
 -Add a 5 px margin so that the bottom line of the text is on the same height as the south-west-west/south-east-east corner of the badge
--Change the font of “VIS Author Profiles” in the logo to the one used in the page (not sure it looks better, but the current font of the logo doesn’t fit really)
--Correction: I didn’t mean a larger space between the badges, but between the author name and the first badge only. It should be at least the size as between two badges (currently it is half the size).
--Make the badges a bit larger 
 
--Only two labels for x-axis and 1 for y (only the max value on the right)
 -Text should describe the authors within the visualization 
 ------
 TODOs
@@ -45,11 +31,8 @@ Appearance
 Functionality 
 -NLG : Handle the case where 2nd and 3rd top coauthors have same no. of publications 
 -Stephan Diel is a good example having 3 top coauthors and three of them are his supervisees
--Handle if the author has more than 2 supervisors 
 -Exception handling when record of author is not found
--link names in central graphic to load record function
-[Priority:High]-fix the height of bar for each author in the central graphic
--Author badges based on statistics e.g. Supervised Student, Active Years, No of publications etc. [IN PROCESS]
+
 -Add DOI to publications 
 
 
