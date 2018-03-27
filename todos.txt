@@ -20,7 +20,6 @@ Fabian's Feedback - Suggestions / Things to do
 LAYOUT 
 
 -Add a 5 px margin so that the bottom line of the text is on the same height as the south-west-west/south-east-east corner of the badge
-
 -Text should describe the authors within the visualization 
 ------
 TODOs
