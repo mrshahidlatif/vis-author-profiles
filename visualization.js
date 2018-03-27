@@ -119,19 +119,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .text(function (d) { 
             return getLastName(d.Name) + " (" + d.MutualPublications + ")"; 
           })
-          //   .on("mouseover", function(d) {
-          //    div.transition()
-          //      .duration(200)
-          //      .style("opacity", .9);
-          //    div.html( "<br/>" + getFullNameWithoutNo(d.Name))
-          //      .style("left", (d3.event.pageX) + 5 + "px")
-          //      .style("top", (d3.event.pageY - 38) + "px");
-          //    })
-          //  .on("mouseout", function(d) {
-          //    div.transition()
-          //      .duration(500)
-          //      .style("opacity", 0);
-          //    })
           .on("click", function (d) {
             div.transition()
               .duration(500)
@@ -146,55 +133,37 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
             s += " (marked in red) with " + getFullNameWithoutNo(aName);
             s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
-            return s + ".";
+            return s + ". [Click to see "+getLastName(d.Name)+"'s profile]";
           });
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
         .data(indPub[j])
         .enter().append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.Year); })
-          .attr("y", function(d) { return y(d.Value); })
-          .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
-          .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-          .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5 + "px")
-             .style("top", (d3.event.pageY - 38) + "px");
-           })
-         .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-            .on("click", function(d){showIndividualPublications(pdata, allAuthorsData, d.Year, d.Name)});
+        .attr("class", "bar")
+        .attr("x", function (d) { return x(d.Year); })
+        .attr("y", function (d) { return y(d.Value); })
+        .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
+        .attr("height", function (d) { return (j + 1) * height / N - y(d.Value); })
+        .on("click", function (d) { showIndividualPublications(pdata, allAuthorsData, d.Year, d.Name) })
+        .append("svg:title")
+        .text(function(d) {
+          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" publications in total. [Click to see details]")
+        });
       //Adding bars for mutual publications
       g.selectAll(".mbar")
         .data(gdata[j].MutualPubPerYear)
         .enter().append("rect")
-          .attr("class", "mbar")
-          .attr("x", function(d) { return x(d.Year); })
-          .attr("y", function(d) { return y(d.Value); })
-          .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
-          .attr("height", function(d) { return (j+1)*height/N - y(d.Value); })
-         .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5 + "px")
-             .style("top", (d3.event.pageY - 38) + "px");
-           })
-         .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-            .on("click", function(d){showMutualPublications(pdata, allAuthorsData, d.Year, aName, d.Name)});
+        .attr("class", "mbar")
+        .attr("x", function (d) { return x(d.Year); })
+        .attr("y", function (d) { return y(d.Value); })
+        .attr("width", Math.min(MAX_WIDTH_OF_BAR, x.bandwidth()))
+        .attr("height", function (d) { return (j + 1) * height / N - y(d.Value); })
+        .on("click", function (d) { showMutualPublications(pdata, allAuthorsData, d.Year, aName, d.Name) })
+        .append("svg:title")
+        .text(function(d) {
+          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" joint publications with "+getFullNameWithoutNo(aName)+". [Click to see details]")
+        });
 
       //Adding horizontal lines 
       g.append("g")
