@@ -222,15 +222,17 @@ p {
 /*Visualization styles */
 .bar {
   fill: gray;
+  cursor: pointer;
 }
 
 .hbar{
     fill:black;
-    opacity: 0.1 
+    opacity: 0.1; 
 }
 .mbar{
     fill:#AA0000;
-    opacity: 1
+    opacity: 1;
+    cursor: pointer;
 }
 
 .bar:hover {
