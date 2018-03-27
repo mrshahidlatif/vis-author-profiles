@@ -229,10 +229,20 @@ p {
     fill:black;
     opacity: 0.1; 
 }
+/*Bars for showing mutual publications*/
 .mbar{
     fill:#AA0000;
     opacity: 1;
     cursor: pointer;
+}
+/*Bar for showing publications on topic*/
+.tbar{
+    fill:#73a2d1;
+    opacity: 1
+}
+.tbar:hover{
+    fill:#1E90FF;
+    opacity: 1
 }
 
 .bar:hover {

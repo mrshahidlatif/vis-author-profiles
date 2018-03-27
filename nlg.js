@@ -1559,10 +1559,7 @@ function makeMeLive_LoadData(pdata, adata, text, a, c){
 }
 
 function makeMeLive_LoadDataOnTopic(pdata, adata, text, a, topic, cssClass){
-	//text : hyperlink 
-	//a : main author 
-	//c: coauthor 
-	//y : year
+
 	return  '<span id="linkedAuthorName" class="'+cssClass+'" onclick="loadPublicationsOnTopic(pdata, adata, \''+a+'\', \''+topic+'\')">' + text + "</span>";
 }
 
@@ -1635,6 +1632,7 @@ function loadMutualPublications(pdata, adata, a, c){
 
 function loadPublicationsOnTopic(pdata, adata, a, topic){
   //Return array of mutual publications of Author and CoAuthor for Year "year"
+  // console.log(a); 
   var pubsOnTopic = []; 
   for(var i=0;i<pdata.length;i++){
       var tempAuthors = []; 
@@ -1655,16 +1653,16 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
 
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Publications " + "(" + pubsOnTopic.length + ") : " + getLastName(a) +  "</span>" + "<br>" + "<hr>";
   
-  var pubsForSparkline = {}; 
+  var dataForBarChart = []; 
   for (var i=0; i<pubsOnTopic.length;i++){
     StringifyPublication(pdata, adata, pubsOnTopic[i]);
-	    if (!pubsForSparkline[pubsOnTopic[i].Year]) {
-	    	pubsForSparkline[pubsOnTopic[i].Year]=0;
-	    } 
-	    pubsForSparkline[pubsOnTopic[i].Year]++ ; 
+    dataForBarChart.push(pubsOnTopic[i].Year); 
+	   
   }
-  // console.log(pubsForSparkline); 
-  //return pubsOnTopic; 
+  dataForBarChart = countFrequency(dataForBarChart); 
+  generateBarChart(pdata, adata, a, dataForBarChart, "figure"); 
+  // console.log(dataForBarChart); 
+
 }
 
 function loadAllIndividualPublications(pdata, adata, name){
