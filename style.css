@@ -185,11 +185,14 @@ p {
 #dod li {
     line-height: 1.6;
 }
+#dod .sim0 {
+    background: rgba(33, 151, 255, 1.0);
+}
 #dod .sim9 {
-    background: rgba(33, 151, 255, 0.55);
+    background: rgba(33, 151, 255, 0.7);
 }
 #dod .sim8 {
-    background: rgba(33, 151, 255, 0.45);
+    background: rgba(33, 151, 255, 0.5);
 }
 #dod .sim7 {
     background: rgba(33, 151, 255, 0.35);

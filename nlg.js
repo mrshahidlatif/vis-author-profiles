@@ -1118,9 +1118,11 @@ function generateResearchTopicsText(pdata, adata, a){
 			text += otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive);
 			$similarResearchers = similarResearchersPhraseTopics(pdata,adata, a);
 		}
+		$rtopics.html(text);
+		$rtopics.append($similarResearchers)
+	} else {
+		$rtopics.empty();
 	}
-	$rtopics.html(text);
-	$rtopics.append($similarResearchers)
 }
 function visCommunityPhraseTopics(pdata, adata, keywords, a, keyword, isActive) {
 	var pubCount = keyword.Value;
@@ -1471,16 +1473,19 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 			coauthorFreq[name]++;			
 		}
 	}
-	if (a.Keywords.length < 20) return [];
-	var keywordMap1 = createKeywordMap(a.Keywords); //getKeywords(pdata, a));
+	if (a.Conferences + a.Journals < 30) return [];
+	var keywordMap1 = createKeywordMap(a.Keywords, author_venue_keywords[a.Name]);
+	console.log(a);
+	console.log(keywordMap1);
 	var similarAuthors = [];
 	for (var i = 0; i < adata.length; i++) {
-		if (adata[i].Name === a.Name || adata[i].Keywords.length < 20 || coauthorFreq[adata[i].Name] > 2) continue;
-		//var venueKeywords = getKeywords(pdata, adata[i]);
-		var keywordMap2 = createKeywordMap(adata[i].Keywords);//, venueKeywords);
+		if (adata[i].Name === a.Name || adata[i].Conferences + adata[i].Journals < 30 || coauthorFreq[adata[i].Name] > 2) continue;
+		var keywordMap2 = createKeywordMap(adata[i].Keywords, author_venue_keywords[adata[i].Name]);
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
-		if (similarity > 0.45) {
+		if (similarity > 0.5) {
 			similarAuthors.push({Name: adata[i].Name, Value: similarity});
+			console.log(adata[i].Name);
+			console.log(keywordMap2);
 		}
 	}
 	similarAuthors.sort(function(a, b) {
@@ -1490,14 +1495,19 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 }
 function createKeywordMap(keywords, venueKeywords) {
 	var keywordMap = {};
-	if (venueKeywords) {
-		for (var i = 0; i < venueKeywords.length; i++) {
-			keywordMap[venueKeywords[i].Name] = venueKeywords[i].Value;
-		}
-	}
 	for (var i = 0; i < keywords.length; i++) {
 		var keyword = author_keywords[keywords[i]];
 		if (keyword === undefined || keyword === "unclear") {
+			continue;
+		}
+		if (!keywordMap[keyword]) {
+			keywordMap[keyword] = 0;
+		}
+		keywordMap[keyword]++;
+	}
+	for (var i = 0; i < venueKeywords.length; i++) {
+		var keyword = venueKeywords[i];
+		if (keyword === "visualization") {
 			continue;
 		}
 		if (!keywordMap[keyword]) {

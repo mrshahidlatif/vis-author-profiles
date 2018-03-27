@@ -29,12 +29,7 @@ Fabian's Feedback - Suggestions / Things to do
 
 LAYOUT 
 
--Add a 5 px margin so that the bottom line of the text is on the same height as the south-west-west/south-east-east corner of the badge
 -Change the font of “VIS Author Profiles” in the logo to the one used in the page (not sure it looks better, but the current font of the logo doesn’t fit really)
--Correction: I didn’t mean a larger space between the badges, but between the author name and the first badge only. It should be at least the size as between two badges (currently it is half the size).
--Make the badges a bit larger 
-
--Only two labels for x-axis and 1 for y (only the max value on the right)
 -Text should describe the authors within the visualization 
 ------
 TODOs
