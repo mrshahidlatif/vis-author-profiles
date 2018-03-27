@@ -20,7 +20,7 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 	var eYear = findEndYear(aObject);
 
 	var totalpubCount = (aObject.Journals+aObject.Conferences);
-	var yearsActive = eYear - sYear; 
+	var yearsActive = eYear - sYear + 1; 
 	
 	//document.getElementById("name").innerHTML = title;
 	getKeywords(pdata, aObject); 
