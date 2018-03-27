@@ -605,6 +605,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 	// console.log(a.CollaborationGroups);
 	var s="";
 	var groups = a.CollaborationGroups;
+	// console.log(groups); 
 	var info = '<span class="info" onclick="">&#9432</span>';
 	//Adding attribute "Value" for using in getTopNItems()
 	for(var i=0;i<groups.length ;i++){
@@ -1802,7 +1803,7 @@ function analyzeTimeSeries(timeseries,author){
 	// console.log(sum23); 
 	// console.log(sum33); 	
 	if(sum13/totalpubCount > 0.45){
-		result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;
+		result = " with most contributions ("+ sum13 + ") made between " + minYear + " and " + firstPointYear;
 		return result;
 	}
 	if(sum23/totalpubCount > 0.45){
