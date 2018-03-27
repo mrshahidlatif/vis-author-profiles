@@ -148,7 +148,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
         .on("click", function (d) { showIndividualPublications(pdata, allAuthorsData, d.Year, d.Name) })
         .append("svg:title")
         .text(function(d) {
-          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" publications in total. [Click to see details]")
+          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" publications in total. [Click to see details]");
         });
       //Adding bars for mutual publications
       g.selectAll(".mbar")
@@ -462,20 +462,11 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); })
-      .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5  + "px")
-             .style("top", (d3.event.pageY ) - 38 + "px");
-           })
-      .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)});
+      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, name)})
+      .append("svg:title")
+      .text(function(d){
+         return("In "+d.Year+", the author published " + d.Value +" publications in total. [Click to see details]");
+      });
 
       svg.append("g")
      .attr("transform", "translate(-25," + height + ")")
@@ -621,54 +612,36 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
        });
 
       svg.selectAll(".bar")
-      .data(data_mainAuthor)
-      .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.Year); })
-      .attr("width", x.bandwidth())
-      .attr("y", function(d) { return y(d.Value); })
-      .attr("height", function(d) { return height - y(d.Value); })
-      .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5  + "px")
-             .style("top", (d3.event.pageY ) - 38 + "px");
-           })
-       .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
-      
+        .data(data_mainAuthor)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) { return x(d.Year); })
+        .attr("width", x.bandwidth())
+        .attr("y", function (d) { return y(d.Value); })
+        .attr("height", function (d) { return height - y(d.Value); })
+        .on("click", function (d) { showIndividualPublications(pdata, adata, d.Year, a.Name) })
+        .append("svg:title")
+        .text(function (d) {
+          return ("In " + d.Year + ", the author published " + d.Value + " publications in total. [Click to see details]");
+        });
+
 
       // console.log(data2);
-       svg.selectAll(".mbar")
+      svg.selectAll(".mbar")
         .data(data2)
         .enter().append("rect")
         .attr("class", "mbar")
-        .attr("x", function(d) { return x(d.Year); })
+        .attr("x", function (d) { return x(d.Year); })
         .attr("width", x.bandwidth())
-        .attr("y", function(d) { return y(d.Value); })
-        .attr("height", function(d) { return height - y(d.Value); })
-         .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5  + "px")
-             .style("top", (d3.event.pageY ) - 38 + "px");
-           })
-       .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-        .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
+        .attr("y", function (d) { return y(d.Value); })
+        .attr("height", function (d) { return height - y(d.Value); })
+        .on("click", function (d) { showMutualPublications(pdata, adata, d.Year, a.Name, cName) })
+        .append("svg:title")
+        .text(function (d) {
+          return ("In " + d.Year + ", the author published " + d.Value + " joint publications with " +getFullNameWithoutNo(cName)+". [Click to see details]");
+        });
 
-    // add the x Axis
+      // add the x Axis
       svg.append("g")
          .attr("transform", "translate(-25," + height + ")")
          .append("text")
