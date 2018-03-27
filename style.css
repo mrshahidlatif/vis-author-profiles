@@ -258,10 +258,29 @@ p {
     font: 10px sans-serif;
 }
 
+.author_line {
+    stroke: #AA0000;
+    stroke-width: 1px;
+}
+
+.author_line_tooltip {
+    stroke: transparent;
+    stroke-width: 5px;
+}
+
+.author_line_tooltip:hover {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.x-line {
+    stroke: rgba(0, 0, 0, 0.5);
+    stroke-width: 1px;
+}
+
 .axis path,
 .axis line {
     fill: none;
-    stroke: #000;
+    stroke: black
     shape-rendering: crispEdges;
 }
 

@@ -169,18 +169,25 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       g.append("g")
        .attr("transform", "translate(0, "+(j+1)*height/N+")")
        .append("line")
-       .attr("x2", width)
-       .attr("stroke", "#6b6b6b")
-       .attr("stroke-width", "0.3px");
+       .attr("class", "x-line")
+       .attr("x2", width);
 
   }
     //Draw Vertical line for showing the starting year of main author 
-    g.append("g")
-         .attr("transform", "translate("+x(main_author_start_year)+", 0)")
+    var gAuthorLine = g.append("g")
+         .attr("transform", "translate("+(x(main_author_start_year)-1)+", 0)");
+    gAuthorLine
          .append("line")
          .attr("y2", height)
-         .attr("stroke", "#ff2b2b")
-         .attr("stroke-width", "0.5px");
+         .attr("class", "author_line");
+    gAuthorLine    
+         .append("line")
+         .attr("y2", height)
+         .attr("class", "author_line_tooltip")
+         .append("svg:title")
+         .text(function(d){
+            return "This line marks the year "+main_author_start_year+", when "+getLastName(aName)+" started publishing."
+         });
 
     g.selectAll(".moreBtn")
           .data(adata)
