@@ -44,6 +44,11 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
         maxCount = temp4;
     }
  
+  //if main author is the most senior one 
+  if (main_author_start_year < minYear ){
+    minYear = main_author_start_year;
+  }
+
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
   var h = indPub.length*50 + 30; //adding thirty for the margins 
@@ -51,6 +56,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   if (w > 550) {w = 550;}
   if (w < 250) {w=250;}
   if (h<60){h=80;}
+
 
   
   var svg = d3.select("#" + canvas)
