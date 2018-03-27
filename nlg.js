@@ -64,7 +64,7 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		if(hasSupversied && !isSupSupervisor){
 			title += '<img class="badge" align="top" src="badges/supervisor.svg">'; 
 		}
-		console.log(isSupSupervisor);
+		// console.log(isSupSupervisor);
 		if(isSupSupervisor){
 			title += '<img class="badge" align="top" src="badges/sup_supervisor.svg">'; 
 		}
@@ -1384,6 +1384,46 @@ function getKeywords(pdata, a){
 	return keywordList;
 }
 
+// ONLY TO PREPROCESS 
+// CREATES AUTHOR : LIST OF VENUE KEYWORDS MAPPING
+// function getKeywordsForAllAuthors(pdata, adata){
+	
+// 	var keywords = {};
+
+// 	var author_venuekeywords_Map = {}; 
+// 	for (var k=0;k<adata.length;k++){
+// 		var pubs = getPublications(pdata, adata[k].Name);
+// 		var keywordList= [];
+// 		for (var i = 0; i < pubs.length; i++) {
+// 			var pubKeywords = getPublicationKeywords(pubs[i]);
+// 			 // console.log(pubKeywords);
+
+// 		// 	for (var j = 0; j < pubKeywords.length; j++) {
+// 		// 		var keyword = pubKeywords[j];
+// 		// 		if (!keywords[keyword]) {
+// 		// 			keywords[keyword] = { Name: keyword, Value: 0, MaxYear: 0 };
+// 		// 		}
+// 		// 		keywords[keyword].Value++;
+// 		// 		keywords[keyword].MaxYear = Math.max(keywords[keyword].MaxYear, pubs[i].Year);
+// 		// 	}
+// 		// }
+// 		// var keywordList = Object.keys(keywords).map(function (keyword) {
+// 		// 	return {Name: keyword, Value: keywords[keyword].Value, MaxYear: keywords[keyword].MaxYear};
+// 		// });
+// 		// keywordList.sort(function (a, b) {
+// 		// 	return +(b.Value) - +(a.Value);
+// 		// });
+// 		keywordList.push.apply(keywordList, pubKeywords); 
+	
+// 		}
+// 		author_venuekeywords_Map[adata[k].Name] = keywordList; 
+// 		// console.log(keywordList);
+// 	}
+// 	console.log(author_venuekeywords_Map); 
+// 	// return keywordList;
+// }
+
+
 function getPublicationKeywords(publication) {
 	var pubKeywords = [];
 	if (venue_keywords[publication.Venue]) {
@@ -1752,7 +1792,9 @@ function analyzeTimeSeries(timeseries,author){
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
 	
-	console.log(totalpubCount); 
+	// console.log(sum13); 
+	// console.log(sum23); 
+	// console.log(sum33); 	
 	if(sum13/totalpubCount > 0.45){
 		result = " with most contributions ("+ sum13 + ") made recently between " + minYear + " and " + firstPointYear;
 		return result;
