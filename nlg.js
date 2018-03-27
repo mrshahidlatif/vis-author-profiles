@@ -168,7 +168,7 @@ function generateSummary(pdata, adata, a, p)
 	}
 	else if (eYear < 2013){
 
-		bio = getLastName(a.Name) + " published " + makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + "research papers", a.Name) + " "
+		bio = getLastName(a.Name) + " published " + makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " between " +  sYear + " and " + eYear + trend + "," + " including "
 			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
