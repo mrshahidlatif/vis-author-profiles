@@ -1,10 +1,13 @@
 var hasSupversied = false; 
+var isSupSupervisor = false; 
 var listOfSparklines = []; 
 var alreadyListedTopics = []; 
 var MAX_SUPERVISEES = 5; 
+
 function generateProfileText(pdata, adata, aObject, topCoAuthors) {
  	
 	hasSupversied = false; 
+	isSupSupervisor=false; 
 	var alreadyListedTopics = []; 
 	var bio = "";
 	var collab="";
@@ -58,9 +61,14 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		else if(totalpubCount>=10 && totalpubCount <50){
 			title += '<img class="badge" align="top" src="badges/article_bronze.svg">'; 
 		}
-		if(hasSupversied){
-			title += '<img class="badge" align="top" src="badges/supervisor_badge.svg">'; 
+		if(hasSupversied && !isSupSupervisor){
+			title += '<img class="badge" align="top" src="badges/supervisor.svg">'; 
 		}
+		console.log(isSupSupervisor);
+		if(isSupSupervisor){
+			title += '<img class="badge" align="top" src="badges/sup_supervisor.svg">'; 
+		}
+
 		if (yearsActive >= 20){
 			title += '<img class="badge" align="top" src="badges/active_gold.svg">'; 
 		}
@@ -777,6 +785,7 @@ function supSupervisorPhrase(pdata, adata, author, supervisees){
 	// var names = stringifyListWithAuthorLinks(convertToStringArray(supSupervisees));
 
 	if (supSupervisees.length > 0){
+		isSupSupervisor = true;
 		s+= " " + getLastNamePronoun(author.Name) ;
 		s+= (supSupervisees.length == 1) ? " supervisee, " : " supvervisees, " ; 
 		s+= stringifyListWithAuthorLinks(convertToStringArray(supSupervisees)) ;
