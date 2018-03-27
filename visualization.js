@@ -743,3 +743,155 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
     loadMutualPublications(pdata, adata, a.Name, cName); 
 
 }
+
+function generateBarChart(pdata, adata, authorName, data, canvas){
+
+ // console.log(ymax); 
+
+ var a = getAuthorObjectByName(adata, authorName);
+ aName = a.Name;
+
+ var ymax = d3.max(a.AllPublicationsPerYear, function(d){return d.Value});
+ 
+ data.sort(function(a, b) {
+    return +a.Year - +b.Year;
+  });
+
+ var h=90;
+ var w=360;
+ // add in missing years 
+ var data2 = [];
+ //var range = +data[data.length-1].Year - +data[0].Year;
+  var startYear = findStartYear(a);
+  var endYear = findEndYear(a);
+ var range = endYear - startYear; 
+ //console.log(range);
+ for (var i=0;i<=range;i++){
+    //var year = +data[0].Year + i;
+    var year = +startYear + i;
+    var count = 0;
+    for (j=0;j<data.length;j++){
+      if(year == data[j].Year){
+        count = data[j].Value;
+      }
+    }
+    var obj = new Object()
+    obj.Year = year;
+    obj.Value = count;
+    data2.push(obj);
+ }
+  // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 40, bottom: 10, left: 40},
+      width =  w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
+  
+
+
+  // set the ranges
+  var x = d3.scaleBand()
+            .range([0, width])
+            .padding(0.3);
+  var y = d3.scaleLinear()
+            .range([height, 0]);
+            
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+
+      var svg = d3.select("#" + canvas)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("background-color", '#f2f2f2')
+      .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")");
+      
+    //tooltip 
+    var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+      
+  
+  svg.selectAll("*.msbar").remove();
+  // Scale the range of the data in the domains
+  x.domain(data2.map(function(d) { return d.Year; }));
+  //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
+  y.domain([0, ymax]);
+
+
+   var data_mainAuthor = a.AllPublicationsPerYear; 
+   data_mainAuthor.sort(function(a, b) {
+      return +a.Year - +b.Year;
+   });
+
+      svg.selectAll(".bar")
+      .data(data_mainAuthor)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.Year); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.Value); })
+      .attr("height", function(d) { return height - y(d.Value); })
+      .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5  + "px")
+             .style("top", (d3.event.pageY ) - 38 + "px");
+           })
+       .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
+      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
+
+      // console.log(data2);
+       svg.selectAll(".tbar")
+        .data(data2)
+        .enter().append("rect")
+        .attr("class", "tbar")
+        .attr("x", function(d) { return x(d.Year); })
+        .attr("width", x.bandwidth())
+        .attr("y", function(d) { return y(d.Value); })
+        .attr("height", function(d) { return height - y(d.Value); })
+         .on("mouseover", function(d) {
+           div.transition()
+             .duration(200)
+             .style("opacity", .9);
+           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
+             .style("left", (d3.event.pageX) + 5  + "px")
+             .style("top", (d3.event.pageY ) - 38 + "px");
+           })
+       .on("mouseout", function(d) {
+           div.transition()
+             .duration(500)
+             .style("opacity", 0);
+           })
+        .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
+
+    // add the x Axis
+      svg.append("g")
+         .attr("transform", "translate(-25," + height + ")")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text(startYear);
+
+         svg.append("g")
+         .attr("transform", "translate("+width+"," + height + ")")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text(endYear);  
+
+
+         svg.append("g")
+         .attr("transform", "translate("+width+",3)")
+         .append("text")
+         .attr("class", "xlabelBar")
+         .attr("y2", height)
+         .text("—" + ymax);  
+         
+}
