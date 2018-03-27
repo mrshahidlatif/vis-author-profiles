@@ -10,7 +10,7 @@ var titleKeywords = {
     "node-link": "information visualization",
     "treemap" : "information visualization",
     "flow visualization": "scientific visualization",
-    "visual analytics": "visual analytics",
+    "visual analytic": "visual analytics",
     "raycasting": "computer graphics",
     "rendering": "computer graphics",
     "human-computer": "human-computer interaction",
@@ -20,4 +20,9 @@ var titleKeywords = {
     "user interface": "human-computer interaction",
     "biomedical": "bioinformatics",
     "health record": "bioinformatics",
+    "medication": "bioinformatics",
+    "cancer": "bioinformatics",
+    "diabetic": "bioinformatics",
+    "map navigation": "geoscience",
+    "city model": "geoscience",
 };
