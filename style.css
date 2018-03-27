@@ -222,16 +222,18 @@ p {
 /*Visualization styles */
 .bar {
   fill: gray;
+  cursor: pointer;
 }
 
 .hbar{
     fill:black;
-    opacity: 0.1 
+    opacity: 0.1; 
 }
 /*Bars for showing mutual publications*/
 .mbar{
     fill:#AA0000;
-    opacity: 1
+    opacity: 1;
+    cursor: pointer;
 }
 /*Bar for showing publications on topic*/
 .tbar{

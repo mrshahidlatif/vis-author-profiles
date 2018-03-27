@@ -1476,8 +1476,6 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 	}
 	if (a.Conferences + a.Journals < 30) return [];
 	var keywordMap1 = createKeywordMap(a.Keywords, author_venue_keywords[a.Name]);
-	console.log(a);
-	console.log(keywordMap1);
 	var similarAuthors = [];
 	for (var i = 0; i < adata.length; i++) {
 		if (adata[i].Name === a.Name || adata[i].Conferences + adata[i].Journals < 30 || coauthorFreq[adata[i].Name] > 2) continue;
@@ -1485,8 +1483,6 @@ function findAuthorsWithSimilarResearchTopics(pdata, adata, a) {
 		var similarity = computeSimilarityOfKeywords(keywordMap1, keywordMap2);
 		if (similarity > 0.5) {
 			similarAuthors.push({Name: adata[i].Name, Value: similarity});
-			console.log(adata[i].Name);
-			console.log(keywordMap2);
 		}
 	}
 	similarAuthors.sort(function(a, b) {
