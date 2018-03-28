@@ -1551,10 +1551,7 @@ function makeMeLive_LoadGroupPublications(pdata, adata, text, author, group){
 	return  '<span id="linkedAuthorName" onclick="loadGroupPublications(pdata, adata, \''+author+'\', \''+group+'\');">' + text + "</span>";
 }
 function makeMeLive_LoadData(pdata, adata, text, a, c){
-	//text : hyperlink 
-	//a : main author 
-	//c: coauthor 
-	//y : year
+
 	return  '<span id="linkedAuthorName" onclick="loadMutualPublications(pdata, adata, \''+a+'\', \''+c+'\')">' + text + "</span>";
 }
 
@@ -1623,10 +1620,16 @@ function loadMutualPublications(pdata, adata, a, c){
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + mutualPublications.length + ") : " + getLastName(a) + " and " +
    getLastName(c) + "</span>" + "<br>" + "<hr>";
   
+  var dataForBarChart = [];
   for (var i=0; i<mutualPublications.length;i++){
     StringifyPublication(pdata, adata, mutualPublications[i]);
+       dataForBarChart.push(mutualPublications[i].Year); 
   }
-  //return mutualPublications; 
+  //return mutualPublications;  
+
+  dataForBarChart = countFrequency(dataForBarChart); 
+  generateBarChart(pdata, adata, a, dataForBarChart, "figure", "msbar"); 
+  console.log(dataForBarChart); 
 
 }
 
@@ -1660,7 +1663,7 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
 	   
   }
   dataForBarChart = countFrequency(dataForBarChart); 
-  generateBarChart(pdata, adata, a, dataForBarChart, "figure"); 
+  generateBarChart(pdata, adata, a, dataForBarChart, "figure", "tbar"); 
   // console.log(dataForBarChart); 
 
 }

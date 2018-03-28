@@ -693,7 +693,7 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
 
 }
 
-function generateBarChart(pdata, adata, authorName, data, canvas){
+function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars){
 
  // console.log(ymax); 
 
@@ -761,7 +761,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas){
       .style("opacity", 0);
       
   
-  svg.selectAll("*.msbar").remove();
+  svg.selectAll("*.tbar").remove();
   // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
   //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
@@ -797,10 +797,10 @@ function generateBarChart(pdata, adata, authorName, data, canvas){
       .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
 
       // console.log(data2);
-       svg.selectAll(".tbar")
+       svg.selectAll("." +classOfBars)
         .data(data2)
         .enter().append("rect")
-        .attr("class", "tbar")
+        .attr("class", classOfBars)
         .attr("x", function(d) { return x(d.Year); })
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.Value); })
