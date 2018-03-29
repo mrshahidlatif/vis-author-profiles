@@ -14,6 +14,9 @@
   <script type="text/javascript"  src="title_keywords.js"></script>
   <script type="text/javascript"  src="dictionary.js"></script>
   <script type="text/javascript"  src="author_autocomplete.js"></script>
+  <script type="text/javascript"  src="adata.js"></script>
+  <script type="text/javascript"  src="pdata.js"></script>
+  <!-- <script type="text/javascript"  src="vis_authors.js"></script> -->
   
   <title id="pageTitle">VAP</title>
 </head>
@@ -67,11 +70,12 @@
   <script>
 
      autocomplete(document.getElementById("myInput"), authors_list);
-     loadJSON("pubdata.json", function(response) {
-        pdata = JSON.parse(response);
+     // loadJSON("pubdata.json", function(response) {
+     //    pdata = JSON.parse(response);
 
-     loadJSON("authordata.json", function(response) {
-        adata = JSON.parse(response);
+     // loadJSON("authordata.json", function(response) {
+     //    adata = JSON.parse(response);
+       
         // console.log(pdata);
         // console.log(adata); 
 
@@ -79,7 +83,7 @@
           var l=3;
           var u=8;
 
-               //Reading authorname from url and loading the profile
+         //Reading authorname from url and loading the profile
 
          var urlParam = function(name, w){
           w = w || window;
@@ -119,8 +123,8 @@
           document.getElementById("myInput").value = "";
           process(pdata, adata, name,"CollabChart1",l,u); 
         }
-      });
-  });
+  //     });
+  // });
   </script>
 </body>
   <script src="lib/jquery-3.3.1.js"></script>
