@@ -381,3 +381,7 @@ input[type=submit]{
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
+
+.no-wrap {
+    white-space: nowrap;
+}
