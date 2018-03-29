@@ -154,13 +154,17 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
 
         if (main_author_start_year != minYear){
           // console.log(main_author_start_year);
-           g.selectAll(".yearSpan")
+           g.selectAll(".labelStartYear")
             .data(adata)
             .enter().append("text")
-            .attr("class", "xlabelBar")
+            .attr("class", "labelStartYear")
             .attr("x", x(main_author_start_year)-13)
             .attr("y", -5)
-            .text(main_author_start_year); 
+            .text(main_author_start_year)
+            .append("svg:title")
+            .text(function(d){
+                return getLastName(aName)+" started publishing in "+main_author_start_year+"."
+            });
         }
       }
       //adding bars for individual publications 

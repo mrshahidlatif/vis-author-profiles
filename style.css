@@ -257,6 +257,15 @@ p {
 .axis {
     font: 10px sans-serif;
 }
+.labelStartYear{
+     fill:black;
+     font-size:14px;
+
+}
+.labelStartYear:hover{
+    cursor:pointer;
+    text-decoration:underline;
+}
 
 .author_line {
     stroke: #AA0000;
