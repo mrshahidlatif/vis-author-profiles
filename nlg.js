@@ -1851,15 +1851,15 @@ function analyzeTimeSeries(timeseries,author){
 	// console.log(sum23); 
 	// console.log(sum33); 	
 	if(sum13/totalpubCount > 0.60){
-		result = " with most contributions ("+ sum13 + ") made between " + minYear + " and " + firstPointYear;
+		result = ", where most contributions appeared between " + minYear + " and " + firstPointYear + " ("+ sum13 + " publications)";
 		return result;
 	}
 	if(sum23/totalpubCount > 0.60){
-		result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;
+		result = ", where most contributions appeared between " +firstPointYear + " and " + secondPointYear + " ("+ sum23 + " publications)";
 		return result; 	
 	}
 	if(sum33/totalpubCount > 0.60){
-		result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;
+		result = ", where most contributions appeared recently since "+ secondPointYear + " and " + maxYear + " ("+ sum33 + " publications)";
 		return result; 
 	}
 	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
