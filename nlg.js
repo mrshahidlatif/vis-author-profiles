@@ -119,8 +119,8 @@ function generateSummary(pdata, adata, a, p)
 	var eYear = d3.max(a.AllPublicationsPerYear, function(d){return d.Year;});
 
 
-	if (eYear >= 2013) {
-		if (a.Journals+a.Conferences >= 10 && (a.Journals+a.Conferences) < 100 && eYear-sYear >= 5 && eYear >=2015 ){
+	if (eYear >= 2015) {
+		if (a.Journals+a.Conferences >= 10 && (a.Journals+a.Conferences) < 100 && eYear-sYear >= 5 ){
 			bio = getFullNameWithoutNo(a.Name) + " is" ;
 			if (eYear-sYear >= 20) {
 				bio += " a longtime research contributor ";
@@ -130,8 +130,9 @@ function generateSummary(pdata, adata, a, p)
 			}
 			bio += "since " + sYear + " and has "+ "published " + 
 			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-			+ '<span class="no-wrap"><svg width="70" height="20" id="sparklineAll"></svg>' + trend + ",</span> including " +
-			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<span class="no-wrap"><svg width="70" height="20" id="sparklineAll"></svg>,</span> ';
+			bio += trend?(trend+"The publications include "): "including ";
+			bio += makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
@@ -139,7 +140,7 @@ function generateSummary(pdata, adata, a, p)
 			+ ' <span class="no-wrap"><svg width="70" height="20" id="sparklineConfs"></svg>' 
 			+ ".</span>";
 		}
-		else if (a.Journals + a.Conferences >= 100 && eYear - sYear >= 5 && eYear >= 2015) {
+		else if (a.Journals + a.Conferences >= 100 && eYear - sYear >= 5 ) {
 			var nPub = a.Journals + a.Conferences
 			var nPubRoundedDownToFifties = Math.floor(nPub / 50.0) * 50;
 			bio = getFullNameWithoutNo(a.Name) + " is" ;
@@ -153,7 +154,9 @@ function generateSummary(pdata, adata, a, p)
 			bio += (nPub === nPubRoundedDownToFifties) ? "" : "more than "
 			bio += makeMeLive_LoadAllIndividualPublications(pdata, adata, nPubRoundedDownToFifties + " publications", a.Name) + " "
 				+ '<svg width="70" height="20" id="sparklineAll"></svg>'
-				+ " since " + sYear + trend + ". " + getLastNamePronoun(a.Name) + " published work includes "
+				+ " since " + sYear;
+			bio += trend? ", " + trend: ". ";
+			bio += getLastNamePronoun(a.Name) + " published work includes "
 				+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 				+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and "
 				+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " "
@@ -163,7 +166,7 @@ function generateSummary(pdata, adata, a, p)
 		else {
 			bio = getFullNameWithoutNo(a.Name) + " has published " + 
 			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers ", a.Name)
-			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + trend + " since " + sYear + ", including " +
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " since " + sYear + ", including " +
 			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
@@ -173,11 +176,11 @@ function generateSummary(pdata, adata, a, p)
 			+ ".</span>";
 		}
 	}
-	else if (eYear < 2013){
-
+	else {
 		bio = getLastName(a.Name) + " published " + makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " between " +  sYear + " and " + eYear + trend + "," + " including "
-			+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
+			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + " between " +  sYear + " and " + eYear +", ";	
+		bio += trend?(trend+"The publications include "): "including ";
+		bio	+= makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
@@ -190,13 +193,13 @@ function generateSummary(pdata, adata, a, p)
 		var firstAuthorJournals = getPublicationsAsFirstAuthor(pdata,a.Name,"J");
 		var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,a.Name,"C");
 
-		bio += " Out of " + (a.Journals+a.Conferences) + " publications, the author published " + sumAllValues(firstAuthorPubs) +
+		bio += " Out of the total " + (a.Journals+a.Conferences) + " publications, the author published " + sumAllValues(firstAuthorPubs) +
 		" articles as first author " + '<span class="no-wrap"><svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + ".</span>";
 	}
 
 	if (a.PhDThesisTitle != ""){
-		bio += " The author completed PhD at " + a.PhDSchool + " and the PhD thesis titled \"" + a.PhDThesisTitle + 
-		"\" was published in " + a.PhDYear+".";
+		bio += " The author received a PhD degree from " + a.PhDSchool + " with the dissertation published in "+ a.PhDYear +" and titled &ldquo;" + a.PhDThesisTitle.split(".")[0] + 
+		"&rdquo;.";
 	}
 
 	return bio;
@@ -255,7 +258,7 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 	}
 	else if (pub.length > 1 && eYear >= 2013 ){ 
 		if ( a.Journals > 0 && a.Conferences > 0) {
-			bio += getFullNameWithoutNo(a.Name) + " has published " + no2word[pub.length] + " research papers so far, including " + no2word[a.Journals] ;
+			bio += getFullNameWithoutNo(a.Name) + " has published " + no2word[pub.length] + " research papers since " + sYear + ", including " + no2word[a.Journals] ;
 			if (a.Journals > 1){
 			  bio += " journal articles and ";
 			}
@@ -270,7 +273,7 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 			}
 		}
 		else {
-			bio += getFullNameWithoutNo(a.Name) + " has published " + no2word[pub.length] + " research papers so far."; 
+			bio += getFullNameWithoutNo(a.Name) + " has published " + no2word[pub.length] + " research papers since " + sYear +"."; 
 		}
 		//Showing publication on the sidebar 
 		document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pub.length + ") : " + a.Name  
@@ -1820,8 +1823,8 @@ function analyzeTimeSeries(timeseries,author){
 	// console.log(max);
 	// console.log(secondMax); 
 	//Looking for a peak in data 
-	if (max >= 2*secondMax){ 
-		result = " with a clear peak at " + timeseries.find(function(d){return d.Value == max}).Year + " (" + max + " publications )"; 
+	if (max > 2*secondMax && max > 3){ 
+		result = "where a clear peak is in " + timeseries.find(function(d){return d.Value == max}).Year + " (" + max + " publications ). "; 
 		return result; 
 	}
 
@@ -1829,14 +1832,14 @@ function analyzeTimeSeries(timeseries,author){
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
 	// console.log(midYear); 
 
-	if(computeSteadyRate(timeseries, minYear, midYear) > 0.80) { 
-		result = " with the majority of the publications in the first half";
-		return result; 
-	}
-	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.80) {
-		 result = " with the majority of the publications in the second half";
-		 return result; 
-	}
+	// if(computeSteadyRate(timeseries, minYear, midYear) > 0.80) { 
+	// 	result = " with the majority of the publications in the first half";
+	// 	return result; 
+	// }
+	// if(computeSteadyRate(timeseries, midYear, maxYear) > 0.80) {
+	// 	 result = " with the majority of the publications in the second half";
+	// 	 return result; 
+	// }
 
 	//Dividing interval in three parts
 	var firstPointYear = Math.round((+maxYear - +minYear) / 3 + +minYear);
@@ -1852,15 +1855,21 @@ function analyzeTimeSeries(timeseries,author){
 	// console.log(sum23); 
 	// console.log(sum33); 	
 	if(sum13/totalpubCount > 0.60){
-		result = ", where most contributions appeared between " + minYear + " and " + firstPointYear + " ("+ sum13 + " publications)";
+		result = "where most contributions appeared until " + firstPointYear + " ("+ sum13 + " publications). ";
 		return result;
 	}
 	if(sum23/totalpubCount > 0.60){
-		result = ", where most contributions appeared between " +firstPointYear + " and " + secondPointYear + " ("+ sum23 + " publications)";
+		result = "where most contributions appeared between " +firstPointYear + " and " + secondPointYear + " ("+ sum23 + " publications). ";
 		return result; 	
 	}
 	if(sum33/totalpubCount > 0.60){
-		result = ", where most contributions appeared recently since "+ secondPointYear + " and " + maxYear + " ("+ sum33 + " publications)";
+		if (maxYear >= 2017) {
+			// Michael Burch
+			result = "where most contributions appeared recently since "+ secondPointYear + " ("+ sum33 + " publications). ";
+		} else {
+			// Wolfgang Straßer
+			result = "where most contributions appeared between "+ secondPointYear + " and " + maxYear +" ("+ sum33 + " publications). ";
+		}
 		return result; 
 	}
 	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
