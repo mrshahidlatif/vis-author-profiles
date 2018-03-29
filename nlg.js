@@ -555,7 +555,7 @@ function superviseePhrase_InAdditionTo1OR2(pdata, adata, a,c1,c2,supervisees){
 		}
 	}
 	else {
-		s += "Supervisees" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + "of " + getLastName(a.Name) + 
+		s += "Supervisees" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " of " + getLastName(a.Name) + 
 		" with considerable amount of publications are " ;
 		s+=stringifyListWithSparklines(supervisees)+ ".";	
 	}
@@ -593,12 +593,12 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 		}
 		if (supervisees.length > 2){
 			s +=  ", further supervisees" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + 
-			"of " + getLastName(a.Name) + " with considerable amount of publications are " ;
+			" of " + getLastName(a.Name) + " with considerable amount of publications are " ;
 			s+=stringifyListWithSparklines(supervisees)+ ".";
 		}
 		else if (supervisees.length == 1){
 			s +=  ", another supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + 
-			"of " + getLastName(a.Name) + " with considerable amount of publications is " ;
+			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;
 			s += stringifyListWithSparklines(supervisees)+ ".";
 		}
 	}
