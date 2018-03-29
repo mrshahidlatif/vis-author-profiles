@@ -121,6 +121,8 @@
        // console.log(author_name_param);
         
         if(author_name_param != null){
+            document.getElementById("bio").innerHTML = "";
+            document.getElementById("rtopics").innerHTML = "";
             process(pdata, adata, author_name_param,"CollabChart1",l,u); 
         }
 
