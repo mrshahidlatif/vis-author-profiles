@@ -326,7 +326,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' ;
 		s+= (endOfCollaborationYear <=2013) ? " is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' +
-		" and " + makeMeLive_LastName(c.Name) + " supervised in the early years. " : 
+		" and " + makeMeLive_LastName(c.Name) + " acted as a supervisor in the early years. " : 
 		 " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)+ " " +
 		 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
 		var obj = new Object();
@@ -480,7 +480,7 @@ function stringifyListWithSparklines(list) {
 	switch (list.length) {
 		case 0: return "";
 		case 1: 
-		console.log(list[0]); 
+		// console.log(list[0]); 
 			var ID = "sparkline_coll"+0;
 			s = makeMeLive_FullName(list[0].Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>';
 			var obj = new Object();
@@ -547,9 +547,11 @@ function superviseePhrase_InAdditionTo1(pdata, adata, a,c,supervisees){
 			s+=stringifyListWithSparklines(supervisees)+ "."; 
 		}
 		else if (supervisees.length == 1){
+			// console.log(supervisees[0]);
 			var ID = "sparkline_coll"+0;
-			s += "Supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + 
-			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;  
+			s += "Supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " of " + getLastName(a.Name) ;  
+			s += (supervisees[0].Count > 5) ? " with considerable amount of publications is " : " is ";
+			
 			s+=stringifyListWithSparklines(supervisees) + "."; 
 		}	
 	
@@ -626,7 +628,8 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 		}
 		else if (supervisees.length == 1){
 			s +=  ", another supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + 
-			" of " + getLastName(a.Name) + " with considerable amount of publications is " ;
+			" of " + getLastName(a.Name) ;
+			s+= (supervisees[0].Count>5) ? " with considerable amount of publications is " : " is ";
 			s += stringifyListWithSparklines(supervisees)+ ".";
 		}
 	}
