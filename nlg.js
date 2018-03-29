@@ -1091,7 +1091,7 @@ function findSupervisee(pubData, adata, author){
 		if(aObject != null){
 			var AuthorStartYear = Math.min(getMin(aObject.JournalsPerYear), getMin(aObject.ConfsPerYear));
 			//console.log(AuthorStartYear);
-			if(SupervisorStartYear + 5 < AuthorStartYear ){
+			if(SupervisorStartYear + 5 <= AuthorStartYear ){
 				var mutualPubs = getAllMutualPublicationsForSuperVisee(pubs,aObject.Name,author.Name); // Publications of supervisee as first authors (deciding publications)
 				var allMutualPubs = getAllMutualPublications(pdata, aObject.Name, author.Name); // All mutual publications of supervisee with supervisor (for sparkline)
 				//console.log(mutualPubs);
