@@ -432,13 +432,13 @@ function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervis
 			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
 					" between " + startYear1 + " and " + lastYear1 ;
 			if (DoesExistInList(supervisees, c.Name)){
-					s += ", and " + getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
-					"in this collaboration"
+					s += ", and " + getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' ;
+					
 			}
 			if (DoesExistInSupervisors(supervisors, c.Name)){
 					s += ", and " +  makeMeLive_LastName(c.Name) + 
-					" acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
-					 "in this collaboration"
+					" acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' ;
+				
 			}
 		}
 		s += ". ";
