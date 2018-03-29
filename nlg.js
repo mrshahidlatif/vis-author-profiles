@@ -885,6 +885,17 @@ function getLastNamePronoun(fullName){
 }
 function getLastName(fullName){
 	if (fullName != undefined){ 
+		var name = fullName.split(" ");
+		if(isNaN(name[name.length-1])){
+			return name[name.length-1];
+		}
+		else {
+			return name[name.length-2];
+		}
+	}
+}
+function getLastNameForVis(fullName){
+	if (fullName != undefined){ 
 		if(authors_list.indexOf(fullName) != -1){
 			var name = fullName.split(" ");
 			if(isNaN(name[name.length-1])){
