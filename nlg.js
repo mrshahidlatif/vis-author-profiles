@@ -422,14 +422,15 @@ function thirdCoauthorPhrase(pdata, adata, a, c, supervisors, supervisees){
 	var startYear1 = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
 	var lastYear1 = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
 		s += "Together with " +  makeMeLive_FullName(c.Name)  + 
-		" " + '<svg width="70" height="20" id="sparkline_third_coll"></svg>' + ", the author published ";
+		" " + '<svg width="70" height="20" id="sparkline_third_coll"></svg>' ;
 		var obj = new Object();
 		obj.sparklineID = "sparkline_third_coll";
 		obj.data = c.MutualPubPerYear; 
 		obj.coauthor = c.Name; 
 		listOfSparklines.push(obj); 
+
 		if (lastYear1 -  startYear1 > 15 && lastYear1>2015){
-			s += ", a long-lasting and still ongoing collaboration with "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name)+
+			s += ", a long-lasting and still ongoing collaboration produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name)+
 					" since " + startYear1;
 			if (DoesExistInList(supervisees, c.Name)){
 						s += " and " + getLastName(a.Name) + " is acting as a supervisor. "
@@ -438,9 +439,12 @@ function thirdCoauthorPhrase(pdata, adata, a, c, supervisors, supervisees){
 						s += " and " +  makeMeLive_LastName(c.Name) + 
 						" is acting as a supervisor. "
 			}
+			if (!DoesExistInList(supervisees, c.Name) && !DoesExistInSupervisors(supervisors, c.Name)){
+				s+= "."
+			}
 		}
 		else {
-			s += makeMeLive_LoadData(pdata, adata, c.MutualPublications + " research papers", a.Name, c.Name) + " since " + startYear1 + ". "; 
+			s += + ", the author published " + makeMeLive_LoadData(pdata, adata, c.MutualPublications + " research papers", a.Name, c.Name) + " since " + startYear1 + ". "; 
 		}
 		return s;
 
