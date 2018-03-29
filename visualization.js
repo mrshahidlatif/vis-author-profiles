@@ -127,13 +127,24 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           })
           .append("svg:title")
           .text(function (d) {
-            var jointPubsStartYear = d.MutualPubPerYear[0].Year;
-            var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
-            var s = getFullNameWithoutNo(d.Name) + " has published ";
-            s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
-            s += " (marked in red) with " + getFullNameWithoutNo(aName);
-            s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
-            return s + ". [Click to see "+getLastName(d.Name)+"'s profile]";
+            if (authors_list.indexOf(d.Name) != -1){ //VIS authors 
+                var jointPubsStartYear = d.MutualPubPerYear[0].Year;
+                var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
+                var s = getFullNameWithoutNo(d.Name) + " has published ";
+                s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
+                s += " (marked in red) with " + getFullNameWithoutNo(aName);
+                s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
+                return s + ". [Click to see "+getLastName(d.Name)+"'s profile]";
+            }
+            else { //Non-VIS authors 
+               var jointPubsStartYear = d.MutualPubPerYear[0].Year;
+                var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
+                var s = getFullNameWithoutNo(d.Name) + " has published ";
+                s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
+                s += " (marked in red) with " + getFullNameWithoutNo(aName);
+                s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
+                return s + ". Information about "+getFullNameWithoutNoWithoutAsterisk(d.Name)+" may not be complete!";
+            }
           });
 
          g.selectAll(".yearSpan")

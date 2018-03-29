@@ -92,7 +92,7 @@ function process(pdata, adata, name,container, minN,maxN) {
       }
     
       else {
-        document.getElementById("name").innerHTML = '<span style="color:red">' +  "Author's (" + name + ") profile page not available!";
+        document.getElementById("name").innerHTML = '<span style="color:red">' +  "Profile page for " + getFullNameWithoutNoWithoutAsterisk(name) + " not available!";
       }
 }
 function getAllPublicationYears(pdata, authorName){
@@ -267,7 +267,7 @@ function compressArray(original, name) {
       return o.Name === name;
     },
     true);
-  
+
   return compressed;
 }
 

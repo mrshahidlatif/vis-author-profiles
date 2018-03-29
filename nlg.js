@@ -977,6 +977,21 @@ function getFullNameWithoutNo(fullName){
 	}
 	
 }
+function getFullNameWithoutNoWithoutAsterisk(fullName){
+	var name = fullName.split(" ");
+	var no = "";
+		if(!isNaN(name[name.length-1])){
+			no = name[name.length-1];
+			name = name.filter(function(item) { 
+		    return item !== no
+			})
+			name = name.join(" ");
+			return name;  
+		}
+		else {
+			return fullName; 
+		}
+}
 
 function isFirstAuthor(p, a){
 	var tempAuthors = []; 
