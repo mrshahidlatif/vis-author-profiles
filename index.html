@@ -101,6 +101,22 @@
               search(pdata, adata);
           }); 
         
+        //Reading authorname from url and loading the profile
+
+         var urlParam = function(name, w){
+          w = w || window;
+          var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
+              val = w.location.search.match(rx);
+          return !val ? '':val[1];
+        }
+
+        var author_name_param = unescape(urlParam('name'));
+        // console.log(author_name_param);
+        
+        if(author_name_param != null){
+            process(pdata, adata, author_name_param,"CollabChart1",l,u); 
+        }
+
         function search(pdata, adata){
           // name = document.getElementById("search").value;
           name = document.getElementById("myInput").value;
