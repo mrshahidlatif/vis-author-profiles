@@ -895,6 +895,7 @@ function getLastName(fullName){
 	}
 }
 function getLastNameForVis(fullName){
+	//it marks non-vis authors with *
 	if (fullName != undefined){ 
 		if(authors_list.indexOf(fullName) != -1){
 			var name = fullName.split(" ");
