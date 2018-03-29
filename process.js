@@ -92,7 +92,7 @@ function process(pdata, adata, name,container, minN,maxN) {
       }
     
       else {
-        document.getElementById("name").innerHTML = '<span style="color:red">' + "Author not found!";
+        document.getElementById("name").innerHTML = '<span style="color:red">' +  "Author's (" + name + ") profile page not available!";
       }
 }
 function getAllPublicationYears(pdata, authorName){
