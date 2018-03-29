@@ -295,10 +295,20 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees){
 	var s = "" ;
 	//console.log(c.Name); makeMeLive(c.Name)
+
+	// var sYear = findStartYear(a);
+	// var eYear = findEndYear(c);
+	var endOfCollaborationYear = getMax(c.MutualPubPerYear);
+	console.log(endOfCollaborationYear);
+	// console.log(c); 
+
 	if (DoesExistInList(supervisees, c.Name)){
 
-		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
-		" and supervisee" + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' ;
+		
+		s += (endOfCollaborationYear <=2013) ? " is " + makeMeLive_FullName(c.Name) + " and " + makeMeLive_LastName(c.Name) + " " + 
+		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> " + " supervised in the early years. " 
+			: " and supervisee " + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
 		
 		var obj = new Object();
@@ -307,18 +317,23 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 		obj.coauthor = c.Name; 
 		listOfSparklines.push(obj); 
 
+		if (endOfCollaborationYear <=2013){
+			s += getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
+				" and supervisee" + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)
+		}
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
 
-			s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' +
-			 " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is "
-			 + makeMeLive_FullName(c.Name) + " " +
-			 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
-			var obj = new Object();
-			obj.sparklineID = "sparkline_top_coll_supvervisor";
-			obj.data = c.MutualPubPerYear; 
-			obj.coauthor = c.Name; 
-			listOfSparklines.push(obj); 
+		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' ;
+		s+= (endOfCollaborationYear <=2013) ? " is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' +
+		" and " + makeMeLive_LastName(c.Name) + " supervised in the early years. " : 
+		 " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)+ " " +
+		 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
+		var obj = new Object();
+		obj.sparklineID = "sparkline_top_coll_supvervisor";
+		obj.data = c.MutualPubPerYear; 
+		obj.coauthor = c.Name; 
+		listOfSparklines.push(obj); 
 	}
 	else {
 		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
@@ -373,7 +388,9 @@ function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 			if (lastYear-startYear >20){
 				s += "that "; 
 			}
-		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + " between " + startYear + " and " + lastYear+ ". " ; 
+
+		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) ;
+		s += (lastYear - startYear > 1) ? " between " + startYear + " and " + lastYear + ". " : " during " + startYear + ". " ; 
 	}
 	return s;
 }
@@ -413,13 +430,13 @@ function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervis
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
 			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
-					" during " + startYear1 + " and " + lastYear1 ;
+					" between " + startYear1 + " and " + lastYear1 ;
 			if (DoesExistInList(supervisees, c.Name)){
-					s += getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
+					s += ", and " + getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
 					"in this collaboration"
 			}
 			if (DoesExistInSupervisors(supervisors, c.Name)){
-					s +=  makeMeLive_LastName(c.Name) + 
+					s += ", and " +  makeMeLive_LastName(c.Name) + 
 					" acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
 					 "in this collaboration"
 			}
