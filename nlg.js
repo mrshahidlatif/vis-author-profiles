@@ -882,12 +882,23 @@ function getLastNamePronoun(fullName){
 }
 function getLastName(fullName){
 	if (fullName != undefined){ 
-		var name = fullName.split(" ");
-		if(isNaN(name[name.length-1])){
-			return name[name.length-1];
+		if(authors_list.indexOf(fullName) != -1){
+			var name = fullName.split(" ");
+			if(isNaN(name[name.length-1])){
+				return name[name.length-1];
+			}
+			else {
+				return name[name.length-2];
+			}
 		}
 		else {
-			return name[name.length-2];
+			var name = fullName.split(" ");
+			if(isNaN(name[name.length-1])){
+				return name[name.length-1]+"*";
+			}
+			else {
+				return name[name.length-2]+"*";
+			}
 		}
 	}
 }
@@ -895,16 +906,31 @@ function getLastName(fullName){
 function getFullNameWithoutNo(fullName){
 	var name = fullName.split(" ");
 	var no = "";
-	if(!isNaN(name[name.length-1])){
-		no = name[name.length-1];
-		name = name.filter(function(item) { 
-	    return item !== no
-		})
-		name = name.join(" ");
-		return name;  
+	if (authors_list.indexOf(fullName) != -1){ //vis author
+		if(!isNaN(name[name.length-1])){
+			no = name[name.length-1];
+			name = name.filter(function(item) { 
+		    return item !== no
+			})
+			name = name.join(" ");
+			return name;  
+		}
+		else {
+			return fullName; 
+		}
 	}
-	else {
-		return fullName; 
+	else { // non-vis author 
+		if(!isNaN(name[name.length-1])){
+			no = name[name.length-1];
+			name = name.filter(function(item) { 
+		    return item !== no
+			})
+			name = name.join(" ");
+			return name+"*";  
+		}
+		else {
+			return fullName+"*"; 
+		}
 	}
 	
 }
@@ -1535,7 +1561,7 @@ function makeMeLive_FullName(name){
 	}
 	else 
 	{
-		return getFullNameWithoutNo(name);
+		return getFullNameWithoutNo(name)+"*";
 	}
 }
 function makeMeLive_LastName(name){
@@ -1543,7 +1569,7 @@ function makeMeLive_LastName(name){
 		return  '<span id="linkedAuthorName" onclick="loadMe(pdata, adata, \''+name+'\')">' + getLastName(name) + "</span>";
 	}
 	else {
-		return getLastName(name); 
+		return getLastName(name)+"*"; 
 	}
 }
 function makeMeLive_LoadGroupPublications(pdata, adata, text, author, group){
@@ -1628,7 +1654,7 @@ function loadMutualPublications(pdata, adata, a, c){
   //return mutualPublications;  
 
   dataForBarChart = countFrequency(dataForBarChart); 
-  generateBarChart(pdata, adata, a, dataForBarChart, "figure", "msbar"); 
+  // generateBarChart(pdata, adata, a, dataForBarChart, "figure", "msbar"); 
   console.log(dataForBarChart); 
 
 }
@@ -1781,11 +1807,11 @@ function analyzeTimeSeries(timeseries,author){
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
 	// console.log(midYear); 
 
-	if(computeSteadyRate(timeseries, minYear, midYear) > 0.70) { 
+	if(computeSteadyRate(timeseries, minYear, midYear) > 0.80) { 
 		result = " with the majority of the publications in the first half";
 		return result; 
 	}
-	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.70) {
+	if(computeSteadyRate(timeseries, midYear, maxYear) > 0.80) {
 		 result = " with the majority of the publications in the second half";
 		 return result; 
 	}
@@ -1803,15 +1829,15 @@ function analyzeTimeSeries(timeseries,author){
 	// console.log(sum13); 
 	// console.log(sum23); 
 	// console.log(sum33); 	
-	if(sum13/totalpubCount > 0.45){
+	if(sum13/totalpubCount > 0.60){
 		result = " with most contributions ("+ sum13 + ") made between " + minYear + " and " + firstPointYear;
 		return result;
 	}
-	if(sum23/totalpubCount > 0.45){
+	if(sum23/totalpubCount > 0.60){
 		result = " where most publications appeared ("+ sum33 + ") between " +firstPointYear + " and " + secondPointYear;
 		return result; 	
 	}
-	if(sum33/totalpubCount > 0.45){
+	if(sum33/totalpubCount > 0.60){
 		result = " with most contributions ("+ sum33 + ") made recently between "+ secondPointYear + " and " + maxYear;
 		return result; 
 	}

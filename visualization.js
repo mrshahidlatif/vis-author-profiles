@@ -302,7 +302,7 @@ function StringifyPublication(pdata, adata, p){
       }
     }
     else {
-      authors += p.Authors[i].Name ;
+      authors += p.Authors[i].Name+"*" ;
       if(i != p.Authors.length-1){
         authors += ", ";
       }
