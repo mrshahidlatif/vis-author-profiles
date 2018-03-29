@@ -123,7 +123,7 @@ function generateSummary(pdata, adata, a, p)
 		if (a.Journals+a.Conferences >= 10 && (a.Journals+a.Conferences) < 100 && eYear-sYear >= 5 && eYear >=2015 ){
 			bio = getFullNameWithoutNo(a.Name) + " is" ;
 			if (eYear-sYear >= 20) {
-				bio += " a longtime contributor ";
+				bio += " a longtime research contributor ";
 			}
 			else {
 				bio += " an active researcher "; 
@@ -142,7 +142,14 @@ function generateSummary(pdata, adata, a, p)
 		else if (a.Journals + a.Conferences >= 100 && eYear - sYear >= 5 && eYear >= 2015) {
 			var nPub = a.Journals + a.Conferences
 			var nPubRoundedDownToFifties = Math.floor(nPub / 50.0) * 50;
-			bio = getFullNameWithoutNo(a.Name) + " is an active and longtime contributor with "
+			bio = getFullNameWithoutNo(a.Name) + " is" ;
+			if (eYear-sYear >= 20) {
+				bio += " an active and longtime research contributor ";
+			}
+			else {
+				bio += " an active researcher "; 
+			}
+			bio += "with "
 			bio += (nPub === nPubRoundedDownToFifties) ? "" : "more than "
 			bio += makeMeLive_LoadAllIndividualPublications(pdata, adata, nPubRoundedDownToFifties + " publications", a.Name) + " "
 				+ '<svg width="70" height="20" id="sparklineAll"></svg>'
