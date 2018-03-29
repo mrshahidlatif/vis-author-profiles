@@ -1851,21 +1851,21 @@ function analyzeTimeSeries(timeseries,author){
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
 	
-	// console.log(sum13); 
-	// console.log(sum23); 
-	// console.log(sum33); 	
-	if(sum13/totalpubCount > 0.60){
+	console.log(sum13); 
+	console.log(sum23); 
+	console.log(sum33); 	
+	if(sum13/totalpubCount > 0.50){
 		result = "where most contributions appeared until " + firstPointYear + " ("+ sum13 + " publications). ";
 		return result;
 	}
-	if(sum23/totalpubCount > 0.60){
+	if(sum23/totalpubCount > 0.50){
 		result = "where most contributions appeared between " +firstPointYear + " and " + secondPointYear + " ("+ sum23 + " publications). ";
 		return result; 	
 	}
-	if(sum33/totalpubCount > 0.60){
+	if(sum33/totalpubCount > 0.50){
 		if (maxYear >= 2017) {
 			// Michael Burch
-			result = "where most contributions appeared recently since "+ secondPointYear + " ("+ sum33 + " publications). ";
+			result = "where most contributions appeared since "+ secondPointYear + " ("+ sum33 + " publications). ";
 		} else {
 			// Wolfgang Straßer
 			result = "where most contributions appeared between "+ secondPointYear + " and " + maxYear +" ("+ sum33 + " publications). ";
