@@ -260,11 +260,14 @@ function compressArray(original, name) {
     }
   }
   //Remove the self author 
+  // console.log(compressed); 
+  // compressed.filter(function(e){return e.Name!=name;});
   compressed = $.grep(compressed,
     function(o, i) {
       return o.Name === name;
     },
     true);
+  
   return compressed;
 }
 

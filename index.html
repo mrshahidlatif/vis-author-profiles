@@ -4,6 +4,10 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <script src="lib/d3.v5.js"></script>
+  <script src="lib/jquery-3.3.1.js"></script>
+  <script src="lib/jquery-ui.js"></script>
+  <script type="text/javascript"  src="adata.js"></script>
+  <script type="text/javascript"  src="pdata.js"></script>
   <script type="text/javascript"  src="loadJsonData.js"></script>
   <script type="text/javascript"  src="process.js"></script>
   <script type="text/javascript"  src="nlg.js"></script>
@@ -14,9 +18,8 @@
   <script type="text/javascript"  src="title_keywords.js"></script>
   <script type="text/javascript"  src="dictionary.js"></script>
   <script type="text/javascript"  src="author_autocomplete.js"></script>
-  <script type="text/javascript"  src="adata.js"></script>
-  <script type="text/javascript"  src="pdata.js"></script>
-  <!-- <script type="text/javascript"  src="vis_authors.js"></script> -->
+  <script type="text/javascript"  src="visualization.js"></script>
+
   
   <title id="pageTitle">VAP</title>
 </head>
@@ -83,14 +86,19 @@
           var l=3;
           var u=8;
 
-         //Reading authorname from url and loading the profile
-
-         var urlParam = function(name, w){
-          w = w || window;
-          var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-              val = w.location.search.match(rx);
-              return !val ? '':val[1];
+        //Reading authorname from url and loading the profile
+        //URL PARAMETERS 
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
+        var author_name_param = getParameterByName('name');
+        console.log(author_name_param);
 
           document.getElementById('r').addEventListener('click', function(){
             var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
@@ -110,8 +118,7 @@
           }); 
         
 
-        var author_name_param = unescape(urlParam('name'));
-        console.log(author_name_param);
+       // console.log(author_name_param);
         
         if(author_name_param != null){
             process(pdata, adata, author_name_param,"CollabChart1",l,u); 
@@ -127,9 +134,5 @@
   // });
   </script>
 </body>
-  <script src="lib/jquery-3.3.1.js"></script>
-  <script src="lib/jquery-ui.js"></script>
-  <!-- <script type="text/javascript"  src="authors-autocomplete.js"></script> -->
-  <script type="text/javascript"  src="visualization.js"></script>
 
 </html> 
