@@ -403,7 +403,7 @@ function secondMostFrequentCoauthorPhrase(pdata, adata, a,c,supervisors,supervis
 		}
 		else if (lastYear1 -  startYear1 > 1 && lastYear1<=2015) {
 			s += ", a collaboration that produced "+ makeMeLive_LoadData(pdata, adata, c.MutualPublications + " publications", a.Name, c.Name) +
-					" in a span of " + (lastYear1 - startYear1) + " years. ";
+					" during " + startYear1 + " and " + lastYear1 ;
 			if (DoesExistInList(supervisees, c.Name)){
 					s += getLastName(a.Name) + " acted as a supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + 
 					"in this collaboration"
@@ -629,7 +629,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 		case 2:
 			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
-			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
 				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
@@ -642,7 +642,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 		default:
 			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
-			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
 				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
