@@ -308,7 +308,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 		
 		s += (endOfCollaborationYear <=2013) ? " is " + makeMeLive_FullName(c.Name) + " and " + makeMeLive_LastName(c.Name) + " " + 
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> " + " supervised in the early years. " 
-			: " and supervisee " + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
+			: " and supervisee " + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
 		
 		var obj = new Object();
@@ -319,7 +319,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		if (endOfCollaborationYear <=2013){
 			s += getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
-				" and supervisee" + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)
+				" and supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)
 		}
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){

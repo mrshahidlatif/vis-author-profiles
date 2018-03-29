@@ -150,7 +150,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .attr("class", "xlabelBar")
           .attr("x", x(minYear)-13)
           .attr("y", -5)
-          .text(minYear); 
+          .text(minYear)
 
         if (main_author_start_year != minYear){
           // console.log(main_author_start_year);
