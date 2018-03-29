@@ -619,7 +619,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 		case 1:
 			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
-			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + " .";
 			$subgroups = $("<span>" + s + "<span>");
 			$subgroups.find(".info").click(function () {
 				showAdditionalInfoGroups(a, a.CollaborationGroups);
@@ -629,7 +629,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 		case 2:
 			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
-			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + " .";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
 				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
@@ -642,7 +642,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 		default:
 			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
-			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " researcher papers", a.Name, topGroups[0].Members) + " .";
+			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + " .";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
 				makeMeLive_LoadGroupPublications(pdata, adata, topGroups[1].Value + " publications", a.Name, topGroups[1].Members);
