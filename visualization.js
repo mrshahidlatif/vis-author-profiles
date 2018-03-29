@@ -117,7 +117,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .attr("x", 0)
           .attr("y", function (d, i) { return (i + 1) * height / N - 5 })
           .text(function (d) { 
-            return getLastName(d.Name) + " (" + d.MutualPublications + ")"; 
+            return getLastNameForVis(d.Name) + " (" + d.MutualPublications + ")"; 
           })
           .on("click", function (d) {
             div.transition()
