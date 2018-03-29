@@ -130,14 +130,14 @@ function generateSummary(pdata, adata, a, p)
 			}
 			bio += "since " + sYear + " and has "+ "published " + 
 			makeMeLive_LoadAllIndividualPublications(pdata, adata, (a.Journals+a.Conferences) + " research papers", a.Name) + " "
-			+ '<svg width="70" height="20" id="sparklineAll"></svg>' + trend + ", including " +
+			+ '<span class="no-wrap"><svg width="70" height="20" id="sparklineAll"></svg>' + trend + ",</span> including " +
 			makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-			+ ".";
+			+ ' <span class="no-wrap"><svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".</span>";
 		}
 		else if (a.Journals + a.Conferences >= 100 && eYear - sYear >= 5 && eYear >= 2015) {
 			var nPub = a.Journals + a.Conferences
@@ -150,8 +150,8 @@ function generateSummary(pdata, adata, a, p)
 				+ makeMeLive_loadJournalsIndividualPublications(pdata, adata, a.Journals + " journal articles", a.Name) + " "
 				+ '<svg width="70" height="20" id="sparklineJournals"></svg>' + " and "
 				+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " "
-				+ ' <svg width="70" height="20" id="sparklineConfs"></svg>'
-				+ ".";
+				+ ' <span class="no-wrap"><svg width="70" height="20" id="sparklineConfs"></svg>'
+				+ ".</span>";
 		}
 		else {
 			bio = getFullNameWithoutNo(a.Name) + " has published " + 
@@ -162,8 +162,8 @@ function generateSummary(pdata, adata, a, p)
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
 
-			+ ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-			+ ".";
+			+ ' <span class="no-wrap"><svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".</span>";
 		}
 	}
 	else if (eYear < 2013){
@@ -174,8 +174,8 @@ function generateSummary(pdata, adata, a, p)
 			+ '<svg width="70" height="20" id="sparklineJournals"></svg>' 
 			+ " and " 
 			+ makeMeLive_loadConferenceIndividualPublications(pdata, adata, a.Conferences + " proceedings papers", a.Name) + " " 
-			+  ' <svg width="70" height="20" id="sparklineConfs"></svg>' 
-			+ ".";
+			+  ' <span class="no-wrap"><svg width="70" height="20" id="sparklineConfs"></svg>' 
+			+ ".</span>";
 	}
 
 	if (pub.length < 100){
@@ -184,7 +184,7 @@ function generateSummary(pdata, adata, a, p)
 		var firstAuthorConfs = getPublicationsAsFirstAuthor(pdata,a.Name,"C");
 
 		bio += " Out of " + (a.Journals+a.Conferences) + " publications, the author published " + sumAllValues(firstAuthorPubs) +
-		" articles as first author " + '<svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + ".";
+		" articles as first author " + '<span class="no-wrap"><svg width="70" height="20" id="sparklineAsFirstAuthor"></svg>' + ".</span>";
 	}
 
 	if (a.PhDThesisTitle != ""){
@@ -289,7 +289,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author" + '<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
 		" and supervisee" + '<span class="info" onlick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
-		'<svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ". ";
+		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
 		
 		var obj = new Object();
 		obj.sparklineID = "sparkline_top_coll_supervisee";
@@ -303,7 +303,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 			s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' +
 			 " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is "
 			 + makeMeLive_FullName(c.Name) + " " +
-			 '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ". ";
+			 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
 			var obj = new Object();
 			obj.sparklineID = "sparkline_top_coll_supvervisor";
 			obj.data = c.MutualPubPerYear; 
@@ -312,7 +312,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	}
 	else {
 		s = getLastNamePronoun(a.Name) + " most frequent co-author" +'<span class="info" onclick="infoMostFrequentCoAuthor()">&#9432</span>' + 
-		" is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll"></svg>' + ". ";	
+		" is " + makeMeLive_FullName(c.Name) + " " + '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll"></svg>' + ".</span> ";	
 		var obj = new Object();
 		obj.sparklineID = "sparkline_top_coll";
 		obj.data = c.MutualPubPerYear; 
@@ -488,20 +488,20 @@ function stringifyListWithSparklines(list) {
 			// list.forEach(function (element, i) {
 				element = list[i]; 
 				if (i > 0) {
-					s += ", ";
+					s += ",</span> ";
 					if (i === Math.min(list.length,MAX_SUPERVISEES) - 1) {
 						s += "and ";
 					}
 				}
 				var ID = "sparkline_coll"+i;
-				s += makeMeLive_FullName(element.Name) + " " + '<svg width="70" height="20" id="' + ID + '"></svg>' ;
+				s += makeMeLive_FullName(element.Name) + " " + '<span class="no-wrap"><svg width="70" height="20" id="' + ID + '"></svg>' ;
 				var obj = new Object();
 				obj.sparklineID = ID; 
 				obj.data = element.MutualPubPerYear; 
 				obj.coauthor = element.Name; 
 				listOfSparklines.push(obj); 
 			}
-			return s;
+			return s + "</span>";
 	}
 }
 function superviseePhrase_InAdditionTo1(pdata, adata, a,c,supervisees){
