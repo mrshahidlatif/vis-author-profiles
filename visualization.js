@@ -274,8 +274,10 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
           var mppy = getMutualPublications(pdata, aName, dataForGantt[i].Name);
           // console.log(mppy);
           dataForGantt[i]["MutualPubPerYear"] = mppy;
+          sortByYear(dataForGantt[i].MutualPubPerYear);
           
         }
+
         // console.log(dataForGantt);
         generateVis(dataForGantt, authorObjects, canvas, pdata,aName, adata, distCoAuthors, 2); 
 
