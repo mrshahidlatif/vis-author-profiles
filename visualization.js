@@ -808,20 +808,11 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars){
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.Value); })
       .attr("height", function(d) { return height - y(d.Value); })
-      .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Individual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5  + "px")
-             .style("top", (d3.event.pageY ) - 38 + "px");
-           })
-       .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
-      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)});
+      .on("click", function(d){showIndividualPublications(pdata, adata, d.Year, a.Name)})
+      .append("svg:title")
+      .text(function(d){
+         return("In "+d.Year+", the author published " + d.Value +" publications in total. [Click to see details]");
+      });
 
       // console.log(data2);
        svg.selectAll("." +classOfBars)
@@ -832,19 +823,10 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars){
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.Value); })
         .attr("height", function(d) { return height - y(d.Value); })
-         .on("mouseover", function(d) {
-           div.transition()
-             .duration(200)
-             .style("opacity", .9);
-           div.html("Mutual" + "<br/>" + "Year: " + d.Year + "<br/>" + "# Articles: " + d.Value)
-             .style("left", (d3.event.pageX) + 5  + "px")
-             .style("top", (d3.event.pageY ) - 38 + "px");
-           })
-       .on("mouseout", function(d) {
-           div.transition()
-             .duration(500)
-             .style("opacity", 0);
-           })
+        .append("svg:title")
+        .text(function(d){
+          return("In "+d.Year+", the author published " + d.Value +" publications in total. [Click to see details]")
+        })
         .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
 
     // add the x Axis
