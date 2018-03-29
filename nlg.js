@@ -470,7 +470,8 @@ function thirdCoauthorPhrase(pdata, adata, a, c, supervisors, supervisees){
 			}
 		}
 		else {
-			s += " the author published " + makeMeLive_LoadData(pdata, adata, c.MutualPublications + " research papers", a.Name, c.Name) + " since " + startYear1 + ". "; 
+			s += " the author published " + makeMeLive_LoadData(pdata, adata, c.MutualPublications + " research papers", a.Name, c.Name) ;
+			s += (lastYear1 < 2015) ?  " between " + startYear1 + " and " + lastYear1 + ". " : " since " + startYear1 + ". "; 
 		}
 		return s;
 
