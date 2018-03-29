@@ -139,19 +139,29 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
          g.selectAll(".yearSpan")
           .data(adata)
           .enter().append("text")
-          .attr("class", "moreBtn")
+          .attr("class", "xlabelBar")
           .attr("x", width-30)
           .attr("y", -5)
           .text(maxYear); 
 
-
-           g.selectAll(".yearSpan")
+         g.selectAll(".yearSpan")
           .data(adata)
           .enter().append("text")
-          .attr("class", "moreBtn")
+          .attr("class", "xlabelBar")
           .attr("x", x(minYear)-13)
           .attr("y", -5)
           .text(minYear); 
+
+        if (main_author_start_year != minYear){
+          // console.log(main_author_start_year);
+           g.selectAll(".yearSpan")
+            .data(adata)
+            .enter().append("text")
+            .attr("class", "xlabelBar")
+            .attr("x", x(main_author_start_year)-13)
+            .attr("y", -5)
+            .text(main_author_start_year); 
+        }
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
