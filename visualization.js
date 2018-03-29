@@ -62,7 +62,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   var svg = d3.select("#" + canvas)
   .attr("height", h )
   .attr("width", w );
-    margin = {top: 10, right: 0, bottom: 20, left: 20};
+    margin = {top: 20, right: 0, bottom: 20, left: 20};
     width = +svg.attr("width") - margin.left - margin.right;
     height = +svg.attr("height") - margin.top - margin.bottom;
     //height = indPub.length*60 - margin.top - margin.bottom;
@@ -135,6 +135,23 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
             return s + ". [Click to see "+getLastName(d.Name)+"'s profile]";
           });
+
+         g.selectAll(".yearSpan")
+          .data(adata)
+          .enter().append("text")
+          .attr("class", "moreBtn")
+          .attr("x", width-30)
+          .attr("y", -5)
+          .text(maxYear); 
+
+
+           g.selectAll(".yearSpan")
+          .data(adata)
+          .enter().append("text")
+          .attr("class", "moreBtn")
+          .attr("x", x(minYear)-13)
+          .attr("y", -5)
+          .text(minYear); 
       }
       //adding bars for individual publications 
       g.selectAll(".bar")
