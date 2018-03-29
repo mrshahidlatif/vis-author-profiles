@@ -363,7 +363,7 @@ function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 			if (lastYear-startYear >20){
 				s += "that "; 
 			}
-		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + " in " + (lastYear - startYear) + " years. " ; 
+		s += "produced " + makeMeLive_LoadData(pdata, adata, c.MutualPublications.toString() + " publications", a.Name, c.Name) + " between " + startYear + " and " + lastYear+ ". " ; 
 	}
 	return s;
 }
