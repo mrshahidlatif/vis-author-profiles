@@ -300,7 +300,7 @@ function showMutualPublications(pdata, adata, year, aName, cName){
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + pubs.length + ") : " +
    getLastName(aName) + " and " + getLastName(cName) + ", " + year + "</span>" + "<br>" + "<hr>";
-  
+  console.log(pubs);
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pdata, adata, pubs[i]);
   }

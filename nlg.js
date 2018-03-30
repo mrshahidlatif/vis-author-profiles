@@ -35,7 +35,10 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject);
-		collaborationRelationText = getLastName(aObject.Name) + " worked with " + stringifyListWithAuthorLinks(convertToStringArray(topCoAuthors)) + "."; 
+		// console.log(topCoAuthors);
+		if (topCoAuthors.length > 0){
+			collaborationRelationText = getLastName(aObject.Name) + " worked with " + stringifyListWithAuthorLinks(convertToStringArray(topCoAuthors)) + "."; 
+		}
 		$collRelation = $("#collRelation");
 		$collRelation.html(collaborationRelationText); 
 		document.getElementById("bio").innerHTML = bio;
