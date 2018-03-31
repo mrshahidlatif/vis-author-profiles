@@ -943,13 +943,49 @@ function getLastNameForVis(fullName){
 		else {
 			var name = fullName.split(" ");
 			if(isNaN(name[name.length-1])){
+				//s = '<span title="More information about this author is not available" id="nonVISAuthors" onclick="">' +name[name.length-1]+"*" + "</span>";
+				//return s; 
 				return name[name.length-1]+"*";
 			}
 			else {
+				//s = '<span title="More information about this author is not available" id="nonVISAuthors" onclick="">' +name[name.length-2]+"*" + "</span>";
+				//return s; 
 				return name[name.length-2]+"*";
 			}
 		}
 	}
+}
+function getFullNameWithoutNoForVis(fullName){
+	var name = fullName.split(" ");
+	var no = "";
+	if (authors_list.indexOf(fullName) != -1){ //vis author
+		if(!isNaN(name[name.length-1])){
+			no = name[name.length-1];
+			name = name.filter(function(item) { 
+		    return item !== no
+			})
+			name = name.join(" ");
+			return name;  
+		}
+		else {
+			return fullName; 
+		}
+	}
+	else { // non-vis author 
+		if(!isNaN(name[name.length-1])){
+			no = name[name.length-1];
+			name = name.filter(function(item) { 
+		    	return item !== no
+			})
+			name = name.join(" ");
+			return name+"*";  
+		}
+		else {
+			return fullName+"*"; 
+
+		}
+	}
+	
 }
 
 function getFullNameWithoutNo(fullName){
@@ -972,13 +1008,18 @@ function getFullNameWithoutNo(fullName){
 		if(!isNaN(name[name.length-1])){
 			no = name[name.length-1];
 			name = name.filter(function(item) { 
-		    return item !== no
+		    	return item !== no
 			})
 			name = name.join(" ");
-			return name+"*";  
+			s = '<span title="More information about this author is not available" id="nonVISAuthors">' + name+"*" + "</span>";
+        	return s;
+			// return name+"*";  
 		}
 		else {
-			return fullName+"*"; 
+			//return fullName+"*"; 
+			s = '<span title="More information about this author is not available" id="nonVISAuthors">' + fullName+"*" + "</span>";
+        	return s;
+
 		}
 	}
 	

@@ -323,6 +323,9 @@ p {
     /*color:blue;*/
     text-decoration:underline;
 }
+#nonVISAuthors:hover{
+    cursor:pointer;
+}
 
 div.tooltip {
   position: absolute;

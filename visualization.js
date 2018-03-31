@@ -130,18 +130,18 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             if (authors_list.indexOf(d.Name) != -1){ //VIS authors 
                 var jointPubsStartYear = d.MutualPubPerYear[0].Year;
                 var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
-                var s = getFullNameWithoutNo(d.Name) + " has published ";
+                var s = getFullNameWithoutNoForVis(d.Name) + " has published ";
                 s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
-                s += " (marked in red) with " + getFullNameWithoutNo(aName);
+                s += " (marked in red) with " + getFullNameWithoutNoForVis(aName);
                 s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
                 return s + ". [Click to see "+getLastName(d.Name)+"'s profile]";
             }
             else { //Non-VIS authors 
                var jointPubsStartYear = d.MutualPubPerYear[0].Year;
                 var jointPubsEndYear = d.MutualPubPerYear[d.MutualPubPerYear.length - 1].Year;
-                var s = getFullNameWithoutNo(d.Name) + " has published ";
+                var s = getFullNameWithoutNoForVis(d.Name) + " has published ";
                 s += d.MutualPublications === 1 ? " a joint publication" : (d.MutualPublications + " joint publications");
-                s += " (marked in red) with " + getFullNameWithoutNo(aName);
+                s += " (marked in red) with " + getFullNameWithoutNoForVis(aName);
                 s += jointPubsEndYear === jointPubsStartYear ? " in " + jointPubsStartYear : " between " + jointPubsStartYear + " and " + jointPubsEndYear;
                 return s + ". Information about "+getFullNameWithoutNoWithoutAsterisk(d.Name)+" may not be complete!";
             }
@@ -190,7 +190,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
         .on("click", function (d) { showIndividualPublications(pdata, allAuthorsData, d.Year, d.Name) })
         .append("svg:title")
         .text(function(d) {
-          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" publications in total. [Click to see details]");
+          return("In "+d.Year+", "+getFullNameWithoutNoForVis(d.Name)+" published " + d.Value +" publications in total. [Click to see details]");
         });
       //Adding bars for mutual publications
       g.selectAll(".mbar")
@@ -204,7 +204,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
         .on("click", function (d) { showMutualPublications(pdata, allAuthorsData, d.Year, aName, d.Name) })
         .append("svg:title")
         .text(function(d) {
-          return("In "+d.Year+", "+getFullNameWithoutNo(d.Name)+" published " + d.Value +" joint publications with "+getFullNameWithoutNo(aName)+". [Click to see details]")
+          return("In "+d.Year+", "+getFullNameWithoutNoForVis(d.Name)+" published " + d.Value +" joint publications with "+getFullNameWithoutNoForVis(aName)+". [Click to see details]")
         });
 
       //Adding horizontal lines 
@@ -320,7 +320,7 @@ function showIndividualPublications(pdata, adata, year, name){
   // console.log(year + name);
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
   // console.log(pubs);
-  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + getLastName(name)
+  document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + getLastNameForVis(name)
   + ", " + year + "</span>" + "<br>" + "<hr>";
 
   pubs.sort(function(a, b){
@@ -707,7 +707,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .on("click", function (d) { showMutualPublications(pdata, adata, d.Year, a.Name, cName) })
         .append("svg:title")
         .text(function (d) {
-          return ("In " + d.Year + ", the author published " + d.Value + " joint publications with " +getFullNameWithoutNo(cName)+". [Click to see details]");
+          return ("In " + d.Year + ", the author published " + d.Value + " joint publications with " +getFullNameWithoutNoForVis(cName)+". [Click to see details]");
         });
 
       // add the x Axis
