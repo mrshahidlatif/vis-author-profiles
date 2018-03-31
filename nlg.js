@@ -58,10 +58,10 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		if (totalpubCount>=100){
 			title += '<img class="badge" align="top" src="badges/article_gold.svg">'; 
 		}
-		else if(totalpubCount>=50 && totalpubCount<100){
+		else if(totalpubCount>=30 && totalpubCount<100){
 			title += '<img class="badge" align="top" src="badges/article_silver.svg">'; 
 		}
-		else if(totalpubCount>=10 && totalpubCount <50){
+		else if(totalpubCount>=10 && totalpubCount <30){
 			title += '<img class="badge" align="top" src="badges/article_bronze.svg">'; 
 		}
 		if(hasSupversied && !isSupSupervisor){
