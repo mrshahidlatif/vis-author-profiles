@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="sup_supervisor.svg">
+   sodipodi:docname="supervisor.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -184,7 +184,7 @@
          sodipodi:role="line">50+</tspan></text>
     <path
        sodipodi:type="star"
-       style="fill:#c0c0c0;fill-opacity:1;stroke-width:0.11422494"
+       style="fill:#b3b3b3;fill-opacity:1;stroke-width:0.11422494"
        id="path63"
        sodipodi:sides="6"
        sodipodi:cx="11.402482"
