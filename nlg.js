@@ -310,7 +310,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and " ;
 		
-		s += (c.StartYear <=2008) ? " past supervisee is " + makeMeLive_FullName(c.Name) + '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>'+".</span> "
+		s += (c.StartYear <=2008) ? " past supervisee is " + makeMeLive_FullName(c.Name) + " "+ '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>'+".</span> "
 			: " and supervisee is " + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
 		
@@ -657,8 +657,8 @@ function collaborationGroupPhrase(pdata, adata, a){
 	switch (topGroups.length) {
 		case 0: return "";
 		case 1:
-			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
-			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " Regarding collaboration subgroups" + info + " "+ getLastNam(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + " .";
 			$subgroups = $("<span>" + s + "<span>");
 			$subgroups.find(".info").click(function () {
@@ -667,8 +667,8 @@ function collaborationGroupPhrase(pdata, adata, a){
 			// console.log(s);
 			return $subgroups;
 		case 2:
-			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
-			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " Regarding collaboration subgroups" + info + " "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
@@ -680,8 +680,8 @@ function collaborationGroupPhrase(pdata, adata, a){
 			});
 			return $subgroups;
 		default:
-			s += " Analysis of subgroups within " + getLastNamePronoun(a.Name) + " co-author network" + info + " shows that the author along with " + stringifyListWithAuthorLinks(topGroups[0].Members);
-			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " has worked on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
+			s += " Regarding collaboration subgroups" + info + " "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
 			s += " is with " + stringifyListWithAuthorLinks(topGroups[1].Members) + " resulting in " +
