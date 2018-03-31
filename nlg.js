@@ -302,7 +302,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	// var sYear = findStartYear(a);
 	// var eYear = findEndYear(c);
 	var endOfCollaborationYear = getMax(c.MutualPubPerYear);
-	console.log(endOfCollaborationYear);
+	// console.log(endOfCollaborationYear);
 	// console.log(c); 
 
 	if (DoesExistInList(supervisees, c.Name)){
@@ -1719,7 +1719,7 @@ function loadMutualPublications(pdata, adata, a, c){
 
   dataForBarChart = countFrequency(dataForBarChart); 
   // generateBarChart(pdata, adata, a, dataForBarChart, "figure", "msbar"); 
-  console.log(dataForBarChart); 
+  // console.log(dataForBarChart); 
 
 }
 
@@ -1890,9 +1890,9 @@ function analyzeTimeSeries(timeseries,author){
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
 	
-	console.log(sum13); 
-	console.log(sum23); 
-	console.log(sum33); 	
+	// console.log(sum13); 
+	// console.log(sum23); 
+	// console.log(sum33); 	
 	if(sum13/totalpubCount > 0.50){
 		result = "where most contributions appeared until " + firstPointYear + " ("+ sum13 + " publications). ";
 		return result;

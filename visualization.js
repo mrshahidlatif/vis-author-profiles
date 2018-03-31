@@ -300,7 +300,16 @@ function showMutualPublications(pdata, adata, year, aName, cName){
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + pubs.length + ") : " +
    getLastName(aName) + " and " + getLastName(cName) + ", " + year + "</span>" + "<br>" + "<hr>";
-  console.log(pubs);
+  // console.log(pubs);
+  pubs.sort(function(a, b){
+     var nameA=a.Title.toLowerCase(), nameB=b.Title.toLowerCase();
+     if (nameA < nameB) //sort string ascending
+      return -1;
+     if (nameA > nameB)
+      return 1;
+     return 0; //default return value (no sorting)
+  });
+  // console.log(pubs);
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pdata, adata, pubs[i]);
   }
@@ -313,6 +322,15 @@ function showIndividualPublications(pdata, adata, year, name){
   // console.log(pubs);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + getLastName(name)
   + ", " + year + "</span>" + "<br>" + "<hr>";
+
+  pubs.sort(function(a, b){
+     var nameA=a.Title.toLowerCase(), nameB=b.Title.toLowerCase();
+     if (nameA < nameB) //sort string ascending
+      return -1;
+     if (nameA > nameB)
+      return 1;
+     return 0; //default return value (no sorting)
+  });
   
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pdata, adata, pubs[i]);
