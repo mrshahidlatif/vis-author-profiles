@@ -1620,20 +1620,22 @@ function computeSimilarityOfKeywords(keywordMap1, keywordMap2) {
 	return sum / (Math.sqrt(length1) * Math.sqrt(length2));
 }
 function makeMeLive_FullName(name){
-	if (authors_list.indexOf(name) != 1){
+
+	if (authors_list.indexOf(name) != -1){
+		// console.log(name); 
 		return  '<span id="linkedAuthorName" onclick="loadMe(pdata, adata, \''+name+'\')">' + getFullNameWithoutNo(name) + "</span>";
 	}
 	else 
 	{
-		return getFullNameWithoutNo(name)+"*";
+		return getFullNameWithoutNo(name);
 	}
 }
 function makeMeLive_LastName(name){
-	if (authors_list.indexOf(name) != 1){
+	if (authors_list.indexOf(name) != -1){
 		return  '<span id="linkedAuthorName" onclick="loadMe(pdata, adata, \''+name+'\')">' + getLastName(name) + "</span>";
 	}
 	else {
-		return getLastName(name)+"*"; 
+		return getLastName(name);
 	}
 }
 function makeMeLive_LoadGroupPublications(pdata, adata, text, author, group){
