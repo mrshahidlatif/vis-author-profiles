@@ -310,7 +310,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and " ;
 		
-		s += (c.StartYear <=2008) ? " past supervisee is" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " " + makeMeLive_FullName(c.Name) + " "+
+		s += (c.StartYear <=2008) ? " past supervisee" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 			'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>'+".</span> "
 			: " and supervisee is " + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
@@ -327,8 +327,8 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 		console.log(author_startYear);
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and ";
-		s+= (author_startYear <=2008) ? " past supervisor is " + makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>'
-		 : " and supervisor is " +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)+ " " +
+		s+= (author_startYear <=2008) ? " past supervisor" + '<span class="info" onclick="infoSupervisor()">&#9432</span>' +" is "+ makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>'
+		 : " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)+ " " +
 		 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
 		var obj = new Object();
 		obj.sparklineID = "sparkline_top_coll_supvervisor";
@@ -658,7 +658,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 	switch (topGroups.length) {
 		case 0: return "";
 		case 1:
-			s += " Regarding collaboration subgroups" + info + " "+ getLastNam(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += " Regarding collaboration subgroups" + info + ", "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + " .";
 			$subgroups = $("<span>" + s + "<span>");
@@ -668,7 +668,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 			// console.log(s);
 			return $subgroups;
 		case 2:
-			s += " Regarding collaboration subgroups" + info + " "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += " Regarding collaboration subgroups" + info + ", "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
@@ -681,7 +681,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 			});
 			return $subgroups;
 		default:
-			s += " Regarding collaboration subgroups" + info + " "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
+			s += " Regarding collaboration subgroups" + info + ", "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
 			s += (getGroupKeywords(pdata, a, topGroups[0].Members).length >= 1) ? " on " + stringifyList(getGroupKeywords(pdata, a, topGroups[0].Members)) + " and" : "";
 			s += " produced " + makeMeLive_LoadGroupPublications(pdata, adata, topGroups[0].Value + " research papers", a.Name, topGroups[0].Members) + ".";
 			s += (topGroups[1].Members.length >= 5) ? " Another considerably large group " : " Another notable group ";
