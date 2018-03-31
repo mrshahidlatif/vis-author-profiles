@@ -310,7 +310,8 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and " ;
 		
-		s += (c.StartYear <=2008) ? " past supervisee is " + makeMeLive_FullName(c.Name) + " "+ '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>'+".</span> "
+		s += (c.StartYear <=2008) ? " past supervisee is" + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " " + makeMeLive_FullName(c.Name) + " "+
+			'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>'+".</span> "
 			: " and supervisee is " + '<span class="info" onclick="infoSupervisee()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name) + " "+
 		'<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supervisee"></svg>' + ".</span> ";
 		
