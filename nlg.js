@@ -1977,7 +1977,7 @@ function infoSupervisee(){
 function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 	$dod = $("#dod");
 	$dod.empty();
-	$("<span id='sideBarHead'>Similar authors to " + getFullNameWithoutNo(author.Name) + "</span>")
+	$("<span id='sideBarHead'>Similar authors to " + getLastName(author.Name) + "</span>")
 		.appendTo($dod);
 	$("<br/><hr/>").appendTo($dod);
 	$("<p>")
@@ -2000,14 +2000,14 @@ function showAdditionalInfoGroups(author, groups){
 
 	$dod = $("#dod");
 	$dod.empty();
-	$("<span id='sideBarHead'>Sub-groups within " + getLastNamePronoun(author.Name) + " co-author network" + "</span>")
+	$("<span id='sideBarHead'>Subgroups within " + getLastNamePronoun(author.Name) + " co-author network" + "</span>")
 		.appendTo($dod);
 	$("<br/><hr/>").appendTo($dod);
 	$("<p>")
-		.text("Sub-groups within the co-author network are computed using the Formal Concept Analysis (FCA). It provides us with paired sets of co-authors and joint publications that are maximal both w.r.t to co-authors and publications. To extract higher-order sub-groups, sub-groups with fewer than three publications and two co-authors are discarded. Further we rate groups according to a score (n^(1/2)*m) where n is number of publications and m is the number of co-authors in a sub-group.")
+		.text("Subgroups within the co-author network are computed using the Formal Concept Analysis (FCA). It provides us with paired sets of co-authors and joint publications that are maximal both w.r.t to co-authors and publications. Subgroups with fewer than three publications and two co-authors are discarded. ")
 		.appendTo($dod);
 	$("<p>")
-		.text("The most notable groups are:")
+		.text("The most notable groups are described below (Number in the parenthesis shows number of group publications):")
 		.appendTo($dod);
 	$topGroups = $("<ul>")
 		.appendTo($dod);
