@@ -303,7 +303,7 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	// var eYear = findEndYear(c);
 	var endOfCollaborationYear = getMax(c.MutualPubPerYear);
 	// console.log(endOfCollaborationYear);
-	console.log(c); 
+	// console.log(c); 
 
 	if (DoesExistInList(supervisees, c.Name)){
 		// var superviseeStartYear = getMin(c.)
@@ -324,10 +324,10 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
 		var author_startYear = getMin(a.AllPublicationsPerYear);
-		console.log(author_startYear);
+		// console.log(author_startYear);
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and ";
-		s+= (author_startYear <=2008) ? " past supervisor" + '<span class="info" onclick="infoSupervisor()">&#9432</span>' +" is "+ makeMeLive_FullName(c.Name) + " " + '<svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>'
+		s+= (author_startYear <=2008) ? " past supervisor" + '<span class="info" onclick="infoSupervisor()">&#9432</span>' +" is "+ makeMeLive_FullName(c.Name) + " " + '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> "
 		 : " and supervisor" +'<span class="info" onclick="infoSupervisor()">&#9432</span>' + " is " + makeMeLive_FullName(c.Name)+ " " +
 		 '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> ";
 		var obj = new Object();
@@ -621,10 +621,10 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 			s += "In addition to ";
 			for (var i=0;i<alreadySupervisees.length;i++){
 				if(i==alreadySupervisees.length-1){
-					s += "and " + makeMeLive_LastName(alreadySupervisees[i].Name)+" " +".";
+					s += "and " + makeMeLive_LastName(alreadySupervisees[i].Name);
 				}
 				else {
-					s +=makeMeLive_LastName(alreadySupervisees[i].Name)+	" " + ", ";
+					s +=makeMeLive_LastName(alreadySupervisees[i].Name) + ", ";
 				}
 			}
 		}
@@ -651,7 +651,7 @@ function collaborationGroupPhrase(pdata, adata, a){
 	//Adding attribute "Value" for using in getTopNItems()
 	for(var i=0;i<groups.length ;i++){
 		groups[i]["Value"]= groups[i].Publications;
-	}
+	}  
 	// console.log(groups);
 	var topGroups = getTopNItems(groups, 2,3);
 	// console.log(topGroups);
@@ -829,7 +829,7 @@ function supSupervisorPhrase(pdata, adata, author, supervisees){
 	if (supSupervisees.length > 0){
 		isSupSupervisor = true;
 		s+= " " + getLastNamePronoun(author.Name) ;
-		s+= (supSupervisees.length == 1) ? " supervisee, " : " supvervisees, " ; 
+		s+= (supSupervisees.length == 1) ? " supervisee " : " supvervisees " ; 
 		s+= stringifyListWithAuthorLinks(convertToStringArray(supSupervisees)) ;
 		s+= (supSupervisees.length == 1) ? " is " : " are " ;
 		s+= " already supervising other researchers. ";
