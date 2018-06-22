@@ -323,6 +323,15 @@ p {
     /*color:blue;*/
     text-decoration:underline;
 }
+
+.visTitle{
+  font-size:14px;
+}
+
+.legend{
+  font-size:12px;
+}
+
 #nonVISAuthors:hover{
     cursor:pointer;
 }

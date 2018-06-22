@@ -51,7 +51,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
 
   //console.log(indPub);
   //var svg = d3.select("#" + canvas),
-  var h = indPub.length*50 + 30; //adding thirty for the margins 
+  var h = indPub.length*50 + 80; //adding thirty for the margins 
   var w = (maxYear-minYear)*20;
   if (w > 550) {w = 550;}
   if (w < 250) {w=250;}
@@ -62,7 +62,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   var svg = d3.select("#" + canvas)
   .attr("height", h )
   .attr("width", w );
-    margin = {top: 20, right: 0, bottom: 20, left: 20};
+    margin = {top: 70, right: 0, bottom: 20, left: 20};
     width = +svg.attr("width") - margin.left - margin.right;
     height = +svg.attr("height") - margin.top - margin.bottom;
     //height = indPub.length*60 - margin.top - margin.bottom;
@@ -148,7 +148,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           });
 
          g.selectAll(".yearSpan")
-          .data(adata)
+          .data([1])
           .enter().append("text")
           .attr("class", "xlabelBar")
           .attr("x", width-30)
@@ -156,7 +156,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .text(maxYear); 
 
          g.selectAll(".yearSpan")
-          .data(adata)
+          .data([1])
           .enter().append("text")
           .attr("class", "xlabelBar")
           .attr("x", x(minYear)-13)
@@ -166,7 +166,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
         if (main_author_start_year != minYear){
           // console.log(main_author_start_year);
            g.selectAll(".labelStartYear")
-            .data(adata)
+            .data([1])
             .enter().append("text")
             .attr("class", "labelStartYear")
             .attr("x", x(main_author_start_year)-13)
@@ -232,7 +232,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
          });
 
     g.selectAll(".moreBtn")
-          .data(adata)
+          .data([1])
           .enter().append("text")
           .attr("class", "moreBtn")
           .attr("x", width-30)
@@ -240,6 +240,51 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .text("More")
           //.on("click", function(d){});
           .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors);});
+
+    //Adding legend and Title 
+    g.selectAll(".visTitle")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "visTitle")
+      .attr("x", width/2 - 85)
+      .attr("y",-50)
+      .text("Co-author Publication Timeline");
+
+    g.selectAll(".legendRectRed")
+        .data([1])
+        .enter().append("rect")
+        .attr("class", "mbar")
+        .attr("x", width/2 - 110  )
+        .attr("y", -40 )
+        .attr("width", 10 )
+        .attr("height", 10 );
+
+    g.selectAll(".legendTextRed")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "legend")
+      .attr("x", width/2 - 95)
+      .attr("y",-31)
+      .text("Mutual Publications");
+
+    g.selectAll(".legendRectGray")
+    .data([1])
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", width/2 + 5)
+    .attr("y", -40 )
+    .attr("width", 10 )
+    .attr("height", 10 );
+
+    g.selectAll(".legendTextGray")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "legend")
+      .attr("x", width/2 + 20)
+      .attr("y",-31)
+      .text("Individual Publications");
+
+
   }
 }
 
