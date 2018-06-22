@@ -284,7 +284,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       .attr("y",-31)
       .text("Individual Publications");
 
-
   }
 }
 
@@ -509,7 +508,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
  //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 40, bottom: 10, left: 40},
+    var margin = {top: 10, right: 40, bottom: 20, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -602,7 +601,17 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name){
      .append("text")
      .attr("class", "xlabelBar")
      .attr("y2", height)
-     .text("—" + ymax);  
+     .text("—" + ymax); 
+
+      //Adding a label
+      var xpos = (width/2 - 80);
+      var ypos = height +15; 
+      svg.append("g")
+         .attr("transform", "translate("+ xpos + "," + ypos + ")")
+         .append("text")
+         .attr("class", "barTitle")
+         .attr("y2", height)
+         .text(getLastName(name)+"'s Publication Timeline");
     }
 }
 
@@ -652,7 +661,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
  }
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 40, bottom: 10, left: 40},
+    var margin = {top: 10, right: 40, bottom: 20, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -777,6 +786,18 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
          .attr("class", "xlabelBar")
          .attr("y2", height)
          .text("—" + ymax);  
+
+
+       svg.selectAll(".barTitle").remove(); 
+        //Adding a label
+        var xpos = (width/2 - 80);
+        var ypos = height +15; 
+        svg.append("barTitle")
+           .attr("transform", "translate("+ xpos + "," + ypos + ")")
+           .append("text")
+           .attr("class", "barTitle")
+           .attr("y2", height)
+           .text(getLastName(aName)+"'s Publication Timeline");
          
     }
 }
@@ -784,7 +805,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 function enlargeMe(data, id, startYear, endYear, ymax, name){
    //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
-    generateSparkline(data,"figure", 90, 360, startYear, endYear, ymax, name); 
+    generateSparkline(data,"figure", 100, 360, startYear, endYear, ymax, name); 
 
 }
 function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYear, endYear, ymax){
@@ -794,7 +815,7 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
     //cName : Name of coauthor 
    //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
-    generateSparklineForMutualPublications(pdata, adata, a, cName, data,"figure", 90, 360, startYear, endYear, ymax); 
+    generateSparklineForMutualPublications(pdata, adata, a, cName, data,"figure", 100, 360, startYear, endYear, ymax); 
 
     loadMutualPublications(pdata, adata, a.Name, cName); 
 
@@ -813,7 +834,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
     return +a.Year - +b.Year;
   });
 
- var h=90;
+ var h=100;
  var w=360;
  // add in missing years 
  var data2 = [];
@@ -837,7 +858,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
     data2.push(obj);
  }
   // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 40, bottom: 10, left: 40},
+    var margin = {top: 10, right: 40, bottom: 20, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   
@@ -925,11 +946,22 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
          .text(endYear);  
 
 
-         svg.append("g")
+      svg.append("g")
          .attr("transform", "translate("+width+",3)")
          .append("text")
          .attr("class", "xlabelBar")
          .attr("y2", height)
-         .text("—" + ymax);  
+         .text("—" + ymax);
+
+     svg.selectAll(".barTitle").remove(); 
+      //Adding a label
+      var xpos = (width/2 - 80);
+      var ypos = height +15; 
+      svg.append("barTitle")
+         .attr("transform", "translate("+ xpos + "," + ypos + ")")
+         .append("text")
+         .attr("class", "barTitle")
+         .attr("y2", height)
+         .text(getLastName(aName)+"'s Publication Timeline");
          
 }
