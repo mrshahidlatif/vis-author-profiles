@@ -800,9 +800,9 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
 
 }
 
-function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars){
+function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, topic){
 
- // console.log(ymax); 
+ // console.log(topic); 
 
  var a = getAuthorObjectByName(adata, authorName);
  aName = a.Name;
@@ -905,7 +905,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars){
         .attr("height", function(d) { return height - y(d.Value); })
         .append("svg:title")
         .text(function(d){
-          return("In "+d.Year+", the author published " + d.Value +" publications in total. [Click to see details]")
+          return("In "+d.Year+", the author published " + d.Value +" research articles on " +topic+ ".")
         })
         .on("click", function(d){showMutualPublications(pdata, adata, d.Year, a.Name, cName)});
 

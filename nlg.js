@@ -1800,7 +1800,7 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
 	   
   }
   dataForBarChart = countFrequency(dataForBarChart); 
-  generateBarChart(pdata, adata, a, dataForBarChart, "figure", "tbar"); 
+  generateBarChart(pdata, adata, a, dataForBarChart, "figure", "tbar", topic); 
   // console.log(dataForBarChart); 
 
 }
