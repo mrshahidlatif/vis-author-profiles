@@ -87,13 +87,13 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		document.getElementById("name").innerHTML = title;
 		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 
-		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name);
-		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax, aObject.Name);
-		generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax, aObject.Name);
-		generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax, aObject.Name);
+		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name,"c");
+		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax, aObject.Name,"j");
+		generateSparkline(aObject.AllPublicationsPerYear,"sparklineAll", 20, 90, sYear,eYear, ymax, aObject.Name,"all");
+		generateSparkline(firstAuthorPubs,"sparklineAsFirstAuthor", 20, 90, sYear,eYear, ymax, aObject.Name,"firstA");
 		//Initial Display of Info header graph
 		document.getElementById("info").innerHTML = '<svg width="350" height="100" id="figure"></svg>';
-		generateSparkline(aObject.AllPublicationsPerYear,"figure", 100, 360, sYear, eYear, ymax, aObject.Name);  
+		generateSparkline(aObject.AllPublicationsPerYear,"figure", 100, 360, sYear, eYear, ymax, aObject.Name,"all");
 		
 		for (var i=0;i<listOfSparklines.length;i++){
 			// console.log(listOfSparklines[i]);

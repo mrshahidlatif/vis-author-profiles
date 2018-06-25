@@ -244,6 +244,15 @@ p {
     fill:#1E90FF;
     opacity: 1
 }
+.boxGray{
+  fill: gray;
+}
+.boxRed{
+  fill:#AA0000;
+}
+.boxBlue{
+   fill:#123b7c;
+}
 
 .bar:hover {
   fill: DodgerBlue;
