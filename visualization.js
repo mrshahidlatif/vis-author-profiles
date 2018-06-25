@@ -470,7 +470,7 @@ function getAuthorObjectByName(adata, name){
 
 function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, type){
 
- console.log(type); 
+ // console.log(type); 
  var largeScale = false;
  if (h>100 || w>200){
   largeScale = true ;
@@ -820,6 +820,62 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
            .attr("class", "barTitle")
            .attr("y2", height)
            .text(getLastName(aName)+"'s Publication Timeline");
+
+      // dynamic caption 
+    var allCaptionText = getLastName(aName)+"'s #pub. per year overall joint with " + getLastName(cName); 
+     // console.log(allCaptionText); 
+     var textWidth = getTextWidth(allCaptionText,12,'Verlag Book'); 
+      //Adding a label
+      var xpos = (width/2 - (textWidth/2) - 20);
+      // console.log(width + ": "+ textWidth + ": " + xpos);
+      var ypos = height +15; 
+   
+   d3.select("#figure").selectAll("rect.boxGray").remove();
+   d3.select("#figure").selectAll("rect.boxRed").remove(); 
+   d3.select("#figure").selectAll("rect.boxBlue").remove(); 
+   d3.select("#figure").selectAll("text.legend").remove(); 
+
+   svg.append("text")
+     .attr("transform", "translate("+ xpos + "," + ypos + ")")
+     // .append("text")
+     .attr("class", "barTitle")
+     .attr("y2", height)
+     .text(getLastName(aName)+"'s #pub. per year (");
+
+    //   //Adding legend and Title 
+    svg.selectAll(".legendRectGray")
+        .data([1])
+        .enter().append("rect")
+        .attr("class", "boxGray")
+        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book'))
+        .attr("y", ypos - 8)
+        .attr("width", 10 )
+        .attr("height", 10 );
+
+    svg.selectAll(".legendTextGray")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "legend")
+      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book')+12)
+      .attr("y",ypos )
+      .text("all");
+
+    svg.selectAll(".legendRectBlue")
+    .data([1])
+    .enter().append("rect")
+    .attr("class", "boxRed")
+    .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #publ. per year all ( ",12,'Verlag Book')+20)
+    .attr("y", ypos - 8)
+    .attr("width", 10 )
+    .attr("height", 10 );
+
+    svg.selectAll(".legendTextBlue")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "legend")
+      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all ( ",12,'Verlag Book')+35)
+      .attr("y",ypos)
+      .text("joint with "+ getLastName(cName)+ ")");
          
     }
 }
@@ -987,6 +1043,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
    d3.select("#figure").selectAll("rect.boxBlue").remove(); 
+    d3.select("#figure").selectAll("rect.boxRed").remove(); 
    d3.select("#figure").selectAll("text.legend").remove(); 
 
    svg.append("text")
