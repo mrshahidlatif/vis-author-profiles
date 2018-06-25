@@ -901,7 +901,7 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
 
 function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, topic){
 
- console.log(classOfBars); 
+ // console.log(classOfBars); 
 
  var a = getAuthorObjectByName(adata, authorName);
  aName = a.Name;
@@ -1034,11 +1034,11 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
      d3.select("#figure").selectAll("text.barTitle").remove();
      
      var allCaptionText = getLastName(aName)+"'s #pub. per year overall on "+ topic; 
-     console.log(allCaptionText); 
+     // console.log(allCaptionText); 
      var textWidth = getTextWidth(allCaptionText,12,'Verlag Book'); 
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
-      console.log(width + ": "+ textWidth + ": " + xpos);
+      // console.log(width + ": "+ textWidth + ": " + xpos);
       var ypos = height +15; 
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
