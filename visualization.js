@@ -248,13 +248,13 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       .attr("class", "visTitle")
       .attr("x", width/2 - 85)
       .attr("y",-50)
-      .text("Co-author Publication Timeline");
+      .text("Co-author Publications Per Year");
 
-    g.selectAll(".legendRectRed")
+    g.selectAll(".legendRectGray")
         .data([1])
         .enter().append("rect")
-        .attr("class", "mbar")
-        .attr("x", width/2 - 110  )
+        .attr("class", "bar")
+        .attr("x", width/2 - 125  )
         .attr("y", -40 )
         .attr("width", 10 )
         .attr("height", 10 );
@@ -263,14 +263,14 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", width/2 - 95)
+      .attr("x", width/2 - 110)
       .attr("y",-31)
-      .text("Mutual Publications");
+      .text("Individual #publications");
 
-    g.selectAll(".legendRectGray")
+    g.selectAll(".legendRectRed")
     .data([1])
     .enter().append("rect")
-    .attr("class", "bar")
+    .attr("class", "mbar")
     .attr("x", width/2 + 5)
     .attr("y", -40 )
     .attr("width", 10 )
@@ -282,7 +282,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       .attr("class", "legend")
       .attr("x", width/2 + 20)
       .attr("y",-31)
-      .text("Individual Publications");
+      .text("Joint #publications with " + getLastName(aName));
 
   }
 }
