@@ -508,7 +508,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
  //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 40, bottom: 20, left: 40},
+    var margin = {top: 10, right: 40, bottom: 30, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -624,7 +624,7 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
       }
 
       var xpos = (width/2 - (textW/2));
-      var ypos = height +15; 
+      var ypos = height +20; 
       svg.append("text")
          .attr("transform", "translate("+ xpos + "," + ypos + ")")
          // .append("text")
@@ -683,7 +683,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
  }
   // set the dimensions and margins of the graph
   if (largeScale){
-    var margin = {top: 10, right: 40, bottom: 20, left: 40},
+    var margin = {top: 10, right: 40, bottom: 30, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
@@ -828,7 +828,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
       // console.log(width + ": "+ textWidth + ": " + xpos);
-      var ypos = height +15; 
+      var ypos = height +20; 
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
    d3.select("#figure").selectAll("rect.boxRed").remove(); 
@@ -873,7 +873,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all,(",14,'Verlag Book')+30)
+      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all,( ",14,'Verlag Book')+30)
       .attr("y",ypos)
       .text("joint with "+ getLastName(cName)+ ")");
          
@@ -936,7 +936,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
     data2.push(obj);
  }
   // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 40, bottom: 20, left: 40},
+    var margin = {top: 10, right: 40, bottom: 30, left: 40},
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   
@@ -1039,7 +1039,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
       // console.log(width + ": "+ textWidth + ": " + xpos);
-      var ypos = height +15; 
+      var ypos = height +20; 
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
    d3.select("#figure").selectAll("rect.boxBlue").remove(); 
