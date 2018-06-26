@@ -607,20 +607,20 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
       var textW = 0;
       var caption = ""; 
       if(type == "all"){
-        textW = getTextWidth(getLastName(name)+"'s #pub. per year",12, 'Verlag Book');
+        textW = getTextWidth(getLastName(name)+"'s #pub. per year",14, 'Verlag Book');
         caption = getLastName(name)+"'s #pub. per year"; 
       }
-      else if (type == "c"){
-        textW = getTextWidth(getLastName(name)+"'s #journal pub. per year",12, 'Verlag Book');
+      else if (type == "j"){
+        textW = getTextWidth(getLastName(name)+"'s #journal pub. per year",14, 'Verlag Book');
         caption = getLastName(name)+"'s #journal pub. per year";
       }
-      else if (type == "j"){
-        textW = getTextWidth(getLastName(name)+"'s #conference pub. per year",12, 'Verlag Book');
+      else if (type == "c"){
+        textW = getTextWidth(getLastName(name)+"'s #conference pub. per year",14, 'Verlag Book');
         caption = getLastName(name)+"'s #conference pub. per year";
       }
       else if (type == "firstA"){
-        textW = getTextWidth(getLastName(name)+"'s #first author pub. per year",12, 'Verlag Book');
-        caption = getLastName(name)+"'s #first author pub. per year";
+        textW = getTextWidth(getLastName(name)+"'s #first author pub. per year",14, 'Verlag Book');
+        caption = getLastName(name)+"'s #first-author pub. per year";
       }
 
       var xpos = (width/2 - (textW/2));
@@ -822,9 +822,9 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
            .text(getLastName(aName)+"'s Publication Timeline");
 
       // dynamic caption 
-    var allCaptionText = getLastName(aName)+"'s #pub. per year overall joint with " + getLastName(cName); 
+    var allCaptionText = getLastName(aName)+"'s #pub. per year ( all joint with )" + getLastName(cName); 
      // console.log(allCaptionText); 
-     var textWidth = getTextWidth(allCaptionText,12,'Verlag Book'); 
+     var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
       // console.log(width + ": "+ textWidth + ": " + xpos);
@@ -847,8 +847,8 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .data([1])
         .enter().append("rect")
         .attr("class", "boxGray")
-        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book'))
-        .attr("y", ypos - 8)
+        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book'))
+        .attr("y", ypos - 9)
         .attr("width", 10 )
         .attr("height", 10 );
 
@@ -856,16 +856,16 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book')+12)
+      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+12)
       .attr("y",ypos )
-      .text("all");
+      .text("all, ");
 
     svg.selectAll(".legendRectBlue")
     .data([1])
     .enter().append("rect")
     .attr("class", "boxRed")
-    .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #publ. per year all ( ",12,'Verlag Book')+20)
-    .attr("y", ypos - 8)
+    .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #publ. per year all, (",14,'Verlag Book')+12)
+    .attr("y", ypos - 9)
     .attr("width", 10 )
     .attr("height", 10 );
 
@@ -873,7 +873,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all ( ",12,'Verlag Book')+35)
+      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all,(",14,'Verlag Book')+30)
       .attr("y",ypos)
       .text("joint with "+ getLastName(cName)+ ")");
          
@@ -1033,9 +1033,9 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
 
      d3.select("#figure").selectAll("text.barTitle").remove();
      
-     var allCaptionText = getLastName(aName)+"'s #pub. per year overall on "+ topic; 
+     var allCaptionText = getLastName(aName)+"'s #pub. per year all , ()"+ topic; 
      // console.log(allCaptionText); 
-     var textWidth = getTextWidth(allCaptionText,12,'Verlag Book'); 
+     var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
       // console.log(width + ": "+ textWidth + ": " + xpos);
@@ -1058,8 +1058,8 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
         .data([1])
         .enter().append("rect")
         .attr("class", "boxGray")
-        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book'))
-        .attr("y", ypos - 8)
+        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book'))
+        .attr("y", ypos - 9)
         .attr("width", 10 )
         .attr("height", 10 );
 
@@ -1067,16 +1067,16 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",12,'Verlag Book')+12)
+      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+12)
       .attr("y",ypos )
-      .text("all");
+      .text("all, ");
 
     svg.selectAll(".legendRectBlue")
     .data([1])
     .enter().append("rect")
     .attr("class", "boxBlue")
-    .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #publ. per year all ( ",12,'Verlag Book')+20)
-    .attr("y", ypos - 8)
+    .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #publ. per year ( all, ",14,'Verlag Book')+10)
+    .attr("y", ypos - 9)
     .attr("width", 10 )
     .attr("height", 10 );
 
@@ -1084,9 +1084,9 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all ( ",12,'Verlag Book')+35)
+      .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year all ( ",14,'Verlag Book')+30)
       .attr("y",ypos)
-      .text("on "+ topic + ")");
+      .text(topic + ")");
          
 }
 function getTextWidth(text, fontSize, fontFace) {
