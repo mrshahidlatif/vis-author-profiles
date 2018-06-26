@@ -858,7 +858,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
         .data([1])
         .enter().append("rect")
         .attr("class", "boxGray")
-        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book'))
+        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year (",14,'Verlag Book'))
         .attr("y", ypos - 9)
         .attr("width", 10 )
         .attr("height", 10 );
@@ -867,7 +867,7 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+12)
+      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+10)
       .attr("y",ypos )
       .text("all, ");
 
@@ -1069,7 +1069,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
         .data([1])
         .enter().append("rect")
         .attr("class", "boxGray")
-        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book'))
+        .attr("x", xpos + getTextWidth(getLastName(aName)+"'s #pub. per year (",14,'Verlag Book'))
         .attr("y", ypos - 9)
         .attr("width", 10 )
         .attr("height", 10 );
@@ -1078,7 +1078,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+12)
+      .attr("x", xpos+ getTextWidth(getLastName(aName)+"'s #pub. per year ( ",14,'Verlag Book')+10)
       .attr("y",ypos )
       .text("all, ");
 
