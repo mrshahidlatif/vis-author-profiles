@@ -242,47 +242,58 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors);});
 
     //Adding legend and Title 
-    g.selectAll(".visTitle")
-      .data([1])
-      .enter().append("text")
-      .attr("class", "visTitle")
-      .attr("x", width/2 - 85)
-      .attr("y",-50)
-      .text("Co-author Publications Per Year");
+      //-----------------------------------------------------
+     var allCaptionText = "#Publlications per year ( all joint with )" + getLastName(aName); 
+     // console.log(allCaptionText); 
+     var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
+      //Adding a label
+      var xpos = (width/2 - (textWidth/2) - 20);
+      // console.log(width + ": "+ textWidth + ": " + xpos);
+      var ypos = -30; 
 
+   g.append("text")
+     .attr("transform", "translate("+ xpos + "," + ypos + ")")
+     // .append("text")
+     .attr("class", "barTitle")
+     .attr("y2", height)
+     .text("#Publications per year (");
+
+    //   //Adding legend and Title 
     g.selectAll(".legendRectGray")
         .data([1])
         .enter().append("rect")
         .attr("class", "boxGray")
-        .attr("x", width/2 - 125  )
-        .attr("y", -40 )
+        .attr("x", xpos + getTextWidth("#Publications per year (",14,'Verlag Book'))
+        .attr("y", ypos - 9)
         .attr("width", 10 )
         .attr("height", 10 );
-
-    g.selectAll(".legendTextRed")
-      .data([1])
-      .enter().append("text")
-      .attr("class", "legend")
-      .attr("x", width/2 - 110)
-      .attr("y",-31)
-      .text("Individual #publications");
-
-    g.selectAll(".legendRectRed")
-    .data([1])
-    .enter().append("rect")
-    .attr("class", "boxRed")
-    .attr("x", width/2 + 5)
-    .attr("y", -40 )
-    .attr("width", 10 )
-    .attr("height", 10 );
 
     g.selectAll(".legendTextGray")
       .data([1])
       .enter().append("text")
       .attr("class", "legend")
-      .attr("x", width/2 + 20)
-      .attr("y",-31)
-      .text("Joint #publications with " + getLastName(aName));
+      .attr("x", xpos+ getTextWidth("#Publications per year ( ",14,'Verlag Book')+10)
+      .attr("y",ypos )
+      .text("all, ");
+
+    g.selectAll(".legendRectBlue")
+    .data([1])
+    .enter().append("rect")
+    .attr("class", "boxRed")
+    .attr("x", xpos + getTextWidth("#Publications per year all, (",14,'Verlag Book')+15)
+    .attr("y", ypos - 9)
+    .attr("width", 10 )
+    .attr("height", 10 );
+
+    g.selectAll(".legendTextBlue")
+      .data([1])
+      .enter().append("text")
+      .attr("class", "legend")
+      .attr("x", xpos + getTextWidth("#publications per year all,( ",14,'Verlag Book')+30)
+      .attr("y",ypos)
+      .text("joint with "+ getLastName(aName)+ ")");
+  
+      //-----------------------------------------------------
 
   }
 }
