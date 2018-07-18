@@ -7,8 +7,16 @@
     font-weight: normal;
     src: local('Verlag Book'), url('Verlag-Book.woff') format('woff');
 }
+hr{
+  height:2px;
+  border-width:0;
+  color:gray;
+  background-color:gray
+}
+
 #logo { 
     float:left;
+    display: block;
     padding-left: 10px;
     padding-right: 15px;
     padding-top: 10px;
@@ -60,9 +68,19 @@ body
     font-size: 14pt;
     text-align: justify;
     line-height: 1.5;
+    height:100%;
 }
 p {
     text-align: justify;   
+}
+a{
+  color: black;
+}
+a:hover{
+  color: DodgerBlue;
+}
+#contact{
+   font-size: 12pt;
 }
 .title {
     /*background-color: #F1F1F1;*/
@@ -128,14 +146,40 @@ p {
     display: table;
     clear: both;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+   color: DodgerBlue;
+}
 
 .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
     background-color: #aaa;
-    text-align: center;
-    padding: 3px;
-    height: 30px; 
-    font-size: 0.6em;
     color: white;
+    vertical-align: middle;
+    line-height: 5px;  
+    font-size: 10pt;
 }
 
 /*Clickable Names*/

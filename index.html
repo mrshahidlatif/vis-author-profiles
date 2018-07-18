@@ -3,32 +3,15 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css">
-  <script src="lib/d3.v5.js"></script>
   <script src="lib/jquery-3.3.1.js"></script>
-  <script src="lib/jquery-ui.js"></script>
-  <script type="text/javascript"  src="adata.js"></script>
-  <script type="text/javascript"  src="pdata.js"></script>
-  <script type="text/javascript"  src="loadJsonData.js"></script>
-  <script type="text/javascript"  src="process.js"></script>
-  <script type="text/javascript"  src="nlg.js"></script>
-  <script type="text/javascript"  src="venue_keywords.js"></script>
-  <script type="text/javascript"  src="subfields_community.js"></script>
-  <script type="text/javascript"  src="author_keywords.js"></script>
-  <script type="text/javascript"  src="author_venue_keywords.js"></script>
-  <script type="text/javascript"  src="title_keywords.js"></script>
-  <script type="text/javascript"  src="dictionary.js"></script>
-  <script type="text/javascript"  src="author_autocomplete.js"></script>
-  <script type="text/javascript"  src="visualization.js"></script>
 
-  
   <title id="pageTitle">VAP</title>
 </head>
 <body>
     <div class="topnav">
-
        <!-- <img id="logo" src="logo.svg" srcset="logo.svg"> -->
        <div id="logo"> 
-           <object width="90" height="30" type="image/svg+xml" data="logo.svg">
+          <object width="90" height="30" type="image/svg+xml" data="logo.svg">
           </object>
         </div>
        <div class="autocomplete">
@@ -53,87 +36,128 @@
   <div class="row">
     <div class="leftcolumn">
       <p id="bio">
-        <b>VIS Author Profiles</b> describes publication records of authors from the visualization community in the form of interactive reports that combine automatically generated text and visualizations. The profiles are based on data from <a href="http://dblp.uni-trier.de/" target="_blank">DBLP</a>, the <a href="http://www.vispubdata.org/site/vispubdata/" target="_blank">Visualization Publication Data Collection</a>, and <a href="http://keyvis.org/expert.php" target="_blank">KeyVis</a>.
+        <i>VIS Author Profiles (VAP)</i> describes publication records of authors from the visualization community in the form of interactive reports that combine automatically generated text and visualizations. The profiles are based on data from <a href="http://dblp.uni-trier.de/" target="_blank">DBLP</a>, the <a href="http://www.vispubdata.org/site/vispubdata/" target="_blank">Visualization Publication Data Collection</a>, and <a href="http://keyvis.org/expert.php" target="_blank">KeyVis</a>. VAP uses a subset of the DBLP dataset, containing 127,871 publications until 16 July 2018. And our system produce profile pages of 5,087 authors working in the visualization community. VAP is a prototype and might contain occassional bugs or performance issues. If you encounter any problem or have a suggestion, please feel free to contact us.
       </p>
       <p id="rtopics">
-        Every author has an individual profile page. Type an author name in the search box, start with a <a id="r" href="#">random author profile</a>, or select one of the most frequent contributors of the visualization community. 
+        <b>Ready to explore?</b> <br>
+        Type an author's name in the search box or start with a <a id="r" href="#">random author's profile</a>. Every author has an individual profile page. 
+         <br> <br>
+         <b>DISCLAIMER:</b> The author's profile text is automatically generated, based on the analysis of bibliographic metadata. Therefore, we assume no responibility or liability for any inaccuracies or incompleteness in the contents of a profile page.
       </p>
-      <p id="collRelation"></p>
+      <p id="collRelation">
+      <b>Interested in finding out more about VAP?</b> <br>
+      Please read our paper: <br>
+      Shahid Latif and Fabian Beck: <i>VIS Author Profiles: Interactive Descriptions of Publication Records Combining Text and Visualization.</i> IEEE VIS 2018 <a href="">[Preprint]</a>
+      </p>
 
       <!-- <svg width="330" height="200" id="CollabChart1"></svg>
       <svg width="330" height="200" id="CollabChart2"></svg> -->
 
-      <svg  id="CollabChart1"></svg>
+    <svg  id="CollabChart1"></svg>
     </div>
     <div class="rightcolumn">
-          <p id=dod> </p>
+          <p id=dod>
+            <span id="sideBarHead"> Contact Us </span> <br> <hr>
+          </p>
+          <p id="contact">
+          <a href="https://www.vis.wiwi.uni-due.de/en/team/shahid-latif/">Shahid Latif</a> and 
+          <a href="https://www.vis.wiwi.uni-due.de/en/team/fabian-beck/">Fabian Beck</a> <br> 
+          {shahid.latif, fabian.beck} (at) paluno.uni-due.de <br>
+          University of Duisburg-Essen, Germany
+          </p>
     </div>
+  </div>
+  <div class="footer">
+    <ul>
+      <li><a href="index.html">CONTACT</a></li>
+      <li><a href="https://www.uni-due.de/de/impressum.shtml">IMPRINT</a></li>
+      <li><a href="https://www.uni-due.de/de/datenschutz.php">DATA PROTECTION</a></li>
+      <li style="float:right"><a href="https://www.vis.wiwi.uni-due.de/en/">ABOUT US</a></li>
+    </ul>
   </div>
   <script>
 
+    $( document ).ready(function() {
+
+        // console.log( "ready!" );
      autocomplete(document.getElementById("myInput"), authors_list);
-     // loadJSON("pubdata.json", function(response) {
-     //    pdata = JSON.parse(response);
+     loadJSON("data/pdata.json", function(response) {
+        pdata = JSON.parse(response);
 
-     // loadJSON("authordata.json", function(response) {
-     //    adata = JSON.parse(response);
-       
-        // console.log(pdata);
-        // console.log(adata); 
+       loadJSON("data/adata.json", function(response) {
+          adata = JSON.parse(response);
+         
+          // console.log(pdata);
+          // console.log(adata); 
 
-        //var name = "";
-          var l=3;
-          var u=8;
+          //var name = "";
+            var l=3;
+            var u=8;
 
-        //Reading authorname from url and loading the profile
-        //URL PARAMETERS 
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
-        var author_name_param = getParameterByName('name');
-        // console.log(author_name_param);
-
-          document.getElementById('r').addEventListener('click', function(){
-            var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
-            process(pdata, adata, random_name , "CollabChart1",l,u,1);
-          }); 
-
-          document.getElementById('myInput').onkeydown = function(event) {
-            if (event.keyCode == 13) {
-                var sss = document.getElementById("myInput").value;
-                search(pdata, adata); 
-            }
+          //Reading authorname from url and loading the profile
+          //URL PARAMETERS 
+          function getParameterByName(name, url) {
+              if (!url) url = window.location.href;
+              name = name.replace(/[\[\]]/g, "\\$&");
+              var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                  results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return '';
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
           }
-     
-    
-          document.getElementById('srchbtn').addEventListener('click', function(){
-              search(pdata, adata);
-          }); 
-        
+          var author_name_param = getParameterByName('name');
+          // console.log(author_name_param);
 
-       // console.log(author_name_param);
-        
-        if(author_name_param != null){
-            document.getElementById("bio").innerHTML = "";
-            document.getElementById("rtopics").innerHTML = "";
-            process(pdata, adata, author_name_param,"CollabChart1",l,u); 
-        }
+            document.getElementById('r').addEventListener('click', function(){
+              var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
+              process(pdata, adata, random_name , "CollabChart1",l,u,1);
+            }); 
 
-        function search(pdata, adata){
-          // name = document.getElementById("search").value;
-          name = document.getElementById("myInput").value;
-          document.getElementById("myInput").value = "";
-          process(pdata, adata, name,"CollabChart1",l,u); 
-        }
-  //     });
-  // });
+            document.getElementById('myInput').onkeydown = function(event) {
+              if (event.keyCode == 13) {
+                  var sss = document.getElementById("myInput").value;
+                  search(pdata, adata); 
+              }
+            }       
+      
+            document.getElementById('srchbtn').addEventListener('click', function(){
+                search(pdata, adata);
+            }); 
+          
+
+         // console.log(author_name_param);
+          
+          if(author_name_param != null){
+              document.getElementById("bio").innerHTML = "";
+              document.getElementById("rtopics").innerHTML = "";
+              process(pdata, adata, author_name_param,"CollabChart1",l,u); 
+          }
+
+          function search(pdata, adata){
+            // name = document.getElementById("search").value;
+            name = document.getElementById("myInput").value;
+            document.getElementById("myInput").value = "";
+            process(pdata, adata, name,"CollabChart1",l,u); 
+          }
+        });
+      });
+    });
+
+
   </script>
 </body>
+  <script src="lib/d3.v5.js"></script>
+  <script src="lib/jquery-ui.js"></script>
+  <script type="text/javascript"  src="loadJsonData.js"></script>
+  <script type="text/javascript"  src="process.js"></script>
+  <script type="text/javascript"  src="nlg.js"></script>
+  <script type="text/javascript"  src="venue_keywords.js"></script>
+  <script type="text/javascript"  src="subfields_community.js"></script>
+  <script type="text/javascript"  src="author_keywords.js"></script>
+  <script type="text/javascript"  src="author_venue_keywords.js"></script>
+  <script type="text/javascript"  src="title_keywords.js"></script>
+  <script type="text/javascript"  src="dictionary.js"></script>
+  <script type="text/javascript"  src="author_autocomplete.js"></script>
+  <script type="text/javascript"  src="visualization.js"></script>
 
 </html> 

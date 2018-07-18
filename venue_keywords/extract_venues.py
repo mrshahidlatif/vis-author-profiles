@@ -2,7 +2,7 @@ import json
 import re
 import operator
 
-data = json.load(open("../pubdata.json", encoding="utf8"))
+data = json.load(open("../data/pdata.json", encoding="utf8"))
 
 venues = {}
 venueRawMapping = {}

@@ -5,6 +5,8 @@ function process(pdata, adata, name,container, minN,maxN) {
   //Clearing Stuff when searching for new author
   // console.log(name); 
   document.getElementById("dod").innerHTML= ""; 
+  document.getElementById("contact").innerHTML= ""; 
+  $('hr').remove();
   listOfSparklines = []; 
 
   var allCoAuthors = [];
