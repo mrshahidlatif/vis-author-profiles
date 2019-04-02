@@ -1,7 +1,5 @@
 var MORE_TO_SHOW = 3; 
 function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAuthors, t){
-  // console.log(gdata);
-  // console.log(adata);
   if (t==1){
     MORE_TO_SHOW =3;
   }
@@ -14,7 +12,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   }
   if(isFound) {
     var main_author_start_year = d3.min(main_author.AllPublicationsPerYear, function(d){return d.Year});
-    //console.log(main_author);
     //Data for individual Publications
     var indPub = [];
     for(var i=0;i<adata.length;i++){
@@ -48,9 +45,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
   if (main_author_start_year < minYear ){
     minYear = main_author_start_year;
   }
-
-  //console.log(indPub);
-  //var svg = d3.select("#" + canvas),
   var h = indPub.length*50 + 80; //adding thirty for the margins 
   var w = (maxYear-minYear)*20;
   if (w > 550) {w = 550;}
@@ -65,9 +59,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
     margin = {top: 70, right: 0, bottom: 20, left: 20};
     width = +svg.attr("width") - margin.left - margin.right;
     height = +svg.attr("height") - margin.top - margin.bottom;
-    //height = indPub.length*60 - margin.top - margin.bottom;
-
-  // console.log(height);
   
   //Clearing the contents of SVG before second search
   svg.selectAll("*").remove();
@@ -90,9 +81,7 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
     .attr("class", "tooltip")
     .style("opacity", 0);
       
-      //x.domain(data.map(function(d) { return d.Year; }));
       x.domain(xDomain);
-      //y.domain([0, d3.max(data, function(d) { return d.Value; })]);
       y.domain([0,maxCount]);
       
       if (j==0){
@@ -108,8 +97,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             .attr("width", function(d){return x(d.EndYear) - x(d.StartYear)+x.bandwidth();})
             .attr("height",height/N);
 
-          //Adding names of coauthors 
-          // loadMe(pdata, adata, this.innerHTML)
         g.selectAll(".names")
           .data(gdata)
           .enter().append("text")
@@ -164,7 +151,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .text(minYear)
 
         if (main_author_start_year != minYear){
-          // console.log(main_author_start_year);
            g.selectAll(".labelStartYear")
             .data([1])
             .enter().append("text")
@@ -178,7 +164,6 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
             });
         }
       }
-      //adding bars for individual publications 
       g.selectAll(".bar")
         .data(indPub[j])
         .enter().append("rect")
@@ -242,14 +227,10 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
           .on("click", function(d){updateCoauthorVis(canvas, pdata, aName, allAuthorsData , distCoAuthors);});
 
     //Adding legend and Title 
-      //-----------------------------------------------------
      var allCaptionText = "#Publlications per year ( all joint with )" + getLastName(aName); 
-     // console.log(allCaptionText); 
      var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
-      //Adding a label
-      var xpos = (width/2 - (textWidth/2) - 20);
-      // console.log(width + ": "+ textWidth + ": " + xpos);
-      var ypos = -30; 
+     var xpos = (width/2 - (textWidth/2) - 20);
+     var ypos = -30; 
 
    g.append("text")
      .attr("transform", "translate("+ xpos + "," + ypos + ")")
@@ -292,12 +273,9 @@ function generateVis(gdata, adata, canvas,pdata, aName, allAuthorsData, distCoAu
       .attr("x", xpos + getTextWidth("#publications per year all,( ",14,'Verlag Book')+30)
       .attr("y",ypos)
       .text("joint with "+ getLastName(aName)+ ")");
-  
-      //-----------------------------------------------------
 
   }
 }
-
 function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
      MORE_TO_SHOW += 3; 
      var authorObjects = [];
@@ -321,7 +299,6 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
            authorObjects.push(author_object); 
         }
      }
-     // console.log(authorObjects);
         var dataForGantt = [];
         for (var i = 0; i < authorObjects.length; i++) {
           var sYear = Math.min(getMin(authorObjects[i].AllPublicationsPerYear));
@@ -332,30 +309,24 @@ function updateCoauthorVis(canvas, pdata, aName, adata , distCoAuthors){
           a.StartYear = sYear;
           a.EndYear = lYear;
           a.MutualPublications = distCoAuthors[i].Value;
-          //console.log(a.MutualPublications/(2017-a.StartYear)); 
           dataForGantt.push(a);
         }
-        // console.log(dataForGantt);
+
         for (var i=0;i<dataForGantt.length;i++){
           var mppy = getMutualPublications(pdata, aName, dataForGantt[i].Name);
-          // console.log(mppy);
           dataForGantt[i]["MutualPubPerYear"] = mppy;
           sortByYear(dataForGantt[i].MutualPubPerYear);
           
         }
 
-        // console.log(dataForGantt);
         generateVis(dataForGantt, authorObjects, canvas, pdata,aName, adata, distCoAuthors, 2); 
 
 }
 function showMutualPublications(pdata, adata, year, aName, cName){
   //Prints the mutual publications on mouse click in side panel 
-  //console.log("Hi from Call me ");
-  //console.log(year + aName+cName);
   var pubs = getMutualPublicationObjects(pdata, year,aName, cName);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Mutual Publications " + "(" + pubs.length + ") : " +
    getLastName(aName) + " and " + getLastName(cName) + ", " + year + "</span>" + "<br>" + "<hr>";
-  // console.log(pubs);
   pubs.sort(function(a, b){
      var nameA=a.Title.toLowerCase(), nameB=b.Title.toLowerCase();
      if (nameA < nameB) //sort string ascending
@@ -364,7 +335,6 @@ function showMutualPublications(pdata, adata, year, aName, cName){
       return 1;
      return 0; //default return value (no sorting)
   });
-  // console.log(pubs);
   for (var i=0; i<pubs.length;i++){
     StringifyPublication(pdata, adata, pubs[i]);
   }
@@ -372,9 +342,7 @@ function showMutualPublications(pdata, adata, year, aName, cName){
 
 function showIndividualPublications(pdata, adata, year, name){
   //Prints the mutual publications on mouse click in side panel 
-  // console.log(year + name);
   var pubs = getIndividualPublicationsObjects(pdata, year, name);
-  // console.log(pubs);
   document.getElementById("dod").innerHTML= '<span id=sideBarHead>' + "Individual Publications " + "(" + pubs.length + ") : " + getLastNameForVis(name)
   + ", " + year + "</span>" + "<br>" + "<hr>";
 
@@ -444,9 +412,6 @@ function StringifyPublication(pdata, adata, p){
   //document.getElementById("dod").innerHTML = pString + "<br>";
 }
 function loadMe(pdata, adata, name){
-  // console.log(pdata);
-  // console.log(adata); 
-  // console.log(name); 
   process(pdata, adata, name, "CollabChart1", 3, 8); 
   
 }
@@ -469,8 +434,6 @@ function getMutualPublicationObjects(pubData, year, aName, cName){
     return mutualPublications; 
 }
 function getAuthorObjectByName(adata, name){
-  //console.log(adata)
-  //console.log(name);
   for (var i=0;i<adata.length;i++){
     if (adata[i].Name==name){
       var obj =adata[i];
@@ -480,8 +443,6 @@ function getAuthorObjectByName(adata, name){
 }
 
 function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, type){
-
- // console.log(type); 
  var largeScale = false;
  if (h>100 || w>200){
   largeScale = true ;
@@ -490,14 +451,11 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
  data.sort(function(a, b) {
     return +a.Year - +b.Year;
   });
- //console.log(data); 
  // add in missing years 
  var data2 = [];
  //var range = +data[data.length-1].Year - +data[0].Year;
  var range = endYear - startYear; 
- //console.log(range);
  for (var i=0;i<=range;i++){
-    //var year = +data[0].Year + i;
     var year = +startYear + i;
     var count = 0;
     for (j=0;j<data.length;j++){
@@ -511,12 +469,10 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
     data2.push(obj);
  }
 
-    //tooltip 
+  //tooltip 
   var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
-
- //console.log(data2); 
   // set the dimensions and margins of the graph
   if (largeScale){
     var margin = {top: 10, right: 40, bottom: 30, left: 40},
@@ -536,14 +492,10 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
   var y = d3.scaleLinear()
             .range([height, 0]);
 
-  // append the svg object to the body of the page
-  // append a 'group' element to 'svg'
-  // moves the 'group' element to the top left margin
   var svg = d3.select("#" + canvas)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .style("background-color", '#f2f2f2')
-      // .attr("style", "outline: thin solid red;")  
 
       .append("g")
       .attr("transform", 
@@ -563,7 +515,6 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
   svg.selectAll(".bar").remove();
   // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
-  //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
   y.domain([0, ymax]);
 
   // append the rectangles for the bar chart
@@ -642,8 +593,6 @@ function generateSparkline(data,canvas, h, w, startYear, endYear, ymax, name, ty
          .attr("class", "barTitle")
          .attr("y2", height)
          .text(caption);
-
-      // svg.selectAll("text.barTitle").remove();
     }
 
 }
@@ -662,7 +611,6 @@ function removeBorder(container){
 
 function generateSparklineForMutualPublications(pdata, adata, a, cName, data,canvas, h, w, startYear, endYear, ymax){
 
- // console.log(ymax); 
  aName = a.Name; 
  var largeScale = false;
  if (h>100 || w>200){
@@ -672,12 +620,10 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
  data.sort(function(a, b) {
     return +a.Year - +b.Year;
   });
- //console.log(data); 
  // add in missing years 
  var data2 = [];
  //var range = +data[data.length-1].Year - +data[0].Year;
  var range = endYear - startYear; 
- //console.log(range);
  for (var i=0;i<=range;i++){
     //var year = +data[0].Year + i;
     var year = +startYear + i;
@@ -703,7 +649,6 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
       width =  w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
   }
-
   // set the ranges
   var x = d3.scaleBand()
             .range([0, width])
@@ -781,8 +726,6 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
           return ("In " + d.Year + ", the author published " + d.Value + " publications in total. [Click to see details]");
         });
 
-
-      // console.log(data2);
       svg.selectAll(".mbar")
         .data(data2)
         .enter().append("rect")
@@ -834,11 +777,9 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 
       // dynamic caption 
     var allCaptionText = getLastName(aName)+"'s #pub. per year ( all joint with )" + getLastName(cName); 
-     // console.log(allCaptionText); 
-     var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
+    var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
-      // console.log(width + ": "+ textWidth + ": " + xpos);
       var ypos = height +20; 
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
@@ -848,7 +789,6 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 
    svg.append("text")
      .attr("transform", "translate("+ xpos + "," + ypos + ")")
-     // .append("text")
      .attr("class", "barTitle")
      .attr("y2", height)
      .text(getLastName(aName)+"'s #pub. per year (");
@@ -892,7 +832,6 @@ function generateSparklineForMutualPublications(pdata, adata, a, cName, data,can
 }
 
 function enlargeMe(data, id, startYear, endYear, ymax, name,type){
-   //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
     generateSparkline(data,"figure", 100, 360, startYear, endYear, ymax, name,type); 
 
@@ -902,7 +841,6 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
     //adata : Data of all authors 
     //aName : Name of main author 
     //cName : Name of coauthor 
-   //console.log(data); 
     document.getElementById("info").innerHTML = '<svg width="400" height="200" id="figure"></svg>';
     generateSparklineForMutualPublications(pdata, adata, a, cName, data,"figure", 100, 360, startYear, endYear, ymax); 
 
@@ -911,9 +849,6 @@ function enlargeMe_MutualPublications(pdata, adata, a, cName, data, id, startYea
 }
 
 function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, topic){
-
- // console.log(classOfBars); 
-
  var a = getAuthorObjectByName(adata, authorName);
  aName = a.Name;
 
@@ -927,13 +862,10 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
  var w=360;
  // add in missing years 
  var data2 = [];
- //var range = +data[data.length-1].Year - +data[0].Year;
   var startYear = findStartYear(a);
   var endYear = findEndYear(a);
- var range = endYear - startYear; 
- //console.log(range);
+  var range = endYear - startYear; 
  for (var i=0;i<=range;i++){
-    //var year = +data[0].Year + i;
     var year = +startYear + i;
     var count = 0;
     for (j=0;j<data.length;j++){
@@ -963,7 +895,6 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
   // append the svg object to the body of the page
   // append a 'group' element to 'svg'
   // moves the 'group' element to the top left margin
-
       var svg = d3.select("#" + canvas)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -979,9 +910,7 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       
   
   svg.selectAll("*.tbar").remove();
-  // Scale the range of the data in the domains
   x.domain(data2.map(function(d) { return d.Year; }));
-  //y.domain([0, d3.max(data2, function(d) { return d.Value; })]);
   y.domain([0, ymax]);
 
 
@@ -1003,8 +932,6 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
       .text(function(d){
          return("In "+d.Year+", the author published " + d.Value +" publications in total. [Click to see details]");
       });
-
-      // console.log(data2);
        svg.selectAll("." +classOfBars)
         .data(data2)
         .enter().append("rect")
@@ -1045,11 +972,9 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
      d3.select("#figure").selectAll("text.barTitle").remove();
      
      var allCaptionText = getLastName(aName)+"'s #pub. per year all , ()"+ topic; 
-     // console.log(allCaptionText); 
      var textWidth = getTextWidth(allCaptionText,14,'Verlag Book'); 
       //Adding a label
       var xpos = (width/2 - (textWidth/2) - 20);
-      // console.log(width + ": "+ textWidth + ": " + xpos);
       var ypos = height +20; 
    
    d3.select("#figure").selectAll("rect.boxGray").remove();
@@ -1059,7 +984,6 @@ function generateBarChart(pdata, adata, authorName, data, canvas, classOfBars, t
 
    svg.append("text")
      .attr("transform", "translate("+ xpos + "," + ypos + ")")
-     // .append("text")
      .attr("class", "barTitle")
      .attr("y2", height)
      .text(getLastName(aName)+"'s #pub. per year (");
