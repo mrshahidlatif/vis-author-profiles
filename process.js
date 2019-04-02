@@ -24,10 +24,8 @@ function process(pdata, adata, name,container, minN,maxN) {
           }
         }
       }
-      // console.log(allCoAuthors);
       var items = compressArray(allCoAuthors, name);
       var topNCoAuthor = getTopNItems(items, minN, maxN);
-      // console.log(items); 
       
       var topNCoAuthorObjects = [];
       var visAuthor = false; 
@@ -60,10 +58,8 @@ function process(pdata, adata, name,container, minN,maxN) {
           a.StartYear = sYear;
           a.EndYear = lYear;
           a.MutualPublications = topNCoAuthor[i].Value;
-          //console.log(a.MutualPublications/(2017-a.StartYear)); 
           dataForGantt.push(a);
         }
-        //console.log(dataForGantt);
         for (var i=0;i<dataForGantt.length;i++){
           var mppy = getMutualPublications(pdata,name, dataForGantt[i].Name);
           dataForGantt[i]["MutualPubPerYear"] = mppy;
@@ -75,7 +71,6 @@ function process(pdata, adata, name,container, minN,maxN) {
         var statData = []; //For computing statistics 
         var pubCount = 0; //No of publications for searched author
         var aObject;
-          //console.log(adata);
           for (var i = 0; i < adata.length; i++) {
             statData.push(adata[i].Journals + adata[i].Conferences);
             if (adata[i].Name == name) {
@@ -155,7 +150,6 @@ function countFrequency(original) {
   return compressed;
 }
 
-
 function sortByYear(data) {
   data.sort(function(a, b) {
     return +(a.Year) - +(b.Year);
@@ -205,16 +199,13 @@ function getTopNItems(items, minN, maxN) {
   }
 
   if (topItems.length > minN){
-    // console.log(topItems);
     var gaps = [];
     for(var i=minN;i<topItems.length;i++){
       var gap = topItems[i-1].Value - topItems[i].Value;
       gaps.push(gap);
     }
-    // console.log(gaps);
     var maxGap = d3.max(gaps);
     var cutPoint = gaps.indexOf(maxGap) + minN ; // adding 1 due to 0-indexing system 
-    // console.log(cutPoint);
     
     for (var i=0;i<cutPoint;i++){
       finaltopItems.push(topItems[i]);
@@ -223,15 +214,12 @@ function getTopNItems(items, minN, maxN) {
   else {
     finaltopItems = topItems;
   }
-  // console.log(finaltopItems); 
 
   return finaltopItems;
 }
 //Counting frequency of each element in array and return a (key,value) pair
 //Also removes the self author
 function compressArray(original, name) {
-  //console.log(original);
-  //console.log(name);
   var compressed = [];
   // make a copy of the input array
   var copy = original.slice(0);
@@ -258,8 +246,6 @@ function compressArray(original, name) {
     }
   }
   //Remove the self author 
-  // console.log(compressed); 
-  // compressed.filter(function(e){return e.Name!=name;});
   compressed = $.grep(compressed,
     function(o, i) {
       return o.Name === name;
@@ -269,7 +255,6 @@ function compressArray(original, name) {
   return compressed;
 }
 
-//Return (Year, Value ) 
 //Later to be merged with compressArray() as it is duplication
 function compressArray2(original) {
   //console.log(original);

@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="topnav">
-       <!-- <img id="logo" src="logo.svg" srcset="logo.svg"> -->
        <div id="logo"> 
           <object width="90" height="30" type="image/svg+xml" data="logo.svg">
           </object>
@@ -30,9 +29,7 @@
         <div class="infoHead" id="info"></div>
        </div>
       </div>
-    
   </div>
-
   <div class="row">
     <div class="leftcolumn">
       <p id="bio">
@@ -46,10 +43,6 @@
       <b>Publication</b> <br>
       Shahid Latif and Fabian Beck: <i>VIS Author Profiles: Interactive Descriptions of Publication Records Combining Text and Visualization.</i> IEEE VIS 2018 <a href="" target="_blank">[Preprint]</a>
       </p>
-
-      <!-- <svg width="330" height="200" id="CollabChart1"></svg>
-      <svg width="330" height="200" id="CollabChart2"></svg> -->
-
     <svg  id="CollabChart1"></svg>
     </div>
     <div class="rightcolumn">
@@ -75,19 +68,12 @@
   <script>
 
     $( document ).ready(function() {
-
-        // console.log( "ready!" );
      autocomplete(document.getElementById("myInput"), authors_list);
      loadJSON("data/pdata.json", function(response) {
         pdata = JSON.parse(response);
 
        loadJSON("data/adata.json", function(response) {
           adata = JSON.parse(response);
-         
-          // console.log(pdata);
-          // console.log(adata); 
-
-          //var name = "";
             var l=3;
             var u=8;
 
@@ -103,7 +89,6 @@
               return decodeURIComponent(results[2].replace(/\+/g, " "));
           }
           var author_name_param = getParameterByName('name');
-          // console.log(author_name_param);
 
             document.getElementById('r').addEventListener('click', function(){
               var random_name = authors_list[Math.floor(Math.random() * authors_list.length)];
@@ -120,9 +105,6 @@
             document.getElementById('srchbtn').addEventListener('click', function(){
                 search(pdata, adata);
             }); 
-          
-
-         // console.log(author_name_param);
           
           if(author_name_param != null){
               document.getElementById("bio").innerHTML = "";
