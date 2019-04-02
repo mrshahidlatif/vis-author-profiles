@@ -19,7 +19,6 @@
        <input id="srchbtn" type="submit" value="Search">
     
   </div>
-  
   <div class="header">
     <div class="rowHeader">
        <div class="leftcolumnHeader" >
@@ -76,9 +75,6 @@
           adata = JSON.parse(response);
             var l=3;
             var u=8;
-
-          //Reading authorname from url and loading the profile
-          //URL PARAMETERS 
           function getParameterByName(name, url) {
               if (!url) url = window.location.href;
               name = name.replace(/[\[\]]/g, "\\$&");
@@ -113,7 +109,6 @@
           }
 
           function search(pdata, adata){
-            // name = document.getElementById("search").value;
             name = document.getElementById("myInput").value;
             document.getElementById("myInput").value = "";
             process(pdata, adata, name,"CollabChart1",l,u); 
@@ -121,8 +116,6 @@
         });
       });
     });
-
-
   </script>
 </body>
   <script src="lib/d3.v5.js"></script>
