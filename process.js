@@ -1,9 +1,5 @@
 function process(pdata, adata, name,container, minN,maxN) {
-  //Processing the data 
-  // var pdata;
-  // var adata;
   //Clearing Stuff when searching for new author
-  // console.log(name); 
   document.getElementById("dod").innerHTML= ""; 
   document.getElementById("contact").innerHTML= ""; 
   $('hr').remove();

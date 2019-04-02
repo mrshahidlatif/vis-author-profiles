@@ -21,13 +21,10 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 
 	var totalpubCount = (aObject.Journals+aObject.Conferences);
 	var yearsActive = eYear - sYear + 1; 
-	
-	//document.getElementById("name").innerHTML = title;
 	getKeywords(pdata, aObject); 
 
 	if (totalpubCount > 2) {
 		researchTopicsText = generateResearchTopicsText(pdata, adata, aObject); 
-		// collaborationRelationText = generateCollaborationRelationText(pdata, adata, aObject, topCoAuthors);
 		document.getElementById("info").innerHTML = ""; //resetting bar chart on new profile load
 	}
 	else document.getElementById("rtopics").innerHTML = ""; 
@@ -35,7 +32,6 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 	if (totalpubCount < 10 ){
 		//Special Summary for these authors
 		var bio = generateSummaryForOutliers(pdata, adata, aObject);
-		// console.log(topCoAuthors);
 		if (topCoAuthors.length > 0){
 			collaborationRelationText = getLastName(aObject.Name) + " worked with " + stringifyListWithAuthorLinks(convertToStringArray(topCoAuthors)) + "."; 
 		}
@@ -43,7 +39,6 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		$collRelation.html(collaborationRelationText); 
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 	}
 	else if (totalpubCount >= 10){
 			var bio = generateSummary(pdata, adata, aObject);
@@ -67,7 +62,7 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		if(hasSupversied && !isSupSupervisor){
 			title += '<img class="badge" align="top" src="badges/supervisor.svg">'; 
 		}
-		// console.log(isSupSupervisor);
+
 		if(isSupSupervisor){
 			title += '<img class="badge" align="top" src="badges/sup_supervisor.svg">'; 
 		}
@@ -85,7 +80,6 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		var ymax = d3.max(aObject.AllPublicationsPerYear, function(d){return d.Value});
 		document.getElementById("bio").innerHTML = bio;
 		document.getElementById("name").innerHTML = title;
-		// document.getElementById("collRelation").innerHTML = collaborationRelationText;
 
 		generateSparkline(aObject.ConfsPerYear,"sparklineConfs", 20, 90, sYear,eYear, ymax, aObject.Name,"c");
 		generateSparkline(aObject.JournalsPerYear,"sparklineJournals", 20, 90, sYear,eYear, ymax, aObject.Name,"j");
@@ -96,7 +90,6 @@ function generateProfileText(pdata, adata, aObject, topCoAuthors) {
 		generateSparkline(aObject.AllPublicationsPerYear,"figure", 100, 360, sYear, eYear, ymax, aObject.Name,"all");
 		
 		for (var i=0;i<listOfSparklines.length;i++){
-			// console.log(listOfSparklines[i]);
 			generateSparklineForMutualPublications(pdata, adata, aObject, listOfSparklines[i].coauthor, listOfSparklines[i].data,listOfSparklines[i].sparklineID, 20, 90, sYear,eYear, ymax);
 		}
 	}
@@ -113,7 +106,6 @@ function findEndYear(aObject){
 function generateSummary(pdata, adata, a, p)
 {
 	var trend = analyzeTimeSeries(a.AllPublicationsPerYear, a);
-	// console.log(trend); 
 
 	var bio = "";
 	var pub = getPublications(pdata, a.Name);
@@ -297,16 +289,9 @@ function generateSummaryForOutliers(pdata, adata, a, p)
 
 function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees){
 	var s = "" ;
-	//console.log(c.Name); makeMeLive(c.Name)
-
-	// var sYear = findStartYear(a);
-	// var eYear = findEndYear(c);
 	var endOfCollaborationYear = getMax(c.MutualPubPerYear);
-	// console.log(endOfCollaborationYear);
-	// console.log(c); 
 
 	if (DoesExistInList(supervisees, c.Name)){
-		// var superviseeStartYear = getMin(c.)
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and " ;
 		
@@ -324,7 +309,6 @@ function mostFrequentCoauthorPhrase(pdata, adata, a, c, supervisors,supervisees)
 	}
 	else if (DoesExistInSupervisors(supervisors, c.Name)){
 		var author_startYear = getMin(a.AllPublicationsPerYear);
-		// console.log(author_startYear);
 
 		s = getLastNamePronoun(a.Name) + " most frequent co-author and ";
 		s+= (author_startYear <=2008) ? " past supervisor" + '<span class="info" onclick="infoSupervisor()">&#9432</span>' +" is "+ makeMeLive_FullName(c.Name) + " " + '<span class="no-wrap"><svg width="70" height="20" id="sparkline_top_coll_supvervisor"></svg>' + ".</span> "
@@ -372,7 +356,6 @@ function firstCollaborationDescriptionPhrase(pdata, adata, a,c){
 	var s = "";
 	var startYear = d3.min(c.MutualPubPerYear, function(d){return +d.Year;});
 	var lastYear = d3.max(c.MutualPubPerYear, function(d){return +d.Year;});
-	//console.log(lastYear); 
 	if (lastYear>2015){
 		s += " It is ";
 		if (lastYear - startYear > 20){
@@ -519,7 +502,6 @@ function stringifyListWithSparklines(list) {
 		default:
 			var s = "";
 			for (var i=0; i<Math.min(list.length,MAX_SUPERVISEES);i++){
-			// list.forEach(function (element, i) {
 				element = list[i]; 
 				if (i > 0) {
 					s += ",</span> ";
@@ -608,7 +590,6 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 			supervisees = RemoveItemFromList(supervisees, list_c[i].Name);
 		}
 	}
-	// console.log(alreadySupervisees); 
 	if (alreadySupervisees.length > 0 && supervisees.length > 0){
 		if (alreadySupervisees.length == 1){
 			s += "In addition to " + makeMeLive_LastName(alreadySupervisees[0].Name) ;
@@ -617,7 +598,6 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 			s += "In addition to " +  makeMeLive_LastName(alreadySupervisees[0].Name) + " and " +  makeMeLive_LastName(alreadySupervisees[1].Name) ; 
 		}
 		else {
-			// console.log(alreadySupervisees); 
 			s += "In addition to ";
 			for (var i=0;i<alreadySupervisees.length;i++){
 				if(i==alreadySupervisees.length-1){
@@ -643,18 +623,14 @@ function superviseePhrase_InAdditionToN(pdata, adata, a,list_c,supervisees){
 	return s;
 }
 function collaborationGroupPhrase(pdata, adata, a){
-	// console.log(a.CollaborationGroups);
 	var s="";
 	var groups = a.CollaborationGroups;
-	// console.log(groups); 
 	var info = '<span class="info" onclick="">&#9432</span>';
 	//Adding attribute "Value" for using in getTopNItems()
 	for(var i=0;i<groups.length ;i++){
 		groups[i]["Value"]= groups[i].Publications;
 	}  
-	// console.log(groups);
 	var topGroups = getTopNItems(groups, 2,3);
-	// console.log(topGroups);
 	switch (topGroups.length) {
 		case 0: return "";
 		case 1:
@@ -665,7 +641,6 @@ function collaborationGroupPhrase(pdata, adata, a){
 			$subgroups.find(".info").click(function () {
 				showAdditionalInfoGroups(a, a.CollaborationGroups);
 			});
-			// console.log(s);
 			return $subgroups;
 		case 2:
 			s += " Regarding collaboration subgroups" + info + ", "+ getLastName(a.Name) + " has worked with " + stringifyListWithAuthorLinks(topGroups[0].Members);
@@ -699,7 +674,6 @@ function getGroupKeywords(pdata, a, groupMembers){
 	var keywords = {};
 	var pubs = getPublications(pdata, a.Name);
 	var groupPubs = getGroupPublications(pubs, groupMembers);
-	// console.log(groupPubs);
 	for (var i = 0; i < groupPubs.length; i++) {
 		var pubKeywords = getPublicationKeywords(groupPubs[i])
 		for (var j = 0; j < pubKeywords.length; j++) {
@@ -717,15 +691,12 @@ function getGroupKeywords(pdata, a, groupMembers){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	// console.log(keywordList);
 	FilteredkeywordList = keywordList.filter(function(d){return d.Value > 1; });
 	FilteredkeywordList = FilteredkeywordList.filter(function(d){return d.Name != "visualization"}); 
-	// console.log(FilteredkeywordList);
 
 	return convertToStringArray(FilteredkeywordList);
 }
 function getGroupPublications(pubs, groupMembers){
-	// console.log(pubs);
 	var groupPubs = [];
 	for (var i=0;i<pubs.length;i++){
 		var allAuthors = convertToStringArray(pubs[i].Authors);
@@ -733,7 +704,7 @@ function getGroupPublications(pubs, groupMembers){
 			groupPubs.push(pubs[i]);
 		}
 	}
-	// console.log(groupPubs);
+
 	return groupPubs;
 }
 function convertToStringArray(listOfObjects){
@@ -741,7 +712,6 @@ function convertToStringArray(listOfObjects){
 	for (var i=0;i<listOfObjects.length;i++){
 		arr.push(listOfObjects[i].Name);
 	}
-	// console.log(arr);
 	return arr;
 
 }
@@ -749,15 +719,11 @@ function isGroupPublication(allAuthors, groupMembers){
 	var r= false;
 	var memberFoundCount = 0;
 	for (var i=0;i<groupMembers.length;i++){
-		// console.log(allAuthors);
-		// console.log(groupMembers);
 		if (allAuthors.indexOf(groupMembers[i]) > -1){
 			memberFoundCount++;
 		}
 	}
-	// console.log(memberFoundCount);
 	if (memberFoundCount==groupMembers.length) {r = true;}
-	// console.log(r);
 	return r;
 }
 
@@ -769,7 +735,6 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	var supervisors = []; 
 	var main_author_startYear = getStartYear(a);
 	var pubCount = a.Journals + a.Conferences; 
-	//console.log(main_author_startYear);
 	for (var i=0;i<topCoAuthors.length;i++){
 		if(topCoAuthors[i].StartYear < main_author_startYear + 5) {
 			var pubs = getAllMutualPublications(pdata, a.Name, topCoAuthors[i].Name)
@@ -818,13 +783,11 @@ function generateCollaborationRelationText(pdata, adata, a, topCoAuthors){
 	$subgroups = collaborationGroupPhrase(pdata, adata, a); 
 	$collRelation.html(text);
 	$collRelation.append($subgroups);
-	// return text; 
+
 }
 function supSupervisorPhrase(pdata, adata, author, supervisees){
 	var s="";
 	var supSupervisees = supSupervisor(pdata, adata, author, supervisees); 
-
-	// var names = stringifyListWithAuthorLinks(convertToStringArray(supSupervisees));
 
 	if (supSupervisees.length > 0){
 		isSupSupervisor = true;
@@ -834,23 +797,18 @@ function supSupervisorPhrase(pdata, adata, author, supervisees){
 		s+= (supSupervisees.length == 1) ? " is " : " are " ;
 		s+= " already supervising other researchers. ";
 	}
-	// console.log(s); 
 	return s; 
 
 }
 function supSupervisor(pdata, adata, author, supervisees){
 	var supSupervisees = [];
-	// console.log(author);
-	// console.log(supervisees); 
 	for (var i=0; i<supervisees.length;i++){
 		var superviseeObj = findAuthorObjectByName(adata,supervisees[i].Name);
-		var supViseeList = findSupervisee(pdata, adata, superviseeObj);
-		// console.log(supervisees[i]); 
+		var supViseeList = findSupervisee(pdata, adata, superviseeObj); 
 		if (supViseeList.length >1){
 			supSupervisees.push(supervisees[i]); 
 		}
 	}
-	// console.log(supSupervisees); 
 	return supSupervisees;
 
 }
@@ -873,8 +831,6 @@ function DoesExistInList(list, name){
 }
 
 function DoesExistInSupervisors(list, name){
-	//console.log(list);
-	// console.log(name);
 	var r = false;
 	for (var i=0;i<list.length;i++){
 		if (list[i] == name){
@@ -947,13 +903,9 @@ function getLastNameForVis(fullName){
 		else {
 			var name = fullName.split(" ");
 			if(isNaN(name[name.length-1])){
-				//s = '<span title="More information about this author is not available" id="nonVISAuthors" onclick="">' +name[name.length-1]+"*" + "</span>";
-				//return s; 
 				return name[name.length-1]+"*";
 			}
 			else {
-				//s = '<span title="More information about this author is not available" id="nonVISAuthors" onclick="">' +name[name.length-2]+"*" + "</span>";
-				//return s; 
 				return name[name.length-2]+"*";
 			}
 		}
@@ -989,7 +941,6 @@ function getFullNameWithoutNoForVis(fullName){
 
 		}
 	}
-	
 }
 
 function getFullNameWithoutNo(fullName){
@@ -1017,10 +968,8 @@ function getFullNameWithoutNo(fullName){
 			name = name.join(" ");
 			s = '<span title="More information about this author is not available" id="nonVISAuthors">' + name+"*" + "</span>";
         	return s;
-			// return name+"*";  
 		}
-		else {
-			//return fullName+"*"; 
+		else { 
 			s = '<span title="More information about this author is not available" id="nonVISAuthors">' + fullName+"*" + "</span>";
         	return s;
 
@@ -1122,7 +1071,6 @@ function getPublicationsAsFirstAuthor(pdata, name, type){
 function groupPublicationsByYear(pubs){
 	var pubsPerYear = countFrequency(pubs);
 	sortByYear(pubsPerYear);
-	//console.log(pubsPerYear);
 	return pubsPerYear;
 }
 
@@ -1133,7 +1081,6 @@ function sumAllValues(data){
 	}
 	return sum;
 }
-
 function getStartYear(a){
 	var y = d3.min(a.AllPublicationsPerYear, function(d){return +d.Year;})
 
@@ -1174,16 +1121,12 @@ function getAllMutualPublicationsForSuperVisee(pubData, aName, cName){
     return mutualPublications; 
 }
 function findSupervisee(pubData, adata, author){
-	//console.log(pubData);
-	//console.log(author);
-	//console.log(adata);
 	var supervisees=[];
 	var potentialSupervisees = [];
 	var pubs = getPublicationsAsLastAuthor(pubData, author.Name);
 	//console.log(pubs);
 
 	var SupervisorStartYear = Math.min(getMin(author.JournalsPerYear), getMin(author.ConfsPerYear));
-	//console.log(SupervisorStartYear);
 
 	for(var i=0;i<pubs.length;i++){
 		var firstAuthor = pubs[i].Authors[0].Name;
@@ -1191,15 +1134,11 @@ function findSupervisee(pubData, adata, author){
 			potentialSupervisees.push(firstAuthor);
 		}
 	}
-	//console.log(potentialSupervisees)
 	for(var i=0;i<potentialSupervisees.length;i++){
 		var firstAuthor = potentialSupervisees[i];
-		//console.log(firstAuthor);
 		var aObject = findAuthorObjectByName(adata,firstAuthor);
-		//console.log(aObject);
 		if(aObject != null){
 			var AuthorStartYear = Math.min(getMin(aObject.JournalsPerYear), getMin(aObject.ConfsPerYear));
-			//console.log(AuthorStartYear);
 			if(SupervisorStartYear + 5 <= AuthorStartYear ){
 				var mutualPubs = getAllMutualPublicationsForSuperVisee(pubs,aObject.Name,author.Name); // Publications of supervisee as first authors (deciding publications)
 				var allMutualPubs = getAllMutualPublications(pdata, aObject.Name, author.Name); // All mutual publications of supervisee with supervisor (for sparkline)
@@ -1219,7 +1158,6 @@ function findSupervisee(pubData, adata, author){
 			}
 		}
 	}
-	//console.log(supervisees);
 	return supervisees;
 }
 function findAuthorObjectByName(adata, a){
@@ -1284,7 +1222,6 @@ function visSubfieldPhraseTopics(pdata, adata, keywords, a, visIsActive) {
 			alreadyListedTopics.push(keywords[i].Name);
 		}
 	}
-	// console.log(subfields); 
 	if (subfields.length > 0) {
 		if (subfields.length == 1) {
 			s = " with publications mainly within the subfield of " + makeMeLive_LoadDataOnTopic(pdata, adata, subfields[0], a.Name, subfields[0], "subfield") + "."
@@ -1313,7 +1250,6 @@ function visAreaPhraseTopics(a, visIsActive) {
 	//Recent topics of author
 	var s = "";
 	var topics = [];
-	// console.log(a);
 	for (var i = 0; i < a.Keywords.length; i++) {
 		if (author_keywords[a.Keywords[i]] != undefined && author_keywords[a.Keywords[i]] != "unclear") {
 			topics.push(author_keywords[a.Keywords[i]]);
@@ -1323,7 +1259,6 @@ function visAreaPhraseTopics(a, visIsActive) {
 	uniqueTopics.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	// console.log(uniqueTopics);
 	//uniqueTopics = uniqueTopics.slice(1,20); 
 	var topicThreshold = a.Conferences + a.Journals >= 100 ? 3 : 2;
 	var listOfTopics = [];
@@ -1332,7 +1267,6 @@ function visAreaPhraseTopics(a, visIsActive) {
 			listOfTopics.push(uniqueTopics[i].Name);
 		}
 	}
-	// console.log(listOfTopics);
 	var text = "";
 	var cleanedKeywords = [];
 	var allVisVersionsAvailable = true;
@@ -1374,8 +1308,6 @@ function visAreaPhraseTopics(a, visIsActive) {
 }
 function otherCommunityPhraseTopics(pdata, adata, keywords, a, visIsActive){
 	var s = "";
-	//console.log(a);
-	//console.log(alreadyListedTopics);
 	var keywordThreshold = 2;
 	var otherCommutiesActive = [];
 	var otherCommutiesOld = [];
@@ -1501,7 +1433,6 @@ function getKeywords(pdata, a){
 	var pubs = getPublications(pdata, a.Name);
 	for (var i = 0; i < pubs.length; i++) {
 		var pubKeywords = getPublicationKeywords(pubs[i])
-		// console.log(pubKeywords);
 
 		for (var j = 0; j < pubKeywords.length; j++) {
 			var keyword = pubKeywords[j];
@@ -1518,7 +1449,6 @@ function getKeywords(pdata, a){
 	keywordList.sort(function (a, b) {
 		return +(b.Value) - +(a.Value);
 	});
-	// console.log(keywordList);
 	return keywordList;
 }
 
@@ -1572,7 +1502,6 @@ function getPublicationKeywords(publication) {
 			var keyword = titleKeywords[term];
 			if (pubKeywords.indexOf(keyword) == -1) {
 				pubKeywords.push(keyword);
-				// console.log(keyword + "->" + publication.Title);
 			}
 
 		}
@@ -1591,7 +1520,6 @@ function getKeywordsPerYear(pubs, keyword){
 	keywordPerYear.sort(function(a, b) {
     	return +(a.Name) - +(b.Name);
   	});
-	//console.log(keywordPerYear); 
 	return keywordPerYear; 
 }
 
@@ -1667,7 +1595,6 @@ function computeSimilarityOfKeywords(keywordMap1, keywordMap2) {
 function makeMeLive_FullName(name){
 
 	if (authors_list.indexOf(name) != -1){
-		// console.log(name); 
 		return  '<span id="linkedAuthorName" onclick="loadMe(pdata, adata, \''+name+'\')">' + getFullNameWithoutNo(name) + "</span>";
 	}
 	else 
@@ -1762,17 +1689,13 @@ function loadMutualPublications(pdata, adata, a, c){
     StringifyPublication(pdata, adata, mutualPublications[i]);
        dataForBarChart.push(mutualPublications[i].Year); 
   }
-  //return mutualPublications;  
 
   dataForBarChart = countFrequency(dataForBarChart); 
-  // generateBarChart(pdata, adata, a, dataForBarChart, "figure", "msbar"); 
-  // console.log(dataForBarChart); 
 
 }
 
 function loadPublicationsOnTopic(pdata, adata, a, topic){
   //Return array of mutual publications of Author and CoAuthor for Year "year"
-  // console.log(a); 
   var pubsOnTopic = []; 
   for(var i=0;i<pdata.length;i++){
       var tempAuthors = []; 
@@ -1801,7 +1724,6 @@ function loadPublicationsOnTopic(pdata, adata, a, topic){
   }
   dataForBarChart = countFrequency(dataForBarChart); 
   generateBarChart(pdata, adata, a, dataForBarChart, "figure", "tbar", topic); 
-  // console.log(dataForBarChart); 
 
 }
 
@@ -1828,8 +1750,6 @@ function loadAllIndividualPublications(pdata, adata, name){
   for (var i=0; i<indPublications.length;i++){
     StringifyPublication(pdata, adata, indPublications[i]);
   }
-
-  // return indPublications;
 }
 
 function loadJournalsIndividualPublications(pdata, adata, name){
@@ -1858,8 +1778,6 @@ function loadJournalsIndividualPublications(pdata, adata, name){
   for (var i=0; i<indPublications.length;i++){
     StringifyPublication(pdata, adata, indPublications[i]);
   }
-
-  // return indPublications;
 }
 
 function loadConferenceIndividualPublications(pdata, adata, name){
@@ -1888,26 +1806,19 @@ function loadConferenceIndividualPublications(pdata, adata, name){
   for (var i=0; i<indPublications.length;i++){
     StringifyPublication(pdata, adata, indPublications[i]);
   }
-
-  // return indPublications;
 }
 
 function analyzeTimeSeries(timeseries,author){
-	// console.log(timeseries); 
 	var result= ""; 
-	// console.log(author); 
 	var totalpubCount = author.Journals + author.Conferences; 
 	var minYear = d3.min(timeseries, function(d){return d.Year;});
 	var maxYear = d3.max(timeseries, function(d){return d.Year;});
 
 	var sortedTimeseries = timeseries.slice(0); 
 	sortedTimeseries.sort(function(a,b){return b.Value - a.Value});
-	// console.log(timeseries); 
 
 	var max = sortedTimeseries[0].Value;
 	var secondMax = sortedTimeseries[1].Value;
-	// console.log(max);
-	// console.log(secondMax); 
 	//Looking for a peak in data 
 	if (max > 2*secondMax && max > 3){ 
 		result = "where a clear peak is in " + timeseries.find(function(d){return d.Value == max}).Year + " (" + max + " publications ). "; 
@@ -1916,30 +1827,15 @@ function analyzeTimeSeries(timeseries,author){
 
 
 	var midYear = Math.round((+maxYear - +minYear) / 2 + +minYear); 
-	// console.log(midYear); 
-
-	// if(computeSteadyRate(timeseries, minYear, midYear) > 0.80) { 
-	// 	result = " with the majority of the publications in the first half";
-	// 	return result; 
-	// }
-	// if(computeSteadyRate(timeseries, midYear, maxYear) > 0.80) {
-	// 	 result = " with the majority of the publications in the second half";
-	// 	 return result; 
-	// }
 
 	//Dividing interval in three parts
 	var firstPointYear = Math.round((+maxYear - +minYear) / 3 + +minYear);
 	var secondPointYear = Math.round((+maxYear - +minYear)*2/3 + +minYear); 
-	// console.log(firstPointYear);
-	// console.log(secondPointYear);
 
 	var sum13 = computeSum(timeseries, minYear, firstPointYear);
 	var sum23 = computeSum(timeseries, firstPointYear, secondPointYear);
 	var sum33 = computeSum(timeseries, secondPointYear, maxYear);
-	
-	// console.log(sum13); 
-	// console.log(sum23); 
-	// console.log(sum33); 	
+		
 	if(sum13/totalpubCount > 0.50){
 		result = "where most contributions appeared until " + firstPointYear + " ("+ sum13 + " publications). ";
 		return result;
@@ -1950,21 +1846,17 @@ function analyzeTimeSeries(timeseries,author){
 	}
 	if(sum33/totalpubCount > 0.50){
 		if (maxYear >= 2017) {
-			// Michael Burch
 			result = "where most contributions appeared since "+ secondPointYear + " ("+ sum33 + " publications). ";
 		} else {
-			// Wolfgang Straßer
 			result = "where most contributions appeared between "+ secondPointYear + " and " + maxYear +" ("+ sum33 + " publications). ";
 		}
 		return result; 
 	}
-	// if(sum13 < sum23 && sum23 < sum33) {result = " with an increase in number of publications over the years";}
 	return result; 
 }
 
 function computeSteadyRate(data, from, to){
 	var mean = computeMean(data,from,to);
-	// console.log(mean); 
 	var count=0;
 	var lengthOfSubArray =0; 
 	for (var i=0;i<data.length;i++){
@@ -1976,8 +1868,6 @@ function computeSteadyRate(data, from, to){
 				}
 			}
 		}
-		// console.log(count); 
-		// console.log(lengthOfSubArray); 
 		return count/lengthOfSubArray; 
 
 	
@@ -2042,8 +1932,6 @@ function showAdditionalInfoAuthorSimilarity(author, similarAuthors) {
 	});
 }
 function showAdditionalInfoGroups(author, groups){
-	// console.log(author);
-	// console.log(groups); 
 
 	$dod = $("#dod");
 	$dod.empty();
