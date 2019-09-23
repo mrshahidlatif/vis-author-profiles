@@ -1,0 +1,470 @@
+/*Page Layout */
+/*@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');*/
+
+@font-face {
+    font-family: 'Verlag Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Verlag Book'), url('../font/Verlag-Book.woff') format('woff');
+}
+hr{
+  height:2px;
+  border-width:0;
+  color:gray;
+  background-color:gray
+}
+
+#logo { 
+    float:left;
+    display: block;
+    padding-left: 10px;
+    padding-right: 15px;
+    padding-top: 10px;
+}
+
+.badge {
+    padding-top: -5px;
+    width: 50px;  
+}
+
+.badge:first-child {
+    margin-left: 10px; 
+}
+
+.header {
+    position: fixed;
+    margin: 0 auto;
+    top: 40px;
+    width: 100%;
+    height: 110px;
+    z-index: 10;
+    background-color: #F1F1F1;
+}
+.rowHeader{
+    width: 1090px;
+    height: 100px;
+    margin: 0 auto;
+    text-align:center;
+    vertical-align: middle;
+
+}
+.topnav {
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    /*margin: 100px auto;*/
+    /*overflow: hidden;*/
+    background-color: #aaa;
+    height: 50px;
+    width: 100%;
+}
+body
+{
+    margin: 130px auto;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family:'Verlag Book';
+    /*font-family: Helvetica, Sans-Serif;*/
+    color: black;
+    font-size: 14pt;
+    text-align: justify;
+    line-height: 1.5;
+    height:100%;
+}
+p {
+    text-align: justify;   
+}
+a{
+  color: black;
+}
+a:hover{
+  color: DodgerBlue;
+}
+#contact{
+   font-size: 12pt;
+}
+.title {
+    /*background-color: #F1F1F1;*/
+    font-size: 24pt;
+    font-weight: bold;
+    height: 100px;
+    vertical-align: middle;
+    text-align: left;
+  
+}
+
+.leftcolumnHeader {
+    float: left;
+    width: 65%; 
+    height: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.rightcolumnHeader {
+    float: left;
+    width: 30%;
+    /*background-color: #f1f1f1;*/
+    padding-top: 10px;
+    padding-left: 10px;
+    /*background-color: #f1f1f1;*/
+    /*padding-right: 150px;*/
+
+}
+
+.row{
+    width: 1090px;
+    margin: 0 auto;
+/*    background-color: #66ffff;*/
+}
+/* Left column */
+.leftcolumn { 
+    /*margin-left: 200px; */
+    float: left;
+    width: 65%; 
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 20px;
+    text-align: center;
+}
+/* Right column */
+.rightcolumn {
+    /*margin-right: 200px;*/
+    float: left;
+    width: 35%;
+    /*background-color: #f1f1f1;*/
+    padding-top: 20px;
+    padding-left: 20px;
+    /*padding-right: 150px;*/
+    /*max-height: 1000px;*/
+ /*   overflow-y: auto;*/
+
+}
+/* Clear floats after the columns */
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.footer li {
+    float: left;
+}
+
+.footer li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+#disclaimer{
+   display: block;
+   color: white;
+
+}
+
+.footer li a:hover:not(.active) {
+   color: DodgerBlue;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    background-color: #aaa;
+    color: white;
+    vertical-align: middle;
+    line-height: 5px;  
+    font-size: 08pt;
+}
+
+/*Clickable Names*/
+#linkedAuthorName {
+    cursor:pointer;
+    color:black;
+    /*text-decoration:underline;*/
+    font-weight: bold;
+}
+#linkedAuthorName:hover {
+    cursor:pointer;
+    color:#1E90FF;
+    text-decoration:underline;
+    /*font-weight: bold;*/
+}
+#publicationTitle {
+    font-style: italic;
+}
+
+/*Keywords*/
+.community,
+.subfield,
+.topic {
+    padding: 0 3px;
+    border-radius: 4px;
+}
+.community {
+    background: rgba(33, 151, 255, 0.25);
+}
+.subfield {
+    background: rgba(33, 151, 255, 0.12);
+}
+.topic {
+    background: rgba(80, 90, 120, 0.08);
+}
+
+#dod {
+    font-size: 14px;
+    line-height: 1.2;
+}
+#sideBarHead {
+    font-size: 16px;
+    color: black;
+    position: absolute;
+    text-align: left;
+}
+#dod li {
+    line-height: 1.6;
+}
+#dod .sim0 {
+    background: rgba(33, 151, 255, 1.0);
+}
+#dod .sim9 {
+    background: rgba(33, 151, 255, 0.7);
+}
+#dod .sim8 {
+    background: rgba(33, 151, 255, 0.5);
+}
+#dod .sim7 {
+    background: rgba(33, 151, 255, 0.35);
+}
+#dod .sim6 {
+    background: rgba(33, 151, 255, 0.25);
+}
+#dod .sim5 {
+    background: rgba(33, 151, 255, 0.15);
+}
+#dod .sim4 {
+    background: rgba(33, 151, 255, 0.05);
+}
+
+.info {
+    cursor:pointer;
+    color:black;
+    /*font-weight: bold;*/
+}
+.info:hover {
+    cursor:pointer;
+    color:#1E90FF;
+    text-decoration:underline;
+    /*font-weight: bold;*/
+}
+
+/*Visualization styles */
+.bar {
+  fill: gray;
+  cursor: pointer;
+}
+
+.hbar{
+    fill:black;
+    opacity: 0.1; 
+}
+/*Bars for showing mutual publications*/
+.mbar{
+    fill:#AA0000;
+    opacity: 1;
+    cursor: pointer;
+}
+/*Bar for showing publications on topic*/
+.tbar{
+    fill:#123b7c;
+    opacity: 1
+}
+.tbar:hover{
+    fill:#1E90FF;
+    opacity: 1
+}
+.boxGray{
+  fill: gray;
+}
+.boxRed{
+  fill:#AA0000;
+}
+.boxBlue{
+   fill:#123b7c;
+}
+
+.bar:hover {
+  fill: DodgerBlue;
+}
+.mbar:hover {
+  fill: DodgerBlue;
+}
+.msbar {
+  fill: #AA0000;
+}
+.axis {
+    font: 10px sans-serif;
+}
+.labelStartYear{
+     fill:black;
+     font-size:14px;
+
+}
+.labelStartYear:hover{
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+.author_line {
+    stroke: #AA0000;
+    stroke-width: 1px;
+}
+
+.author_line_tooltip {
+    stroke: transparent;
+    stroke-width: 5px;
+}
+
+.author_line_tooltip:hover {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.x-line {
+    stroke: rgba(0, 0, 0, 0.5);
+    stroke-width: 1px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black
+    shape-rendering: crispEdges;
+}
+
+.names{
+    /*font-family: 'Source Sans Pro', sans-serif;*/
+    font-family:'Verlag Book';
+    /*font-weight: bold;*/
+    font-size:14px;
+    cursor:pointer;
+    /*text-decoration:underline;*/
+    font-weight: bold;
+}
+.names:hover {
+    cursor:pointer;
+    fill:#1E90FF;
+    text-decoration:underline;
+    /*font-weight: bold;*/
+}
+.moreBtn {
+    fill:black;
+    font-size:14px;
+  
+}
+.xlabelBar{
+    fill:black;
+    font-size:14px;
+}
+.moreBtn:hover{
+     fill:DodgerBlue;
+     cursor:pointer;
+    /*color:blue;*/
+    text-decoration:underline;
+}
+
+.visTitle{
+  font-size:16px;
+}
+
+.barTitle{
+  font-size:14px;
+}
+
+.legend{
+  font-size:14px;
+}
+
+#nonVISAuthors:hover{
+    cursor:pointer;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 80px;
+  height: 38px;
+  padding: 2px;
+  font: 10px sans-serif;
+  background: #FFD700;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 100; 
+}
+
+* {
+  box-sizing: border-box;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  padding-top: 10px;
+  padding-left:0px;
+  position: relative;
+  width: 300px;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 5px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit]{
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
