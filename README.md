@@ -1,7 +1,7 @@
 # VAP -- VIS Author Profiles
 VAP is a tool that automatically generates profile pages of researchers working in the visualization community. The generated profile includes a novel and interactive combination of natural language text and visualizations.
 
-VAP is hosted at https://vis-tools.paluno.uni-due.de/vap
+VAP is hosted at https://mrshahidlatif.github.io/vis-author-profiles
 
 ## How To Run VAP Source Code
 
